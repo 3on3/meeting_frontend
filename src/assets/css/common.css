@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+html,body{
+  font-size: 14px;
+}
+
+body{
+  position: relative;
+}
+
+/* 루트 */
+:root {
+  --color-bk: #271E33;
+  --color-dark:#373040;
+  --color-gr: #786E85;
+  --color-sh: #C3BECB;
+  --color-light:#E0E0E0;
+  --color-point: #8732F5;
+  --color-wh: #F4F9FF;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}

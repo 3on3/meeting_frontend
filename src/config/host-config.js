@@ -15,9 +15,7 @@ if (clientHostName === "localhost") {
 
 const API_BASE_URL = backendHostName;
 
-const EVENT = "/events";
-const AUTH = "/auth";
+const SIGNUP = "/SIGNUP";
 
-export const EVENT_URL = API_BASE_URL + EVENT;
 
-export const AUTH_URL = API_BASE_URL + AUTH;
+export const AUTH_URL = API_BASE_URL + SIGNUP;

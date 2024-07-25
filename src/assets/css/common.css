@@ -6,6 +6,7 @@ html,body{
 
 body{
   position: relative;
+  max-width: 500px;
 }
 
 /* 루트 */
@@ -19,6 +20,6 @@ body{
   --color-wh: #F4F9FF;
 }
 
-::-webkit-scrollbar {
+*::-webkit-scrollbar {
   display: none;
 }

@@ -165,7 +165,7 @@ label {
   font-family: inherit;
   color: var(--color-bk);
 }
-
+/* 
 input[type='checkbox'],
 input[type='radio'] {
   -webkit-appearance: none;
@@ -182,7 +182,7 @@ button:disabled {
 input[type='checkbox']:disabled+label,
 input[type='radio']:disabled+label {
   cursor: no-drop;
-}
+} */
 
 a {
   text-decoration: none;

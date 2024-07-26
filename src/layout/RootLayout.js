@@ -1,13 +1,16 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Header from './Header';
+import RadioButtonGroup from '../components/common/buttons/radiobutton/RadioButtonGroup';
+// import './RootLayout.css';
 
 const RootLayout = () => {
   return (
     <>
-      <Header/>
+      <RadioButtonGroup />
+      <Header />
       <main className='container'>
-        <Outlet/>
+        <Outlet />
       </main>
     </>
   );

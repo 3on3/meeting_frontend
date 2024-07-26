@@ -10,6 +10,11 @@ body {
   max-width: 500px;
 }
 
+.container{
+  width: 100%;
+  padding: 0 20px;
+}
+
 /* 루트 */
 :root {
   --color-bk: #271e33;

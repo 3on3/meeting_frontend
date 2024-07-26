@@ -1,23 +1,25 @@
 @charset "UTF-8";
 
-html,body{
+html,
+body {
   font-size: 14px;
 }
 
-body{
+body {
   position: relative;
   max-width: 500px;
 }
 
 /* 루트 */
 :root {
-  --color-bk: #271E33;
-  --color-dark:#373040;
-  --color-gr: #786E85;
-  --color-sh: #C3BECB;
-  --color-light:#E0E0E0;
-  --color-point: #8732F5;
-  --color-wh: #F4F9FF;
+  --color-bk: #271e33;
+  --color-dark: #373040;
+  --color-gr: #786e85;
+  --color-sh: #c3becb;
+  --color-light: #e0e0e0;
+  --color-point: #8732f5;
+  --color-wh: #f4f9ff;
+  --color-error: #ff0000;
 }
 
 *::-webkit-scrollbar {

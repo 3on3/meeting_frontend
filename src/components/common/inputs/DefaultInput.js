@@ -1,23 +1,41 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./DefaultInput.module.scss";
 
-/**
- * 기본 스타일 - ${styles.inputWrapper} 만
- * 비활성화 시 - 클래스 이름을 ${styles.disabled}
- * 에러 시 - 클래스 이름을 ${styles.error}
- * 성공 시 - 클래스 이름을 ${styles.correct}
- */
+const DefaultInput = ({ inputState, errorMessage }) => {
+  /**
+   * inputState : error(오류), correct(성공), disabled(비활성화)에 따른 스타일 변경
+   * errorMessage : 오류 시 나타나는 오류 메세지
+   */
 
-// input 내용 상태 (error, correct) 인지 확인
-const inputState = () => {};
+  let state;
+  switch (inputState) {
+    // 오류
+    case "error":
+      state = styles.error;
+      break;
 
-const DefaultInput = () => {
+    // 성공
+    case "correct":
+      state = styles.correct;
+      break;
+
+    // 비활성화
+    case "disabled":
+      state = styles.disabled;
+      break;
+
+    // 기본 설정
+    default:
+      state = "";
+      break;
+  }
+
   return (
     <>
-      <div className={`${styles.inputWrapper}  ${styles.correct}`}>
-        <input className={styles.input} />
-        {/* <img src={errorIcon} /> */}
-        <div className={styles.errorMessage}>잘 못된 값을 입력했습니다.</div>
+      <div className={`${styles.inputWrapper} ${state}`}>
+        <input type="text" className={styles.input} />
+
+        <div className={styles.errorMessage}>{errorMessage}</div>
       </div>
     </>
   );

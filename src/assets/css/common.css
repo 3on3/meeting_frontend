@@ -23,6 +23,7 @@ body{
   --color-light:#E0E0E0;
   --color-point: #8732F5;
   --color-wh: #F4F9FF;
+  --boxshadow-light: 0 0px 10px rgba($color: #000000, $alpha: 0.08);
 }
 
 *::-webkit-scrollbar {

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import styles from "./DefaultInput.module.scss";
 
-const DefaultInput = ({ inputState, errorMessage, placeholder }) => {
+const DefaultInput = ({ inputState, errorMessage, placeholder, onChange }) => {
   /**
    * inputState : error(오류), correct(성공), disabled(비활성화)에 따른 스타일 변경
    * errorMessage : 오류 시 나타나는 오류 메세지
@@ -34,7 +34,12 @@ const DefaultInput = ({ inputState, errorMessage, placeholder }) => {
   return (
     <>
       <div className={`${styles.inputWrapper} ${state}`}>
-        <input type="text" className={styles.input} placeholder={placeholder} />
+        <input
+          type="text"
+          className={styles.input}
+          placeholder={placeholder}
+          onChange={onChange}
+        />
 
         <div className={styles.errorMessage}>{errorMessage}</div>
       </div>

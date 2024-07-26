@@ -1,20 +1,89 @@
-.container{
-  height: 100vh;
-  padding: 100px 0 0;
+body{
+  background-color: var(--color-wh);
 }
+.container {
+  height: 100vh;
+  padding: 100px 0 110px;
+  // background-color: var(--color-wh);
+}
+
 // ChatHead.js
-.head{
+.head {
   width: 100%;
-  height: 60px;
+  height: 50px;
   background-color: #fff;
   border-radius: 12px;
   display: flex;
-  >p{
-    width: calc(100% - 60px);
+  box-shadow: 0 0 10px rgba($color: #000000, $alpha: 0.1);
+  position: relative;
+  > p {
+    width: calc(100% - 50px);
+    text-align: center;
+    line-height: 50px;
+    font-size: 16px;
+    font-weight: 600;
   }
-  .chatMenuBtn{
-    width: 60px;
-    height: 60px;
+  .chatMenuBtn {
+    width: 50px;
+    height: 50px;
     border-radius: 12px;
+    background-color: var(--color-point);
+    background-image: url(../../assets/images/icons/c-chat-hamburger.svg);
+    background-position: center;
+    background-size: 20px;
+    background-repeat: no-repeat;
   }
+}
+.chatMenu {
+  position: absolute;
+  top: 56px;
+  right: 0;
+  button {
+    width: 90px;
+    height: 44px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 4px;
+    transform: translateX(-10px);
+    opacity: 0;
+    transition: .5s ease-out;
+    &:last-child {
+      margin-bottom: 0;
+    }
+    &.showMemberBtn {
+      background-color: var(--color-point);
+
+      color: #fff;
+    }
+    &.delChatBtn {
+      border: solid 1px var(--color-point);
+      transition-delay: .1s;
+      a {
+        color: var(--color-point);
+
+        font-weight: 400;
+      }
+    }
+  }
+  &.isActive{
+    button{
+      transform: translateX(0px);
+      opacity: 1;
+    }
+  }
+}
+
+// ChatBody.js
+.chatBody{
+  width: 100%;
+  padding-top: 30px;
+  height: calc(100% - 140px);
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column-reverse;
+
 }

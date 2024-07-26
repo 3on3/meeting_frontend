@@ -8,10 +8,10 @@ const RadioButtonGroup = () => {
   return (
     <div>
       <div>RadioButton</div>
-      <RadioGroup label="Radio Button" value={value} onChange={setValue}>
-        <Radio value="1번">1번</Radio>
-        <Radio value="2번">2번</Radio>
-        <Radio value="3번">3번</Radio>
+      <RadioGroup label="Radio Button" name="radioGroup" value={value} onChange={setValue}>
+        <Radio value="1번"> 과팅1</Radio>
+        <Radio value="2번"> 과팅2</Radio>
+        <Radio value="3번"> 과팅3</Radio>
       </RadioGroup>
     </div>
   );

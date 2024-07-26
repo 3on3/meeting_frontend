@@ -1,11 +1,21 @@
 import React from "react";
-import { RadioContext } from "./RadioContext"
+import { RadioContext } from "./RadioContext";
 
-export function RadioGroup ({ label, children, ...rest }) {
+export function RadioGroup({ label, name, value, onChange, disabled, children }) {
+  
+  // 컨텍스트에 전달될 값
+  const contextValue = {
+    name,
+    value,
+    onChange,
+    disabled,
+  };
+
   return (
-    <fieldset>
+    // 라디오 버튼 그룹화
+    <fieldset> 
       <legend>{label}</legend>
-      <RadioContext.Provider value={rest}>
+      <RadioContext.Provider value={contextValue}>
         {children}
       </RadioContext.Provider>
     </fieldset>

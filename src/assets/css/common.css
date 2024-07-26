@@ -25,7 +25,6 @@ body {
   --color-point: #8732f5;
   --color-wh: #f4f9ff;
   --color-error: #ff0000;
-  --boxshadow-light: 0 0px 10px rgba($color: #000000, $alpha: 0.08);
 }
 
 *::-webkit-scrollbar {

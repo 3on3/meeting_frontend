@@ -1,11 +1,12 @@
 #header {
   width: 100%;
 }
+// MainNavigation.js
 .nav {
   width: 100%;
   height: 100px;
   background-color: #fff;
-  box-shadow: var(--boxshadow-light);
+  box-shadow: 0 0 10px rgba($color: #000000, $alpha: 0.2);
   position: fixed;
   left: 0;
   bottom: 0;
@@ -74,24 +75,36 @@
   opacity: 0;
   transition: 0.4s ease-out;
 }
+// FloatingNavigation.js
 .floating {
   > button {
-    width: 66px;
-    height: 66px;
+    width: 54px;
+    height: 54px;
     background-color: var(--color-dark);
-    background-image: url(../assets/images/icons/h-plus.svg);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 27px;
     border-radius: 18px;
     position: fixed;
     bottom: 120px;
     right: 20px;
     z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 10px rgba($color: #000000, $alpha: 0.2);
+
+    i {
+      width: 20px;
+      height: 20px;
+      background: url(../assets/images/icons/h-plus.svg) no-repeat;
+      background-size: cover;
+      transition: 0.6s ease-out;
+    }
+    &.isActive i {
+      transform: rotate(45deg);
+    }
   }
   > nav {
     position: fixed;
-    bottom: 200px;
+    bottom: 182px;
     right: 20px;
     z-index: 100;
     display: flex;
@@ -100,35 +113,32 @@
     a {
       display: flex;
       padding: 17px 16px;
-      font-size: 20px;
+      font-size: 16px;
       font-weight: 600;
       border-radius: 18px;
-      box-shadow: var(--boxshadow-light);
+      box-shadow: 0 0 10px rgba($color: #000000, $alpha: 0.2);
       transform: translateX(-10px);
 
       opacity: 0;
-      transition: .4s ease-out;
+      transition: 0.6s ease-out;
       &:last-child {
         margin-bottom: 0;
-        transition-delay: .2s;
       }
       margin-bottom: 8px;
       &.invite_code_btn {
         background-color: var(--color-wh);
         color: var(--color-dark);
+        transition-delay: 0.2s;
       }
       &.new_group_btn {
         background-color: var(--color-point);
         color: #fff;
       }
-      &.is-active{
+    }
+    &.isActive {
+      a {
         opacity: 1;
         transform: translateX(0);
-      }
-    }
-    &.is-active{
-      a{
-
       }
     }
   }

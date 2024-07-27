@@ -4,11 +4,11 @@ import DefaultInput from "../../../components/common/inputs/DefaultInput";
 import MtButtons from "../../../components/common/buttons/MtButtons";
 
 const ModifyInformation = () => {
-  let isPassCheck = true;
+  let isPassCheck = false;
   return (
     <>
       <div className={styles.content}>
-        <div className={styles.text}>회원 정보 수정</div>
+        <h1 className={`title ${styles.text}`}>회원 정보 수정</h1>
         <div className={styles.margin20}>
           <DefaultInput
             inputState={isPassCheck ? "correct" : "error"}
@@ -60,10 +60,7 @@ const ModifyInformation = () => {
           <div className={styles.lineText}>이름</div>
         </div>
         <div className={styles.margin35}>
-          <DefaultInput
-            inputState={"disabled"}
-            placeholder={"진상훈"}
-          />
+          <DefaultInput inputState={"disabled"} placeholder={"진상훈"} />
         </div>
         <div className={styles.margin20}>
           <div className={styles.lineText}>생년월일</div>
@@ -78,10 +75,7 @@ const ModifyInformation = () => {
           <div className={styles.lineText}>성별</div>
         </div>
         <div className={styles.margin35}>
-          <DefaultInput
-            inputState={"disabled"}
-            placeholder={"남"}
-          />
+          <DefaultInput inputState={"disabled"} placeholder={"남"} />
         </div>
       </div>
     </>

@@ -6,6 +6,8 @@ import Chat from "../pages/chat/Chat";
 import LoginPage from "../pages/login/LoginPage";
 import IntroPage from "../pages/login/IntroPage";
 import MainFilter from "../pages/main/MainFilter";
+import CheckPass from "../pages/mypage/modify_information/CheckPass";
+import ModifyInformation from "../pages/mypage/modify_information/ModifyInformation";
 
 export const router = createBrowserRouter([
   {
@@ -29,6 +31,14 @@ export const router = createBrowserRouter([
       {
         path: "/chat",
         element: <Chat />,
+      },
+      {
+        path: "/mypage/check-pass",
+        element: <CheckPass />,
+      },
+      {
+        path: "/mypage/modify",
+        element: <ModifyInformation />,
       },
     ],
   },

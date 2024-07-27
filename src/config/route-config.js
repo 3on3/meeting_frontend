@@ -6,6 +6,8 @@ import Chat from "../pages/chat/Chat";
 import LoginPage from "../pages/login/LoginPage";
 import IntroPage from "../pages/login/IntroPage";
 import MainFilter from "../pages/main/MainFilter";
+import SignUp from "../pages/signUp/SignUp";
+
 
 export const router = createBrowserRouter([
   {
@@ -27,9 +29,13 @@ export const router = createBrowserRouter([
         element: <LoginPage />,
       },
       {
-        path: "/chat",
-        element: <Chat />,
+        path: '/sign-up',
+        element: <SignUp />
       },
-    ],
+      {
+        path: '/chat',
+        element: <Chat/>
+      }
+    ]
   },
 ]);

@@ -39,6 +39,7 @@ const DefaultInput = ({ inputState, errorMessage, placeholder, onChange }) => {
           className={styles.input}
           placeholder={placeholder}
           onChange={onChange}
+          disabled={inputState === "disabled"}
         />
 
         <div className={styles.errorMessage}>{errorMessage}</div>

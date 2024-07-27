@@ -1,0 +1,29 @@
+// 기본 : 비활성화
+.regionFilterBox {
+  height: 37px;
+  width: 100%;
+
+  border-radius: 500px;
+  padding: 10px;
+  font-weight: 600;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-sh);
+  border: 1px solid var(--color-sh);
+
+  // 활성화
+  &.active {
+    border: 1px solid var(--color-bk);
+    color: var(--color-bk);
+  }
+
+  // 검정 배경
+  &.colorBK {
+    background-color: var(--color-bk);
+    border: none;
+    color: #fff;
+    font-weight: 400;
+  }
+}

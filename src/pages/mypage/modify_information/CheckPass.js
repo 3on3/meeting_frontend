@@ -14,7 +14,7 @@ const CheckPass = () => {
   return (
     <>
       <div className={styles.content}>
-        <div className={styles.text}>비밀번호 확인</div>
+      <h1 className={`title ${styles.text}`}>비밀번호 확인</h1>
         <DefaultInput
           inputState={isPassCheck ? "correct" : "error"}
           placeholder={"비밀번호를 입력해주세요."}

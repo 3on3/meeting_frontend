@@ -5,7 +5,7 @@ import ErrorPage from "../pages/error/ErrorPage";
 import Chat from "../pages/chat/Chat";
 import LoginPage from "../pages/login/LoginPage";
 import IntroPage from "../pages/login/IntroPage";
-import MainFilter from "../pages/main/MainFilter";
+import Main from "../pages/main/Main";
 
 export const router = createBrowserRouter([
   {
@@ -16,7 +16,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <MainFilter />,
+        element: <Main />,
       },
       {
         path: "/intro",

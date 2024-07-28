@@ -41,7 +41,7 @@ export const router = createBrowserRouter([
         path: "/mypage/modify",
         element: <ModifyInformation />,
       },
-    ],
+      {
         path: '/chat',
         element: <Chat/>
       }

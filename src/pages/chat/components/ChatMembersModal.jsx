@@ -1,10 +1,11 @@
 import React from 'react';
+import ModalLayout from '../../../components/common/modal/ModalLayout';
 
 const ChatMembersModal = () => {
   return (
-    <div>
-      <h2>참여자</h2>
-    </div>
+    <ModalLayout>
+      모달
+    </ModalLayout>
   );
 };
 

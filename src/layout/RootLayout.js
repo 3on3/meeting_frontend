@@ -11,8 +11,7 @@ const RootLayout = () => {
 
   return (
     <>
-      <CheckboxButtonGroup />
-      <RadioButtonGroup />
+
       <Header />
       <main className='container'>
         <Outlet />

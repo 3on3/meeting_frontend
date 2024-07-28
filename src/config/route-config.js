@@ -30,8 +30,8 @@ export const router = createBrowserRouter([
         element: <LoginPage />,
       },
       {
-        path: '/sign-up',
-        element: <SignUp />
+        path: "/sign-up",
+        element: <SignUp />,
       },
       {
         path: "/mypage/check-pass",
@@ -46,5 +46,6 @@ export const router = createBrowserRouter([
       }
     
     ],
+
   },
 ]);

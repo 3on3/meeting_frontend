@@ -38,7 +38,7 @@ const Withdraw = () => {
         <DefaultInput 
           inputState={isPassCheck ? "correct" : "error"}
           placeholder={'이메일 입력'}
-          errorMessage={!isPassCheck ? "이메일 형식이 아닙니다." : ""}
+          errorMessage={!isPassCheck ? "올바르지 않은 이메일입니다" : ""}
           onChange={emailInputHandler}         
         />  
         
@@ -52,7 +52,8 @@ const Withdraw = () => {
             <MtButtons 
               eventType={'click'} 
               eventHandler={withdrawNavigateHandler} 
-              buttonType={'apply'} 
+              // buttonType={'apply'} 
+              buttonType={isEmailValid ? 'apply' : 'disabled'} 
               buttonText={'탈퇴하기'}
             />
             <MtButtons 

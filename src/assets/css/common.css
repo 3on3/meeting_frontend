@@ -16,6 +16,11 @@ body {
   min-height: 100vh;
   padding: 0 20px;
 }
+h1.title {
+  font-size: 34px;
+  text-align: center;
+  font-weight: 600;
+}
 
 /* 루트 */
 :root {

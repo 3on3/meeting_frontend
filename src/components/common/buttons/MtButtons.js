@@ -4,10 +4,14 @@ import styles from './MtButtons.module.scss'
 const MtButtons = ({buttonType, buttonText, eventType, eventHandler}) => {
 
     // 사용예시
-    // <MtButtons buttonType={'아래 타입 4개중 1개'} buttonText={'버튼 안 텍스트 입력'} eventType={'click or submit'} eventHandler={click or submit 에 들어갈 이벤트핸들러 함수 } />
+    // <MtButtons 
+    //  buttonType={'아래 타입 4개중 1개'} 
+    //  buttonText={'버튼 안 텍스트 입력'} 
+    //  eventType={'click or submit'} 
+    //  eventHandler={click or submit 에 들어갈 이벤트핸들러 함수 } 
+    // />
 
     let type;
-    let eType;
 
     switch (buttonType) {
         case 'apply' :

@@ -126,6 +126,7 @@
 
       opacity: 0;
       transition: 0.6s ease-out;
+      pointer-events: none;
       &:last-child {
         margin-bottom: 0;
       }
@@ -144,6 +145,8 @@
       a {
         opacity: 1;
         transform: translateX(0);
+      pointer-events: all;
+
       }
     }
   }

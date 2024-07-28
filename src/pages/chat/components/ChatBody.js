@@ -5,7 +5,10 @@ const ChatBody = ({styles}) => {
 
   return (
     <div className={styles.chatBody}>
-      <MessageBox auth={"otherUser"}/>
+      <MessageBox styles={styles} authClass={styles.otherUser}/>
+      <MessageBox styles={styles} authClass={styles.user}/>
+      <MessageBox styles={styles} authClass={styles.otherUser}/>
+
     </div>
   );
 };

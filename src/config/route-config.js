@@ -42,9 +42,9 @@ export const router = createBrowserRouter([
         element: <ModifyInformation />,
       },
       {
-        path: "/chat",
-        element: <Chat />,
-      },
-    ],
+        path: '/chat',
+        element: <Chat/>
+      }
+        ]
   },
 ]);

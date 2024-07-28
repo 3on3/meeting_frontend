@@ -1,0 +1,54 @@
+.checkboxInput {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkboxInput + span {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: #e0e0e0;
+  border-radius: 4px;
+  position: relative;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.checkboxInput + span::after {
+  content: '';
+  position: absolute;
+  left: 7px;
+  top: 3px;
+  width: 4px;
+  height: 8px;
+  border: solid #a3a3a3; // 체크되지 않은 상태의 회색 V 표시
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.checkboxInput:checked + span {
+  background-color: #8732f5; // 체크 시 보라색 배경색
+}
+
+.checkboxInput:checked + span::after {
+  border-color: white; // 체크 시 흰색 V 표시
+}
+
+.checkboxInput:disabled + span {
+  background-color: #f0f0f0;
+  cursor: not-allowed;
+}
+
+.checkboxInput:disabled:checked + span {
+  background-color: #b0b0b0;
+}
+
+label {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+label span {
+  margin-right: 8px;
+}

@@ -170,3 +170,74 @@ body{
     background-repeat: no-repeat;
   }
 }
+
+.modalTit{
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+}
+.tabBox{
+  margin-top: 24px;
+}
+.tabBtns{
+  width: 100%;
+  display: flex;
+  button{
+    width: 500px;
+    padding-bottom: 14px;
+    font-size: 16px;
+    font-weight: 600;
+    &.isActive{
+      color: var(--color-point);
+      border-color: var(--color-point);
+      font-weight: 700;
+    }
+    color: #9AA9BA;
+    border-bottom: solid 2px #9AA9BA;
+  }
+}
+.userListWrap{
+  margin-top: 20px;
+  >li{
+    background-color: var(--color-wh);
+    display: flex;
+    align-items: center;
+    padding: 9px 10px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    box-shadow: 0 0 10px rgba($color: #000000, $alpha: 0.1);
+    &:last-child{
+      margin-bottom: 0;
+    }
+    .img{
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-right: 12px;
+      img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+    .userName{
+      font-size: 16px;
+      color: var(--color-dark);
+      margin-right: 8px;
+      font-weight: 500;
+    }
+    .userInfo{
+      font-size: 14px;
+      color: #786E85;
+      font-weight: 500;
+
+      span{
+        margin-right: 6px;
+        &:last-child{
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}

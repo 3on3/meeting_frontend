@@ -7,7 +7,6 @@ import RadioButtonGroup from '../components/common/buttons/radiobutton/RadioButt
 const RootLayout = () => {
   return (
     <>
-      <RadioButtonGroup />
       <Header />
       <main className='container'>
         <Outlet />

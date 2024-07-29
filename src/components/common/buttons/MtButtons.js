@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './MtButtons.module.scss'
 
-const MtButtons = ({buttonType, buttonText, eventType, eventHandler}) => {
+const MtButtons = ({buttonType, buttonText, eventType, eventHandler , className}) => {
 
     // 사용예시
     // <MtButtons 
@@ -37,7 +37,7 @@ const MtButtons = ({buttonType, buttonText, eventType, eventHandler}) => {
     return (
         <>
             <button
-                className={type}
+                className={`${type} ${className}`}
                 disabled={buttonType === 'disabled'}
                 onClick={eventType === 'click' ? eventHandler : null}
                 onSubmit={eventType === 'submit' ? eventHandler : null}

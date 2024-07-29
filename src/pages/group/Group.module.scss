@@ -1,0 +1,86 @@
+.content {
+  width: 100%;
+  padding-top: 101px;
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  .margin20 {
+    margin-bottom: 20px;
+    width: 100%;
+  }
+  .margin40 {
+    margin-bottom: 40px;
+    width: 100%;
+  }
+  .margin35 {
+    margin-bottom: 35px;
+    width: 100%;
+  }
+  .margin60 {
+    margin-bottom: 60px;
+    width: 100%;
+  }
+  .labelsWrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 58%;
+    margin: 0 auto;
+    padding-top: 40px;
+  }
+}
+
+.regionFilter {
+  // padding-top: 40px;
+  display: flex;
+  overflow: auto;
+  white-space: nowrap;
+  flex: 3;
+  justify-content: center; // 수평 가운데 정렬
+  width: max-content;
+  li {
+    margin-right: 6px;
+    cursor: pointer;
+  }
+}
+
+.informationFilter {
+  background: #ffffff;
+  width: 168px;
+  height: 37px;
+  border: 1px solid #271e33;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 37px;
+  border-radius: 500px;
+  display: flex;
+  flex: 7;
+  justify-content: center; // 수평 가운데 정렬
+  align-items: center; // 수직 가운데 정렬
+
+  p {
+    display: flex;
+    align-items: center;
+
+    span {
+      display: flex;
+      align-items: center;
+
+      &::after {
+        content: "";
+        display: inline-block;
+        width: 2px;
+        height: 2px;
+        background-color: var(--color-dark);
+        border-radius: 50%;
+        margin: 0 14px;
+      }
+
+      &:last-child::after {
+        display: none;
+      }
+    }
+  }
+}

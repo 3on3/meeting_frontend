@@ -10,8 +10,9 @@ import Main from "../pages/main/Main";
 import CheckPass from "../pages/mypage/modify_information/CheckPass";
 import ModifyInformation from "../pages/mypage/modify_information/ModifyInformation";
 import SignUp from "../pages/signUp/SignUp";
-import MyPage from '../pages/mypage/MyPage';
+import MyPage from "../pages/mypage/MyPage";
 import FirstLoginPage from "../pages/login/FirstLoginPage";
+import Group from "../pages/group/Group";
 
 export const router = createBrowserRouter([
   {
@@ -44,8 +45,8 @@ export const router = createBrowserRouter([
         element: <ModifyInformation />,
       },
       {
-        path: '/chat',
-        element: <Chat/>
+        path: "/chat",
+        element: <Chat />,
       },
       {
         path: "/mypage",
@@ -53,8 +54,12 @@ export const router = createBrowserRouter([
       },
       {
         path: "/login/first-login",
-        element: <FirstLoginPage />
-      }
+        element: <FirstLoginPage />,
+      },
+      {
+        path: "/group",
+        element: <Group />,
+      },
     ],
   },
 ]);

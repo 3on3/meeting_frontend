@@ -3,12 +3,14 @@ import MtButtons from "../../../components/common/buttons/MtButtons";
 import styles from "./EmailInput.module.scss"
 import DefaultInput from "../../../components/common/inputs/DefaultInput";
 
-const EmailInput = ({nextStep}) => {
+
+const EmailInput = ({nextStep, userEmail}) => {
 
     const [emailInput, setEmailInput] = useState('');
 
     const emailInputHandler = e => {
         setEmailInput(e.target.value);
+        userEmail(e.target.value);
     }
 
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // 간단한 이메일 패턴 검사
@@ -27,7 +29,7 @@ const EmailInput = ({nextStep}) => {
 
     return (
         <div className={styles.container}>
-            <h1>학교 이메일 인증</h1>
+            <h1 className={'title'}>학교 이메일 인증</h1>
             <DefaultInput inputState={isEmail}
                           errorMessage={'이메일 형식이 아닙니다.'}
                           onChange={emailInputHandler}

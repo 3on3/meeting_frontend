@@ -1,0 +1,35 @@
+/* 기본 스타일 */
+.radioInput {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #e0e0e0;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 8px;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+}
+
+/* 선택되지 않은 상태 */
+.radioInput::before {
+  content: '';
+  display: block;
+  width: 12px;
+  height: 12px;
+  background-color: #e0e0e0;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* 선택된 상태 */
+.radioInput:checked::before {
+  background-color: #8732F5; /* 보라색 */
+}
+

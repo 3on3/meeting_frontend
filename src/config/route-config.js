@@ -7,6 +7,10 @@ import LoginPage from "../pages/login/LoginPage";
 import IntroPage from "../pages/login/IntroPage";
 import Main from "../pages/main/Main";
 
+import CheckPass from "../pages/mypage/modify_information/CheckPass";
+import ModifyInformation from "../pages/mypage/modify_information/ModifyInformation";
+import SignUp from "../pages/signUp/SignUp";
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -25,6 +29,18 @@ export const router = createBrowserRouter([
       {
         path: "/login",
         element: <LoginPage />,
+      },
+      {
+        path: "/sign-up",
+        element: <SignUp />,
+      },
+      {
+        path: "/mypage/check-pass",
+        element: <CheckPass />,
+      },
+      {
+        path: "/mypage/modify",
+        element: <ModifyInformation />,
       },
       {
         path: "/chat",

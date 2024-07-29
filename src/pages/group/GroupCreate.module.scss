@@ -1,0 +1,54 @@
+.container {
+  width: 100%;
+  height: 100vh;
+  margin-top: 120px;
+
+  .groupInput {
+    margin-top: 50px;
+  }
+  .region {
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap; /* 줄 바꿈 없이 가로로 펼쳐짐 */
+    margin-top: 20px;
+  }
+  .region li {
+    margin-right: 5px;
+    cursor: pointer;
+
+  }
+  .genContainer {
+    display: flex;
+    margin-left: 20px;
+    margin-top: 40px;
+    font-size: 14px;
+
+    .gender {
+      font-weight: 700;
+    }
+    .female {
+      margin-left: 50px;
+      
+    }
+    .male {
+      margin-left: 20px;
+    }
+  }
+  .numberContainer {
+    display: flex;
+    margin-left: 20px;
+    margin-top: 20px;
+    font-size: 14px;
+    margin-bottom: 50px;
+    .numberOfParticipants {
+      font-weight: 700;
+    }
+    .three {
+      margin-left: 23px;
+    }
+    .four,
+    .five {
+      margin-left: 23px;
+    }
+  }
+}

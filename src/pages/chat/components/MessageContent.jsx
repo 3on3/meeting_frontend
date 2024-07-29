@@ -1,9 +1,9 @@
 import React from 'react';
 
-const MessageContent = ({styles, message}) => {
+const MessageContent = ({styles, content}) => {
   return (
     <p className={styles.content}>
-      {message}
+      {content}
     </p>
   );
 };

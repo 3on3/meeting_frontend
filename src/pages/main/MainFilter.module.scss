@@ -51,7 +51,8 @@
     visibility: hidden;
     opacity: 0;
     max-height: 0;
-    transition: max-height 0.3s ease, opacity 0.3s ease;
+    transition: 0.4s ease-out;
+    // transition: max-height 0.3s ease, opacity 0.3s ease;
 
     &.visible {
       max-height: 131px;

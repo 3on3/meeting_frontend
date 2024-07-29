@@ -1,0 +1,50 @@
+.meetingList {
+  margin-top: 30px;
+
+  .groupTitle {
+    width: 100px;
+
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .groupInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+
+    .groupDetail {
+      font-size: 13px;
+    }
+
+    .groupMajor {
+      margin-top: 5px;
+      font-size: 12px;
+      color: var(--color-gr);
+    }
+
+    .matching {
+      display: flex;
+      align-items: center;
+      height: 35px;
+
+      margin-top: 15px;
+
+      .matchingText {
+        font-size: 10px;
+        color: var(--color-point);
+        margin-right: 8px;
+      }
+
+      .matchingBt {
+        height: 100%;
+        padding: 10px 13px;
+        border-radius: 500px;
+        background-color: var(--color-point);
+        color: #fff;
+
+        font-weight: 600;
+      }
+    }
+  }
+}

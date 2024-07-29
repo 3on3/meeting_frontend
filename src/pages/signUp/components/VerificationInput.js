@@ -26,7 +26,7 @@ const VerificationInput = ({nextStep}) => {
 
     return (
         <div className={styles.container}>
-            <h1>학교 이메일 인증</h1>
+            <h1 className={'title'}>학교 이메일 인증</h1>
             <DefaultInput inputState={inputState}
                           errorMessage={'인증번호가 일치하지 않습니다.'}
                           onChange={verificationInputHandler}

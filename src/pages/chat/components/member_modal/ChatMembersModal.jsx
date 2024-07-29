@@ -1,6 +1,6 @@
 import React from 'react';
 import ModalLayout from '../../../../components/common/modal/ModalLayout';
-import ChatMemberList from './ChatMemberList';
+import ChatMemberList from '../../../../components/memberList/MemberList';
 import imgOriginUrl from '../../../../assets/images/profile.jpg'
 
 const ChatMembersModal = ({styles}) => {
@@ -18,15 +18,15 @@ const ChatMembersModal = ({styles}) => {
         </p>
         {/* 주최자 tab */}
         <ul className={styles.userListWrap}>
-          <ChatMemberList styles={styles} imgUrl={imgUrl} userName={userName} univ={univ} major={major}/>
-          <ChatMemberList styles={styles} imgUrl={imgUrl} userName={userName} univ={univ} major={major}/>
-          <ChatMemberList styles={styles} imgUrl={imgUrl} userName={userName} univ={univ} major={major}/>
+          <ChatMemberList imgUrl={imgUrl} userName={userName} univ={univ} major={major}/>
+          <ChatMemberList imgUrl={imgUrl} userName={userName} univ={univ} major={major}/>
+          <ChatMemberList imgUrl={imgUrl} userName={userName} univ={univ} major={major}/>
         </ul>
         {/* 신청자 tab */}
         {/* <ul className={styles.userListWrap}>
-          <ChatMemberList styles={styles} imgUrl={imgUrl} userName={userName} univ={univ} major={major}/>
-          <ChatMemberList styles={styles} imgUrl={imgUrl} userName={userName} univ={univ} major={major}/>
-          <ChatMemberList styles={styles} imgUrl={imgUrl} userName={userName} univ={univ} major={major}/>
+          <ChatMemberList imgUrl={imgUrl} userName={userName} univ={univ} major={major}/>
+          <ChatMemberList imgUrl={imgUrl} userName={userName} univ={univ} major={major}/>
+          <ChatMemberList imgUrl={imgUrl} userName={userName} univ={univ} major={major}/>
         </ul> */}
       </div>
     </ModalLayout>

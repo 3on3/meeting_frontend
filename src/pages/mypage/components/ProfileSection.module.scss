@@ -1,0 +1,103 @@
+.container {
+  width: 100%;
+  height: 60vh;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  margin: 0 auto;
+  padding-top: 30px;
+  
+  .text { 
+    font-weight: 700;
+    font-size: 32px;
+    margin-bottom: 40px;
+  }
+  .profile img{
+    width: 200px;
+    height: 170px;
+    border-radius: 20px;
+  }
+  .contentsBox {
+    margin-top: 20px;
+  }
+  .firstContents,
+  .secondContents,
+  .thirdContents {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    font-size: 16px;
+    line-height: 25px;
+    font-weight: 500;
+
+    img {
+      cursor: pointer;
+      margin-top: 5px;
+      margin-left: 4px;
+      width: 13px;
+      height: 13px;
+      
+      &.isEditing {
+        width: 16px;
+        height: 16px;
+      }
+    }
+  }
+  div {
+    margin: 0 3px;
+  }
+
+}
+
+.firstContents {
+  position: relative;
+  left: 40px;
+  .content1 {
+    font-weight: 600;
+
+    .nameInputField  {
+      text-align: center;
+      border-radius: 10px;
+      width: 60px;
+      font-size: 16px;
+      background: #F4F9FF;
+      font-weight: 500;
+    }
+  }
+  .content2 {
+    color: grey;
+    font-size: 12px;
+    margin-left: 8px;
+  }
+  .content3 {
+    color: #8732F5;
+    font-size: 12px;
+    font-weight: 700;
+    margin-left: 10px;
+  }
+}
+.secondContents {
+  .content4 {
+    .descInputField  {
+      text-align: center;
+      border-radius: 10px;
+      width: 200px;
+      font-size: 16px;
+      background: #F4F9FF;
+      font-weight: 500;
+    }
+  }
+}
+.thirdContents {
+  .content6 {
+    .majorinputField  {
+      text-align: center;
+      border-radius: 10px;
+      width: 100px;
+      font-size: 16px;
+      background: #F4F9FF;
+      font-weight: 500;
+    }
+  }
+}

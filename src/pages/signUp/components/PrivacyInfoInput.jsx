@@ -3,7 +3,7 @@ import styles from "./EmailInput.module.scss";
 import DefaultInput from "../../../components/common/inputs/DefaultInput";
 import MtButtons from "../../../components/common/buttons/MtButtons";
 
-const PrivacyInfoInput = () => {
+const PrivacyInfoInput = ({nextStep}) => {
 
 
 
@@ -112,7 +112,7 @@ const PrivacyInfoInput = () => {
                     <MtButtons buttonText={'SUBMIT'}
                                buttonType={buttonStatus ? 'apply' : 'disabled'}
                                eventType={'click'}
-                               eventHandler={null}/>
+                               eventHandler={nextStep}/>
                 </div>
             </div>
     );

@@ -8,10 +8,12 @@ import SignUpComplete from "./components/SignUpComplete";
 
 const SignUp = () => {
 
+    // 회원가입 단계를 useState로 관리
     const [signUpStep, setSignUpStep] = useState(1);
 
     const [signUpEmail, setSignUpEmail] = useState('');
 
+    // 각 컴포넌트에서 조건을 만족 후 버튼을 누를시 다음 스텝으로 넘어가도록 설정
     const nextStepHandler = () => {
         setSignUpStep(signUpStep + 1);
     }

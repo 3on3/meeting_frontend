@@ -10,6 +10,7 @@ const EmailInput = ({nextStep, userEmail}) => {
 
     const emailInputHandler = e => {
         setEmailInput(e.target.value);
+        //VerificationInput에 전달할 email
         userEmail(e.target.value);
     }
 
@@ -17,6 +18,7 @@ const EmailInput = ({nextStep, userEmail}) => {
 
         let isEmail = '';
 
+        // 아직 입력된 이메일이 없으면 기본 스타일, 이메일 형식이 아니라면 error 스타일, 이메일 형식이면 correct 스타일
         if(!emailInput) {
             isEmail = '';
         } else if(emailPattern.test(emailInput)) {

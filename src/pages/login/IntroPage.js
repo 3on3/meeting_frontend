@@ -25,8 +25,16 @@ const IntroPage = () => {
                 <img src={profileImage} alt="로고이미지"/>
             </div>
             <div className={styles.button}>
-                    <MtButtons eventType={'click'} eventHandler={loginNavigateHandler} buttonType={'apply'} buttonText={'로그인'}/>
-                    <MtButtons eventType={'click'} eventHandler={signUpNavigateHandler} buttonType={'cancel'} buttonText={'회원가입'}/>
+                    <MtButtons eventType={'click'}
+                               eventHandler={loginNavigateHandler}
+                               buttonType={'apply'}
+                               buttonText={'로그인'}
+                    />
+                    <MtButtons eventType={'click'}
+                               eventHandler={signUpNavigateHandler}
+                               buttonType={'cancel'}
+                               buttonText={'회원가입'}
+                    />
             </div>
         </div>
     );

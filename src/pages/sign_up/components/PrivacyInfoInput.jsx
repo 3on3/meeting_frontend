@@ -7,19 +7,22 @@ const PrivacyInfoInput = ({nextStep}) => {
 
 
 
-
+    // input 에 입력되는 값들을 저장하기 위한 useState
     const [userName, setUserName] = useState('');
     const [userBirth, setUserBirth] = useState('');
     const [userGender, setUserGender] = useState('');
     const [userPhoneNumber, setUserPhoneNumber] = useState('');
 
+    // input에 입력된 값들이 조건에 만족하는지를 관리하는 useState
     const [isName, setIsName] = useState(false);
     const [isBirth, setIsBirth] = useState(false);
     const [isGender, setIsGender] = useState(false);
     const [isPhoneNumber, setIsPhoneNumber] = useState(false);
 
+    // 버튼의 활성상태를 관리하기 위한 useState
     const [buttonStatus, setButtonStatus] = useState(false);
 
+    // 모든 입력된 모든 값들이 조건에 만족할시 버튼 활성화
     const checkButtonStatus = () => {
         if (isName && isBirth && isGender && isPhoneNumber) {
             setButtonStatus(true);
@@ -28,11 +31,13 @@ const PrivacyInfoInput = ({nextStep}) => {
         }
     }
 
+    // 각 input 값들이 변결될때마다 버튼 활성화 여부 검증
     useEffect(() => {
         checkButtonStatus();
     }, [isName, isBirth, isGender, isPhoneNumber]);
 
 
+    // 유저의 이름이 한국어라면 검증 성공 ( 검증 추가해야할지도..? )
     const userNameInputHandler = e => {
         setUserName(e.target.value);
 
@@ -45,6 +50,7 @@ const PrivacyInfoInput = ({nextStep}) => {
         }
     }
 
+    // 입력된 생년월일이 6자이고 숫자로만 이루어있는지 검증 ( 검증 추가여부 확인 필요)
     const userBirthInputHandler = e => {
 
         // 인풋에 입력된 값이 숫자인지 판단하는 패턴
@@ -59,6 +65,7 @@ const PrivacyInfoInput = ({nextStep}) => {
         }
     }
 
+    // 입력된 성별이 남 or 여일 경우에만 검증 성공 ( radio로 바꿀지 여부 검토해봐야함)
     const userGenderInputHandler = e => {
         setUserGender(e.target.value);
 
@@ -69,6 +76,7 @@ const PrivacyInfoInput = ({nextStep}) => {
         }
     }
 
+    // 전화번호 형식이 010-XXXX-XXXX인지 검증
     const userPhoneNumberInputHandler = e => {
         setUserPhoneNumber(e.target.value);
 

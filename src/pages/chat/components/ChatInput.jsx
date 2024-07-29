@@ -1,6 +1,8 @@
 import React, { useRef, useState } from "react";
 import DefaultInput from "../../../components/common/inputs/DefaultInput";
 
+
+// 채팅 입력창 컴포넌트
 const ChatInput = ({ styles, onChangeInput, onClickSendBtn,value}) => {
 
 

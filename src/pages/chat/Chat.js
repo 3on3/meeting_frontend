@@ -6,8 +6,9 @@ import styles from "./Chat.module.scss";
 import ChatMembersModal from "./components/member_modal/ChatMembersModal";
 
 const Chat = () => {
+  // input value
   const [value, setValue] = useState("");
-
+  // 채팅 배열
   const [messageList, setMessageList] = useState([
     {
       id: 1,
@@ -35,7 +36,7 @@ const Chat = () => {
     },
   ]);
 
-  // input
+  // input value
   const onChangeInput = (e) => {
     setValue(e.target.value);
   };
@@ -43,6 +44,7 @@ const Chat = () => {
   // 메세지 보내기 버튼
   const onClickSendBtn = () => {
     const newMessage = {
+      id: messageList.length + 1,
       userName: "뉴유저",
       auth: "user",
       content: value,

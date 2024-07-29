@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import styles from "./DefaultInput.module.scss";
 
 // className 추가햇음
@@ -9,6 +9,7 @@ const DefaultInput = ({ inputState, errorMessage, placeholder, onChange, classNa
    * placeholder : 내용 작성
    */
 
+  
   let state;
   switch (inputState) {
     // 오류

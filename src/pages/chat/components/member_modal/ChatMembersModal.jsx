@@ -1,6 +1,6 @@
 import React from 'react';
 import ModalLayout from '../../../../components/common/modal/ModalLayout';
-import ChatMemberList from './ChatMemberList';
+import ChatMemberList from '../../../../components/memberList/MemberList';
 import imgOriginUrl from '../../../../assets/images/profile.jpg'
 
 const ChatMembersModal = ({styles}) => {

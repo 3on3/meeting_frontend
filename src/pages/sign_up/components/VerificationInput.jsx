@@ -14,6 +14,8 @@ const VerificationInput = ({nextStep}) => {
     }
 
 
+    // 인증번호 입력 후 버튼 클릭시 인증번호가 일치한다면 다음 단계로 넘어감
+    // 인증번호가 일치하지 않는다면 error 메시지 출력
     const verificationHandler = () => {
        if(emailVerificationInput !== '5555') {
            setInputState('error');

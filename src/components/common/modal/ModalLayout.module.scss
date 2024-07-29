@@ -1,0 +1,43 @@
+.backDropLayer {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 101;
+  background-color: rgba($color: #000000, $alpha: 0.3);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  opacity: 0;
+  pointer-events: none;
+  .modal {
+    width: 100%;
+    background-color: #fff;
+    border-radius: 32px;
+    padding: 35px 20px 20px;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(-10px);
+    position: relative;
+  }
+  .modalClose{
+    width: 30px;
+    height: 30px;
+    background: url(../../../assets/images/icons/c-modal-close.svg);
+    position: absolute;
+    top: 30px;
+    right: 20px;
+  }
+  &.isActive {
+    opacity: 1;
+    pointer-events: all;
+    .modal {
+      opacity: 1;
+      pointer-events: all;
+      transform: translateY(0px);
+    }
+  }
+}

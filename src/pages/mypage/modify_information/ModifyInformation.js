@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./ModifyInformation.module.scss";
 import DefaultInput from "../../../components/common/inputs/DefaultInput";
 import MtButtons from "../../../components/common/buttons/MtButtons";
+import DisabledInformations from "./components/DisabledInformations";
 
 const ModifyInformation = () => {
   let isPassCheck = false;
@@ -47,36 +48,7 @@ const ModifyInformation = () => {
             buttonText={"SUBMIT"}
           />
         </div>
-        <div className={styles.margin20}>
-          <div className={styles.lineText}>이메일</div>
-        </div>
-        <div className={styles.margin35}>
-          <DefaultInput
-            inputState={"disabled"}
-            placeholder={"tkdgnsdldkdlel@gmail.com"}
-          />
-        </div>
-        <div className={styles.margin20}>
-          <div className={styles.lineText}>이름</div>
-        </div>
-        <div className={styles.margin35}>
-          <DefaultInput inputState={"disabled"} placeholder={"진상훈"} />
-        </div>
-        <div className={styles.margin20}>
-          <div className={styles.lineText}>생년월일</div>
-        </div>
-        <div className={styles.margin35}>
-          <DefaultInput
-            inputState={"disabled"}
-            placeholder={"2002년 10월 5일"}
-          />
-        </div>
-        <div className={styles.margin20}>
-          <div className={styles.lineText}>성별</div>
-        </div>
-        <div className={styles.margin35}>
-          <DefaultInput inputState={"disabled"} placeholder={"남"} />
-        </div>
+      <DisabledInformations styles={styles}/>
       </div>
     </>
   );

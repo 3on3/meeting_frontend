@@ -24,9 +24,9 @@ const ChatMembersModal = ({styles}) => {
         </ul>
         {/* 신청자 tab */}
         {/* <ul className={styles.userListWrap}>
-          <ChatMemberList styles={styles} imgUrl={imgUrl} userName={userName} univ={univ} major={major}/>
-          <ChatMemberList styles={styles} imgUrl={imgUrl} userName={userName} univ={univ} major={major}/>
-          <ChatMemberList styles={styles} imgUrl={imgUrl} userName={userName} univ={univ} major={major}/>
+          <ChatMemberList imgUrl={imgUrl} userName={userName} univ={univ} major={major}/>
+          <ChatMemberList imgUrl={imgUrl} userName={userName} univ={univ} major={major}/>
+          <ChatMemberList imgUrl={imgUrl} userName={userName} univ={univ} major={major}/>
         </ul> */}
       </div>
     </ModalLayout>

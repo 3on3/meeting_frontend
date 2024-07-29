@@ -1,8 +1,9 @@
 import React from 'react';
+import styles from './MemberList.module.scss';
 
-const ChatMemberList = ({styles, imgUrl, userName, univ, major}) => {
+const MemberList = ({ imgUrl, userName, univ, major}) => {
   return (
-    <li>
+    <li className={styles.mamberList}>
       <p className={styles.img}>
       <img src={imgUrl} alt="유저프로필 이미지"/>
 
@@ -16,4 +17,4 @@ const ChatMemberList = ({styles, imgUrl, userName, univ, major}) => {
   );
 };
 
-export default ChatMemberList;
+export default MemberList;

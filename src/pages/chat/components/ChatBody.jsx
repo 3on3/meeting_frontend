@@ -1,7 +1,7 @@
 import React from 'react';
 import MessageBox from './MessageBox';
 
-const ChatBody = ({styles}) => {
+const ChatBody = ({styles,message}) => {
 
   return (
     <div className={styles.chatBody}>

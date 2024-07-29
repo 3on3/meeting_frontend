@@ -8,7 +8,7 @@ import SignUpComplete from "./components/SignUpComplete";
 
 const SignUp = () => {
 
-    const [signUpStep, setSignUpStep] = useState(5);
+    const [signUpStep, setSignUpStep] = useState(1);
 
     const [signUpEmail, setSignUpEmail] = useState('');
 

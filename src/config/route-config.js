@@ -12,6 +12,7 @@ import ModifyInformation from "../pages/mypage/modify_information/ModifyInformat
 import SignUp from "../pages/signUp/SignUp";
 import MyPage from '../pages/mypage/MyPage';
 import FirstLoginPage from "../pages/login/FirstLoginPage";
+import MyGroups from "../pages/mypage/mypage_groups/MyGroups";
 
 export const router = createBrowserRouter([
   {
@@ -52,9 +53,14 @@ export const router = createBrowserRouter([
         element: <MyPage />,
       },
       {
+        path: "/mypage/groups",
+        element: <MyGroups />
+      },
+      {
         path: "/login/first-login",
         element: <FirstLoginPage />
-      }
+      },
+      
     ],
   },
 ]);

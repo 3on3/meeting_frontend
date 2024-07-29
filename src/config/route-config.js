@@ -5,18 +5,19 @@ import ErrorPage from "../pages/error/ErrorPage";
 import Chat from "../pages/chat/Chat";
 import LoginPage from "../pages/login/LoginPage";
 import IntroPage from "../pages/login/IntroPage";
+import MainFilter from "../pages/main/MainFilter";
 import Main from "../pages/main/Main";
-
 import CheckPass from "../pages/mypage/modify_information/CheckPass";
 import ModifyInformation from "../pages/mypage/modify_information/ModifyInformation";
 import SignUp from "../pages/signUp/SignUp";
+import MyPage from '../pages/mypage/MyPage';
+import FirstLoginPage from "../pages/login/FirstLoginPage";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
     errorElement: <ErrorPage />,
-
     children: [
       {
         path: "/",
@@ -43,9 +44,17 @@ export const router = createBrowserRouter([
         element: <ModifyInformation />,
       },
       {
-        path: "/chat",
-        element: <Chat />,
+        path: '/chat',
+        element: <Chat/>
       },
+      {
+        path: "/mypage",
+        element: <MyPage />,
+      },
+      {
+        path: "/login/first-login",
+        element: <FirstLoginPage />
+      }
     ],
   },
 ]);

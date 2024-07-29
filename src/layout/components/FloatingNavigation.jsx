@@ -13,7 +13,7 @@ const FloatingNavigation = ({styles}) => {
     <nav className={active? styles.isActive : ""}>
       <NavLink className={styles.invite_code_btn}>참여 코드</NavLink>
       <NavLink className={styles.new_group_btn}>새 그룹</NavLink>
-    </nav>
+    </nav>  
   </div>
   );
 };

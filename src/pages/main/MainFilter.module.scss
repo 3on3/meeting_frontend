@@ -1,0 +1,112 @@
+.filterBox {
+  width: 100%;
+  height: auto;
+  padding: 20px 30px;
+  position: relative;
+  border-radius: 18px;
+  color: var(--color-sh);
+  background-color: var(--color-wh);
+  box-shadow: 0 0 10px rgba($color: #000000, $alpha: 0.1);
+
+  // 공통 타이틀
+  .filterTitle {
+    width: 50px;
+    font-weight: 700;
+    color: var(--color-bk);
+  }
+
+  // 상단 필터
+  .filterHeder {
+    display: flex;
+    width: 100%;
+
+    align-items: center;
+
+    .filterPossible {
+      cursor: pointer;
+
+      &::before {
+        content: "";
+        display: inline-block;
+        height: 11px;
+        width: 11px;
+        margin-right: 5px;
+        background-image: url(../../assets/images/icons/m-check.svg);
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+      // 참여가능한 것만 보기 필터 클릭시 변경
+      &.check {
+        color: var(--color-point);
+        &::before {
+          background-image: url(../../assets/images/icons/m-check-active.svg);
+        }
+      }
+    }
+  }
+
+  // 성별 & 인원 필터
+  .filterDetail {
+    overflow: hidden;
+    visibility: hidden;
+    opacity: 0;
+    max-height: 0;
+    transition: 0.4s ease-out;
+    // transition: max-height 0.3s ease, opacity 0.3s ease;
+
+    &.visible {
+      max-height: 131px;
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .filterHeder {
+      margin-top: 20px;
+
+      .filterTitle {
+        font-weight: 600;
+      }
+
+      li {
+        margin-right: 25px;
+        font-weight: 700;
+        font-size: 13px;
+      }
+    }
+
+    // 성별 & 인원 클릭 시
+    .filterCheck {
+      color: var(--color-dark);
+
+      &::before {
+        content: "";
+        display: inline-block;
+        height: 11px;
+        width: 11px;
+        margin-right: 5px;
+        background-image: url(../../assets/images/icons/m-check-active-B.svg);
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+    }
+  }
+
+  // 상세 보기
+  .more {
+    content: "";
+    display: inline-block;
+    height: 17px;
+    width: 17px;
+    position: absolute;
+    top: 18px;
+    right: 30px;
+
+    background-image: url(../../assets/images/icons/m-more.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+
+    &.closeMore {
+      background-image: url(../../assets/images/icons/m-close-more.svg);
+    }
+  }
+}

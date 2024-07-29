@@ -7,6 +7,7 @@ const SignUp = () => {
 
     const [signUpStep, setSignUpStep] = useState(1);
 
+    const [signUpEmail, setSignUpEmail] = useState('');
 
     const nextStepHandler = () => {
         setSignUpStep(signUpStep + 1);
@@ -16,9 +17,9 @@ const SignUp = () => {
 
     return (
         <>
-            {signUpStep === 1 && <EmailInput nextStep={nextStepHandler} />}
+            {signUpStep === 1 && <EmailInput nextStep={nextStepHandler} userEmail={setSignUpEmail} />}
             {signUpStep === 2 && <VerificationInput nextStep={nextStepHandler} /> }
-            {signUpStep === 3 && <MajorInput nextStep={nextStepHandler}/>}
+            {signUpStep === 3 && <MajorInput nextStep={nextStepHandler} userEmail={signUpEmail}/>}
         </>
 
     );

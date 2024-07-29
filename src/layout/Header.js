@@ -1,13 +1,12 @@
 import React from "react";
 import styles from "./Header.module.scss";
-import MainNavigation from "./MainNavigation";
-import FloatingNavigation from "./FloatingNavigation";
+import MainNavigation from "./components/MainNavigation";
+import FloatingNavigation from "./components/FloatingNavigation";
 import { useLocation } from "react-router-dom";
 
 const Header = () => {
 
   const location = useLocation();
-  console.log(location);
 
 
   return (

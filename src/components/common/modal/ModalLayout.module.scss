@@ -22,6 +22,11 @@
     opacity: 0;
     transform: translateY(-10px);
     position: relative;
+    .modalTit {
+      font-size: 20px;
+      font-weight: 600;
+      text-align: center;
+    }
   }
   .modalClose{
     width: 30px;

@@ -5,16 +5,15 @@ import FloatingNavigation from "./components/FloatingNavigation";
 import { useLocation } from "react-router-dom";
 
 const Header = () => {
-
   const location = useLocation();
-
 
   return (
     <header id={styles.header}>
-      <MainNavigation styles={styles}/>
+      <MainNavigation styles={styles} />
       <div className={styles.layer}></div>
-    {location.pathname !== '/chat' ? <FloatingNavigation styles={styles}/> : null}
-   
+      {location.pathname !== "/chat" && location.pathname !== "/group" ? (
+        <FloatingNavigation styles={styles} />
+      ) : null}
     </header>
   );
 };

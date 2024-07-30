@@ -1,25 +1,24 @@
 .content {
   width: 100%;
-  padding-top: 101px;
-  margin-top: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  padding-top: calc(100vw * (101 / 500));
+
+  position: relative;
   flex-direction: column;
+  height: calc(100vw * (200 / 500));
   .margin20 {
-    margin-bottom: 20px;
+    margin-bottom: calc(100vw * (20 / 500));
     width: 100%;
   }
   .margin40 {
-    margin-bottom: 40px;
+    margin-bottom: calc(100vw * (40 / 500));
     width: 100%;
   }
   .margin35 {
-    margin-bottom: 35px;
+    margin-bottom: calc(100vw * (35 / 500));
     width: 100%;
   }
   .margin60 {
-    margin-bottom: 60px;
+    margin-bottom: calc(100vw * (60 / 500));
     width: 100%;
   }
   .labelsWrap {
@@ -28,33 +27,40 @@
     align-items: center;
     width: 58%;
     margin: 0 auto;
-    padding-top: 40px;
+    position: absolute;
+    bottom: calc(100vw * (-18 / 500));
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .buttonBox {
+    width: 100%;
+    margin-top: calc(100vw * (40 / 500));
   }
 }
 
 .regionFilter {
-  // padding-top: 40px;
   display: flex;
   overflow: auto;
   white-space: nowrap;
   flex: 3;
   justify-content: center; // 수평 가운데 정렬
   width: max-content;
+
   li {
-    margin-right: 6px;
+    margin-right: calc(100vw * (6 / 500));
     cursor: pointer;
   }
 }
 
 .informationFilter {
   background: #ffffff;
-  width: 168px;
-  height: 37px;
-  border: 1px solid #271e33;
+  width: calc(100vw * (168 / 500));
+  height: calc(100vw * (37 / 500));
+  border: calc(100vw * (1 / 500)) solid #271e33;
   font-weight: 600;
-  font-size: 16px;
-  line-height: 37px;
-  border-radius: 500px;
+  font-size: calc(100vw * (16 / 500));
+  line-height: calc(100vw * (37 / 500));
+  border-radius: calc(100vw * (500 / 500));
   display: flex;
   flex: 7;
   justify-content: center; // 수평 가운데 정렬
@@ -71,16 +77,41 @@
       &::after {
         content: "";
         display: inline-block;
-        width: 2px;
-        height: 2px;
+        width: calc(100vw * (2 / 500));
+        height: calc(100vw * (2 / 500));
         background-color: var(--color-dark);
         border-radius: 50%;
-        margin: 0 14px;
+        margin: 0 calc(100vw * (14 / 500));
       }
 
       &:last-child::after {
         display: none;
       }
     }
+  }
+}
+
+.content2 {
+  background: #f4f9ff;
+  width: 100%;
+  height: calc(100vh - (100vw * (390 / 500)));
+  padding-bottom: calc(100vw * (40 / 500));
+  // overflow-y: scroll;
+  padding-top: calc(100vw * (60 / 500));
+  .ul {
+    height: calc(100% - (100vw * (150 / 500)));
+    overflow-y: scroll;
+  }
+  .textLine {
+    font-size: calc(100vw * (18 / 500));
+    padding-left: calc(100vw * (25 / 500));
+    padding-bottom: calc(100vw * (20 / 500));
+    padding-top: calc(100vw * (41 / 500));
+  }
+  .textLine2 {
+    font-size: calc(100vw * (18 / 500));
+    padding-left: calc(100vw * (25 / 500));
+    padding-bottom: calc(100vw * (20 / 500));
+    text-align: left;
   }
 }

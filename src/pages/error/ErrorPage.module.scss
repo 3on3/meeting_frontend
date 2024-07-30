@@ -1,7 +1,7 @@
 .container {
-  margin-top: 200px;
+  margin-top: calc( 100vw* ( 200 /500));
 
   h1 {
-    margin-bottom: 60px;
+    margin-bottom: calc( 100vw* ( 60 /500));
   }
 }

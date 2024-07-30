@@ -2,9 +2,9 @@
   margin-top: calc(100vw * (30 / 500));
 
   .groupTitle {
-    width: calc(100vw * (100 / 500));
+    width: calc(100vw * (190 / 500));
 
-    font-size: calc(100vw * (16 / 500));
+    font-size: calc(100vw * (22 / 500));
     font-weight: 600;
   }
 
@@ -14,7 +14,7 @@
     align-items: end;
 
     .groupDetail {
-      font-size: calc(100vw * (13 / 500));
+      font-size: calc(100vw * (14 / 500));
     }
 
     .groupMajor {
@@ -31,7 +31,7 @@
       margin-top: calc(100vw * (15 / 500));
 
       .matchingText {
-        font-size: calc(100vw * (10 / 500));
+        font-size: calc(100vw * (12 / 500));
         color: var(--color-point);
         margin-right: calc(100vw * (8 / 500));
       }

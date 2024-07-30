@@ -9,7 +9,7 @@ import MainFilter from "../pages/main/MainFilter";
 import Main from "../pages/main/Main";
 import CheckPass from "../pages/mypage/modify_information/CheckPass";
 import ModifyInformation from "../pages/mypage/modify_information/ModifyInformation";
-import SignUp from "../pages/signUp/SignUp";
+import SignUp from "../pages/sign_up/SignUp";
 import MyPage from "../pages/mypage/MyPage";
 import FirstLoginPage from "../pages/login/FirstLoginPage";
 import Group from "../pages/group/Group";
@@ -57,7 +57,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/mypage/groups",
-        element: <MyGroups />
+        element: <MyGroups />,
       },
       {
         path: "/login/first-login",
@@ -68,17 +68,17 @@ export const router = createBrowserRouter([
         element: <Group />,
       },
       {
-        path: '/error',
-        element: <ErrorPage />
+        path: "/error",
+        element: <ErrorPage />,
       },
       {
-        path: '/group/create',
-        element: <GroupCreate />
+        path: "/group/create",
+        element: <GroupCreate />,
       },
       {
-        path: '/mypage/withdraw',
-        element: <Withdraw />
-      }
+        path: "/mypage/withdraw",
+        element: <Withdraw />,
+      },
     ],
   },
 ]);

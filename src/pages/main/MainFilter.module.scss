@@ -11,6 +11,7 @@
   // 공통 타이틀
   .filterTitle {
     width: calc(100vw * (50 / 500));
+    font-size: calc(100vw * (15 / 500));
     font-weight: 700;
     color: var(--color-bk);
   }
@@ -65,6 +66,7 @@
 
       .filterTitle {
         font-weight: 600;
+        font-size: calc(100vw * (14 / 500));
       }
 
       li {

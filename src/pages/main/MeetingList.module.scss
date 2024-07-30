@@ -1,10 +1,10 @@
 .meetingList {
-  margin-top: 30px;
+  margin-top: calc(100vw * (30 / 500));
 
   .groupTitle {
-    width: 100px;
+    width: calc(100vw * (100 / 500));
 
-    font-size: 16px;
+    font-size: calc(100vw * (16 / 500));
     font-weight: 600;
   }
 
@@ -14,32 +14,32 @@
     align-items: end;
 
     .groupDetail {
-      font-size: 13px;
+      font-size: calc(100vw * (13 / 500));
     }
 
     .groupMajor {
-      margin-top: 5px;
-      font-size: 12px;
+      margin-top: calc(100vw * (5 / 500));
+      font-size: calc(100vw * (12 / 500));
       color: var(--color-gr);
     }
 
     .matching {
       display: flex;
       align-items: center;
-      height: 35px;
+      height: calc(100vw * (35 / 500));
 
-      margin-top: 15px;
+      margin-top: calc(100vw * (15 / 500));
 
       .matchingText {
-        font-size: 10px;
+        font-size: calc(100vw * (10 / 500));
         color: var(--color-point);
-        margin-right: 8px;
+        margin-right: calc(100vw * (8 / 500));
       }
 
       .matchingBt {
         height: 100%;
-        padding: 10px 13px;
-        border-radius: 500px;
+        padding: calc(100vw * (10 / 500)) calc(100vw * (13 / 500));
+        border-radius: calc(100vw * (500 / 500));
         background-color: var(--color-point);
         color: #fff;
 

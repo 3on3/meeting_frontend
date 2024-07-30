@@ -17,6 +17,45 @@ import MyGroups from "../pages/mypage/mypage_groups/MyGroups";
 import GroupCreate from "../pages/group/GroupCreate";
 import Withdraw from "../pages/mypage/modify_information/withdraw/Withdraw";
 
+
+// 마이페이지 라우터
+const mypageRouter = [
+  {
+    path: "/mypage",
+    element: <MyPage />,
+    children: [
+      {
+        path: "check-pass",
+        element: <CheckPass />,
+      },
+      {
+        path: "group",
+        element: <MyGroups />,
+      },
+      {
+        path: "modify",
+        element: <ModifyInformation />,
+      },
+      {
+        path: "group/create",
+        element: <GroupCreate />,
+      },
+      {
+        path: "withdraw",
+        element: <Withdraw />,
+      },
+    ],
+  },
+];
+
+// 채팅 라우터
+const chatRouter = [
+  {
+    path: "/chat",
+    element: <Chat />,
+  },
+];
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -40,44 +79,24 @@ export const router = createBrowserRouter([
         element: <SignUp />,
       },
       {
-        path: "/mypage/check-pass",
-        element: <CheckPass />,
-      },
-      {
-        path: "/mypage/modify",
-        element: <ModifyInformation />,
-      },
-      {
-        path: "/chat",
-        element: <Chat />,
-      },
-      {
-        path: "/mypage",
-        element: <MyPage />,
-      },
-      {
-        path: "/mypage/groups",
-        element: <MyGroups />,
-      },
-      {
         path: "/login/first-login",
         element: <FirstLoginPage />,
       },
+      // 채팅 라우터
       {
-        path: "/group",
-        element: <Group />,
+        path: "/chat",
+        children: chatRouter,
       },
+      // 마이페이지 라우터
+      {
+        path: "/mypage",
+        children: mypageRouter,
+      },
+
+      // 이하로는 임시페이지임
       {
         path: "/error",
         element: <ErrorPage />,
-      },
-      {
-        path: "/group/create",
-        element: <GroupCreate />,
-      },
-      {
-        path: "/mypage/withdraw",
-        element: <Withdraw />,
       },
     ],
   },

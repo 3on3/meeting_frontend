@@ -6,16 +6,15 @@ import { useLocation } from "react-router-dom";
 import InvitingCodeModal from "./components/modal/InvitingCodeModal";
 
 const Header = () => {
-
   const location = useLocation();
-
 
   return (
     <header id={styles.header}>
-      <MainNavigation styles={styles}/>
+      <MainNavigation styles={styles} />
       <div className={styles.layer}></div>
-    {location.pathname !== '/chat' ? <FloatingNavigation styles={styles}/> : null}
-      <InvitingCodeModal/>
+      {location.pathname !== "/chat" && location.pathname !== "/group" ? (
+        <FloatingNavigation styles={styles} />
+      ) : null}
     </header>
   );
 };

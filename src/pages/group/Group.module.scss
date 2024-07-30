@@ -1,0 +1,117 @@
+.content {
+  width: 100%;
+  padding-top: calc(100vw * (101 / 500));
+
+  position: relative;
+  flex-direction: column;
+  height: calc(100vw * (200 / 500));
+  .margin20 {
+    margin-bottom: calc(100vw * (20 / 500));
+    width: 100%;
+  }
+  .margin40 {
+    margin-bottom: calc(100vw * (40 / 500));
+    width: 100%;
+  }
+  .margin35 {
+    margin-bottom: calc(100vw * (35 / 500));
+    width: 100%;
+  }
+  .margin60 {
+    margin-bottom: calc(100vw * (60 / 500));
+    width: 100%;
+  }
+  .labelsWrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 58%;
+    margin: 0 auto;
+    position: absolute;
+    bottom: calc(100vw * (-18 / 500));
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .buttonBox {
+    width: 100%;
+    margin-top: calc(100vw * (40 / 500));
+  }
+}
+
+.regionFilter {
+  display: flex;
+  overflow: auto;
+  white-space: nowrap;
+  flex: 3;
+  justify-content: center; // 수평 가운데 정렬
+  width: max-content;
+
+  li {
+    margin-right: calc(100vw * (6 / 500));
+    cursor: pointer;
+  }
+}
+
+.informationFilter {
+  background: #ffffff;
+  width: calc(100vw * (168 / 500));
+  height: calc(100vw * (37 / 500));
+  border: calc(100vw * (1 / 500)) solid #271e33;
+  font-weight: 600;
+  font-size: calc(100vw * (16 / 500));
+  line-height: calc(100vw * (37 / 500));
+  border-radius: calc(100vw * (500 / 500));
+  display: flex;
+  flex: 7;
+  justify-content: center; // 수평 가운데 정렬
+  align-items: center; // 수직 가운데 정렬
+
+  p {
+    display: flex;
+    align-items: center;
+
+    span {
+      display: flex;
+      align-items: center;
+
+      &::after {
+        content: "";
+        display: inline-block;
+        width: calc(100vw * (2 / 500));
+        height: calc(100vw * (2 / 500));
+        background-color: var(--color-dark);
+        border-radius: 50%;
+        margin: 0 calc(100vw * (14 / 500));
+      }
+
+      &:last-child::after {
+        display: none;
+      }
+    }
+  }
+}
+
+.content2 {
+  background: #f4f9ff;
+  width: 100%;
+  height: calc(100vh - (100vw * (390 / 500)));
+  padding-bottom: calc(100vw * (40 / 500));
+  // overflow-y: scroll;
+  padding-top: calc(100vw * (60 / 500));
+  .ul {
+    height: calc(100% - (100vw * (150 / 500)));
+    overflow-y: scroll;
+  }
+  .textLine {
+    font-size: calc(100vw * (18 / 500));
+    padding-left: calc(100vw * (25 / 500));
+    padding-bottom: calc(100vw * (20 / 500));
+    padding-top: calc(100vw * (41 / 500));
+  }
+  .textLine2 {
+    font-size: calc(100vw * (18 / 500));
+    padding-left: calc(100vw * (25 / 500));
+    padding-bottom: calc(100vw * (20 / 500));
+    text-align: left;
+  }
+}

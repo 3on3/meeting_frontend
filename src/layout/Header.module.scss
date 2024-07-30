@@ -4,7 +4,7 @@
 // MainNavigation.js
 .nav {
   width: 100%;
-  height: 100px;
+  height: calc( 100vw * ( 100 / 500));
   background-color: #fff;
   box-shadow: 0 0 calc( 100vw * ( 10 / 500)) rgba($color: #000000, $alpha: 0.2);
   position: fixed;
@@ -20,16 +20,16 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: calc( 100vw * ( 60 / 500));
+    width: calc( 100vw * ( 70 / 500));
     height: 100%;
-    font-size: calc( 100vw * ( 12 / 500));
+    font-size: calc( 100vw * ( 14 / 500));
     font-weight: 700;
     color: var(--color-dark);
     transition: color .1s;
 
     i {
-      width: calc( 100vw * ( 30 / 500));
-      height: calc( 100vw * ( 30 / 500));
+      width: calc( 100vw * ( 34 / 500));
+      height: calc( 100vw * ( 34 / 500));
       margin-bottom: calc( 100vw * ( 4 / 500));
       display: inline-block;
       background-size: cover;
@@ -82,8 +82,8 @@
 // FloatingNavigation.js
 .floating {
   > button {
-    width: calc( 100vw * ( 50 / 500));
-    height: calc( 100vw * ( 50 / 500));
+    width: calc( 100vw * ( 60 / 500));
+    height: calc( 100vw * ( 60 / 500));
     background-color: var(--color-dark);
     border-radius: calc( 100vw * ( 18 / 500));
     position: fixed;
@@ -109,8 +109,8 @@
   }
   > nav {
     position: fixed;
-    bottom: calc( 100vw * ( 170 / 500));
-    right: calc( 100vw * ( 520 / 500));
+    bottom: calc( 100vw * ( 180 / 500));
+    right: calc( 100vw * ( 20 / 500));
     z-index: 100;
     display: flex;
     flex-direction: column;
@@ -118,7 +118,7 @@
     a {
       display: flex;
       padding: calc( 100vw * ( 17 / 500)) calc( 100vw * ( 16 / 500));
-      font-size: calc( 100vw * ( 16 / 500));
+      font-size: calc( 100vw * ( 18 / 500));
       font-weight: 600;
       border-radius: calc( 100vw * ( 18 / 500));
       box-shadow: 0 0 calc( 100vw * ( 10 / 500)) rgba($color: #000000, $alpha: 0.2);

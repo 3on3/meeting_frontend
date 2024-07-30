@@ -65,7 +65,7 @@
   height: calc( 100vw* ( 66 /500));
   border-radius: calc( 100vw* ( 18 /500));
   background: #ffffff;
-  border: calc( 100vw* ( 2 /500)) solid #271E33;
+  border: calc( 100vw* ( 1 /500)) solid #271E33;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -76,7 +76,7 @@
     text-align: center;
     height: calc( 100vw* ( 21 /500));
     color: #271E33;
-    font-weight: 700;
+    font-weight: 600;
     font-size: calc( 100vw* ( 18 /500));
   }
 }

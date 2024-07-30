@@ -6,31 +6,31 @@
   width: 100%;
   height: 100px;
   background-color: #fff;
-  box-shadow: 0 0 10px rgba($color: #000000, $alpha: 0.2);
+  box-shadow: 0 0 calc( 100vw * ( 10 / 500)) rgba($color: #000000, $alpha: 0.2);
   position: fixed;
   left: 0;
   bottom: 0;
   z-index: 100;
-  max-width: 500px;
+  max-width: calc( 100vw * ( 500 / 500));
   display: flex;
   justify-content: space-between;
-  padding: 0 20px 20px;
+  padding: 0 calc( 100vw * ( 20 / 500)) calc( 100vw * ( 20 / 500));
   a {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 60px;
+    width: calc( 100vw * ( 60 / 500));
     height: 100%;
-    font-size: 12px;
+    font-size: calc( 100vw * ( 12 / 500));
     font-weight: 700;
     color: var(--color-dark);
     transition: color .1s;
 
     i {
-      width: 30px;
-      height: 30px;
-      margin-bottom: 4px;
+      width: calc( 100vw * ( 30 / 500));
+      height: calc( 100vw * ( 30 / 500));
+      margin-bottom: calc( 100vw * ( 4 / 500));
       display: inline-block;
       background-size: cover;
       background-position: center;
@@ -82,22 +82,22 @@
 // FloatingNavigation.js
 .floating {
   > button {
-    width: 50px;
-    height: 50px;
+    width: calc( 100vw * ( 50 / 500));
+    height: calc( 100vw * ( 50 / 500));
     background-color: var(--color-dark);
-    border-radius: 18px;
+    border-radius: calc( 100vw * ( 18 / 500));
     position: fixed;
-    bottom: 110px;
-    right: 20px;
+    bottom: calc( 100vw * ( 110 / 500));
+    right: calc( 100vw * ( 20 / 500));
     z-index: 100;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 0 10px rgba($color: #000000, $alpha: 0.2);
+    box-shadow: 0 0 calc( 100vw * ( 10 / 500)) rgba($color: #000000, $alpha: 0.2);
 
     i {
-      width: 20px;
-      height: 20px;
+      width: calc( 100vw * ( 20 / 500));
+      height: calc( 100vw * ( 20 / 500));
       background: url(../assets/images/icons/h-plus.svg) no-repeat;
       background-size: cover;
       transition: 0.6s ease-out;
@@ -109,20 +109,20 @@
   }
   > nav {
     position: fixed;
-    bottom: 170px;
-    right: 20px;
+    bottom: calc( 100vw * ( 170 / 500));
+    right: calc( 100vw * ( 520 / 500));
     z-index: 100;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     a {
       display: flex;
-      padding: 17px 16px;
-      font-size: 16px;
+      padding: calc( 100vw * ( 17 / 500)) calc( 100vw * ( 16 / 500));
+      font-size: calc( 100vw * ( 16 / 500));
       font-weight: 600;
-      border-radius: 18px;
-      box-shadow: 0 0 10px rgba($color: #000000, $alpha: 0.2);
-      transform: translateX(-10px);
+      border-radius: calc( 100vw * ( 18 / 500));
+      box-shadow: 0 0 calc( 100vw * ( 10 / 500)) rgba($color: #000000, $alpha: 0.2);
+      transform: translateX(-calc( 100vw * ( 10 / 500)));
 
       opacity: 0;
       transition: 0.6s ease-out;
@@ -130,7 +130,7 @@
       &:last-child {
         margin-bottom: 0;
       }
-      margin-bottom: 8px;
+      margin-bottom: calc( 100vw * ( 8 / 500));
       &.invite_code_btn {
         background-color: var(--color-wh);
         color: var(--color-dark);

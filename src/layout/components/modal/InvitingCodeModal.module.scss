@@ -1,6 +1,6 @@
 .inner{
-  margin-top: 40px;
+  margin-top: calc( 100vw * ( 40 / 500));
 }
 .button{
-  margin-top: 20px;
+  margin-top: calc( 100vw * ( 20 / 500));
 }

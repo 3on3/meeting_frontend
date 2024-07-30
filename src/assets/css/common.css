@@ -2,7 +2,7 @@
 
 html,
 body {
-  font-size: 14px;
+  font-size: calc( 100vw * ( 14 / 500));
 }
 
 body {
@@ -14,10 +14,10 @@ body {
 .container {
   width: 100%;
   min-height: 100vh;
-  padding: 0 20px;
+  padding: 0 calc( 100vw * ( 20 / 500));
 }
 h1.title {
-  font-size: 34px;
+  font-size: calc( 100vw * ( 34 / 500));
   text-align: center;
   font-weight: 600;
 }

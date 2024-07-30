@@ -8,9 +8,9 @@
   flex-direction: column;
 
   .logo {
-    width: 200px;
-    height: 160px;
-    margin: 0 auto 40px;
+    width: calc( 100vw* ( 200 /500));
+    height: calc( 100vw* ( 160 /500));
+    margin: 0 auto calc( 100vw* ( 40 /500));
 
     img {
       width: 100%;

@@ -11,6 +11,7 @@
     width: 160px;
     height: 117px;
     margin: 0 auto 40px;
+    overflow: hidden;
 
     img {
       width: 100%;
@@ -20,7 +21,6 @@
   }
   .input {
     width: 100%;
-    margin-bottom: 25px;
 
     input {
       display: block;
@@ -29,7 +29,7 @@
     }
 
     div {
-      margin-bottom: 12px;
+      margin-bottom: 40px;
     }
 
 

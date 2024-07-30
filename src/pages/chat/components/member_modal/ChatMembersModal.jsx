@@ -9,8 +9,7 @@ const ChatMembersModal = ({ styles }) => {
   const univ = "건국대";
   const major = "현대미술과";
   return (
-    <ModalLayout>
-      <h2 className={styles.modalTit}>참여자</h2>
+    <ModalLayout className={""} title={"채팅 참여자"}>
       <div className={styles.tabBox}>
         <p className={styles.tabBtns}>
           <button className={styles.isActive}>건국대 킹카</button>
@@ -39,9 +38,9 @@ const ChatMembersModal = ({ styles }) => {
         </ul>
         {/* 신청자 tab */}
         {/* <ul className={styles.userListWrap}>
-          <ChatMemberList styles={styles} imgUrl={imgUrl} userName={userName} univ={univ} major={major}/>
-          <ChatMemberList styles={styles} imgUrl={imgUrl} userName={userName} univ={univ} major={major}/>
-          <ChatMemberList styles={styles} imgUrl={imgUrl} userName={userName} univ={univ} major={major}/>
+          <ChatMemberList imgUrl={imgUrl} userName={userName} univ={univ} major={major}/>
+          <ChatMemberList imgUrl={imgUrl} userName={userName} univ={univ} major={major}/>
+          <ChatMemberList imgUrl={imgUrl} userName={userName} univ={univ} major={major}/>
         </ul> */}
       </div>
     </ModalLayout>

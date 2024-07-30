@@ -1,6 +1,7 @@
 import React, { act, useState } from 'react';
 import ChatMenu from './ChatMenu';
 
+
 const ChatHead = ({styles}) => {
 
   const [active, setActive] = useState(false)

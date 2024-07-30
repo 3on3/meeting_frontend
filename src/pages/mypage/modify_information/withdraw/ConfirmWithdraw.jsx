@@ -4,8 +4,11 @@ import styles from "./Withdraw.module.scss";
 import DefaultInput from '../../../../components/common/inputs/DefaultInput';
 import {useNavigate} from "react-router-dom";
 
-
+// 사용자가 이메일과 패스워드를 입력하고, 
+// 탈퇴를 확정할 수 있는 최종 확인 화면 제공
 const ConfirmWithdraw = () => {
+
+  // 이메일과 패스워드 입력 필드의 상태를 지정하는 변수
   let isPassCheck = true;
 
   return (
@@ -15,7 +18,6 @@ const ConfirmWithdraw = () => {
       <DefaultInput
         inputState={"correct"}
         placeholder={"abc@naver.com"}
-
       />
       <DefaultInput
         inputState={"correct"}

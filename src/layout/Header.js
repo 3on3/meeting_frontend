@@ -3,6 +3,7 @@ import styles from "./Header.module.scss";
 import MainNavigation from "./components/MainNavigation";
 import FloatingNavigation from "./components/FloatingNavigation";
 import { useLocation } from "react-router-dom";
+import InvitingCodeModal from "./components/modal/InvitingCodeModal";
 
 const Header = () => {
   const location = useLocation();

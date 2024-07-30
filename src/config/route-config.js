@@ -13,6 +13,8 @@ import SignUp from "../pages/signUp/SignUp";
 import MyPage from "../pages/mypage/MyPage";
 import FirstLoginPage from "../pages/login/FirstLoginPage";
 import Group from "../pages/group/Group";
+import MyGroups from "../pages/mypage/mypage_groups/MyGroups";
+import GroupCreate from "../pages/group/GroupCreate";
 
 export const router = createBrowserRouter([
   {
@@ -53,6 +55,10 @@ export const router = createBrowserRouter([
         element: <MyPage />,
       },
       {
+        path: "/mypage/groups",
+        element: <MyGroups />
+      },
+      {
         path: "/login/first-login",
         element: <FirstLoginPage />,
       },
@@ -60,6 +66,14 @@ export const router = createBrowserRouter([
         path: "/group",
         element: <Group />,
       },
+      {
+        path: '/error',
+        element: <ErrorPage />
+      },
+      {
+        path: '/group/create',
+        element: <GroupCreate />
+      }
     ],
   },
 ]);

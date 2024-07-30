@@ -1,11 +1,10 @@
 .inputWrapper {
   position: relative;
   width: 100%;
-  height: calc(100vw * (60 / 500));
 
   .input {
     width: 100%;
-    height: 100%;
+    height: calc(100vw * (60 / 500));
     border-radius: calc(100vw * (18 / 500));
     background-color: var(--color-wh);
     box-shadow: 0 0 calc(100vw * (10 / 500)) rgba($color: #000000, $alpha: 0.1);

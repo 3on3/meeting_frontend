@@ -8,9 +8,9 @@
   flex-direction: column;
 
   .text {
-    margin: 0 auto 40px;
-    font-size: 32px;
-    margin-bottom: 80px;
+    margin: 0 auto calc( 100vw * ( 40 /500));
+    font-size: calc( 100vw * ( 32 /500));
+    margin-bottom: calc( 100vw * ( 80 /500));
   }
 
   .button {

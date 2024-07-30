@@ -15,6 +15,7 @@ import FirstLoginPage from "../pages/login/FirstLoginPage";
 import Group from "../pages/group/Group";
 import MyGroups from "../pages/mypage/mypage_groups/MyGroups";
 import GroupCreate from "../pages/group/GroupCreate";
+import Withdraw from "../pages/mypage/modify_information/withdraw/Withdraw";
 
 export const router = createBrowserRouter([
   {
@@ -73,6 +74,10 @@ export const router = createBrowserRouter([
       {
         path: '/group/create',
         element: <GroupCreate />
+      },
+      {
+        path: '/mypage/withdraw',
+        element: <Withdraw />
       }
     ],
   },

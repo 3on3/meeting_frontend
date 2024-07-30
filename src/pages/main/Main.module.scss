@@ -1,6 +1,4 @@
 .wrapper {
-  padding-top: 80px;
+  padding-top: calc(100vw * (80 / 500));
   width: 100%;
 }
-
-

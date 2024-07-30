@@ -1,11 +1,11 @@
 .regionFilter {
-  margin-top: 15px;
+  margin-top: calc(100vw * (15 / 500));
   display: flex;
   overflow: auto;
   white-space: nowrap;
 
   li {
-    margin-right: 6px;
+    margin-right: calc(100vw * (6 / 500));
     cursor: pointer;
   }
 }

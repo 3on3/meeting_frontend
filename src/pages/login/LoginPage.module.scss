@@ -8,9 +8,9 @@
   flex-direction: column;
 
   .logo {
-    width: 160px;
-    height: 117px;
-    margin: 0 auto 40px;
+    width: calc( 100vw* ( 160 /500));
+    height: calc( 100vw* ( 117 /500));
+    margin: 0 auto calc( 100vw* ( 40 /500));
     overflow: hidden;
 
     img {
@@ -24,32 +24,32 @@
 
     input {
       display: block;
-      margin-bottom: 12px;
+      margin-bottom: calc( 100vw* ( 12 /500));
       width: 100%;
     }
 
     div {
-      margin-bottom: 40px;
+      margin-bottom: calc( 100vw* ( 40 /500));
     }
 
 
   }
 
   .checkbox {
-    margin-bottom: 12px;
+    margin-bottom: calc( 100vw* ( 12 /500));
     width: 100%;
     justify-content: left;
   }
 
   .button {
     width: 100%;
-    margin-bottom: 13px;
+    margin-bottom: calc( 100vw* ( 13 /500));
   }
 
   .findPassword {
     text-decoration: underline;
     text-underline-position: under;
-    font-size: 18px;
+    font-size: calc( 100vw* ( 18 /500));
 
   }
 

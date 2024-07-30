@@ -1,33 +1,33 @@
 .container {
   width: 100%;
   height: 60vh;
-  border-radius: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: calc( 100vw* ( 20 /500));
+  box-shadow: 0 calc( 100vw* ( 4 /500)), calc( 100vw* ( 8 /500)), rgba(0, 0, 0, 0.1);
   text-align: center;
   margin: 0 auto;
-  padding-top: 30px;
+  padding-top: calc( 100vw* ( 30 /500));
   
   .text { 
     font-weight: 700;
-    font-size: 32px;
-    margin-bottom: 40px;
+    font-size: calc( 100vw * ( 32 / 500));
+    margin-bottom: calc( 100vw* ( 40 /500));
   }
   .profile {
-    width: 200px;
-    height: 170px;
+    width: calc( 100vw* ( 200 /500));
+    height: calc( 100vw* ( 170 /500));
     overflow: hidden;
-    border-radius: 20px;
+    border-radius: calc( 100vw* ( 20 /500));
     position: relative;
-    left: 130px;
+    left: calc( 100vw* ( 130 /500));
   }
-  .profile img{
+  .profile img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
   }
   .contentsBox {
-    margin-top: 20px;
+    margin-top: calc( 100vw* ( 20 /500));
   }
   .firstContents,
   .secondContents,
@@ -35,64 +35,64 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 10px;
-    font-size: 16px;
-    line-height: 25px;
+    margin-bottom: calc( 100vw* ( 10 /500));
+    font-size: calc( 100vw* ( 16 /500));
+    line-height: calc( 100vw* ( 25 /500));
     font-weight: 500;
 
     img {
       cursor: pointer;
-      margin-top: 5px;
-      margin-left: 4px;
-      width: 13px;
-      height: 13px;
+      margin-top: calc( 100vw* ( 5 /500));
+      margin-left: calc( 100vw* ( 4 /500));
+      width: calc( 100vw* ( 13 /500));
+      height: calc( 100vw* ( 13 /500));
       
       &.isEditing {
-        width: 16px;
-        height: 16px;
+        width: calc( 100vw* ( 16 /500));
+        height: calc( 100vw* ( 16 /500));
       }
     }
   }
   div {
-    margin: 0 3px;
+    margin: 0 calc( 100vw* ( 3 /500));
   }
 
 }
 
 .firstContents {
   position: relative;
-  left: 40px;
+  left: calc( 100vw* ( 40 /500));
   .content1 {
     font-weight: 600;
 
     .nameInputField  {
       text-align: center;
-      border-radius: 10px;
-      width: 60px;
-      font-size: 16px;
+      border-radius: calc( 100vw* ( 10 /500));
+      width: calc( 100vw* ( 60 /500));
+      font-size: calc( 100vw* ( 16 /500));
       background: #F4F9FF;
       font-weight: 500;
     }
   }
   .content2 {
     color: grey;
-    font-size: 12px;
-    margin-left: 8px;
+    font-size: calc( 100vw* ( 12 /500));
+    margin-left: calc( 100vw* ( 8 /500));
   }
   .content3 {
     color: #8732F5;
-    font-size: 12px;
+    font-size: calc( 100vw* ( 12 /500));
     font-weight: 700;
-    margin-left: 10px;
+    margin-left: calc( 100vw* ( 10 /500));
   }
 }
 .secondContents {
   .content4 {
     .descInputField  {
       text-align: center;
-      border-radius: 10px;
-      width: 200px;
-      font-size: 16px;
+      border-radius: calc( 100vw* ( 10 /500));
+      width: calc( 100vw* ( 200 /500));
+      font-size: calc( 100vw* ( 16 /500));
       background: #F4F9FF;
       font-weight: 500;
     }
@@ -102,9 +102,9 @@
   .content6 {
     .majorinputField  {
       text-align: center;
-      border-radius: 10px;
-      width: 100px;
-      font-size: 16px;
+      border-radius: calc( 100vw* ( 10 /500));
+      width: calc( 100vw* ( 100 /500));
+      font-size: calc( 100vw* ( 16 /500));
       background: #F4F9FF;
       font-weight: 500;
     }

@@ -16,7 +16,6 @@ const RootLayout = () => {
 
   return (
     <>
-   
       <Header />
       <main className='container'>
         <Outlet />

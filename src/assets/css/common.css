@@ -14,7 +14,6 @@ body {
 .container {
   width: 100%;
   min-height: 100vh;
-  padding: 0 calc( 100vw * ( 20 / 500));
 }
 h1.title {
   font-size: calc( 100vw * ( 34 / 500));

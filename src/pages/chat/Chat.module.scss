@@ -3,8 +3,9 @@
 // }
 .container {
   height: 100vh;
-  padding: calc( 100vw * ( 100 / 500)) 0 calc( 100vw * ( 120 / 500));
-  // background-color: var(--color-wh);
+  padding: calc( 100vw * ( 60 / 500)) calc( 100vw * ( 20 / 500)) calc( 100vw * ( 140 / 500));
+
+  background-color: var(--color-wh);
 }
 
 // ChatHead.js
@@ -13,7 +14,7 @@
   height: calc( 100vw * ( 60 / 500));
 
   background-color: #fff;
-  border-radius: calc( 100vw * ( 12 / 500));
+  border-radius: calc( 100vw * ( 18 / 500));
   display: flex;
   box-shadow: 0 0 calc( 100vw * ( 10 / 500)) rgba($color: #000000, $alpha: 0.1);
   position: relative;
@@ -22,12 +23,13 @@
     text-align: center;
     line-height: calc( 100vw * ( 60 / 500));
     font-size: calc( 100vw * ( 24 / 500));
+    padding-left: calc( 100vw * ( 30 / 500));
     font-weight: 600;
   }
   .chatMenuBtn {
     width: calc( 100vw * ( 60 / 500));
     height: calc( 100vw * ( 60 / 500));
-    border-radius: calc( 100vw * ( 12 / 500));
+    border-radius: calc( 100vw * ( 18 / 500));
     background-color: var(--color-dark);
     background-image: url(../../assets/images/icons/c-chat-hamburger.svg);
     background-position: center;
@@ -37,19 +39,19 @@
 }
 .chatMenu {
   position: absolute;
-  top: calc( 100vw * ( 56 / 500));
+  top: calc( 100vw * ( 70 / 500));
   right: 0;
   button {
-    width: calc( 100vw * ( 90 / 500));
-    height: calc( 100vw * ( 44 / 500));
-    border-radius: calc( 100vw * ( 12 / 500));
-    font-size: calc( 100vw * ( 16 / 500));
-    font-weight: 600;
+    width: calc( 100vw * ( 110 / 500));
+    height: calc( 100vw * ( 56 / 500));
+    border-radius: calc( 100vw * ( 18 / 500));
+    font-size: calc( 100vw * ( 18 / 500));
+    font-weight: 700;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: calc( 100vw * ( 4 / 500));
-    transform: translateX(-calc( 100vw * ( 10 / 500)));
+    margin-bottom: calc( 100vw * ( 6 / 500));
+    transform: translateY(calc( 100vw * ( -10 / 500)));
     opacity: 0;
     transition: 0.5s ease-out;
     pointer-events: none;
@@ -58,7 +60,6 @@
     }
     &.showMemberBtn {
       background-color: var(--color-dark);
-
       color: #fff;
       font-weight: 400;
     }
@@ -101,6 +102,17 @@
   margin-bottom: calc( 100vw * ( 12 / 500));
   display: flex;
   flex-direction: column;
+  animation: chatAni .6s ease-out forwards;
+  @keyframes chatAni {
+    0%{
+      opacity: 0;
+      transform: translateY(calc( 100vw * ( 10 / 500)));
+    }
+    100%{
+      opacity: 1;
+      transform: 0;
+    }
+  }
   &.otherUser {
     align-items: flex-start;
     .content {
@@ -124,7 +136,7 @@
   .content {
     font-size: calc( 100vw * ( 18 / 500));
     padding: calc( 100vw * ( 14 / 500)) calc( 100vw * ( 20 / 500));
-    background-color: var(--color-wh);
+    background-color: #fff;
     width: fit-content;
     height: fit-content;
     margin-bottom: calc( 100vw * ( 7 / 500));
@@ -164,6 +176,8 @@
     height: calc( 100vw * ( 60 / 500));
     input {
       background-color: #fff;
+    font-size: calc( 100vw * ( 18 / 500));
+
     }
   }
   .sendBtn {
@@ -180,7 +194,7 @@
 
 
 .tabBox {
-  margin-top: calc( 100vw * ( 24 / 500));
+  margin-top: calc( 100vw * ( 40 / 500));
 }
 .tabBtns {
   width: 100%;
@@ -188,7 +202,7 @@
   button {
     width: calc( 100vw * ( 500 / 500));
     padding-bottom: calc( 100vw * ( 14 / 500));
-    font-size: calc( 100vw * ( 16 / 500));
+    font-size: calc( 100vw * ( 18 / 500));
     font-weight: 600;
     &.isActive {
       color: var(--color-point);

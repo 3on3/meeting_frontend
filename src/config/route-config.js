@@ -82,6 +82,10 @@ export const router = createBrowserRouter([
         path: "/login/first-login",
         element: <FirstLoginPage />,
       },
+      {
+        path: "group/create",
+        element: <GroupCreate />,
+      },
       // 채팅 라우터
       {
         path: "/chat",

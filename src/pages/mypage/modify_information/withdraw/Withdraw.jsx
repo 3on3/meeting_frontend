@@ -1,9 +1,9 @@
-import React, { useState } from 'react'; // useState 추가
+import React, { useState } from 'react'; 
 import MtButtons from '../../../../components/common/buttons/MtButtons';
 import styles from "./Withdraw.module.scss";
 import DefaultInput from '../../../../components/common/inputs/DefaultInput';
-import {useNavigate} from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
+import ConfirmWithdraw from './ConfirmWithdraw';
 
 const Withdraw = () => {
 
@@ -16,18 +16,24 @@ const Withdraw = () => {
   // 입력 초기 상태
   const [isInitial, setIsInitial] = useState(true);
   const [isPasswordInitial, setIsPasswordInitial] = useState(true);
+  // 최종 확인 화면 상태
+  const [showConfirm, setShowConfirm] = useState(false);
+  // 이메일 및 비밀번호 상태
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   // 페이지 이동을 위한 훅
   const navigate = useNavigate(); 
 
   // 탈퇴하기 버튼 클릭시 호출되는 함수
   const withdrawNavigateHandler = () => {
-      navigate('/withdraw');
+      setShowConfirm(true); // 최종 확인 화면을 보여줌
   }
 
   // 이메일 입력 시 호출되는 함수
   const emailInputHandler = (e) => {
     setIsInitial(false); // 초기 상태가 아님을 설정
+    setEmail(e.target.value);
 
     // 이메일 정규식 패턴
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -42,6 +48,7 @@ const Withdraw = () => {
   // 패스워드 입력 시 호출되는 함수
   const passwordInputHandler = (e) => {
     setIsPasswordInitial(false); // 초기 상태가 아님을 설정
+    setPassword(e.target.value);
 
     // 패스워드 정규식 패턴
     const passwordRegex = /^(?=.*[!@#$%^&*(),.?":{}|<>])(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).+$/;
@@ -56,6 +63,10 @@ const Withdraw = () => {
   // inputState 결정 로직
   const emailInputState = isInitial ? "" : (isPassCheck ? "correct" : "error");
   const passwordInputState = isPasswordInitial ? "" : (isPasswordValid ? "correct" : "error");
+
+  if (showConfirm) {
+    return <ConfirmWithdraw email={email} password={password} />;
+  }
 
   return (
     <div className={styles.content}>
@@ -85,7 +96,7 @@ const Withdraw = () => {
             />
             <MtButtons 
               eventType={"click"} 
-              eventHandler={withdrawNavigateHandler} 
+              eventHandler={() => navigate(-1)} 
               buttonType={"cancel"} 
               buttonText={'취소'}
             />
@@ -94,4 +105,4 @@ const Withdraw = () => {
   );
 };
 
-export default Withdraw
+export default Withdraw;

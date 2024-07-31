@@ -10,31 +10,32 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 20px;
+  padding: 0 calc( 100vw * ( 20 / 500));
   opacity: 0;
   pointer-events: none;
   .modal {
     width: 100%;
     background-color: #fff;
-    border-radius: 32px;
-    padding: 35px 20px 20px;
+    border-radius: calc( 100vw * ( 32 / 500));
+    padding: calc( 100vw * ( 35 / 500)) calc( 100vw * ( 20 / 500)) calc( 100vw * ( 20 / 500));
     pointer-events: none;
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(calc( 100vw * ( -10 / 500)));
     position: relative;
     .modalTit {
-      font-size: 20px;
+      font-size: calc( 100vw * ( 20 / 500));
       font-weight: 600;
       text-align: center;
     }
   }
   .modalClose{
-    width: 30px;
-    height: 30px;
-    background: url(../../../assets/images/icons/c-modal-close.svg);
+    width: calc( 100vw * ( 30 / 500));
+    height: calc( 100vw * ( 30 / 500));
+    background: url(../../../assets/images/icons/c-modal-close.svg) no-repeat;
+    background-size: cover;
     position: absolute;
-    top: 30px;
-    right: 20px;
+    top: calc( 100vw * ( 30 / 500));
+    right: calc( 100vw * ( 20 / 500));
   }
   &.isActive {
     opacity: 1;

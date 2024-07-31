@@ -1,14 +1,23 @@
-import React from 'react'
-import ProfileSection from './components/ProfileSection'
-import ActionSection from './components/ActionSection'
-
+import React from "react";
+import { Outlet, useLocation } from "react-router-dom";
+import ProfileSection from "./components/ProfileSection";
+import ActionSection from "./components/ActionSection";
 
 const MyPage = () => {
+  const location = useLocation();
+  const isRootPath = location.pathname === "/mypage";
+
   return (
     <div>
-      <ProfileSection />
+      {isRootPath && (
+        <>
+          <ProfileSection />
+          <ActionSection />
+        </>
+      )}
+      <Outlet />
     </div>
-  )
-}
+  );
+};
 
-export default MyPage
+export default MyPage;

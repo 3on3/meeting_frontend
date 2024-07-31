@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import styles from "./MainFilter.module.scss";
-import correctIcon from "../../assets/images/icons/icon-correct-D.svg";
-import moreIcon from "../../assets/images/icons/m-more.svg";
-import { useActionData } from "react-router-dom";
+
 
 function MainFilter() {
   // =====useState 선언=====

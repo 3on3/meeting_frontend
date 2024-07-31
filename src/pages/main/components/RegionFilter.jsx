@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./RegionFilter.module.scss";
-import RegionFilterBox from "../../components/common/regionFilterBoxs/RegionFilterBox";
+import RegionFilterBox from "../../../components/common/regionFilterBoxs/RegionFilterBox";
 
 function RegionFilter() {
   const regionArr = [

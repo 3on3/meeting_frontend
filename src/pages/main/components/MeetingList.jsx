@@ -1,7 +1,7 @@
 import React from "react";
-import GroupBox from "../../components/common/groupBoxs/GroupBox";
+import GroupBox from "../../../components/common/groupBoxs/GroupBox";
 import styles from "./MeetingList.module.scss";
-import MtButtons from "../../components/common/buttons/MtButtons";
+import MtButtons from "../../../components/common/buttons/MtButtons";
 
 function MeetingList() {
   return (

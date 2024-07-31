@@ -32,7 +32,7 @@
         height: calc(100vw * (11 / 500));
         width: calc(100vw * (11 / 500));
         margin-right: calc(100vw * (5 / 500));
-        background-image: url(../../assets/images/icons/m-check.svg);
+        background-image: url(../../../assets/images/icons/m-check.svg);
         background-repeat: no-repeat;
         background-position: center;
       }
@@ -40,7 +40,7 @@
       &.check {
         color: var(--color-point);
         &::before {
-          background-image: url(../../assets/images/icons/m-check-active.svg);
+          background-image: url(../../../assets/images/icons/m-check-active.svg);
         }
       }
     }
@@ -86,7 +86,7 @@
         height: calc(100vw * (11 / 500));
         width: calc(100vw * (11 / 500));
         margin-right: calc(100vw * (5 / 500));
-        background-image: url(../../assets/images/icons/m-check-active-B.svg);
+        background-image: url(../../../assets/images/icons/m-check-active-B.svg);
         background-repeat: no-repeat;
         background-position: center;
       }
@@ -103,12 +103,12 @@
     top: calc(100vw * (18 / 500));
     right: calc(100vw * (30 / 500));
 
-    background-image: url(../../assets/images/icons/m-more.svg);
+    background-image: url(../../../assets/images/icons/m-more.svg);
     background-repeat: no-repeat;
     background-position: center;
 
     &.closeMore {
-      background-image: url(../../assets/images/icons/m-close-more.svg);
+      background-image: url(../../../assets/images/icons/m-close-more.svg);
     }
   }
 }

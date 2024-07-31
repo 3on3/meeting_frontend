@@ -7,7 +7,6 @@ const MyPage = () => {
   return (
     <div>
       <ProfileSection />
-      <ActionSection />
     </div>
   )
 }

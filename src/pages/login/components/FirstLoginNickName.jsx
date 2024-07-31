@@ -42,7 +42,7 @@ const FirstLoginNickName = () => {
     <div className={styles.container}>
       <h1 className={`title ${styles.text}`}>닉네임 설정</h1>
       <DefaultInput
-  inputState={isNickNameCheck ? "correct" : "error"}
+  inputState={isNickNameCheck ? "" : "error"}
   placeholder={"닉네임을 입력해주세요."}
   value={nickName}
   onChange={nickNameChangeHandler}

@@ -16,6 +16,7 @@ const RootLayout = () => {
 
   return (
     <>
+      <Withdraw />
       <Header />
       <main className='container'>
         <Outlet />

@@ -1,5 +1,5 @@
 import React from "react";
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootLayout from "../layout/RootLayout";
 import ErrorPage from "../pages/error/ErrorPage";
 import Chat from "../pages/chat/Chat";
@@ -17,34 +17,27 @@ import MyGroups from "../pages/mypage/mypage_groups/MyGroups";
 import GroupCreate from "../pages/group/GroupCreate";
 import Withdraw from "../pages/mypage/modify_information/withdraw/Withdraw";
 
-
 // 마이페이지 라우터
 const mypageRouter = [
   {
-    path: "/mypage",
-    element: <MyPage />,
-    children: [
-      {
-        path: "check-pass",
-        element: <CheckPass />,
-      },
-      {
-        path: "group",
-        element: <MyGroups />,
-      },
-      {
-        path: "modify",
-        element: <ModifyInformation />,
-      },
-      {
-        path: "group/create",
-        element: <GroupCreate />,
-      },
-      {
-        path: "withdraw",
-        element: <Withdraw />,
-      },
-    ],
+    path: "check-pass",
+    element: <CheckPass />,
+  },
+  {
+    path: "group",
+    element: <MyGroups />,
+  },
+  {
+    path: "modify",
+    element: <ModifyInformation />,
+  },
+  {
+    path: "group/create",
+    element: <GroupCreate />,
+  },
+  {
+    path: "withdraw",
+    element: <Withdraw />,
   },
 ];
 
@@ -67,41 +60,46 @@ export const router = createBrowserRouter([
         element: <Main />,
       },
       {
-        path: "/intro",
+        path: "intro",
         element: <IntroPage />,
       },
       {
-        path: "/login",
+        path: "login",
         element: <LoginPage />,
       },
       {
-        path: "/sign-up",
+        path: "sign-up",
         element: <SignUp />,
       },
       {
-        path: "/login/first-login",
+        path: "login/first-login",
         element: <FirstLoginPage />,
       },
       // 채팅 라우터
       {
-        path: "/chat",
+        path: "chat",
         children: chatRouter,
       },
       // 마이페이지 라우터
       {
-        path: "/mypage",
+        path: "mypage",
+        element: <MyPage />,
         children: mypageRouter,
       },
 
       // 이하로는 임시페이지임
       {
-        path: "/error",
+        path: "error",
         element: <ErrorPage />,
       },
       {
-        path: "/group",
-        element : <Group/>
-      }
+        path: "group",
+        element: <Group />,
+      },
     ],
   },
 ]);
+
+export const App = () => <RouterProvider router={router} />;
+
+export default App;

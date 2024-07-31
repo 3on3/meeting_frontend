@@ -7,6 +7,8 @@
   align-items: center;
   flex-direction: column;
 
+  padding: calc(100vh*(60/500)) calc(100vh*(20/500)) calc(100vh*(140/500));
+
   .logo {
     width: calc( 100vw* ( 200 /500));
     height: calc( 100vw* ( 160 /500));

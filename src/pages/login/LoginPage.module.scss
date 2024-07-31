@@ -6,6 +6,8 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  padding: calc(100vh*(60/500)) calc(100vh*(20/500)) calc(100vh*(140/500));
+
 
   .logo {
     width: calc( 100vw* ( 160 /500));
@@ -19,18 +21,14 @@
       object-fit: cover;
     }
   }
+
   .input {
     width: 100%;
 
-    input {
-      display: block;
-      margin-bottom: calc( 100vw* ( 12 /500));
-      width: 100%;
+    .inputCustom {
+      margin-bottom: calc(100vh*(12/500));
     }
 
-    div {
-      margin-bottom: calc( 100vw* ( 40 /500));
-    }
 
 
   }

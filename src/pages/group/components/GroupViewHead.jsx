@@ -9,7 +9,7 @@ const GroupViewHead = ({ styles, name, location, information }) => {
         <h1 className={`title ${styles.text}`}>{name}</h1>
         <div className={styles.labelsWrap}>
           <ul className={styles.regionFilter}>
-            <RegionFilterBox boxState={"BK"} text={"서울/경기"} />
+            <RegionFilterBox boxState={"BK"} text={location} />
           </ul>
           <div className={styles.informationFilter}>
             <Information information={information} styles={styles} />

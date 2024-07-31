@@ -4,6 +4,9 @@
 
   position: relative;
   flex-direction: column;
+  padding-left: calc(100vw * (20 / 500));
+  padding-right: calc(100vw * (20 / 500));
+
   height: calc(100vw * (200 / 500));
   .margin20 {
     margin-bottom: calc(100vw * (20 / 500));
@@ -51,7 +54,12 @@
     cursor: pointer;
   }
 }
-
+.groupBtn {
+  position: fixed;
+  left: 50%;
+  bottom: calc(100vw * (110 / 500));
+  transform: translateX(-50%);
+}
 .informationFilter {
   background: #ffffff;
   width: calc(100vw * (168 / 500));
@@ -94,8 +102,10 @@
 .content2 {
   background: #f4f9ff;
   width: 100%;
-  height: calc(100vh - (100vw * (390 / 500)));
-  padding-bottom: calc(100vw * (40 / 500));
+  height: calc(100vh - (100vw * (200 / 500)));
+  padding-bottom: calc(100vw * (130 / 500));
+  padding-left: calc(100vw * (20 / 500));
+  padding-right: calc(100vw * (20 / 500));
   // overflow-y: scroll;
   padding-top: calc(100vw * (60 / 500));
   .ul {
@@ -113,5 +123,63 @@
     padding-left: calc(100vw * (25 / 500));
     padding-bottom: calc(100vw * (20 / 500));
     text-align: left;
+  }
+  .tabs {
+    display: flex;
+    justify-content: center;
+    margin-top: calc(100vw * (31 / 500));
+    margin-bottom: calc(100vw * (30 / 500));
+    color: #9aa9ba;
+    font-size: calc(100vw * (18 / 500));
+    font-weight: 600;
+
+    .tab {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex: 1;
+      width: 100%;
+      padding-bottom: calc(100vw * (12 / 500));
+      cursor: pointer;
+      border-bottom: calc(100vw * (2 / 500)) solid #9aa9ba;
+      position: relative; // 부모 요소를 기준으로 위치를 설정할 수 있게 합니다.
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: calc(100vw * (2 / 500));
+        background-color: #8732f5;
+        transform: scaleX(0); // 처음에는 가로 길이를 0으로 설정합니다.
+        transform-origin: bottom center; // 애니메이션 시작점을 왼쪽으로 설정합니다.
+        transition: transform 0.2s ease; // 트랜지션을 설정합니다.
+      }
+
+      &.active::after {
+        transform: scaleX(
+          1
+        ); // 활성화된 탭에서는 가로 길이를 100%로 설정하여 채워지는 효과를 줍니다.
+      }
+
+      &.active {
+        color: #8732f5;
+        font-weight: 600;
+        border-bottom: calc(100vw * (2 / 500)) solid #8732f5;
+      }
+    }
+  }
+  .copyWrap {
+    position: relative;
+    .copyBtn {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 30px;
+      height: 30px;
+      background: url(../../assets/images/icons/c-copy.svg) no-repeat;
+    }
   }
 }

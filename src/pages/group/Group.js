@@ -1,17 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import GroupViewHead from "./components/GroupViewHead";
 import styles from "./Group.module.scss";
 import GroupViewBody from "./components/GroupViewBody";
 import MtButtons from "../../components/common/buttons/MtButtons";
 
 const Group = () => {
-  let auth = "joy";
-  let name = "건국대 킹카";
-  let location = "서울/경기";
-  let gender = "여자";
-  let age = 22;
-  let memberCount = 3;
-  let information = [gender, age, memberCount];
+  const [auth, setAuth] = useState("HOST"); // 초기값 설정
+  const name = "목포 산낙지 동호회";
+  const location = "목포/전남";
+  const gender = "여자";
+  const age = 29;
+  const memberCount = 3;
+  const information = [gender, age, memberCount];
+
+  const getButtonConfig = () => {
+    switch (auth) {
+      case "MEMBER":
+        return { type: "apply", text: "이 그룹 나가기" };
+      case "HOST":
+        return { type: "apply", text: "그룹 삭제하기" };
+      case "USER":
+        return { type: "cancel", text: "매칭 신청하기" };
+      default:
+        return { type: "", text: "" };
+    }
+  };
+
+  const { type, text } = getButtonConfig();
+
   return (
     <>
       <GroupViewHead
@@ -24,8 +40,9 @@ const Group = () => {
       <MtButtons
         eventType={"click"}
         // eventHandler={isPassCheckHandler}
-        buttonType={auth === "joy" ? "apply" : "cancel"}
-        buttonText={auth === "joy" ? "이 그룹 나가기" : "매칭 신청하기"}
+        buttonType={type}
+        buttonText={text}
+        className={styles.groupBtn}
       />
     </>
   );

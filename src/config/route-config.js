@@ -98,6 +98,10 @@ export const router = createBrowserRouter([
         path: "/error",
         element: <ErrorPage />,
       },
+      {
+        path: "/group",
+        element : <Group/>
+      }
     ],
   },
 ]);

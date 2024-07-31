@@ -52,11 +52,13 @@ const LoginPage = () => {
                               placeholder={'아이디를 입력하세요.'}
                               onChange={idInputHandler}
                               errorMessage={'아이디가 이메일 형식이 아닙니다.'}
+                              className={styles.inputCustom}
                 />
                 <DefaultInput inputState={''}
                               placeholder={'비밀번호를 입력하세요.'}
                               onChange={passwordInputHandler}
                               errorMessage={'비밀번호가 틀렸습니다.'}
+                              className={styles.inputCustom}
                 />
 
             </div>

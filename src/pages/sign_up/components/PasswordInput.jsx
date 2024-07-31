@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import styles from "./EmailInput.module.scss";
 import DefaultInput from "../../../components/common/inputs/DefaultInput";
 import MtButtons from "../../../components/common/buttons/MtButtons";
+import {passwordVerification} from "../../../assets/js/Verification";
 
 const PasswordInput = ({nextStep}) => {
 
@@ -29,13 +30,7 @@ const PasswordInput = ({nextStep}) => {
     // 패스워드가 최소 1개이상의 특수문자, 영어(대, 소문자), 숫자를 포함하고 있어야함 (추가적인 검증 필요할듯...)
     // 검증에 통과되면 버튼 활성화
     useEffect(() => {
-        const passwordRegex = /^(?=.*[!@#$%^&*(),.?":{}|<>])(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).+$/;
-
-        if(passwordRegex.test(passwordInput)) {
-            setIsPassword(true);
-        } else {
-            setIsPassword(false);
-        }
+        setIsPassword(passwordVerification(passwordInput));
     }, [passwordInput]);
 
     const passwordConfirmInputHandler = (e) => {

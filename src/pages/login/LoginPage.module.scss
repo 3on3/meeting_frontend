@@ -21,18 +21,14 @@
       object-fit: cover;
     }
   }
+
   .input {
     width: 100%;
 
-    input {
-      display: block;
-      margin-bottom: calc( 100vw* ( 12 /500));
-      width: 100%;
+    .inputCustom {
+      margin-bottom: calc(100vh*(12/500));
     }
 
-    div {
-      margin-bottom: calc( 100vw* ( 40 /500));
-    }
 
 
   }

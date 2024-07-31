@@ -15,6 +15,7 @@ const Header = () => {
       {location.pathname !== "/chat" && location.pathname !== "/group" ? (
         <FloatingNavigation styles={styles} />
       ) : null}
+      <InvitingCodeModal/>
     </header>
   );
 };

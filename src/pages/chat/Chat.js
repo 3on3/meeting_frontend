@@ -8,6 +8,7 @@ import ChatMembersModal from "./components/member_modal/ChatMembersModal";
 const Chat = () => {
   // input value
   const [value, setValue] = useState("");
+
   // 채팅 배열
   const [messageList, setMessageList] = useState([
     {
@@ -43,19 +44,20 @@ const Chat = () => {
 
   // 메세지 보내기 버튼
   const onClickSendBtn = () => {
-    const newMessage = {
-      id: messageList.length + 1,
-      userName: "뉴유저",
-      auth: "user",
-      content: value,
-    };
+    if (value !== "") {
+      const newMessage = {
+        id: messageList.length + 1,
+        userName: "뉴유저",
+        auth: "user",
+        content: value,
+      };
 
-    setMessageList(prev=>[...prev,newMessage]);
-    setValue("")
+      setMessageList((prev) => [...prev, newMessage]);
+      setValue("");
+    }
   };
 
-  useEffect(()=>{},[messageList])
-
+  useEffect(() => {}, [messageList]);
 
   // 참여자 보기 버튼
   // const [modalActive, setModalActive] = useState(false);
@@ -65,7 +67,7 @@ const Chat = () => {
 
   return (
     <div className={styles.container}>
-      <ChatHead styles={styles}/>
+      <ChatHead styles={styles} />
       <ChatBody messageList={messageList} styles={styles} />
       <ChatInput
         onChangeInput={onChangeInput}

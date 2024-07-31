@@ -3,18 +3,22 @@ import { Outlet } from 'react-router-dom';
 import Header from './Header';
 
 
+
 // import './RootLayout.css';
 
 
 const RootLayout = () => {
 
   return (
+
     <>
-      <Header />
+      <Header /> 
       <main className='container'>
         <Outlet />
       </main>
+      
     </>
+
   );
 };
 

@@ -1,46 +1,29 @@
-import React, { useState } from 'react';
-import styles from './RadioButton.module.scss';
+import React from 'react';
+import styles from "./RadioButton.module.scss";
 
-const RadioButton = () => {
-  const [selected, setSelected] = useState(null);
+// 사용예시
+//  <RadioButton 
+//    name="contact" // => 버튼 그룹으로 만들 시 name 값 일치시키기
+//    value="option1" 
+//    text="2:2" 
+//  />
 
-  const handleRadioClick = (value) => {
-    setSelected(value);
-  };
 
-  // 사용예시
-  // 라디오 버튼 여러개 만들고 싶을 경우 아래 배열 추가해주면 됨.
-
-  const options = [
-    { value: "option1", label: "2:2" },
-    // { value: "option2", label: "3:3" },
-    // { value: "option3", label: "4:4" },
-    // { value: "option4", label: "5:5" },
-  ];
-
+const RadioButton = ({ text, name, value, defaultChecked, disabled }) => {
   return (
-    <div>
-      {options.map((option) => (
-        <div key={option.value}>
-          <input
-            type="radio"
-            name="radioToggle"
-            value={option.value}
-            checked={selected === option.value}
-            onClick={() => handleRadioClick(option.value)}
-            className={styles.radioInput}
-            readOnly
-          />
-          <label 
-            onClick={() => handleRadioClick(option.value)}
-            className={selected === option.value ? styles.labelSelected : styles.label}
-          >
-            {option.label}
-          </label>
-        </div>
-      ))}
-    </div>
+    <label className={styles.radioLabel}>
+      <input 
+        type="radio" 
+        name={name} 
+        value={value} 
+        defaultChecked={defaultChecked} // 라디오 버튼 체크 기본 설정
+        disabled={disabled} // 라디오 버튼 비활성화
+        className={styles.radioInput}
+      />
+     <span></span>
+      <span>{text}</span>
+    </label>
   );
-};
+}
 
 export default RadioButton;

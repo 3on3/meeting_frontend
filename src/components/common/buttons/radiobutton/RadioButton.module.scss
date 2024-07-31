@@ -1,43 +1,60 @@
-.radioInput {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  width: calc( 100vw* ( 20 /500));
-  height: calc( 100vw* ( 20 /500));
-  border: 2px solid #e0e0e0;
-  border-radius: 50%;
-  display: inline-block;
-  margin-right: calc( 100vw* ( 8 /500));;
-  position: relative;
+.radioLabel {
+  display: inline-flex;
+  align-items: center;
   cursor: pointer;
-  outline: none;
+  margin: 10px;
+  font-family: Arial, sans-serif;
 }
 
-/* 선택되지 않은 상태 */
-.radioInput::before {
-  content: '';
-  display: block;
-  width: calc( 100vw* ( 12 /500));;
-  height: calc( 100vw* ( 12 /500));;
-  background-color: #e0e0e0;
-  border-radius: 50%;
+.radioInput {
   position: absolute;
-  top: 50%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.radioInput + span {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: #e0e0e0;
+  border-radius: 50%; 
+  position: relative;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.radioInput + span::after {
+  content: '';
+  position: absolute;
   left: 50%;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  background-color: #a3a3a3; /* 기본 비선택 상태 */
+  border-radius: 50%; 
   transform: translate(-50%, -50%);
 }
 
-/* 선택된 상태 */
-.radioInput:checked::before {
-  background-color: #8732F5; /* 보라색 */
+.radioInput:checked + span {
+  background-color: #e0e0e0;
 }
 
-/* 라벨 기본 스타일 */
-.label {
-  font-weight: normal;
+.radioInput:checked + span::after {
+  background-color: #8732f5; /* 선택 시 보라색 내부 원 */
 }
 
-/* 선택된 라벨 스타일 */
-.labelSelected {
-  font-weight: bold;
+.radioInput:disabled + span {
+  background-color: #e0e0e0; /* 선택 시 외부 원 */
+  cursor: not-allowed;
+}
+
+.radioInput:disabled:checked + span {
+  background-color: #b0b0b0;
+}
+
+.radioInput:checked + span + span {
+  font-weight: bold; /* 라디오 버튼이 선택된 경우 텍스트를 진하게 */
+}
+
+label span {
+  margin-right: 8px;
 }

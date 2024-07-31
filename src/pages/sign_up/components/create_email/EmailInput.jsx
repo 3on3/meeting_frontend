@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import styles from "./EmailInput.module.scss";
-import DefaultInput from "../../../components/common/inputs/DefaultInput";
-import { emailVerification } from "../../../assets/js/Verification";
-import MtButtons from "../../../components/common/buttons/MtButtons";
+import DefaultInput from "../../../../components/common/inputs/DefaultInput";
+import { emailVerification } from "../../../../assets/js/Verification";
+import MtButtons from "../../../../components/common/buttons/MtButtons";
 
 const EmailInput = ({
+  styles,
   userEmail,
   setIsEmail,
   isEmail,

@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
-import styles from "./EmailInput.module.scss";
-import DefaultInput from "../../../components/common/inputs/DefaultInput";
-import MtButtons from "../../../components/common/buttons/MtButtons";
+import DefaultInput from "../../../../components/common/inputs/DefaultInput";
+import MtButtons from "../../../../components/common/buttons/MtButtons";
 
-const VerificationInput = ({isSubmit,setIsSubmit}) => {
+const VerificationInput = ({styles,isSubmit,setIsSubmit}) => {
 
     const [emailVerificationInput, setEmailVerificationInput] = useState('');
 

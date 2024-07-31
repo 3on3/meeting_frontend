@@ -1,47 +1,49 @@
-import React, {useEffect, useState} from 'react';
-import MtButtons from "../../../components/common/buttons/MtButtons";
-import styles from "./EmailInput.module.scss"
+import React, { useEffect, useState } from "react";
+import styles from "./EmailInput.module.scss";
 import DefaultInput from "../../../components/common/inputs/DefaultInput";
-import {emailVerification} from "../../../assets/js/Verification";
+import { emailVerification } from "../../../assets/js/Verification";
+import MtButtons from "../../../components/common/buttons/MtButtons";
 
+const EmailInput = ({
+  userEmail,
+  setIsEmail,
+  isEmail,
+  isSubmit,
+  setIsSubmit,
+}) => {
+  const [emailInput, setEmailInput] = useState("");
+  const emailInputHandler = (e) => {
+    setEmailInput(e.target.value);
+    //VerificationInput에 전달할 email
+    userEmail(e.target.value);
+  };
 
-const EmailInput = ({nextStep, userEmail}) => {
+  useEffect(() => {
+    setIsEmail(emailVerification(emailInput));
+  }, [emailInput]);
 
-    const [emailInput, setEmailInput] = useState('');
-    const [isEmail, setIsEmail] = useState(false);
+  const submitHandler = () => {
+    setIsSubmit([true, false, false]);
+  };
 
-    const emailInputHandler = e => {
-        setEmailInput(e.target.value);
-        //VerificationInput에 전달할 email
-        userEmail(e.target.value);
-    }
-
-    useEffect(() => {
-        setIsEmail(emailVerification(emailInput));
-    }, [emailInput]);
-
-
-
-
-
-
-
-    return (
-        <div className={styles.container}>
-            <h1 className={'title'}>학교 이메일 인증</h1>
-            <DefaultInput inputState={!emailInput? '' : (isEmail ? 'correct' : 'error')}
-                          errorMessage={'이메일 형식이 아닙니다.'}
-                          onChange={emailInputHandler}
-                          placeholder={'학교 이메일 입력'}
-            />
-            <div className={styles.button}>
-                <MtButtons buttonText={'SUBMIT'}
-                           buttonType={isEmail? 'apply' : 'disabled'}
-                           eventType={'click'}
-                           eventHandler={nextStep} />
-            </div>
-        </div>
-    );
+  return (
+    <>
+      <DefaultInput
+        inputState={!emailInput ? "" : isEmail ? "correct" : "error"}
+        errorMessage={"이메일 형식이 아닙니다."}
+        onChange={emailInputHandler}
+        placeholder={"학교 이메일 입력"}
+      />
+      {!isSubmit[0] &&(
+        <MtButtons
+          buttonText={"SUBMIT"}
+          buttonType={isEmail ? "apply" : "disabled"}
+          eventType={"click"}
+          eventHandler={submitHandler}
+        />
+      )}
+    </>
+  );
 };
 
 export default EmailInput;

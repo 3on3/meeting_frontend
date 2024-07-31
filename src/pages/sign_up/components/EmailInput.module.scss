@@ -1,7 +1,6 @@
 
 .container {
   width: 100%;
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -99,6 +98,18 @@
 
   }
 
+  input{
+
+    animation: showAin .4s ease-out forwards;
+  }
+  button{
+    animation: showAin .4s ease-out forwards;
+
+  }
+  @keyframes showAin {
+    0%{opacity: 0;transform: translateY(10px);}
+    100%{opacity: 1;transform: translateY(0px);}
+  }
 }
 
 

@@ -33,6 +33,7 @@
         width: calc(100vw * (11 / 500));
         margin-right: calc(100vw * (5 / 500));
         background-image: url(../../../assets/images/icons/m-check.svg);
+        background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
       }
@@ -41,6 +42,7 @@
         color: var(--color-point);
         &::before {
           background-image: url(../../../assets/images/icons/m-check-active.svg);
+          background-size: cover;
         }
       }
     }
@@ -87,6 +89,7 @@
         width: calc(100vw * (11 / 500));
         margin-right: calc(100vw * (5 / 500));
         background-image: url(../../../assets/images/icons/m-check-active-B.svg);
+        background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
       }
@@ -104,11 +107,13 @@
     right: calc(100vw * (30 / 500));
 
     background-image: url(../../../assets/images/icons/m-more.svg);
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
 
     &.closeMore {
       background-image: url(../../../assets/images/icons/m-close-more.svg);
+      background-size: cover;
     }
   }
 }

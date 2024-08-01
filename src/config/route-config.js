@@ -6,7 +6,7 @@ import Chat from "../pages/chat/Chat";
 import LoginPage from "../pages/login/LoginPage";
 import IntroPage from "../pages/login/IntroPage";
 
-import Main from "../pages/main/components/Main";
+import Main from "../pages/main/Main";
 import CheckPass from "../pages/mypage/modify_information/CheckPass";
 import ModifyInformation from "../pages/mypage/modify_information/ModifyInformation";
 import SignUp from "../pages/sign_up/SignUp";
@@ -25,7 +25,7 @@ const mypageRouter = [
     element: <CheckPass />,
   },
   {
-    path: "group",
+    path: "mygroup",
     element: <MyGroups />,
   },
   {
@@ -41,7 +41,7 @@ const mypageRouter = [
     element: <Withdraw />,
   },
   {
-    path: "my-chat",
+    path: "mychat",
     element: <MyChats />,
   },
 ];

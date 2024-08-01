@@ -40,6 +40,7 @@
     }
     &::after {
       background-image: url(../../../assets/images/icons/icon-error.svg);
+      background-size: cover;
     }
     .errorMessage {
       display: block;
@@ -59,6 +60,7 @@
   &.correct {
     &::after {
       background-image: url(../../../assets/images/icons/icon-correct.svg);
+      background-size: cover;
     }
   }
 }

@@ -1,3 +1,9 @@
 .meetingList {
-  margin-top: calc(100vw * (37 / 500));
+  margin-top: calc(100vw * (17 / 500));
+  padding: calc(100vw * (20 / 500)) calc(100vw * (20 / 500)) 0;
+  height: calc(100vh - 218px);
+  overflow-y: scroll;
+  >li:last-child{
+    margin-bottom: calc(100vw * (100 / 500));
+  }
 }

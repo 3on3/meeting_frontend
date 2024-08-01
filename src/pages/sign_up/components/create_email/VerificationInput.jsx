@@ -20,7 +20,8 @@ const VerificationInput = ({styles,isSubmit,setIsSubmit}) => {
            setInputState('error');
        } else {
             // nextStep();
-            setIsSubmit([true, true, false])
+           setInputState('correct');
+            setIsSubmit([true, true, false]);
        }
     }
 

@@ -5,7 +5,6 @@ import MtButtons from "../../../../components/common/buttons/MtButtons";
 
 const EmailInput = ({
   styles,
-  userEmail,
   setIsEmail,
   isEmail,
   isSubmit,
@@ -14,8 +13,6 @@ const EmailInput = ({
   const [emailInput, setEmailInput] = useState("");
   const emailInputHandler = (e) => {
     setEmailInput(e.target.value);
-    //VerificationInput에 전달할 email
-    userEmail(e.target.value);
   };
 
   useEffect(() => {
@@ -35,12 +32,14 @@ const EmailInput = ({
         placeholder={"학교 이메일 입력"}
       />
       {!isSubmit[0] &&(
-        <MtButtons
-          buttonText={"SUBMIT"}
-          buttonType={isEmail ? "apply" : "disabled"}
-          eventType={"click"}
-          eventHandler={submitHandler}
-        />
+        <div className={styles.button}>
+          <MtButtons
+            buttonText={"SUBMIT"}
+            buttonType={isEmail ? "apply" : "disabled"}
+            eventType={"click"}
+            eventHandler={submitHandler}
+          />
+        </div>
       )}
     </>
   );

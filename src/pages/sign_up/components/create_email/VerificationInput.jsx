@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
-import styles from "./EmailInput.module.scss";
-import DefaultInput from "../../../components/common/inputs/DefaultInput";
-import MtButtons from "../../../components/common/buttons/MtButtons";
+import DefaultInput from "../../../../components/common/inputs/DefaultInput";
+import MtButtons from "../../../../components/common/buttons/MtButtons";
 
-const VerificationInput = ({nextStep}) => {
+const VerificationInput = ({styles,isSubmit,setIsSubmit}) => {
 
     const [emailVerificationInput, setEmailVerificationInput] = useState('');
 
@@ -20,27 +19,28 @@ const VerificationInput = ({nextStep}) => {
        if(emailVerificationInput !== '5555') {
            setInputState('error');
        } else {
-            nextStep();
+            // nextStep();
+            setIsSubmit([true, true, false])
        }
     }
 
 
 
     return (
-        <div className={styles.container}>
-            <h1 className={'title'}>학교 이메일 인증</h1>
+        <>
             <DefaultInput inputState={inputState}
                           errorMessage={'인증번호가 일치하지 않습니다.'}
                           onChange={verificationInputHandler}
                           placeholder={'인증코드 입력'}
             />
-            <div className={styles.button}>
+            {!isSubmit[1] && (<div className={styles.button}>
                 <MtButtons buttonText={'SUBMIT'}
                            buttonType={emailVerificationInput ? 'apply' : 'disabled'}
                            eventType={'click'}
                            eventHandler={verificationHandler}/>
-            </div>
-        </div>
+            </div>)}
+            
+        </>
     );
 };
 

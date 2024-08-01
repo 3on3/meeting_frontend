@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
-import styles from "./EmailInput.module.scss";
-import DefaultInput from "../../../components/common/inputs/DefaultInput";
-import MtButtons from "../../../components/common/buttons/MtButtons";
+import DefaultInput from "../../../../components/common/inputs/DefaultInput";
+import MtButtons from "../../../../components/common/buttons/MtButtons";
 
-const MajorInput = ({nextStep, userEmail}) => {
+const MajorInput = ({styles,isSubmit,setIsSubmit}) => {
 
     const [majorInput, setMajorInput] = useState('');
 
@@ -11,13 +10,13 @@ const MajorInput = ({nextStep, userEmail}) => {
         setMajorInput(e.target.value)
     }
 
+    const submitHandler = ()=>{
+        setIsSubmit([true,true,true])
+    }
+
     return (
-            <div className={styles.container}>
-                <h1 className={'title'}>학교 이메일 인증</h1>
-                <DefaultInput inputState={'disabled'}
-                              errorMessage={'이메일 형식이 아닙니다.'}
-                              placeholder={userEmail}
-                />
+            <>
+               
                 <DefaultInput inputState={majorInput ? "correct" : ""}
                               errorMessage={'학과를 입력해 주세요.'}
                               onChange={majorInputHandler}
@@ -27,9 +26,9 @@ const MajorInput = ({nextStep, userEmail}) => {
                     <MtButtons buttonText={'SUBMIT'}
                                buttonType={majorInput ? 'apply' : 'disabled'}
                                eventType={'click'}
-                               eventHandler={nextStep}/>
+                               eventHandler={submitHandler}/>
                 </div>
-            </div>
+            </>
     );
 };
 

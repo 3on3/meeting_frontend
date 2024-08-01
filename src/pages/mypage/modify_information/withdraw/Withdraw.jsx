@@ -71,11 +71,13 @@ const Withdraw = () => {
   return (
     <div className={styles.content}>
       <h1 className={`title ${styles.text}`}>회원탈퇴</h1>
+      <div className={styles.input}>
         <DefaultInput 
           inputState={emailInputState} // 이메일이 올바른 형식인지에 따라 correct, error 또는 기본 상태
           placeholder={'이메일 입력'} // 입력 필드에 대한 힌트
           errorMessage={!isPassCheck && !isInitial ? "올바르지 않은 이메일입니다" : ""} // 이메일 형식이 올바르지 않은 경우 에러메시지 발생
-          onChange={emailInputHandler}   // 이메일 입력 시 함수 호출     
+          onChange={emailInputHandler}   // 이메일 입력 시 함수 호출
+          className={styles.inputCustom}   
         />  
         
         {isEmailValid && (
@@ -84,8 +86,10 @@ const Withdraw = () => {
               placeholder={'패스워드 입력'} 
               errorMessage={!isPasswordValid && !isPasswordInitial ? "올바르지 않은 패스워드입니다" : ""} 
               onChange={passwordInputHandler} 
+              className={styles.inputCustom} 
           />
         )}
+      </div>
                       
         <div className={styles.button}>
             <MtButtons 

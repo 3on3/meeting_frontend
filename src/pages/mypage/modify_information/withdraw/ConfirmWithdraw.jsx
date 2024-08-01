@@ -16,18 +16,22 @@ const ConfirmWithdraw = ({ email, password }) => {
   return (
     <div className={styles.content}>
       <h1 className={`title ${styles.text}`}>정말 탈퇴하시겠습니까</h1>
-      <DefaultInput
-        inputState={"correct"}
-        placeholder={email}
-        value={email}
-        readOnly
-      />
-      <DefaultInput
-        inputState={"correct"}
-        placeholder={"**********"}
-        value={password}
-        readOnly
-      />
+      <div className={styles.input}>
+        <DefaultInput
+          inputState={"correct"}
+          placeholder={email}
+          value={email}
+          className={styles.inputCustom}
+          readOnly
+        />
+        <DefaultInput
+          inputState={"correct"}
+          placeholder={"**********"}
+          value={password}
+          className={styles.inputCustom}
+          readOnly
+        />
+      </div>
       <div className={styles.button}>
         <MtButtons 
           eventType={'click'} 

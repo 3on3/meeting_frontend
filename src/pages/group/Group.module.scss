@@ -28,7 +28,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 58%;
+    width: 100%;
     margin: 0 auto;
     position: absolute;
     bottom: calc(100vw * (-18 / 500));
@@ -45,7 +45,6 @@
   display: flex;
   overflow: auto;
   white-space: nowrap;
-  flex: 3;
   justify-content: center; // 수평 가운데 정렬
   width: max-content;
 
@@ -55,6 +54,7 @@
   }
 }
 .groupBtn {
+  width: calc(100% - (100vw * (40 / 500)));
   position: fixed;
   left: 50%;
   bottom: calc(100vw * (110 / 500));
@@ -62,7 +62,7 @@
 }
 .informationFilter {
   background: #ffffff;
-  width: calc(100vw * (168 / 500));
+  width: fit-content;
   height: calc(100vw * (37 / 500));
   border: calc(100vw * (1 / 500)) solid #271e33;
   font-weight: 600;
@@ -70,7 +70,8 @@
   line-height: calc(100vw * (37 / 500));
   border-radius: calc(100vw * (500 / 500));
   display: flex;
-  flex: 7;
+  // flex: 7;
+  padding: 0 calc(100vw * (12 / 500));
   justify-content: center; // 수평 가운데 정렬
   align-items: center; // 수직 가운데 정렬
 
@@ -174,12 +175,13 @@
     position: relative;
     .copyBtn {
       position: absolute;
-      right: 20px;
+      right: calc(100vw * (20 / 500));
       top: 50%;
       transform: translateY(-50%);
-      width: 30px;
-      height: 30px;
-      background: url(../../assets/images/icons/c-copy.svg) no-repeat;
+      width: calc(100vw * (30 / 500));
+      height: calc(100vw * (30 / 500));
+      background: url(../../assets/images/icons/c-copy.svg) no-repeat
+        center/cover;
     }
   }
 }

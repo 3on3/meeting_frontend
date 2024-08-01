@@ -12,7 +12,6 @@ const MyPage = () => {
       {isRootPath && (
         <>
           <ProfileSection />
-          <ActionSection />
         </>
       )}
       <Outlet />

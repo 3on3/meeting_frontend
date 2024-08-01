@@ -10,25 +10,6 @@ import styles from "./RegionFilterBox.module.scss";
 function RegionFilterBox({ boxState, text }) {
   // li태그라서 쓸때 <ul></ul> 로 감싸서 사용하세요
 
-  // 스타일 case
-  // let state;
-  // switch (boxState) {
-  //   // 활성화
-  //   case "active":
-  //     state = styles.active;
-  //     break;
-
-  //   // 검정 배경색
-  //   case "BK":
-  //     state = styles.colorBK;
-  //     break;
-
-  //   // 기본 설정
-  //   default:
-  //     state = "";
-  //     break;
-  // }
-
   // ==== useState 선언 ====
   const [isActive, setIsActive] = useState(false);
 

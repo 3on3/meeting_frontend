@@ -23,14 +23,7 @@ const FirstLoginProfile = ({ nextHandler }) => {
     };
     reader.readAsDataURL(file);
   };
-
-  // 파일 삭제 핸들러
-  const removeFileHandler = () => {
-    setSelectedFile(null);
-    setProfileImg(defaultImg);
-  };
-
-
+  
   const submitHandler = () => {
 
     ////////////// 서버 업로드 하는 부분 ///////////////

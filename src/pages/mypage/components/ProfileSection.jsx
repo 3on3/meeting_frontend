@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import styles from "./ProfileSection.module.scss";
-import profileImg from "../../../assets/images/profile.jpg";
+import defaultImg from "../../../assets/images/profile.jpg";
 import penImg from "../../../assets/images/mypage/pen.svg";
 import checkImg from "../../../assets/images/mypage/check.svg";
 import ActionSection from "./ActionSection";
+import MypageModal from "../components/mypage_modal/MypageModal";
 
 const ProfileSection = () => {
   const [isEditingName, setIsEditingName] = useState(false);
@@ -13,6 +14,12 @@ const ProfileSection = () => {
   const [name, setName] = useState("야옹이");
   const [description, setDescription] = useState("안녕하세요 야옹이입니다.");
   const [major, setMajor] = useState("현대미술과");
+
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [profileImg, setProfileImg] = useState(defaultImg);
+  const [modalActive, setModalActive] = useState(false);
+  const [modalPosition, setModalPosition] = useState({ x: 0, y: 0 });
+  const fileInputRef = useRef(null);
 
   const editNameToggle = () => {
     setIsEditingName(!isEditingName);
@@ -38,14 +45,65 @@ const ProfileSection = () => {
     setMajor(e.target.value);
   };
 
+  // 파일 변경 핸들러
+  const fileChangeHandler = (e) => {
+    const file = e.target.files[0];
+    setSelectedFile(file);
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      setProfileImg(reader.result);
+    };
+    reader.readAsDataURL(file);
+  };
+
+
+  // 모달에서 기본 이미지로 설정
+  const setDefaultImageHandler = () => {
+    setProfileImg(defaultImg);
+    setSelectedFile(null);
+    setModalActive(false);
+  };
+
+  // 모달에서 프로필 변경 선택
+  const changeProfileHandler = () => {
+    fileInputRef.current.click();
+    setModalActive(false);
+  };
+
+  // 프로필 이미지 클릭 핸들러
+  const profileClickHandler = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setModalPosition({
+      x: rect.left + rect.width / 2 + 40,
+      y: rect.top + window.scrollY + 80
+    });
+    setModalActive(!modalActive);
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.profileContainer}>
         <div className={styles.contentsBox}>
           <h1 className={`title ${styles.text}`}>마이페이지</h1>
-          <div className={styles.profile}>
+          <div className={styles.profile} onClick={profileClickHandler}>
             <img src={profileImg} alt="프로필 이미지" />
           </div>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*"
+            onChange={fileChangeHandler}
+            className={styles.fileInput}
+          />
+          {modalActive && 
+            <MypageModal
+              active={modalActive}
+              position={modalPosition}
+              onDefaultImage={setDefaultImageHandler}
+              onChangeProfile={changeProfileHandler}
+            />
+          }
           <div className={styles.firstContents}>
             <div className={styles.content1}>
               {isEditingName ? (

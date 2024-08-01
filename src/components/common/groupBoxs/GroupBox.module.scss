@@ -5,14 +5,6 @@
   box-shadow: 0 0 calc(100vw * (10 / 500)) rgba($color: #000000, $alpha: 0.1);
   margin-bottom: calc(100vw * (13 / 500));
 
-  .lineGroupText {
-    display: none;
-  }
-
-  .lineGroupInfo {
-    display: none;
-  }
-
   // 기본값 흰색 박스
   .groupDetailText {
     width: 100%;
@@ -80,14 +72,6 @@
     .matchingWrapper {
       display: none;
     }
-
-    .lineGroupText {
-      display: none;
-    }
-
-    .lineGroupInfo {
-      display: none;
-    }
   }
 
   // 검정 라인 + 흰색 배경
@@ -140,10 +124,6 @@
     }
 
     .matchingWrapper {
-      display: none;
-    }
-
-    .groupDetailText {
       display: none;
     }
   }

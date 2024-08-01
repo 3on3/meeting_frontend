@@ -40,27 +40,38 @@ function GroupBox({ state, matchingState }) {
   return (
     <li className={`${styles.groupBox} ${groupBoxState}`}>
       {/* 기본 & sky */}
-      <div className={styles.groupDetailText}>
-        <div className={styles.groupTitle}> 미녀들 모임</div>
-        <div className={styles.groupInfoWrapper}>
-          <div className={styles.groupInfo}>여자 · 22세 · 3명 · 서울/경기</div>
-          <div className={styles.groupMajor}>건국대 현대미술과</div>
+      {(state === "sky" || state === undefined) && (
+        <div className={styles.groupDetailText}>
+          <div className={styles.groupTitle}> 미녀들 모임</div>
+          <div className={styles.groupInfoWrapper}>
+            <div className={styles.groupInfo}>
+              여자 · 22세 · 3명 · 서울/경기
+            </div>
+            <div className={styles.groupMajor}>건국대 현대미술과</div>
+          </div>
         </div>
-      </div>
+      )}
 
       {/* line */}
-      <div className={styles.lineGroupText}>
-        <div className={styles.lineGroupTextWrapper}>
-          <div className={styles.groupTitle}> 미녀들 모임</div>
-          <div className={styles.groupMajor}>건국대 현대미술과</div>
-        </div>
-        <div className={styles.personnel}>6명</div>
-      </div>
-      <div className={styles.lineGroupInfo}>여자 · 22세 · 3명 · 서울/경기</div>
+      {state === "line" && (
+        <>
+          <div className={styles.lineGroupText}>
+            <div className={styles.lineGroupTextWrapper}>
+              <div className={styles.groupTitle}> 미녀들 모임</div>
+              <div className={styles.groupMajor}>건국대 현대미술과</div>
+            </div>
+            <div className={styles.personnel}>6명</div>
+          </div>
+          <div className={styles.lineGroupInfo}>
+            여자 · 22세 · 3명 · 서울/경기
+          </div>
+        </>
+      )}
 
       {/* 매칭 버튼 부분 */}
       <div className={`${styles.matchingWrapper} ${matching}`}>
         <div className={styles.matchingText}>{matchingText}</div>
+
         <div className={styles.matchingBt}>
           <MatchingButton text={"매칭 신청"} />
         </div>

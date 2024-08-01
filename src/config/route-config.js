@@ -25,7 +25,7 @@ const mypageRouter = [
     element: <CheckPass />,
   },
   {
-    path: "group",
+    path: "mygroup",
     element: <MyGroups />,
   },
   {
@@ -41,7 +41,7 @@ const mypageRouter = [
     element: <Withdraw />,
   },
   {
-    path: "my-chat",
+    path: "mychat",
     element: <MyChats />,
   },
 ];

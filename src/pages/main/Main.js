@@ -1,8 +1,8 @@
 import React from "react";
-import MainFilter from "./MainFilter";
+import MainFilter from "./components/MainFilter";
 import styles from "./Main.module.scss";
-import RegionFilter from "./RegionFilter";
-import MeetingList from "./MeetingList";
+import RegionFilter from "./components/RegionFilter";
+import MeetingList from "./components/MeetingList";
 
 function Main() {
   const { wrapper } = styles;

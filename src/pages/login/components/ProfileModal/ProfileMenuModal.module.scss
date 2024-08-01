@@ -5,7 +5,7 @@
   z-index: 10;
 
   button {
-    width: calc(100vw * (120 / 500));
+    width: calc(100vw * (100 / 500));
     height: calc(100vw * (44 / 500));
     border-radius: calc(100vw * (12 / 500));
     font-size: calc(100vw * (16 / 500));
@@ -24,16 +24,16 @@
     }
 
     &.defaultImgBtn {
-      background-color: var(--color-dark);
-      color: #fff;
-      font-weight: 400;
+      border: 1px solid #000;
+      background-color: #fff;
+      color: black;
+      font-weight: 600;
     }
 
     &.changeProfileBtn {
-      border: solid 1px var(--color-dark);
       transition-delay: 0.1s;
-      background-color: #fff;
-      color: var(--color-dark);
+      background-color: var(--color-dark);
+      color: #fff;
     }
   }
 

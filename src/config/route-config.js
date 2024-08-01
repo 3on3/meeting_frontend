@@ -16,6 +16,7 @@ import Group from "../pages/group/Group";
 import MyGroups from "../pages/mypage/mypage_groups/MyGroups";
 import GroupCreate from "../pages/group/GroupCreate";
 import Withdraw from "../pages/mypage/modify_information/withdraw/Withdraw";
+import MyChats from "../pages/mypage/mypage_chats/MyChats";
 
 // 마이페이지 라우터
 const mypageRouter = [
@@ -38,6 +39,10 @@ const mypageRouter = [
   {
     path: "withdraw",
     element: <Withdraw />,
+  },
+  {
+    path: "my-chat",
+    element: <MyChats />,
   },
 ];
 

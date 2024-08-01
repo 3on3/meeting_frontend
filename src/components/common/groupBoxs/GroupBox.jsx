@@ -4,6 +4,8 @@ import MatchingButton from "../buttons/matchingButton/MatchingButton";
 
 function GroupBox({ state, matchingState }) {
   /**
+   * li 태그라서 쓸때 ul 안에 사용하기
+   *
    * @param state : 그룹 스타일
    * 기본 : 흰색 배경
    * sky : 하늘색 배경

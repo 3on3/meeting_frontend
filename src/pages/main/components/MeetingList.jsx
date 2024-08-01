@@ -10,9 +10,7 @@ function MeetingList() {
     <ul className={styles.meetingList}>
       <GroupBox />
       <GroupBox matchingState={"complete"} />
-      <GroupBox state={"sky"} />
       <GroupBox matchingState={"complete"} />
-      <GroupBox state={"line"} />
       <GroupBox />
     </ul>
   );

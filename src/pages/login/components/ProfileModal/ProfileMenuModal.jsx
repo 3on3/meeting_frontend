@@ -1,18 +1,26 @@
 import React from 'react';
 import styles from './ProfileMenuModal.module.scss';
 
-const ProfileMenuModal = ({ active, onDefaultImage, onChangeProfile }) => {
+const ProfileMenuModal = ({ active, position, onDefaultImage, onChangeProfile }) => {
+  const modalStyles = {
+    left: `${position.x}px`,
+    top: `${position.y}px`,
+  };
+
   return (
-    <nav className={active ? `${styles.isActive} ${styles.profileMenu}` : styles.profileMenu}>
+    <nav 
+      className={active ? `${styles.isActive} ${styles.profileMenu}` : styles.profileMenu}
+      style={modalStyles}
+    >
       <button 
-        className={styles.defaultImgBtn} 
+        className={`${styles.defaultImgBtn} defaultImgBtn`} 
         onClick={onDefaultImage}
       >
-        기본 이미지로 설정
+        기본 이미지
       </button>
       <button 
-        className={styles.changeProfileBtn} 
-        onClick={onChangeProfile}
+        className={`${styles.changeProfileBtn} changeProfileBtn`} 
+        onClick={onChangeProfile} 
       >
         프로필 변경
       </button>

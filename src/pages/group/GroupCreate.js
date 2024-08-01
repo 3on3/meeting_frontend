@@ -39,24 +39,19 @@ const GroupCreate = () => {
       <div className={styles.choiceContainer}>
         <div className={styles.genContainer}>
           <div className={styles.gender}>성별</div>
-          <div className={styles.female}>
-            <RadioButton value="female">여자</RadioButton>
-          </div>
-          <div className={styles.male}>
-            {/* <Radio value="male">남자</Radio> */}
+          <div className={styles.gen}>
+            <RadioButton name="gender" value="male" text="남자" />
+            <RadioButton name="gender" value="female" text="여자" className={styles.female}/>
           </div>
         </div>
         <div className={styles.numberContainer}>
           <div className={styles.numberOfParticipants}>참여 인원</div>
-          <div className={styles.three}>
-            {/* <Radio value="3on3">3:3</Radio> */}
+          <div className={styles.number}>
+          <RadioButton name="options" value="3:3" text="3:3" />
+          <RadioButton name="options" value="4:4" text="4:4" />
+          <RadioButton name="options" value="5:5" text="5:5" />
           </div>
-          <div className={styles.four}>
-            {/* <Radio value="4on4">4:4</Radio> */}
-          </div>
-          <div className={styles.five}>
-            {/* <Radio value="5on5">5:5</Radio> */}
-          </div>
+
         </div>
         <MtButtons
           buttonType={"apply"}

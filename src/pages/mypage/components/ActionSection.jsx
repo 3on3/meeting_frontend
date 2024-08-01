@@ -13,12 +13,12 @@ const ActionSection = () => {
 
   // 내 그룹 핸들러
   const myGroupHandler = () => {
-    navigate("/mypage/check-pass")
+    navigate("/mypage/group")
   };
 
   // 내 채팅 핸들러
   const myChatHandler = () => {
-    // navigate("/mypage/check-pass")
+    navigate("/mypage/my-chat")
   };
 
   return (

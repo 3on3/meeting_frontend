@@ -1,7 +1,6 @@
 import React from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import ProfileSection from "./components/ProfileSection";
-import ActionSection from "./components/ActionSection";
 
 const MyPage = () => {
   const location = useLocation();

@@ -2,15 +2,19 @@
   width: 100%;
   text-align: center;
   margin: 0 auto;
-  padding: calc( 100vw* ( 30 /500)) calc( 100vw* ( 20 /500)) 0 calc( 100vw* ( 20 /500));
+  padding: calc( 100vw* ( 30 /500)) calc( 100vw* ( 20 /500)) calc( 100vw* ( 130 /500)) calc( 100vw* ( 20 /500));
 
   .profileContainer {
     border-radius: calc( 100vw* ( 20 /500));
     box-shadow: 0 0 calc( 100vw* ( 10 /500)) rgba($color:#000000, $alpha: 0.1);
-    height: 55vh;
+    padding-bottom: calc( 100vw* ( 60 /500));
   }
   .contentsBox {
     padding-top: calc( 100vw* ( 50 /500));
+
+    .fileInput {
+      display: none;
+    }
   }
   .text { 
     font-weight: 700;

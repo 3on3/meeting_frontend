@@ -13,7 +13,7 @@ const ActionSection = () => {
 
   // 내 그룹 핸들러
   const myGroupHandler = () => {
-    // navigate("/mypage/check-pass")
+    navigate("/mypage/check-pass")
   };
 
   // 내 채팅 핸들러

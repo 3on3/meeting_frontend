@@ -8,11 +8,12 @@ import MatchingButton from "../../../components/common/buttons/matchingButton/Ma
 function MeetingList() {
   return (
     <ul className={styles.meetingList}>
-      <GroupBox  />
-      <GroupBox  matchingState={"complete"}/>
-      <GroupBox  />
+      <GroupBox />
       <GroupBox matchingState={"complete"} />
-      <GroupBox  />
+      <GroupBox state={"sky"} />
+      <GroupBox matchingState={"complete"} />
+      <GroupBox state={"line"} />
+      <GroupBox />
     </ul>
   );
 }

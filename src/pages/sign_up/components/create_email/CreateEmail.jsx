@@ -15,6 +15,7 @@ const CreateEmail = ({isSubmit,setIsSubmit}) => {
     <>
       <h1 className={"title"}>학교 이메일 인증</h1>
 
+
       <EmailInput userEmail={setSignUpEmail} styles={styles} isEmail={isEmail} setIsEmail={setIsEmail} isSubmit={isSubmit} setIsSubmit={setIsSubmit}/>
       {isSubmit[0] && <VerificationInput styles={styles} isSubmit={isSubmit} setIsSubmit={setIsSubmit}/>}
       {isSubmit[1] && <MajorInput styles={styles} isSubmit={isSubmit} setIsSubmit={setIsSubmit}/>}

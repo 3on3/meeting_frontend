@@ -3,7 +3,7 @@ import styles from "./GroupCreate.module.scss";
 import DefaultInput from "../../components/common/inputs/DefaultInput";
 import MtButtons from "../../components/common/buttons/MtButtons";
 import { useNavigate } from "react-router-dom";
-import RadioButton from "../../components/common/buttons/radiobutton/RadioButton";
+import RadioButton from "../../components/common/inputs/radiobutton/RadioButton";
 
 const GroupCreate = () => {
   const navigate = useNavigate();

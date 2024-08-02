@@ -3,13 +3,7 @@ import DefaultInput from "../../../../components/common/inputs/DefaultInput";
 import { emailVerification } from "../../../../assets/js/Verification";
 import MtButtons from "../../../../components/common/buttons/MtButtons";
 
-const EmailInput = ({
-  styles,
-  setIsEmail,
-  isEmail,
-  isSubmit,
-  setIsSubmit,
-}) => {
+const EmailInput = ({styles, setIsEmail, isEmail,isSubmit, setIsSubmit}) => {
   const [emailInput, setEmailInput] = useState("");
   const emailInputHandler = (e) => {
     setEmailInput(e.target.value);

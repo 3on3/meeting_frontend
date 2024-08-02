@@ -43,7 +43,7 @@ const mypageRouter = [
   {
     path: "mychat",
     element: <MyChats />,
-  },
+  }
 ];
 
 // 채팅 라우터

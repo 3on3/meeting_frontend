@@ -6,6 +6,7 @@ const EmailInput = ({ email, handleEmailChange, isEmailValid, isInitial }) => {
   const emailInputState = isInitial ? "" : (isEmailValid ? "correct" : "error");
 
   return (
+    
     <DefaultInput
       inputState={emailInputState}
       placeholder={'이메일 입력'}

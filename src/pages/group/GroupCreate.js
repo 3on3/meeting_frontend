@@ -23,7 +23,7 @@ const GroupCreate = () => {
   };
 
   const handleRegionClick = (region) => {
-    setSelectedRegion(region);
+    setSelectedRegion(region.value);
   };
 
   const handleGenderChange = (e) => {
@@ -56,7 +56,7 @@ const GroupCreate = () => {
         "Content-Type": "application/json",
         Authorization:
           "Bearer " +
-          "eyJhbGciOiJIUzUxMiJ9.eyJhdXRoIjoiQ09NTU9OIiwiaWQiOiJ0a2RnbnNkbGRrZGxlbEBnbWFpbC5jb20iLCJpc3MiOiJtZWV0aW5nUHJvdmlkZXJLZXkiLCJpYXQiOjE3MjI0OTI0NjYsImV4cCI6MTcyMjU3ODg2Niwic3ViIjoiMTlmYzM3NTMtZjVmZS00MjlmLWFiNjYtMjc2ZDE4ZGVhOGRhIn0.hZuVyNZVWgu2RkrCujA4ekC48ASnoE0vWO-l6l45l3u2QJ3AbzdFKvKXpsMDXa0JSMX23bQRFwdSWTUMQrdz6A",
+          "eyJhbGciOiJIUzUxMiJ9.eyJhdXRoIjoiQ09NTU9OIiwiaWQiOiJ0a2RnbnNkbGRrZGxlbEBnbWFpbC5jb20iLCJpc3MiOiJtZWV0aW5nUHJvdmlkZXJLZXkiLCJpYXQiOjE3MjI2NTY0ODQsImV4cCI6MTcyMjc0Mjg4NCwic3ViIjoiMTlmYzM3NTMtZjVmZS00MjlmLWFiNjYtMjc2ZDE4ZGVhOGRhIn0.jERba9TMlBoYOI4uGLWdxD6DSTxjSzlcxe5sbrZwC7s2wRoqacRpgEgiHC_3A-WntA71jvrGslhvrM3ZXskzeQ",
       },
       body: JSON.stringify(payload),
     });
@@ -71,14 +71,14 @@ const GroupCreate = () => {
   };
 
   const regions = [
-    "SEOUL_GYEONGGI",
-    "충청/대전",
-    "경북/대구",
-    "경남/부산",
-    "강원도",
-    "전라북도",
-    "전남/광주",
-    "제주도",
+    { value: "SEOUL_GYEONGGI", label: "서울/경기" },
+    { value: "CHUNGCHEONG_DAEJEON", label: "충청/대전" },
+    { value: "GYEONGBUK_DAEGU", label: "경북/대구" },
+    { value: "GYEONGNAM_BUSAN", label: "경남/부산" },
+    { value: "GANGWONDO", label: "강원도" },
+    { value: "JEONLABUKDO", label: "전라북도" },
+    { value: "JEONNAM_GWANGJU", label: "전남/광주" },
+    { value: "JEJUDO", label: "제주도" },
   ];
 
   return (
@@ -96,24 +96,25 @@ const GroupCreate = () => {
       <ul className={styles.region}>
         {regions.map((region) => (
           <li
-            key={region}
+            key={region.value}
             style={{
               padding: "10px 20px",
               margin: "5px",
               border:
-                selectedRegion === region
+                selectedRegion === region.value
                   ? "calc(100vw * (1 / 500)) solid #271E33"
                   : "calc(100vw * (1 / 500)) solid #C3BECB",
               cursor: "pointer",
               fontSize: "calc(100vw * (16 / 500))",
               borderRadius: "calc(100vw * (500 / 500))",
               fontWeight: "600",
-              backgroundColor: selectedRegion === region ? "#fff" : "#fff",
-              color: selectedRegion === region ? "#271E33" : "#C3BECB",
+              backgroundColor:
+                selectedRegion === region.value ? "#fff" : "#fff",
+              color: selectedRegion === region.value ? "#271E33" : "#C3BECB",
             }}
             onClick={() => handleRegionClick(region)}
           >
-            {region}
+            {region.label}
           </li>
         ))}
       </ul>

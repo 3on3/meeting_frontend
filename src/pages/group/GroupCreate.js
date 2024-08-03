@@ -56,7 +56,7 @@ const GroupCreate = () => {
         "Content-Type": "application/json",
         Authorization:
           "Bearer " +
-          "eyJhbGciOiJIUzUxMiJ9.eyJhdXRoIjoiQ09NTU9OIiwiaWQiOiJ0a2RnbnNkbGRrZGxlbEBnbWFpbC5jb20iLCJpc3MiOiJtZWV0aW5nUHJvdmlkZXJLZXkiLCJpYXQiOjE3MjI2NTY0ODQsImV4cCI6MTcyMjc0Mjg4NCwic3ViIjoiMTlmYzM3NTMtZjVmZS00MjlmLWFiNjYtMjc2ZDE4ZGVhOGRhIn0.jERba9TMlBoYOI4uGLWdxD6DSTxjSzlcxe5sbrZwC7s2wRoqacRpgEgiHC_3A-WntA71jvrGslhvrM3ZXskzeQ",
+          "eyJhbGciOiJIUzUxMiJ9.eyJhdXRoIjoiQ09NTU9OIiwiaWQiOiJ0a2RnbnNkbGRrZGxlbEBnbWFpbC5jb20iLCJpc3MiOiJtZWV0aW5nUHJvdmlkZXJLZXkiLCJpYXQiOjE3MjI2NzE0NjEsImV4cCI6MTcyMjc1Nzg2MSwic3ViIjoiZDBkMjIxMDctMzNjZi00YjdkLWJkMzItYTgyODExYjcwZmIwIn0.Mrld1okGSwpub7bSJ0wd_nyXRw_H6_rrA-tRX4iEuH9M3XDD2G2rtwp32WcMYbDhdraa3dfRxnsCR1FUoxl6TA",
       },
       body: JSON.stringify(payload),
     });
@@ -65,8 +65,7 @@ const GroupCreate = () => {
       navigate("/group");
     } else {
       const errorText = await response.text();
-      console.error("Error:", errorText);
-      alert("그룹 생성에 실패했습니다. 다시 시도해주세요.");
+      alert(errorText);
     }
   };
 

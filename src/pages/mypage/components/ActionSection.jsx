@@ -1,7 +1,7 @@
 import React from "react";
 import MtButtons from "../../../components/common/buttons/MtButtons";
 import { useNavigate } from "react-router-dom";
-import styles from './ActionSection.module.scss';
+import styles from "./ActionSection.module.scss";
 
 const ActionSection = () => {
   const navigate = useNavigate();
@@ -13,12 +13,12 @@ const ActionSection = () => {
 
   // 내 그룹 핸들러
   const myGroupHandler = () => {
-    navigate("/mypage/group")
+    navigate("/mypage/mygroup");
   };
 
   // 내 채팅 핸들러
   const myChatHandler = () => {
-    navigate("/mypage/my-chat")
+    navigate("/mypage/mychat");
   };
 
   return (

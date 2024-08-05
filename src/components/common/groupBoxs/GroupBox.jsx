@@ -86,7 +86,8 @@ function GroupBox({ state, matchingState, list }) {
               <div className={styles.groupInfoWrapper}>
                 <div className={styles.groupInfo}>
                   {groupGender(group.groupGender)} · {group.averageAge}세 ·{" "}
-                  {group.maxNum}명 ·{groupPlace(group.groupPlace)}
+                  {state === "sky" ? group.memberCount : group.maxNum}명 ·
+                  {groupPlace(group.groupPlace)}
                 </div>
                 <div className={styles.groupMajor}>{group.major}</div>
               </div>
@@ -98,7 +99,7 @@ function GroupBox({ state, matchingState, list }) {
             <>
               <div className={styles.lineGroupText}>
                 <div className={styles.lineGroupTextWrapper}>
-                  <div className={styles.groupTitle}> 미녀들 모임</div>
+                  <div className={styles.groupTitle}> {group.groupName}</div>
                   <div className={styles.groupMajor}>건국대 현대미술과</div>
                 </div>
                 <div className={styles.personnel}>6명</div>

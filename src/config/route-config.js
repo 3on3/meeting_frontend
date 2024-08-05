@@ -13,7 +13,7 @@ import SignUp from "../pages/sign_up/SignUp";
 import MyPage from "../pages/mypage/MyPage";
 import FirstLoginPage from "../pages/login/FirstLoginPage";
 import Group from "../pages/group/Group";
-import MyGroups from "../pages/mypage/mypage_groups/MyGroups";
+import MyGroups, { MyGroupsListFetch } from "../pages/mypage/mypage_groups/MyGroups";
 import GroupCreate from "../pages/group/GroupCreate";
 import Withdraw from "../pages/mypage/modify_information/withdraw/Withdraw";
 import MyChats from "../pages/mypage/mypage_chats/MyChats";
@@ -27,6 +27,7 @@ const mypageRouter = [
   {
     path: "mygroup",
     element: <MyGroups />,
+    loader: MyGroupsListFetch,
   },
   {
     path: "modify",

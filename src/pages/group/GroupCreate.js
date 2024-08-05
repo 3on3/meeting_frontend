@@ -56,7 +56,9 @@ const GroupCreate = () => {
         "Content-Type": "application/json",
         Authorization:
           "Bearer " +
+
           "eyJhbGciOiJIUzUxMiJ9.eyJhdXRoIjoiQ09NTU9OIiwiaWQiOiJwb3MxMTExQG5hdmVyLmNvbSIsImlzcyI6Im1lZXRpbmdQcm92aWRlcktleSIsImlhdCI6MTcyMjg3ODU2NSwiZXhwIjoxNzIyOTY0OTY1LCJzdWIiOiI0MDA1Y2RmYi00ODU3LTRjNzMtYTFjMS01N2E0NWZkY2UwNjAifQ.1neD09yrzrE5yKjb72VjMtFlriMo8tQfVh1z6R-Xce9Jno19cchtKbVO6cv_uFhNvZLOPbmSm4V22W_qLgAMRA",
+
       },
       body: JSON.stringify(payload),
     });
@@ -65,8 +67,7 @@ const GroupCreate = () => {
       navigate("/group");
     } else {
       const errorText = await response.text();
-      console.error("Error:", errorText);
-      alert("그룹 생성에 실패했습니다. 다시 시도해주세요.");
+      alert(errorText);
     }
   };
 

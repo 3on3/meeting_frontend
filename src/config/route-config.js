@@ -6,7 +6,7 @@ import Chat from "../pages/chat/Chat";
 import LoginPage from "../pages/login/LoginPage";
 import IntroPage from "../pages/login/IntroPage";
 
-import Main from "../pages/main/Main";
+import Main, { MainMeetingListFetch } from "../pages/main/Main";
 import CheckPass from "../pages/mypage/modify_information/CheckPass";
 import ModifyInformation from "../pages/mypage/modify_information/ModifyInformation";
 import SignUp from "../pages/sign_up/SignUp";
@@ -63,6 +63,7 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <Main />,
+        loader: MainMeetingListFetch,
       },
       {
         path: "intro",

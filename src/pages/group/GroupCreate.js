@@ -54,12 +54,9 @@ const GroupCreate = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization:
-          "Bearer " +
-          "eyJhbGciOiJIUzUxMiJ9.eyJhdXRoIjoiQ09NTU9OIiwiaWQiOiJtX21pbWlAbmF2ZXIuY29tIiwiaXNzIjoibWVldGluZ1Byb3ZpZGVyS2V5IiwiaWF0IjoxNzIyOTAyODg5LCJleHAiOjE3MjI5ODkyODksInN1YiI6Ijg4MDYwOTM3LTUzMmEtNGYwNC04MWZmLTJiMWQxY2ExM2JlOCJ9.sXuJBQjuUUDq-W1NYzvlE4W7-5I-aRGGZgoa6-E9OxBSaYLlmzBv3-hGpF4H3B4y76zpH_izj09-k8-Ppa4IFQ",
-
+        Authorization: "Bearer " + getUserToken(),
       },
-    
+
       body: JSON.stringify(payload),
     });
 

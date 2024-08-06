@@ -5,31 +5,25 @@ import RegionFilterBox from "../../../components/common/regionFilterBoxs/RegionF
 function RegionFilter() {
   const regionArr = [
     {
-      text: "서울",
+      text: "서울/경기",
     },
     {
-      text: "경기 / 인천",
+      text: "충청/대전",
+    },
+    {
+      text: "경북/대구",
+    },
+    {
+      text: "경남/부산",
     },
     {
       text: "강원도",
     },
     {
-      text: "충북 / 대전",
+      text: "전라북도",
     },
     {
-      text: "충남 / 세종",
-    },
-    {
-      text: "경북 / 대구 / 울산",
-    },
-    {
-      text: "경남 / 부산",
-    },
-    {
-      text: "전북",
-    },
-    {
-      text: "전남 / 광주",
+      text: "전남/광주",
     },
     {
       text: "제주도",

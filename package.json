@@ -20,6 +20,7 @@
     "socket.io-client": "^4.7.5",
     "sockjs-client": "^1.6.1",
     "styled-components": "^6.1.12",
+    "socket.io-client": "^4.7.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

@@ -6,17 +6,18 @@ import Chat from "../pages/chat/Chat";
 import LoginPage from "../pages/login/LoginPage";
 import IntroPage from "../pages/login/IntroPage";
 
-import Main from "../pages/main/Main";
+import Main, { MainMeetingListFetch } from "../pages/main/Main";
 import CheckPass from "../pages/mypage/modify_information/CheckPass";
 import ModifyInformation from "../pages/mypage/modify_information/ModifyInformation";
 import SignUp from "../pages/sign_up/SignUp";
 import MyPage from "../pages/mypage/MyPage";
 import FirstLoginPage from "../pages/login/FirstLoginPage";
 import Group from "../pages/group/Group";
-import MyGroups from "../pages/mypage/mypage_groups/MyGroups";
+import MyGroups, { MyGroupsListFetch } from "../pages/mypage/mypage_groups/MyGroups";
 import GroupCreate from "../pages/group/GroupCreate";
 import Withdraw from "../pages/mypage/modify_information/withdraw/Withdraw";
 import MyChats from "../pages/mypage/mypage_chats/MyChats";
+import TestChat from "../assets/js/test-chat/TestChat";
 
 // 마이페이지 라우터
 const mypageRouter = [
@@ -27,6 +28,7 @@ const mypageRouter = [
   {
     path: "mygroup",
     element: <MyGroups />,
+    loader: MyGroupsListFetch,
   },
   {
     path: "modify",
@@ -63,6 +65,7 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <Main />,
+        loader: MainMeetingListFetch,
       },
       {
         path: "intro",
@@ -88,6 +91,10 @@ export const router = createBrowserRouter([
       {
         path: "chat",
         children: chatRouter,
+      },
+      {
+        path: "testChat",
+        element: <TestChat />,
       },
       // 마이페이지 라우터
       {

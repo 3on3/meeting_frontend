@@ -1,17 +1,18 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   birthVerification,
   firstPhoneNumberVerification,
   genderVerification,
-  nameVerification, secondPhoneNumberVerification
+  nameVerification, 
+  secondPhoneNumberVerification
 } from "../../../../assets/js/Verification";
 import styles from "../SignUpComponent.module.scss";
 import DefaultInput from "../../../../components/common/inputs/DefaultInput";
 import MtButtons from "../../../../components/common/buttons/MtButtons";
 
-const CreateInformations = ({isSubmit, setIsSubmit}) => {
-
-  // input 에 입력되는 값들을 저장하기 위한 useState
+const CreateInformations = ({ isSubmit, setIsSubmit, verifiedData, setUserData }) => {
+  
+  // input에 입력되는 값들을 저장하기 위한 useState
   const [userName, setUserName] = useState('');
   const [userBirth, setUserBirth] = useState('');
   const [userGender, setUserGender] = useState('');
@@ -31,7 +32,7 @@ const CreateInformations = ({isSubmit, setIsSubmit}) => {
   // 버튼의 활성상태를 관리하기 위한 useState
   const [buttonStatus, setButtonStatus] = useState(false);
 
-  // 모든 입력된 모든 값들이 조건에 만족할시 버튼 활성화
+  // 모든 입력된 값들이 조건에 만족할시 버튼 활성화
   const checkButtonStatus = () => {
     if (isName && isBirth && isGender && isPhoneNumber) {
       setButtonStatus(true);
@@ -45,8 +46,7 @@ const CreateInformations = ({isSubmit, setIsSubmit}) => {
     checkButtonStatus();
   }, [isName, isBirth, isGender, isPhoneNumber]);
 
-
-  // 유저 이름 상태관리 ( 검증 추가해야할지도..? )
+  // 유저 이름 상태관리
   const userNameInputHandler = e => {
     setUserName(e.target.value);
   }
@@ -59,7 +59,7 @@ const CreateInformations = ({isSubmit, setIsSubmit}) => {
     setIsSubmit([true, false, false, false]);
   };
 
-  // 생년월일 상태관리
+  // 생년월일 상태관리 (yyMMdd 형식)
   const userBirthInputHandler = e => {
     setUserBirth(e.target.value);
   }
@@ -72,7 +72,7 @@ const CreateInformations = ({isSubmit, setIsSubmit}) => {
     setIsSubmit([true, true, false, false]);
   };
 
-  // 입력된 성별이 남 or 여일 경우에만 검증 성공 ( radio로 바꿀지 여부 검토해봐야함)
+  // 성별 상태관리
   const userGenderInputHandler = e => {
     setUserGender(e.target.value);
   }
@@ -85,7 +85,7 @@ const CreateInformations = ({isSubmit, setIsSubmit}) => {
     setIsSubmit([true, true, true, false]);
   };
 
-
+  // 전화번호 상태관리
   const firstPhoneNumberInputHandler = e => {
     setFirstPhoneNumber(e.target.value);
   }
@@ -114,6 +114,12 @@ const CreateInformations = ({isSubmit, setIsSubmit}) => {
 
   const phoneNoBtnHandler = () => {
     setIsSubmit([true, true, true, true]);
+    setUserData({
+      name: userName,
+      birth: userBirth,
+      gender: userGender,
+      phoneNumber: `${firstPhoneNumber}-${secondPhoneNumber}-${lastPhoneNumber}`
+    });
   };
 
   return (
@@ -205,8 +211,7 @@ const CreateInformations = ({isSubmit, setIsSubmit}) => {
             </>
         }
       </>
-  )
-      ;
+  );
 };
 
 export default CreateInformations;

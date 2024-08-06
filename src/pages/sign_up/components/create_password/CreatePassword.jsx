@@ -4,7 +4,7 @@ import DefaultInput from "../../../../components/common/inputs/DefaultInput";
 import styles from "../SignUpComponent.module.scss";
 import MtButtons from "../../../../components/common/buttons/MtButtons";
 
-const CreatePassword = ({isSubmit, setIsSubmit}) => {
+const CreatePassword = ({isSubmit, setIsSubmit, submitData}) => {
 
   // 패스워드 입력값 관리와 검증 통과 여부 관리하는 useState
   const [passwordInput, setPasswordInput] = useState('');
@@ -13,7 +13,6 @@ const CreatePassword = ({isSubmit, setIsSubmit}) => {
   // 패스워드확인 입력값 관리와 검증 통과 여부 관리하는 useState
   const [passwordConfirmInput, setPasswordConfirmInput] = useState('');
   const [isPasswordConfirm, setIsPasswordConfirm] = useState(false);
-
 
   const passwordInputHandler = e => {
     setPasswordInput(e.target.value);
@@ -27,6 +26,7 @@ const CreatePassword = ({isSubmit, setIsSubmit}) => {
 
   const passwordConfirmHandler = () => {
     setIsSubmit([true, true]);
+    submitData(passwordInput); // 서버로 데이터 전송
   }
 
   // 유저가 패스워드를 입력할때마다 패스워드가 조건에 맞는지 검증
@@ -39,7 +39,6 @@ const CreatePassword = ({isSubmit, setIsSubmit}) => {
   const passwordConfirmInputHandler = (e) => {
     setPasswordConfirmInput(e.target.value);
   }
-
 
   // 패스워드확인 input에 값을 입력할때마다 처음 입력했던 패스워드와 일치하는지 검증
   // 일치한다면 버튼 활성화

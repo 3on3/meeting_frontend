@@ -2,7 +2,8 @@ import React from "react";
 import styles from "./GroupBox.module.scss";
 import MatchingButton from "../buttons/matchingButton/MatchingButton";
 
-function GroupBox({ state, matchingState }) {
+function GroupBox({ state, matchingState, list }) {
+  // =============== param 스타일 가이드 ===============
   /**
    * li 태그라서 쓸때 ul 안에 사용하기
    *
@@ -17,7 +18,6 @@ function GroupBox({ state, matchingState }) {
    *
    *  */
   let groupBoxState;
-  let matchingText;
   switch (state) {
     case "sky":
       groupBoxState = styles.sky;
@@ -27,58 +27,108 @@ function GroupBox({ state, matchingState }) {
       break;
     default:
       groupBoxState = "";
-      matchingText = "매칭을 기다리고 있어요!";
       break;
   }
 
-  let matching;
-  if (matchingState === "complete") {
-    matchingText = "이미 매칭된 그룹이예요.";
-    matching = styles.notMatching;
-  } else {
-    matching = styles.matchingBt;
-  }
+  console.log(list);
+
+  // ====================================================
+  // ======================= 함수 =======================
+  // groupGender Text 변경 작업
+  const groupGender = (gender) => {
+    switch (gender) {
+      case "M":
+        return "남자";
+
+      case "F":
+        return "여자";
+    }
+  };
+
+  // groupPlace Text 변경 작업
+
+  const groupPlace = (place) => {
+    switch (place) {
+      case "SEOUL_GYEONGGI":
+        return " 서울/경기";
+
+      case "CHUNGCHEONG_DAEJEON":
+        return " 충청/대전";
+
+      case "GYEONGBUK_DAEGU":
+        return " 경북/대구";
+
+      case "GYEONGNAM_BUSAN":
+        return " 경남/부산";
+
+      case "GANGWONDO":
+        return " 강원도";
+
+      case "JEONLABUKDO":
+        return " 전라북도";
+
+      case "JEONNAM_GWANGJU":
+        return " 전남/광주";
+
+      case "JEJUDO":
+        return " 제주도";
+    }
+  };
 
   return (
-    <li className={`${styles.groupBox} ${groupBoxState}`}>
-      {/* 기본 & sky */}
-      {(state === "sky" || state === undefined) && (
-        <div className={styles.groupDetailText}>
-          <div className={styles.groupTitle}> 미녀들 모임</div>
-          <div className={styles.groupInfoWrapper}>
-            <div className={styles.groupInfo}>
-              여자 · 22세 · 3명 · 서울/경기
+    <>
+      {list.map((group) => (
+        <li className={`${styles.groupBox} ${groupBoxState}`} key={group.id}>
+          {/* 기본 & sky */}
+          {(state === "sky" || state === undefined) && (
+            <div className={styles.groupDetailText}>
+              <div className={styles.groupTitle}> {group.groupName}</div>
+              <div className={styles.groupInfoWrapper}>
+                <div className={styles.groupInfo}>
+                  {groupGender(group.groupGender)} · {group.averageAge}세 ·{" "}
+                  {state === "sky" ? group.memberCount : group.maxNum}명 ·
+                  {groupPlace(group.groupPlace)}
+                </div>
+                <div className={styles.groupMajor}>{group.major}</div>
+              </div>
             </div>
-            <div className={styles.groupMajor}>건국대 현대미술과</div>
-          </div>
-        </div>
-      )}
+          )}
 
-      {/* line */}
-      {state === "line" && (
-        <>
-          <div className={styles.lineGroupText}>
-            <div className={styles.lineGroupTextWrapper}>
-              <div className={styles.groupTitle}> 미녀들 모임</div>
-              <div className={styles.groupMajor}>건국대 현대미술과</div>
+          {/* line */}
+          {state === "line" && (
+            <>
+              <div className={styles.lineGroupText}>
+                <div className={styles.lineGroupTextWrapper}>
+                  <div className={styles.groupTitle}> {group.groupName}</div>
+                  <div className={styles.groupMajor}>건국대 현대미술과</div>
+                </div>
+                <div className={styles.personnel}>6명</div>
+              </div>
+              <div className={styles.lineGroupInfo}>
+                여자 · 22세 · 3명 · 서울/경기
+              </div>
+            </>
+          )}
+
+          {/* 매칭 버튼 부분 */}
+          <div
+            className={`${styles.matchingWrapper} ${
+              group.isMatched ? styles.notMatching : styles.matchingBt
+            }`}
+          >
+            <div className={styles.matchingText}>
+              {group.isMatched
+                ? "이미 매칭된 그룹이예요."
+                : "매칭을 기다리고 있어요!"}
             </div>
-            <div className={styles.personnel}>6명</div>
-          </div>
-          <div className={styles.lineGroupInfo}>
-            여자 · 22세 · 3명 · 서울/경기
-          </div>
-        </>
-      )}
 
-      {/* 매칭 버튼 부분 */}
-      <div className={`${styles.matchingWrapper} ${matching}`}>
-        <div className={styles.matchingText}>{matchingText}</div>
-
-        <div className={styles.matchingBt}>
-          <MatchingButton text={"매칭 신청"} />
-        </div>
-      </div>
-    </li>
+            <div className={styles.matchingBt}>
+              <MatchingButton text={"매칭 신청"} />
+            </div>
+          </div>
+        </li>
+      ))}
+    </>
   );
 }
 

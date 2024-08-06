@@ -17,7 +17,7 @@ const API_BASE_URL = backendHostName;
 
 const SIGNUP = "/SIGNUP";
 const GROUP = "/group";
-const MYPAGE = "/mypage";
+const MYPAGE = "/mypage"
 
 export const AUTH_URL = API_BASE_URL + SIGNUP;
 export const GROUP_URL = API_BASE_URL + GROUP;

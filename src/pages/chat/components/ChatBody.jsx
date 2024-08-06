@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import MessageBox from "./MessageBox";
+import {userDataLoader} from "../../../config/auth";
 
 const ChatBody = ({ styles, messageList }) => {
   console.log(messageList);
+    const loginUser = userDataLoader();
+    console.log(loginUser.email)
   return (
     <div className={styles.chatBody}>
       <div className={styles.chatInner}>
         {messageList.map((message, i) => {
           console.log(i);
-            console.log(message.user.name)
+            console.log(message.user.email);
           if (i !== 0 && message.user.id === messageList[i - 1].user.id) {
             return (
               <MessageBox
@@ -16,7 +19,7 @@ const ChatBody = ({ styles, messageList }) => {
                 styles={styles}
                 userName={message.user.nickname}
                 authClass={
-                  message.user.auth === "COMMON" ? styles.otherUser : styles.user
+                  message.user.email !== loginUser.email ? styles.otherUser : styles.user
                 }
                 content={message.messageContent}
                 sameUser={true}
@@ -29,7 +32,7 @@ const ChatBody = ({ styles, messageList }) => {
               styles={styles}
               userName={message.user.nickname}
               authClass={
-                message.user.auth === "COMMON" ? styles.otherUser : styles.user
+                  message.user.email !== loginUser.email ? styles.otherUser : styles.user
               }
               content={message.messageContent}
               sameUser={false}

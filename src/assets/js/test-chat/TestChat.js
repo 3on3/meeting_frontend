@@ -4,6 +4,7 @@ import ChatBody from "../../../pages/chat/components/ChatBody";
 import ChatInput from "../../../pages/chat/components/ChatInput";
 import styles from "../../../pages/chat/Chat.module.scss";
 import ChatMembersModal from "../../../pages/chat/components/member_modal/ChatMembersModal";
+import {userDataLoader} from "../../../config/auth";
 
 const TestChat = () => {
   // input value
@@ -14,7 +15,15 @@ const TestChat = () => {
 
   const [socket, setSocket] = useState(null);
 
-  useEffect( async () => {
+  // 처음 채팅방 입장시 그동안의 메세지 받아오기
+  useEffect(   () => {
+
+    fetchData();
+
+  }, []);
+
+  // 메세지 받아오는 fetch
+  async function fetchData()  {
     const response = await fetch("http://localhost:8253/getMessage?chatRoomId=www");
 
     const data = await response.json();
@@ -22,9 +31,9 @@ const TestChat = () => {
     setMessageList(data);
 
     console.log(data);
+  }
 
-  }, []);
-
+  // 웹소켓 설정
   useEffect(() => {
     // WebSocket 설정
     const newSocket = new WebSocket("ws://localhost:8253/testChat");
@@ -64,24 +73,43 @@ const TestChat = () => {
   };
 
   // 메세지 보내기 버튼
-  const onClickSendBtn = () => {
+  const onClickSendBtn = async () => {
+
     if (value !== "") {
-      const newMessage = {
-        id: messageList.length + 1,
-        userName: "뉴유저",
-        auth: "user",
-        content: value,
-      };
+      const message = {
+        roomId: "www",
+        message: value,
+      }
 
+      const data = await sendMessage(message);
 
+      socket.send(JSON.stringify(data));
+      setMessageList(prevState => [...prevState, data]);
+      }
 
-      socket.send(JSON.stringify(newMessage));
-      setMessageList((prev) => [...prev, newMessage]);
       setValue("");
-
-    }
   };
 
+  const sendMessage = async (payload) => {
+
+    const loginUser = userDataLoader();
+
+    const response = await fetch(`http://localhost:8253/sendMessage`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization:
+            "Bearer " +
+            loginUser.token
+
+      },
+      body: JSON.stringify(payload),
+    });
+
+    const json = await response.json();
+
+    return json;
+  }
 
 
   useEffect(() => {}, [messageList]);

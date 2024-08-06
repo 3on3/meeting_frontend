@@ -73,7 +73,7 @@ const Withdraw = () => {
             eventHandler={handlePasswordSubmit}
             buttonType={isPasswordValid ? 'apply' : 'disabled'}
             buttonText={'확인'}
-            readOnly
+            readOnlyws
           />
           <MtButtons
             eventType={"click"}

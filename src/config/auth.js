@@ -9,7 +9,9 @@ const getUserData = () => {
 
 //인증 토큰만 가져오기
 export const getUserToken = () => {
-  return getUserData().token;
+  return "eyJhbGciOiJIUzUxMiJ9.eyJhdXRoIjoiQ09NTU9OIiwiaWQiOiJhYTUzMTJAbmF2ZXIuY29tIiwiaXNzIjoibWVldGluZ1Byb3ZpZGVyS2V5IiwiaWF0IjoxNzIyOTEwNDMzLCJleHAiOjE3MjI5OTY4MzMsInN1YiI6ImRkYTE0NmU5LTgzZTItNDMxZC05NGU4LTRlMDc0OGQ2MzQ5ZCJ9.4tDO1rr_TMFNQNo_O10Q-J6nrl-n_pJE_mbopeZbl9Xuf-eQWNZ0cDaproBEPgYEOtk9xpyhQd-kQb9EToVCvw";
+
+  // return getUserData().token;
 };
 
 //로그인 회원정보를 불러오는 ㅣoader

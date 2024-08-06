@@ -41,7 +41,7 @@
       .groupMajor {
         font-size: calc(100vw * (15 / 500));
         color: var(--color-gr);
-        margin-top: calc(100vw * (10 / 500));
+        margin-top: calc(100vw * (9 / 500));
       }
     }
   }
@@ -50,7 +50,7 @@
     height: calc(100vw * (34 / 500));
     display: flex;
     justify-content: end;
-    margin-top: calc(100vw * (30 / 500));
+    margin-top: calc(100vw * (25 / 500));
 
     .matchingText {
       color: var(--color-point);
@@ -107,7 +107,7 @@
           font-size: calc(100vw * (15 / 500));
           color: var(--color-gr);
           margin-left: calc(100vw * (10 / 500));
-          padding-top: calc(100vw * (10 / 500));
+          padding-top: calc(100vw * (9 / 500));
         }
       }
 

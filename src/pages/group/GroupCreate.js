@@ -56,8 +56,9 @@ const GroupCreate = () => {
         "Content-Type": "application/json",
         Authorization:
           "Bearer " +
-          "eyJhbGciOiJIUzUxMiJ9.eyJhdXRoIjoiQ09NTU9OIiwiaWQiOiJ0a2RnbnNkbGRrZGxlbEBnbWFpbC5jb20iLCJpc3MiOiJtZWV0aW5nUHJvdmlkZXJLZXkiLCJpYXQiOjE3MjI2NTY0ODQsImV4cCI6MTcyMjc0Mjg4NCwic3ViIjoiMTlmYzM3NTMtZjVmZS00MjlmLWFiNjYtMjc2ZDE4ZGVhOGRhIn0.jERba9TMlBoYOI4uGLWdxD6DSTxjSzlcxe5sbrZwC7s2wRoqacRpgEgiHC_3A-WntA71jvrGslhvrM3ZXskzeQ",
+          "eyJhbGciOiJIUzUxMiJ9.eyJhdXRoIjoiQ09NTU9OIiwiaWQiOiJtX21pbWlAbmF2ZXIuY29tIiwiaXNzIjoibWVldGluZ1Byb3ZpZGVyS2V5IiwiaWF0IjoxNzIyOTAyODg5LCJleHAiOjE3MjI5ODkyODksInN1YiI6Ijg4MDYwOTM3LTUzMmEtNGYwNC04MWZmLTJiMWQxY2ExM2JlOCJ9.sXuJBQjuUUDq-W1NYzvlE4W7-5I-aRGGZgoa6-E9OxBSaYLlmzBv3-hGpF4H3B4y76zpH_izj09-k8-Ppa4IFQ",
       },
+    
       body: JSON.stringify(payload),
     });
 

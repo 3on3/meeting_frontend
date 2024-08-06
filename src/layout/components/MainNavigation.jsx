@@ -11,7 +11,7 @@ const MainNavigation = ({ styles }) => {
       <NavLink to="/" className={activeClassFn}>
         <i className={styles.home}></i>홈
       </NavLink>
-      <NavLink to="/group" className={activeClassFn}>
+      <NavLink to="/mypage/mygroup" className={activeClassFn}>
         <i className={styles.group}></i>내 그룹
       </NavLink>
       <NavLink to="/chat" className={activeClassFn}>

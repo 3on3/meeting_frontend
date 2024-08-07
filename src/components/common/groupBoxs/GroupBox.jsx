@@ -3,7 +3,8 @@ import styles from "./GroupBox.module.scss";
 import MatchingButton from "../buttons/matchingButton/MatchingButton";
 import { NavLink } from "react-router-dom";
 
-function GroupBox({ state, matchingState, list }) {
+function GroupBox({ state, group, className }) {
+  console.log(group);
   // =============== param 스타일 가이드 ===============
   /**
    * li 태그라서 쓸때 ul 안에 사용하기
@@ -30,8 +31,6 @@ function GroupBox({ state, matchingState, list }) {
       groupBoxState = "";
       break;
   }
-
-  console.log(list);
 
   // ====================================================
   // ======================= 함수 =======================
@@ -77,61 +76,59 @@ function GroupBox({ state, matchingState, list }) {
   };
 
   return (
-    <>
-      {list.map((group) => (
-        <NavLink key={group.id} to={`/group/${group.id}`}>
-          <li className={`${styles.groupBox} ${groupBoxState}`} key={group.id}>
-            {/* 기본 & sky */}
-            {(state === "sky" || state === undefined) && (
-              <div className={styles.groupDetailText}>
-                <div className={styles.groupTitle}> {group.groupName}</div>
-                <div className={styles.groupInfoWrapper}>
-                  <div className={styles.groupInfo}>
-                    {groupGender(group.groupGender)} · {group.averageAge}세 ·{" "}
-                    {state === "sky" ? group.memberCount : group.maxNum}명 ·
-                    {groupPlace(group.groupPlace)}
-                  </div>
-                  <div className={styles.groupMajor}>{group.major}</div>
-                </div>
-              </div>
-            )}
-
-            {/* line */}
-            {state === "line" && (
-              <>
-                <div className={styles.lineGroupText}>
-                  <div className={styles.lineGroupTextWrapper}>
-                    <div className={styles.groupTitle}> {group.groupName}</div>
-                    <div className={styles.groupMajor}>건국대 현대미술과</div>
-                  </div>
-                  <div className={styles.personnel}>6명</div>
-                </div>
-                <div className={styles.lineGroupInfo}>
-                  여자 · 22세 · 3명 · 서울/경기
-                </div>
-              </>
-            )}
-
-            {/* 매칭 버튼 부분 */}
-            <div
-              className={`${styles.matchingWrapper} ${
-                group.isMatched ? styles.notMatching : styles.matchingBt
-              }`}
-            >
-              <div className={styles.matchingText}>
-                {group.isMatched
-                  ? "이미 매칭된 그룹이예요."
-                  : "매칭을 기다리고 있어요!"}
-              </div>
-
-              <div className={styles.matchingBt}>
-                <MatchingButton text={"매칭 신청"} />
-              </div>
+    <li
+      className={`${styles.groupBox} ${groupBoxState} ${className}`}
+      // key={group.id}
+    >
+      {/* 기본 & sky */}
+      {(state === "sky" || state === undefined) && (
+        <div className={styles.groupDetailText}>
+          <div className={styles.groupTitle}> {group.groupName}</div>
+          <div className={styles.groupInfoWrapper}>
+            <div className={styles.groupInfo}>
+              {groupGender(group.groupGender)} · {group.averageAge}세 ·{" "}
+              {state === "sky" ? group.memberCount : group.maxNum}명 ·
+              {groupPlace(group.groupPlace)}
             </div>
-          </li>
-        </NavLink>
-      ))}
-    </>
+            <div className={styles.groupMajor}>{group.major}</div>
+          </div>
+        </div>
+      )}
+
+      {/* line */}
+      {state === "line" && (
+        <>
+          <div className={styles.lineGroupText}>
+            <div className={styles.lineGroupTextWrapper}>
+              <div className={styles.groupTitle}> {group.groupName}</div>
+              <div className={styles.groupMajor}>건국대 현대미술과</div>
+            </div>
+            <div className={styles.personnel}>6명</div>
+          </div>
+          <div className={styles.lineGroupInfo}>
+            여자 · 22세 · 3명 · 서울/경기
+          </div>
+        </>
+      )}
+
+      {/* 매칭 버튼 부분 */}
+      <div
+        className={`${styles.matchingWrapper} ${
+          group.isMatched ? styles.notMatching : styles.matchingBt
+        }`}
+      >
+        <div className={styles.matchingText}>
+          {group.isMatched
+            ? "이미 매칭된 그룹이예요."
+            : "매칭을 기다리고 있어요!"}
+        </div>
+
+        <div className={styles.matchingBt}>
+          <MatchingButton text={"매칭 신청"} />
+        </div>
+      </div>
+    </li>
+
   );
 }
 

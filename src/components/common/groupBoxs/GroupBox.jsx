@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./GroupBox.module.scss";
 import MatchingButton from "../buttons/matchingButton/MatchingButton";
+import { NavLink } from "react-router-dom";
 
 function GroupBox({ state, matchingState, list }) {
   // =============== param 스타일 가이드 ===============
@@ -123,7 +124,9 @@ function GroupBox({ state, matchingState, list }) {
             </div>
 
             <div className={styles.matchingBt}>
-              <MatchingButton text={"매칭 신청"} />
+              <NavLink to={`/group/${group.id}`}>
+                <MatchingButton text={"매칭 신청"} />
+              </NavLink>
             </div>
           </div>
         </li>

@@ -4,10 +4,16 @@ import ChatBody from "./components/ChatBody";
 import ChatInput from "./components/ChatInput";
 import styles from "./Chat.module.scss";
 import ChatMembersModal from "./components/member_modal/ChatMembersModal";
+// import connect from './js/socket';
 
 const Chat = () => {
   // input value
   const [value, setValue] = useState("");
+
+
+  // connect()
+
+
 
   // 채팅 배열
   const [messageList, setMessageList] = useState([

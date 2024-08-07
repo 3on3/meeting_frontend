@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@stomp/stompjs": "^7.0.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "bootstrap": "^5.3.3",
+    "http-proxy-middleware": "^3.0.0",
     "lodash": "^4.17.21",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -15,6 +17,8 @@
     "react-scripts": "5.0.1",
     "reactstrap": "^9.2.2",
     "sass": "^1.77.8",
+    "socket.io-client": "^4.7.5",
+    "sockjs-client": "^1.6.1",
     "styled-components": "^6.1.12",
     "socket.io-client": "^4.7.2",
     "web-vitals": "^2.1.4"

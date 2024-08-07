@@ -56,6 +56,7 @@ const GroupCreate = () => {
         "Content-Type": "application/json",
         Authorization: "Bearer " + getUserToken(),
       },
+
       body: JSON.stringify(payload),
     });
 

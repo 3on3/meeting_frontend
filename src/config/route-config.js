@@ -13,11 +13,14 @@ import SignUp from "../pages/sign_up/SignUp";
 import MyPage from "../pages/mypage/MyPage";
 import FirstLoginPage from "../pages/login/FirstLoginPage";
 import Group from "../pages/group/Group";
-import MyGroups, { MyGroupsListFetch } from "../pages/mypage/mypage_groups/MyGroups";
+import MyGroups, {
+  MyGroupsListFetch,
+} from "../pages/mypage/mypage_groups/MyGroups";
 import GroupCreate from "../pages/group/GroupCreate";
 import Withdraw from "../pages/mypage/modify_information/withdraw/Withdraw";
 import MyChats from "../pages/mypage/mypage_chats/MyChats";
 import TestChat from "../assets/js/test-chat/TestChat";
+import InvitePage from "../pages/invite/InvitePage";
 
 // 마이페이지 라우터
 const mypageRouter = [
@@ -101,6 +104,11 @@ export const router = createBrowserRouter([
         path: "mypage",
         element: <MyPage />,
         children: mypageRouter,
+      },
+      // 초대 링크 라우터 추가
+      {
+        path: "group/join/invite",
+        element: <InvitePage />,
       },
 
       // 이하로는 임시페이지임

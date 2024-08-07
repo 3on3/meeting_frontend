@@ -22,7 +22,21 @@ export const authCheckLoader = () => {
   const userData = getUserData();
   if (!userData) {
     alert("로그인이 필요한 서비스입니다.");
-    return redirect("/");
+    return redirect("/login");
+  }
+  return null; // 현재 페이지에 머뭄
+};
+
+export const autoCheckReturnLoader = ({ request }) => {
+  const userData = getUserData();
+  const currentUrl = new URL(request.url);
+  if (!userData) {
+    localStorage.setItem(
+      "redirectPath",
+      currentUrl.pathname + currentUrl.search
+    );
+    alert("로그인이 필요한 서비스입니다.");
+    return redirect("/login");
   }
   return null; // 현재 페이지에 머뭄
 };

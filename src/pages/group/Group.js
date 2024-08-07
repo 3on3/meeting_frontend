@@ -31,18 +31,6 @@ const Group = () => {
     fetchGroupData();
   }, [id]);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
-
-  if (!groupData) {
-    return <div>No group data found</div>;
-  }
-
   const { meetingPlace, averageAge, totalMembers, gender, users } = groupData;
 
   const getButtonConfig = () => {
@@ -59,7 +47,6 @@ const Group = () => {
   };
 
   const { type, text } = getButtonConfig();
-
 
   return (
     <>

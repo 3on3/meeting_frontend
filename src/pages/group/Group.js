@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+
+import { useParams } from "react-router-dom";
 import GroupViewHead from "./components/GroupViewHead";
 import styles from "./Group.module.scss";
 import GroupViewBody from "./components/GroupViewBody";
@@ -8,15 +10,45 @@ import { MYPAGEMATCHING_URL } from "../../config/host-config";
 import RequestModal from "./components/modal/RequestModal";
 
 const Group = () => {
-  const [auth, setAuth] = useState("HOST"); // 초기값 설정
-  const name = "목포 산낙지 동호회";
-  const location = "목포/전남";
-  const gender = "여자";
-  const age = 29;
-  const memberCount = 3;
-  const information = [gender, age, memberCount];
+  const { id } = useParams();
+  const [auth, setAuth] = useState("USER");
+  const [groupData, setGroupData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  let onClickHandler;
+  useEffect(() => {
+    const fetchGroupData = async () => {
+      try {
+        const response = await fetch(`http://localhost:8253/group/${id}`);
+        if (!response.ok) {
+          throw new Error("오류!");
+        }
+        const data = await response.json();
+        setGroupData(data);
+        setLoading(false);
+      } catch (error) {
+        setError(error);
+        setLoading(false);
+      }
+    };
+
+    fetchGroupData();
+  }, [id]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+
+  if (!groupData) {
+    return <div>No group data found</div>;
+  }
+
+  const { meetingPlace, averageAge, totalMembers, gender, users } = groupData;
+
   const getButtonConfig = () => {
     switch (auth) {
       case "MEMBER":
@@ -24,6 +56,7 @@ const Group = () => {
       // case "HOST":
       //   return { type: "apply", text: "그룹 삭제하기" };
       case "USER":
+
         onClickHandler = async () => {
           const payload = {
             requestGroupId: "1fc3a005-f582-4f44-9b54-410aa1a4b952",
@@ -53,18 +86,17 @@ const Group = () => {
 
   const { type, text } = getButtonConfig();
 
-  
 
   return (
     <>
       <GroupViewHead
         styles={styles}
-        name={name}
-        location={location}
-        information={information}
-        auth={auth}
+ place={meetingPlace}
+        age={averageAge}
+        totalMember={totalMembers}
+        gender={gender}
       />
-      <GroupViewBody styles={styles} auth={auth} />
+     <GroupViewBody styles={styles} auth={auth} users={users} />
       {auth !== "HOST" && (
         <MtButtons
           eventType={"click"}
@@ -74,8 +106,8 @@ const Group = () => {
           className={styles.groupBtn}
         />
       )}
+          {auth === "HOST" && <RequestModal styles={styles} />}
 
-      {auth === "HOST" && <RequestModal styles={styles} />}
     </>
   );
 };

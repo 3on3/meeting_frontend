@@ -3,15 +3,9 @@ import logoImage from "../../assets/images/login/logo.svg";
 import MtButtons from "../../components/common/buttons/MtButtons";
 import styles from "./LoginPage.module.scss";
 import DefaultInput from "../../components/common/inputs/DefaultInput";
-import { useNavigate } from "react-router-dom";
-
+import { useLocation, useNavigate } from "react-router-dom";
 const LoginPage = () => {
-  // 로그인 성공시 navigate 를 이용하여 메인페이지로 이동
   const navigate = useNavigate();
-
-  const loginNavigate = () => {
-    navigate("/");
-  };
 
   const [idInput, setIdInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
@@ -21,17 +15,17 @@ const LoginPage = () => {
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem("userData") || "{}");
     if (userData.token) {
-      navigate("/");
+      const redirectPath = localStorage.getItem("redirectPath") || "/";
+      localStorage.removeItem("redirectPath");
+      navigate(redirectPath);
     }
   }, [navigate]);
 
-  // idInput 값 변경시마다 이메일 형식 검증을 통해 인풋창 스타일 변경 (error or correct)
   useEffect(() => {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // 간단한 이메일 패턴 검사
     setIdStatus(emailPattern.test(idInput));
   }, [idInput]);
 
-  // id와 password 입력값을 useState로 관리
   const idInputHandler = (e) => {
     setIdInput(e.target.value);
   };
@@ -65,8 +59,7 @@ const LoginPage = () => {
           const data = await response.json();
           console.log("로그인 성공:", data);
 
-        // 로그인 성공 시 userData를 localStorage에 저장
-        const userData = {
+          const userData = {
             token: data.token,
             refreshToken: data.refreshToken,
             email: data.email,
@@ -77,15 +70,18 @@ const LoginPage = () => {
             univName: data.univName,
             major: data.major,
             gender: data.gender,
-            nickname: data.nickname
+            nickname: data.nickname,
           };
-          
+
           localStorage.setItem("userData", JSON.stringify(userData));
-          loginNavigate();
+
+          // 로그인 후 이전 경로로 리디렉션
+          const redirectPath = localStorage.getItem("redirectPath") || "/";
+          localStorage.removeItem("redirectPath");
+          navigate(redirectPath);
         } else {
           const error = await response.text();
           console.error("Login failed:", error);
-          // 여기에 로그인 실패에 대한 처리 로직을 추가
         }
       } catch (error) {
         console.error("Error:", error);
@@ -112,6 +108,7 @@ const LoginPage = () => {
           onChange={passwordInputHandler}
           errorMessage={"비밀번호가 틀렸습니다."}
           className={styles.inputCustom}
+          type={true}
         />
       </div>
       <div className={styles.checkbox}>

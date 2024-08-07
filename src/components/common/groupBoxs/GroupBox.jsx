@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./GroupBox.module.scss";
 import MatchingButton from "../buttons/matchingButton/MatchingButton";
+import { NavLink } from "react-router-dom";
 
 function GroupBox({ state, group, className }) {
   console.log(group);
@@ -127,6 +128,7 @@ function GroupBox({ state, group, className }) {
         </div>
       </div>
     </li>
+
   );
 }
 

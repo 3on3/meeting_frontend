@@ -10,8 +10,7 @@ function MeetingList() {
   const meetingList = useLoaderData();
 
   return (
-    <ul className={styles.meetingList}>
-      
+    <ul className={styles.meetingList}> 
       {meetingList.map(group => <GroupBox key={group.id} group={group} />)}
     </ul>
   );

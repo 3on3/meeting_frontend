@@ -14,7 +14,7 @@
 
   div {
     margin-bottom: calc( 100vw* ( 12 /500)) ;
-    input {
+    input [typeof=text]{
 
       width: 100%;
     }
@@ -30,6 +30,13 @@
     font-weight: 500;
     padding-left: calc(100vw*(5/500));
     margin-top: calc(100vw*(10/500));
+  }
+
+  .radioTitle {
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
   }
 
   .button {

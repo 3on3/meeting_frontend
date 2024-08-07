@@ -36,7 +36,7 @@ const TestChat = () => {
 
     if (value !== "") {
       const payload = {
-        roomId: "www",
+        roomId: "4b3fe6e3-64b2-4959-aa39-ba71b84d409a",
         message: value,
       }
 

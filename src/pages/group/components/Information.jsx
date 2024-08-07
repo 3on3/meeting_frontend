@@ -1,11 +1,12 @@
 import React from "react";
 
-const Information = ({ information, styles }) => {
+const Information = ({ age, totalMember, gender, styles }) => {
+  styles = { styles };
   return (
     <p>
-      <span>{information[0]}</span>
-      <span>{information[1]}세</span>
-      <span>{information[2]}명</span>
+      <span>{gender}</span>
+      <span>{age}세</span>
+      <span>{totalMember}명</span>
     </p>
   );
 };

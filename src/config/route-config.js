@@ -119,7 +119,7 @@ export const router = createBrowserRouter([
         element: <ErrorPage />,
       },
       {
-        path: "group/:groupId",
+        path: "group/:id",
         element: <Group />,
       },
     ],

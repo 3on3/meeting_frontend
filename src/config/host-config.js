@@ -17,8 +17,10 @@ const API_BASE_URL = backendHostName;
 
 const SIGNUP = "/SIGNUP";
 const GROUP = "/group";
+const GROUPMATCHING = "/group/matching";
 const MYPAGE = "/mypage"
 
 export const AUTH_URL = API_BASE_URL + SIGNUP;
 export const GROUP_URL = API_BASE_URL + GROUP;
 export const MYPAGE_URL = API_BASE_URL + MYPAGE;
+export const MYPAGEMATCHING_URL = API_BASE_URL + GROUPMATCHING;

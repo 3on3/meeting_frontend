@@ -11,7 +11,7 @@ function MeetingList() {
 
   return (
     <ul className={styles.meetingList}>
-      <GroupBox list={meetingList} />;
+      <GroupBox list={meetingList} />
     </ul>
   );
 }

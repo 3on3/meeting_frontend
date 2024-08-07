@@ -57,12 +57,14 @@ const CreatePassword = ({isSubmit, setIsSubmit, submitData}) => {
                       errorMessage={'비밀번호 양식에 맞춰 입력해주세요. (특수문자, 숫자, 영어(대,소문자) 최소 1개씩 필수 입력)'}
                       onChange={passwordInputHandler}
                       placeholder={'비밀번호 입력'}
+                      type={true}
         />
         {isSubmit[0] &&
             <DefaultInput inputState={!passwordConfirmInput ? '' : isPasswordConfirm ? 'correct' : 'error'}
                           errorMessage={'비밀번호가 일치하지 않습니다.'}
                           onChange={passwordConfirmInputHandler}
                           placeholder={'비밀번호 확인'}
+                          type={true}
             />}
 
         <div className={styles.button}>

@@ -108,6 +108,7 @@ const LoginPage = () => {
           onChange={passwordInputHandler}
           errorMessage={"비밀번호가 틀렸습니다."}
           className={styles.inputCustom}
+          type={true}
         />
       </div>
       <div className={styles.checkbox}>

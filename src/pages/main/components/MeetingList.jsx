@@ -11,7 +11,8 @@ function MeetingList() {
 
   return (
     <ul className={styles.meetingList}>
-      <GroupBox list={meetingList} />;
+      
+      {meetingList.map(group => <GroupBox key={group.id} group={group} />)}
     </ul>
   );
 }

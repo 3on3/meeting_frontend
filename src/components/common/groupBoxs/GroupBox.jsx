@@ -76,12 +76,11 @@ function GroupBox({ state, group, className }) {
   };
 
   return (
-    
-      <li
-        className={`${styles.groupBox} ${groupBoxState} ${className}`}
-        // key={group.id}
-      >
-        <NavLink key={group.id} to={`/group/${group.id}`}>
+    <li
+      className={`${styles.groupBox} ${groupBoxState} ${className}`}
+      // key={group.id}
+    >
+      <NavLink key={group.id} to={`/group/${group.id}`}>
         {/* 기본 & sky */}
 
         {(state === "sky" || state === undefined) && (
@@ -130,9 +129,8 @@ function GroupBox({ state, group, className }) {
             <MatchingButton text={"매칭 신청"} />
           </div>
         </div>
-        </NavLink>
-      </li>
-   
+      </NavLink>
+    </li>
   );
 }
 

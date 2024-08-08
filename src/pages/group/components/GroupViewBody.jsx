@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from "react";
 import MemberList from "../../../components/memberList/MemberList";
 import imgOriginUrl from "../../../assets/images/profile.jpg";
-import MtButtons from "../../../components/common/buttons/MtButtons";
 import DefaultInput from "../../../components/common/inputs/DefaultInput";
 import { getUserToken } from "../../../config/auth";
 
-const GroupViewBody = ({ auth, styles, users, groupId, inviteCode }) => {
+const GroupViewBody = ({
+  auth,
+  styles,
+  users,
+  groupId,
+  inviteCode,
+  updateUsers,
+  fetchGroupData,
+}) => {
   const [tab, setTab] = useState("current");
   const [applicants, setApplicants] = useState([]);
 
@@ -25,7 +32,7 @@ const GroupViewBody = ({ auth, styles, users, groupId, inviteCode }) => {
             const data = await response.json();
             setApplicants(data);
           } else {
-            throw new Error("Failed to fetch applicants");
+            throw new Error("초대 목록 불러기에 실패하였습니다.");
           }
         } catch (error) {
           console.error(error);
@@ -36,7 +43,59 @@ const GroupViewBody = ({ auth, styles, users, groupId, inviteCode }) => {
     }
   }, [auth, groupId]);
 
-  console.log(applicants);
+  const handleAccept = async (applicantId) => {
+    try {
+      const response = await fetch(
+        `http://localhost:8253/group/join-requests/${applicantId}/accept`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${getUserToken()}`,
+          },
+        }
+      );
+      if (response.ok) {
+        fetchGroupData();
+        const newUser = applicants.find(
+          (applicant) => applicant.id === applicantId
+        );
+        const newUsers = [...users, newUser];
+        setApplicants(
+          applicants.filter((applicant) => applicant.id !== applicantId)
+        );
+        updateUsers(newUsers);
+      } else {
+        throw new Error("가입 수락에 실패하였습니다,");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleCancel = async (applicantId) => {
+    try {
+      const response = await fetch(
+        `http://localhost:8253/group/join-requests/${applicantId}/cancel`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${getUserToken()}`,
+          },
+        }
+      );
+      if (response.ok) {
+        setApplicants(
+          applicants.filter((applicant) => applicant.id !== applicantId)
+        );
+      } else {
+        throw new Error("가입 신청 거절에 실패하였습니다,");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className={styles.content2}>
@@ -68,7 +127,6 @@ const GroupViewBody = ({ auth, styles, users, groupId, inviteCode }) => {
               tab === "applicants" ? styles.active : ""
             }`}
             onClick={() => setTab("applicants")}
-            e
           >
             참여 신청
           </div>
@@ -96,7 +154,9 @@ const GroupViewBody = ({ auth, styles, users, groupId, inviteCode }) => {
                 univ={applicant.userUnivName}
                 major={applicant.userMajor}
                 bgColor="bgWhite"
-                isLeader={true} // 신청자는 리더가 아닙니다.
+                isLeader={true}
+                onAccept={() => handleAccept(applicant.id)}
+                onCancel={() => handleCancel(applicant.id)}
               />
             ))}
       </ul>

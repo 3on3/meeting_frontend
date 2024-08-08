@@ -4,8 +4,8 @@ import MatchingButton from "../buttons/matchingButton/MatchingButton";
 import { NavLink } from "react-router-dom";
 import RequestBtns from "./RequestBtns";
 
-function GroupBox({ state, group, className ,setIsChanged }) {
-  console.log(group);
+function GroupBox({ state,group, className ,setIsChanged }) {
+  
   // =============== param 스타일 가이드 ===============
   /**
    * li 태그라서 쓸때 ul 안에 사용하기
@@ -81,7 +81,7 @@ function GroupBox({ state, group, className ,setIsChanged }) {
   return (
     <li>
       {state === "sky-request" && (
-      <RequestBtns group={group} styles={styles} setIsChanged={setIsChanged}/>
+      <RequestBtns request={group} styles={styles} setIsChanged={setIsChanged}/>
       )}
 
       <NavLink

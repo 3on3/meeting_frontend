@@ -69,8 +69,8 @@
 .layer {
   width: 100%;
   height: 100vh;
-  background-color: rgba($color: #000000, $alpha: 0.4);
-  backdrop-filter: blur(10px);
+  background-color: rgba($color: #000000, $alpha: 0.1);
+  backdrop-filter: blur(5px);
   position: fixed;
   left: 0;
   top: 0;
@@ -78,6 +78,10 @@
   opacity: 0;
   transition: 0.4s ease-out;
   pointer-events: none;
+  &.active{
+    opacity: 1;
+    pointer-events: all;
+  }
 }
 // FloatingNavigation.js
 .floating {
@@ -87,7 +91,7 @@
     background-color: var(--color-dark);
     border-radius: calc( 100vw * ( 18 / 500));
     position: fixed;
-    bottom: calc( 100vw * ( 110 / 500));
+    bottom: calc( 100vw * ( 120 / 500));
     right: calc( 100vw * ( 20 / 500));
     z-index: 100;
     display: flex;
@@ -109,7 +113,7 @@
   }
   > nav {
     position: fixed;
-    bottom: calc( 100vw * ( 180 / 500));
+    bottom: calc( 100vw * ( 190 / 500));
     right: calc( 100vw * ( 20 / 500));
     z-index: 100;
     display: flex;
@@ -132,8 +136,9 @@
       }
       margin-bottom: calc( 100vw * ( 8 / 500));
       &.invite_code_btn {
+        // border: solid 1px var(--color-point);
         background-color: var(--color-wh);
-        color: var(--color-dark);
+        // color: var(--color-point);
         transition-delay: 0.2s;
       }
       &.new_group_btn {

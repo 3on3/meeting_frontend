@@ -1,11 +1,20 @@
 import React from "react";
 import { CHATROOM_URL, MYPAGEMATCHING_URL } from "../../../config/host-config";
+import { useParams } from "react-router-dom";
 
-const RequestBtns = ({ styles, group, setIsChanged }) => {
+const RequestBtns = ({ styles, request, setIsChanged }) => {
+  
+  
+  const {id: responseGroupId} = useParams();
+  const payload = {
+    requestGroupId: request.id,
+    responseGroupId,
+  };
+
+  console.log(payload);
+  
   const processFetch = async (requestUrl) => {
-    const payload = {
-      groupId: group.id,
-    };
+    
     try {
       const response = await fetch(`${MYPAGEMATCHING_URL}/${requestUrl}`, {
         method: "POST",
@@ -29,9 +38,8 @@ const RequestBtns = ({ styles, group, setIsChanged }) => {
   };
 
   const createFetch = async()=>{
-    const payload = {
-      groupId: group.id,
-    };
+   console.log(payload);
+   
     try {
       const response = await fetch(`${CHATROOM_URL}/create`, {
         method: "POST",
@@ -55,7 +63,8 @@ const RequestBtns = ({ styles, group, setIsChanged }) => {
   }
   const onClickAccept = () => {
     processFetch("response-accept")
-    createFetch()
+    setTimeout(()=>{createFetch()}, 300)
+
   }
   return (
     <div className={styles.reqTit}>

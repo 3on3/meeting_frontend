@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
-const FloatingNavigation = ({ styles }) => {
-  const [active, setActive] = useState(false);
+const FloatingNavigation = ({ styles,active,setActive }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
 
@@ -37,12 +36,12 @@ const FloatingNavigation = ({ styles }) => {
         <i></i>
       </button>
       <nav className={active ? styles.isActive : ""}>
-        <NavLink className={styles.invite_code_btn}>참여 코드</NavLink>
+        {/* <NavLink className={styles.invite_code_btn}>참여 코드</NavLink> */}
         <NavLink className={styles.new_group_btn} to="/mypage/group/create">
           새 그룹
         </NavLink>
         {isLoggedIn && (
-          <NavLink className={styles.new_group_btn} onClick={logOutHandler}>
+          <NavLink className={styles.invite_code_btn} onClick={logOutHandler}>
             로그아웃
           </NavLink>
         )}

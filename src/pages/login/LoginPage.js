@@ -4,13 +4,17 @@ import MtButtons from "../../components/common/buttons/MtButtons";
 import styles from "./LoginPage.module.scss";
 import DefaultInput from "../../components/common/inputs/DefaultInput";
 import { useNavigate } from "react-router-dom";
+import { getUserToken } from "../../config/auth";
 
 const LoginPage = () => {
-  // 로그인 성공시 navigate 를 이용하여 메인페이지로 이동
   const navigate = useNavigate();
 
   const loginNavigate = () => {
     navigate("/");
+  };
+
+  const firstLoginNavigate = () => {
+    navigate("/login/first-login");
   };
 
   const [idInput, setIdInput] = useState("");
@@ -25,13 +29,11 @@ const LoginPage = () => {
     }
   }, [navigate]);
 
-  // idInput 값 변경시마다 이메일 형식 검증을 통해 인풋창 스타일 변경 (error or correct)
   useEffect(() => {
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // 간단한 이메일 패턴 검사
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     setIdStatus(emailPattern.test(idInput));
   }, [idInput]);
 
-  // id와 password 입력값을 useState로 관리
   const idInputHandler = (e) => {
     setIdInput(e.target.value);
   };
@@ -65,8 +67,7 @@ const LoginPage = () => {
           const data = await response.json();
           console.log("로그인 성공:", data);
 
-        // 로그인 성공 시 userData를 localStorage에 저장
-        const userData = {
+          const userData = {
             token: data.token,
             refreshToken: data.refreshToken,
             email: data.email,
@@ -77,15 +78,27 @@ const LoginPage = () => {
             univName: data.univName,
             major: data.major,
             gender: data.gender,
-            nickname: data.nickname
+            nickname: data.nickname,
           };
-          
+
           localStorage.setItem("userData", JSON.stringify(userData));
-          loginNavigate();
+
+          const profileResponse = await fetch("http://localhost:8253/user/profile", {
+            method: "GET",
+            headers: {
+              "Authorization": `Bearer ${getUserToken()}`,
+            },
+          });
+
+          if (!profileResponse.ok) {
+            firstLoginNavigate();
+            return;
+          } else {
+            loginNavigate();
+          }
         } else {
           const error = await response.text();
-          console.error("Login failed:", error);
-          // 여기에 로그인 실패에 대한 처리 로직을 추가
+          console.error("로그인 실패:", error);
         }
       } catch (error) {
         console.error("Error:", error);

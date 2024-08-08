@@ -9,45 +9,56 @@ const FirstLoginNickName = () => {
   const [isNickNameValid, setIsNickNameValid] = useState(true);
   const [nickName, setNickName] = useState("");
   const [isNickNameEmpty, setIsNickNameEmpty] = useState(true);
-  const [showError, setShowError] = useState(false); // 에러 메시지 표시 상태
+  const [showError, setShowError] = useState(false);
   const navigate = useNavigate();
+  const email = JSON.parse(localStorage.getItem("userData")).email; // 로컬 스토리지에서 이메일 가져오기
 
-  // 닉네임이 비어있는지 검사
   useEffect(() => {
     setIsNickNameEmpty(nickName.trim() === "");
   }, [nickName]);
 
-  // 닉네임 검증 핸들러
   useEffect(() => {
     if (!isNickNameEmpty) {
       setIsNickNameValid(nickNameVerification(nickName));
     } else {
-      setIsNickNameValid(true); // 입력이 없을 때는 유효 상태로 간주
+      setIsNickNameValid(true);
     }
   }, [nickName, isNickNameEmpty]);
 
-  // 닉네임 확인 핸들러
-  const isNickNameCheckHandler = () => {
+  const isNickNameCheckHandler = async () => {
     if (isNickNameEmpty || !isNickNameValid) {
-      setShowError(true); // 에러 메시지 표시
+      setShowError(true);
     } else {
-      setShowError(false); // 에러 메시지 숨기기
-      navigate('/');
+      setShowError(false);
+      try {
+        const response = await fetch("http://localhost:8253/signup/update-nickname", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, nickname: nickName }),
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to update nickname");
+        }
+        navigate('/');
+      } catch (error) {
+        alert("Error updating nickname");
+      }
     }
   };
 
-  // 닉네임 입력 핸들러
   const nickNameChangeHandler = (e) => {
     setNickName(e.target.value);
     if (e.target.value.trim() === "") {
-      setShowError(false); // 입력이 없을 때는 에러 메시지 숨기기
+      setShowError(false);
     } else {
       setIsNickNameValid(nickNameVerification(e.target.value));
-      setShowError(!nickNameVerification(e.target.value)); // 유효성 검사 결과에 따라 에러 메시지 표시 여부 결정
+      setShowError(!nickNameVerification(e.target.value));
     }
   };
 
-  // 건너뛰기 핸들러
   const skipClickHandler = () => {
     navigate('/');
   };

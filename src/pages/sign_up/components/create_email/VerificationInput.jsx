@@ -28,7 +28,7 @@ const VerificationInput = ({styles,isSubmit,setIsSubmit, email, univName, onVeri
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-              key: process.env.REACT_APP_MAIL_API,
+              // key: process.env.REACT_APP_MAIL_API,
               email: email,
               univName: univName,
               code: emailVerificationInput,

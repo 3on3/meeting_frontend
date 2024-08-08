@@ -10,6 +10,18 @@ import styles from "../SignUpComponent.module.scss";
 import DefaultInput from "../../../../components/common/inputs/DefaultInput";
 import MtButtons from "../../../../components/common/buttons/MtButtons";
 
+// yyMMdd를 yyyy-MM-dd로 변환하는 함수
+const convertToFullDate = (shortDate) => {
+  if (!/^\d{6}$/.test(shortDate)) return ''; // 형식이 맞지 않으면 빈 문자열 반환
+
+  const yearPrefix = shortDate.startsWith('9') ? '19' : '20'; // 첫 자리에 따라 결정
+  const year = `${yearPrefix}${shortDate.substring(0, 2)}`;
+  const month = shortDate.substring(2, 4);
+  const day = shortDate.substring(4, 6);
+
+  return `${year}-${month}-${day}`;
+};
+
 const CreateInformations = ({ isSubmit, setIsSubmit, verifiedData, setUserData }) => {
   
   // input에 입력되는 값들을 저장하기 위한 useState
@@ -113,10 +125,12 @@ const CreateInformations = ({ isSubmit, setIsSubmit, verifiedData, setUserData }
   }, [firstPhoneNoStatus, secondPhoneNoStatus, lastPhoneNoStatus]);
 
   const phoneNoBtnHandler = () => {
+    const fullBirthDate = convertToFullDate(userBirth);
+
     setIsSubmit([true, true, true, true]);
     setUserData({
       name: userName,
-      birth: userBirth,
+      birth: fullBirthDate,
       gender: userGender,
       phoneNumber: `${firstPhoneNumber}-${secondPhoneNumber}-${lastPhoneNumber}`
     });

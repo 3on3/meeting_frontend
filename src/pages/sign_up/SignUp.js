@@ -36,7 +36,7 @@ const SignUp = () => {
       major: major,
       gender: userData.gender === '남' ? 'M' : 'F',
       password: password,
-      nickname: '야옹이'
+      nickname: null
     };
     console.log('payload: ', payload);
 

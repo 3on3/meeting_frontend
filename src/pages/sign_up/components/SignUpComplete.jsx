@@ -8,19 +8,11 @@ import { useNavigate } from "react-router-dom";
 const SignUpComplete = () => {
   const navigate = useNavigate();
 
-  // 자동 로그인 처리 및 메인 페이지로 이동
-  useEffect(() => {
-    const userData = JSON.parse(localStorage.getItem("userData") || "{}");
-    if (userData.token) {
-      navigate("/");
-    }
-  }, [navigate]);
 
-  // 시작하기 버튼 클릭시 메인페이지로 이동하도록 설정 ( 추후 첫 로그인시 이동되는 페이지로 설정해야할듯..)
+  // 시작하기 버튼 클릭시 로그인 페이지로 이동
   const mainNavigateHandler = () => {
-    navigate("/");
+    navigate("/login");
   };
-
   return (
     <>
       <h1 className={"title"}>환영합니다!</h1>

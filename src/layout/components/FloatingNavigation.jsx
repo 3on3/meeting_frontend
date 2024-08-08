@@ -23,6 +23,7 @@ const FloatingNavigation = ({ styles }) => {
     setActive(false);
     // 예시로 로컬 스토리지에서 토큰을 제거하는 방식
     localStorage.removeItem("userData");
+    setIsLoggedIn(false); // 로그아웃 상태로 변경
     // 로그아웃 후 로그인 페이지로 리디렉션
     navigate("/login");
   };
@@ -40,9 +41,11 @@ const FloatingNavigation = ({ styles }) => {
         <NavLink className={styles.new_group_btn} to="/mypage/group/create">
           새 그룹
         </NavLink>
-        <NavLink className={styles.new_group_btn} onClick={logOutHandler}>
-          로그아웃
-        </NavLink>
+        {isLoggedIn && (
+          <NavLink className={styles.new_group_btn} onClick={logOutHandler}>
+            로그아웃
+          </NavLink>
+        )}
       </nav>
     </div>
   );

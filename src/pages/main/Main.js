@@ -4,7 +4,6 @@ import styles from "./Main.module.scss";
 import RegionFilter from "./components/RegionFilter";
 import MeetingList from "./components/MeetingList";
 import { getUserToken } from "../../config/auth";
-import { useLoaderData } from "react-router-dom";
 
 function Main() {
   const { wrapper } = styles;
@@ -25,9 +24,6 @@ function Main() {
   // 필터 지역 DTO 받기
   const [selectedPlace, setSelectedPlace] = useState(null);
 
-  // ===== get fetch 받기 =====
-  // const getMeetingData = useLoaderData();
-  // // Meeting List Data 관리
   const [listData, setListData] = useState([]);
 
   // =====함수=====
@@ -65,7 +61,6 @@ function Main() {
         maxNum: CheckPersonnel,
         isMatched: !isMatched,
       };
-      console.log(`payload : ${JSON.stringify(payload)}`);
 
       try {
         const response = await fetch("http://localhost:8253/main", {
@@ -83,10 +78,7 @@ function Main() {
         }
 
         const data = await response.json();
-        console.log(`Data received: ${JSON.stringify(data)}`); // 로깅 추가
         setListData(data);
-
-        console.log(`data : ${JSON.stringify(data)}`);
       } catch (error) {
         console.error("FilterFetch error", error);
       }
@@ -111,14 +103,3 @@ function Main() {
 }
 
 export default Main;
-
-// ===== get fetch =====
-export const MainMeetingListFetch = async () => {
-  const response = await fetch("http://localhost:8253/main", {
-    headers: {
-      Authorization: "Bearer " + getUserToken(),
-    },
-  });
-
-  return response;
-};

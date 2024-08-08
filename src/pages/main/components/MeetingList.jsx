@@ -1,7 +1,6 @@
 import React from "react";
 import GroupBox from "../../../components/common/groupBoxs/GroupBox";
 import styles from "./MeetingList.module.scss";
-import { useLoaderData } from "react-router-dom";
 
 // matchingState={"complete"} 이면 매칭 완료
 function MeetingList({ meetingList }) {

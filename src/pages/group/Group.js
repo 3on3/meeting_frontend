@@ -11,7 +11,7 @@ import RequestModal from "./components/modal/RequestModal";
 
 const Group = () => {
   const { id } = useParams();
-  const [auth, setAuth] = useState("USER");
+  const [auth, setAuth] = useState("HOST");
   const [groupData, setGroupData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -53,6 +53,7 @@ const Group = () => {
 
   let onClickHandler;
 
+
   const getButtonConfig = () => {
     switch (auth) {
       case "MEMBER":
@@ -69,7 +70,6 @@ const Group = () => {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              // Authorization: "Bearer " + getUserToken(),
             },
             body: JSON.stringify(payload),
           });
@@ -108,7 +108,7 @@ const Group = () => {
           className={styles.groupBtn}
         />
       )}
-      {auth === "HOST" && <RequestModal styles={styles} />}
+      {auth === "HOST" && <RequestModal groupId={id} styles={styles} />}
     </>
   );
 };

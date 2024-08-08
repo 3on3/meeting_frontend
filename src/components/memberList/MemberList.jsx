@@ -1,7 +1,16 @@
 import React from "react";
 import styles from "./MemberList.module.scss";
 
-const MemberList = ({ imgUrl, userName, univ, major, bgColor, isLeader }) => {
+const MemberList = ({
+  imgUrl,
+  userName,
+  univ,
+  major,
+  bgColor,
+  isLeader,
+  onAccept,
+  onCancel,
+}) => {
   return (
     <li className={`${styles.mamberList} ${styles[bgColor]}`}>
       <p className={styles.img}>
@@ -14,8 +23,8 @@ const MemberList = ({ imgUrl, userName, univ, major, bgColor, isLeader }) => {
       </p>
       {isLeader ? (
         <p className={styles.leaderBtns}>
-          <button>수락</button>
-          <button>거절</button>
+          <button onClick={onAccept}>수락</button>
+          <button onClick={onCancel}>거절</button>
         </p>
       ) : (
         ""

@@ -76,6 +76,7 @@ const Group = () => {
 
   let onClickHandler;
 
+
   const getButtonConfig = () => {
     switch (auth) {
       case "MEMBER":
@@ -137,7 +138,7 @@ const Group = () => {
           className={styles.groupBtn}
         />
       )}
-      {auth === "HOST" && <RequestModal styles={styles} />}
+      {auth === "HOST" && <RequestModal groupId={id} styles={styles} />}
     </>
   );
 };

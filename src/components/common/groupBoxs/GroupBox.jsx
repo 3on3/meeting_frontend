@@ -2,8 +2,9 @@ import React from "react";
 import styles from "./GroupBox.module.scss";
 import MatchingButton from "../buttons/matchingButton/MatchingButton";
 import { NavLink } from "react-router-dom";
+import RequestBtns from "./RequestBtns";
 
-function GroupBox({ state, group, className }) {
+function GroupBox({ state, group, className ,setIsChanged }) {
   console.log(group);
   // =============== param 스타일 가이드 ===============
   /**
@@ -27,6 +28,8 @@ function GroupBox({ state, group, className }) {
     case "line":
       groupBoxState = styles.line;
       break;
+    case "sky-request":
+      console.log("sky-request");
     default:
       groupBoxState = "";
       break;
@@ -76,14 +79,19 @@ function GroupBox({ state, group, className }) {
   };
 
   return (
-    <li
-      className={`${styles.groupBox} ${groupBoxState} ${className}`}
-      // key={group.id}
-    >
-      <NavLink key={group.id} to={`/group/${group.id}`}>
+    <li>
+      {state === "sky-request" && (
+      <RequestBtns group={group} styles={styles} setIsChanged={setIsChanged}/>
+      )}
+
+      <NavLink
+        className={`${styles.groupBox} ${groupBoxState} ${className}`}
+        key={group.id}
+        to={`/group/${group.id}`}
+      >
         {/* 기본 & sky */}
 
-        {(state === "sky" || state === undefined) && (
+        {(state === "sky" || state ==="sky-request" || state === undefined) && (
           <div className={styles.groupDetailText}>
             <div className={styles.groupTitle}> {group.groupName}</div>
             <div className={styles.groupInfoWrapper}>

@@ -4,7 +4,7 @@ import MatchingButton from "../buttons/matchingButton/MatchingButton";
 import { NavLink } from "react-router-dom";
 
 function GroupBox({ state, group, className }) {
-  console.log(group);
+  // console.log(group);
   // =============== param 스타일 가이드 ===============
   /**
    * li 태그라서 쓸때 ul 안에 사용하기
@@ -76,12 +76,11 @@ function GroupBox({ state, group, className }) {
   };
 
   return (
-    
-      <li
-        className={`${styles.groupBox} ${groupBoxState} ${className}`}
-        // key={group.id}
-      >
-        <NavLink key={group.id} to={`/group/${group.id}`}>
+    <li
+      className={`${styles.groupBox} ${groupBoxState} ${className}`}
+      // key={group.id}
+    >
+      <NavLink key={group.id} to={`/group/${group.id}`}>
         {/* 기본 & sky */}
 
         {(state === "sky" || state === undefined) && (
@@ -130,9 +129,8 @@ function GroupBox({ state, group, className }) {
             <MatchingButton text={"매칭 신청"} />
           </div>
         </div>
-        </NavLink>
-      </li>
-   
+      </NavLink>
+    </li>
   );
 }
 

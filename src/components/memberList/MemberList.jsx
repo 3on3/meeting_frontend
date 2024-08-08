@@ -2,9 +2,6 @@ import React from "react";
 import styles from "./MemberList.module.scss";
 
 const MemberList = ({ imgUrl, userName, univ, major, bgColor, isLeader }) => {
-
-  
-  console.log(bgColor);
   return (
     <li className={`${styles.mamberList} ${styles[bgColor]}`}>
       <p className={styles.img}>
@@ -20,7 +17,9 @@ const MemberList = ({ imgUrl, userName, univ, major, bgColor, isLeader }) => {
           <button>수락</button>
           <button>거절</button>
         </p>
-        ): ""}
+      ) : (
+        ""
+      )}
     </li>
   );
 };

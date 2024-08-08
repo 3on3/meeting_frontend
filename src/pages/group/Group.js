@@ -11,7 +11,7 @@ import RequestModal from "./components/modal/RequestModal";
 
 const Group = () => {
   const { id } = useParams();
-  const [auth, setAuth] = useState("USER");
+  const [auth, setAuth] = useState("HOST");
   const [groupData, setGroupData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -20,13 +20,18 @@ const Group = () => {
     const fetchGroupData = async () => {
       console.log(id);
       try {
-        const response = await fetch(`http://localhost:8253/group/${id}`);
+        const response = await fetch(`http://localhost:8253/group/${id}`, {
+          headers: {
+            Authorization: `Bearer ${getUserToken()}`,
+          },
+        });
         if (!response.ok) {
           throw new Error("오류!");
         }
         const data = await response.json();
         console.log(data);
         setGroupData(data);
+        setAuth(data.groupAuth); // auth 값을 설정
         setLoading(false);
       } catch (error) {
         setError(error);
@@ -49,7 +54,15 @@ const Group = () => {
     return <div>No group data found</div>;
   }
 
-  const { meetingPlace, averageAge, totalMembers, gender, users } = groupData;
+  const {
+    meetingPlace,
+    averageAge,
+    totalMembers,
+    gender,
+    users,
+    groupName,
+    inviteCode,
+  } = groupData;
 
   let onClickHandler;
 
@@ -97,8 +110,15 @@ const Group = () => {
         age={averageAge}
         totalMember={totalMembers}
         gender={gender}
+        groupName={groupName}
       />
-      <GroupViewBody styles={styles} auth={auth} users={users} />
+      <GroupViewBody
+        styles={styles}
+        auth={auth}
+        users={users}
+        groupId={id}
+        inviteCode={inviteCode}
+      />
       {auth !== "HOST" && (
         <MtButtons
           eventType={"click"}

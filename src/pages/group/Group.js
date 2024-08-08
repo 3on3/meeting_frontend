@@ -18,12 +18,14 @@ const Group = () => {
 
   useEffect(() => {
     const fetchGroupData = async () => {
+      console.log(id);
       try {
         const response = await fetch(`http://localhost:8253/group/${id}`);
         if (!response.ok) {
           throw new Error("오류!");
         }
         const data = await response.json();
+        console.log(data);
         setGroupData(data);
         setLoading(false);
       } catch (error) {
@@ -49,6 +51,8 @@ const Group = () => {
 
   const { meetingPlace, averageAge, totalMembers, gender, users } = groupData;
 
+  let onClickHandler;
+
   const getButtonConfig = () => {
     switch (auth) {
       case "MEMBER":
@@ -56,7 +60,6 @@ const Group = () => {
       // case "HOST":
       //   return { type: "apply", text: "그룹 삭제하기" };
       case "USER":
-
         onClickHandler = async () => {
           const payload = {
             requestGroupId: "1fc3a005-f582-4f44-9b54-410aa1a4b952",
@@ -70,7 +73,7 @@ const Group = () => {
             },
             body: JSON.stringify(payload),
           });
-          const data = await response.json();
+          // const data = await response.json();
           console.log(payload);
 
           if (response.ok) {
@@ -86,28 +89,26 @@ const Group = () => {
 
   const { type, text } = getButtonConfig();
 
-
   return (
     <>
       <GroupViewHead
         styles={styles}
- place={meetingPlace}
+        place={meetingPlace}
         age={averageAge}
         totalMember={totalMembers}
         gender={gender}
       />
-     <GroupViewBody styles={styles} auth={auth} users={users} />
+      <GroupViewBody styles={styles} auth={auth} users={users} />
       {auth !== "HOST" && (
         <MtButtons
           eventType={"click"}
-          eventHandler={onClickHandler}
           buttonType={type}
           buttonText={text}
+          onClickHandler={onClickHandler}
           className={styles.groupBtn}
         />
       )}
-          {auth === "HOST" && <RequestModal styles={styles} />}
-
+      {auth === "HOST" && <RequestModal styles={styles} />}
     </>
   );
 };

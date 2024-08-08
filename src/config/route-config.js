@@ -21,6 +21,7 @@ import Withdraw from "../pages/mypage/modify_information/withdraw/Withdraw";
 import MyChats from "../pages/mypage/mypage_chats/MyChats";
 import TestChat from "../assets/js/test-chat/TestChat";
 import InvitePage from "../pages/invite/InvitePage";
+import { authCheckLoader, autoCheckReturnLoader } from "./auth";
 
 // 마이페이지 라우터
 const mypageRouter = [
@@ -109,6 +110,7 @@ export const router = createBrowserRouter([
       {
         path: "group/join/invite",
         element: <InvitePage />,
+        loader: autoCheckReturnLoader,
       },
 
       // 이하로는 임시페이지임
@@ -117,7 +119,7 @@ export const router = createBrowserRouter([
         element: <ErrorPage />,
       },
       {
-        path: "group",
+        path: "group/:id",
         element: <Group />,
       },
     ],

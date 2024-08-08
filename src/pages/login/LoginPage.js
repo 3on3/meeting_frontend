@@ -5,6 +5,7 @@ import styles from "./LoginPage.module.scss";
 import DefaultInput from "../../components/common/inputs/DefaultInput";
 import { useNavigate } from "react-router-dom";
 import { getUserToken } from "../../config/auth";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -25,7 +26,9 @@ const LoginPage = () => {
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem("userData") || "{}");
     if (userData.token) {
-      navigate("/");
+      const redirectPath = localStorage.getItem("redirectPath") || "/";
+      localStorage.removeItem("redirectPath");
+      navigate(redirectPath);
     }
   }, [navigate]);
 
@@ -82,7 +85,12 @@ const LoginPage = () => {
           };
 
           localStorage.setItem("userData", JSON.stringify(userData));
-
+          
+            // 로그인 후 이전 경로로 리디렉션
+          const redirectPath = localStorage.getItem("redirectPath") || "/";
+          localStorage.removeItem("redirectPath");
+          navigate(redirectPath);
+          
           const profileResponse = await fetch("http://localhost:8253/user/profile", {
             method: "GET",
             headers: {
@@ -125,6 +133,7 @@ const LoginPage = () => {
           onChange={passwordInputHandler}
           errorMessage={"비밀번호가 틀렸습니다."}
           className={styles.inputCustom}
+          type={true}
         />
       </div>
       <div className={styles.checkbox}>

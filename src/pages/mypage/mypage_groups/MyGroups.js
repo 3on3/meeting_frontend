@@ -10,7 +10,9 @@ const MyGroups = () => {
   return (
     <ul className={styles.MyGroupsWrapper}>
       <p className={styles.myGroupsTitle}>내가 속한 그룹</p>
-      <GroupBox state={"sky"} list={myGroupList} />
+      {myGroupList.map(group => <GroupBox key={group.id} state={"sky"} group={group} />)}
+      
+
     </ul>
   );
 };
@@ -23,6 +25,7 @@ export const MyGroupsListFetch = async () => {
       Authorization: "Bearer " + getUserToken(),
     },
   });
+  const data = await response.json();
 
-  return response;
+  return data;
 };

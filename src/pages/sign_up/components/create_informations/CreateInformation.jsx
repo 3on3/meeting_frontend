@@ -9,6 +9,7 @@ import {
 import styles from "../SignUpComponent.module.scss";
 import DefaultInput from "../../../../components/common/inputs/DefaultInput";
 import MtButtons from "../../../../components/common/buttons/MtButtons";
+import RadioButton from "../../../../components/common/buttons/radiobutton/RadioButton";
 
 // yyMMdd를 yyyy-MM-dd로 변환하는 함수
 const convertToFullDate = (shortDate) => {
@@ -175,11 +176,20 @@ const CreateInformations = ({ isSubmit, setIsSubmit, verifiedData, setUserData }
         { isSubmit[1] &&
             <>
               <div className={styles.inputTitle}>성별</div>
-              <DefaultInput inputState={!userGender ? '' : isGender ? 'correct' : 'error'}
-                            errorMessage={'필수 값입니다. "남" 또는 "여"를 정확히 입력해 주세요'}
-                            onChange={userGenderInputHandler}
-                            placeholder={'성별을 입력해 주세요.  ex) 남 or 여'}
-              />
+              <div className={styles.radioTitle}>
+                <RadioButton
+                  text={"남성"}
+                  value={"남"}
+                  name={'gender'}
+                  onChange={userGenderInputHandler}
+                  />
+                <RadioButton
+                    text={"여성"}
+                    value={"여"}
+                    name={'gender'}
+                    onChange={userGenderInputHandler}
+                />
+              </div>
               {!isSubmit[2] &&
                   <div className={styles.button}>
                     <MtButtons buttonText={'SUBMIT'}

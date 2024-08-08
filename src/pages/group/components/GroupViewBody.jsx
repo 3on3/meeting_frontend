@@ -4,11 +4,8 @@ import imgOriginUrl from "../../../assets/images/profile.jpg";
 import MtButtons from "../../../components/common/buttons/MtButtons";
 import DefaultInput from "../../../components/common/inputs/DefaultInput";
 
-const GroupViewBody = ({ auth, styles }) => {
+const GroupViewBody = ({ auth, styles, users }) => {
   const [tab, setTab] = useState("current");
-  const userName = "문지은";
-  const univ = "건국대";
-  const major = "현대미술과";
 
   return (
     <div className={styles.content2}>
@@ -48,41 +45,19 @@ const GroupViewBody = ({ auth, styles }) => {
 
       <ul className={styles.ul}>
         {tab === "current" ? (
-          <>
+          users.map((user) => (
             <MemberList
+              key={user.id}
               imgUrl={imgOriginUrl}
-              userName={userName}
-              univ={univ}
-              major={major}
+              userName={user.name}
+              univ={user.univName}
+              major={user.major}
               bgColor="bgWhite"
+              isLeader={user.auth === "HOST"}
             />
-            <MemberList
-              imgUrl={imgOriginUrl}
-              userName={userName}
-              univ={univ}
-              major={major}
-              bgColor="bgWhite"
-            />
-          </>
+          ))
         ) : (
-          <>
-            <MemberList
-              imgUrl={imgOriginUrl}
-              userName={userName}
-              univ={univ}
-              major={major}
-              bgColor="bgWhite"
-              isLeader={true}
-            />
-            <MemberList
-              imgUrl={imgOriginUrl}
-              userName={userName}
-              univ={univ}
-              major={major}
-              bgColor="bgWhite"
-              isLeader={true}
-            />
-          </>
+          <>{/* 만약 참여 신청자 데이터가 필요없다면 이 부분을 비워둡니다 */}</>
         )}
       </ul>
     </div>

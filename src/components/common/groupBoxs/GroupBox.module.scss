@@ -1,3 +1,7 @@
+li{
+  list-style: none;
+}
+
 .groupBox {
   width: 100%;
   padding: calc(100vw * (30 / 500));
@@ -5,6 +9,7 @@
   box-shadow: 0 0 calc(100vw * (10 / 500)) rgba($color: #000000, $alpha: 0.1);
   margin-bottom: calc(100vw * (13 / 500));
 
+  display: block;
   animation: chatAni 0.6s ease-out forwards;
   @keyframes chatAni {
     0% {
@@ -141,3 +146,30 @@
     }
   }
 }
+
+
+
+
+  .reqTit{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: calc(100vw * (12 / 500));
+    color: var(--color-point);
+    font-size: calc(100vw * (16 / 500));
+    padding: 0 calc(100vw * (25 / 500));
+    font-weight: 500;
+  animation: chatAni 0.6s ease-out forwards;
+
+    button{
+      font-weight: 600;
+      margin-right: calc(100vw * (18 / 500));
+    font-size: calc(100vw * (18 / 500));
+    color: var(--color-point);
+
+      &:last-child{
+        margin-right: 0;
+      }
+    }
+  }
+

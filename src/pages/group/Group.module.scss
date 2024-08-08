@@ -189,48 +189,6 @@
     }
   }
 }
-.requestBox{
-  position: fixed;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: calc(100vw * (110 / 500));
-  width: calc(100% - (100vw * (40 / 500)));
-  z-index: 12;
-  .requestGroup{
-    background-color: var(--color-point);
-    border: none;
-    color: var(--color-wh);
-    padding: calc(100vw * (24 / 500)) calc(100vw * (30 / 500));
-    animation-delay: 0;
-    list-style: none;
-    
-    >div>div>div:last-child{
-    color: var(--color-wh)!important;
-
-    }
-  }
-  .reqTit{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: calc(100vw * (12 / 500));
-    color: var(--color-point);
-    font-size: calc(100vw * (16 / 500));
-    padding: 0 calc(100vw * (25 / 500));
-    font-weight: 500;
-    button{
-      font-weight: 600;
-      margin-right: calc(100vw * (18 / 500));
-    font-size: calc(100vw * (18 / 500));
-    color: var(--color-point);
-
-
-      &:last-child{
-        margin-right: 0;
-      }
-    }
-  }
-}
 
 .groupDelBtn{
   font-size: calc(100vw * (16 / 500));
@@ -241,4 +199,27 @@
   top: calc(100vw * (30 / 500));
   right: calc(100vw * (20 / 500));
   text-underline-position: under;
+}
+.requestBox{
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: calc(100vw * (110 / 500));
+  width: calc(100% - (100vw * (40 / 500)));
+  z-index: 105;
+  a{
+    background-color: var(--color-point);
+    border: none;
+    color: var(--color-wh);
+    padding: calc(100vw * (24 / 500)) calc(100vw * (30 / 500));
+    animation-delay: 0;
+    list-style: none;
+    >div:last-child{
+      display: none;
+    }
+    >div>div>div:last-child{
+    color: var(--color-wh)!important;
+
+    }
+  }
 }

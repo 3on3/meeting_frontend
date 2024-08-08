@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import { useParams } from "react-router-dom";
 import GroupViewHead from "./components/GroupViewHead";
 import styles from "./Group.module.scss";
@@ -15,30 +14,33 @@ const Group = () => {
   const [groupData, setGroupData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [groupUsers, setGroupUsers] = useState([]);
+
+  console.log(groupUsers);
+
+  const fetchGroupData = async () => {
+    try {
+      const response = await fetch(`http://localhost:8253/group/${id}`, {
+        headers: {
+          Authorization: `Bearer ${getUserToken()}`,
+        },
+      });
+      if (!response.ok) {
+        throw new Error("오류!");
+      }
+      const data = await response.json();
+      console.log(data);
+      setGroupData(data);
+      setGroupUsers(data.users);
+      setAuth(data.groupAuth); // auth 값을 설정
+      setLoading(false);
+    } catch (error) {
+      setError(error);
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchGroupData = async () => {
-      console.log(id);
-      try {
-        const response = await fetch(`http://localhost:8253/group/${id}`, {
-          headers: {
-            Authorization: `Bearer ${getUserToken()}`,
-          },
-        });
-        if (!response.ok) {
-          throw new Error("오류!");
-        }
-        const data = await response.json();
-        console.log(data);
-        setGroupData(data);
-        setAuth(data.groupAuth); // auth 값을 설정
-        setLoading(false);
-      } catch (error) {
-        setError(error);
-        setLoading(false);
-      }
-    };
-
     fetchGroupData();
   }, [id]);
 
@@ -54,24 +56,31 @@ const Group = () => {
     return <div>No group data found</div>;
   }
 
+  const updateUsers = (newUsers) => {
+    setGroupUsers(newUsers);
+    setGroupData((prevData) => ({
+      ...prevData,
+      users: newUsers,
+      totalMembers: newUsers.length,
+    }));
+  };
+
   const {
     meetingPlace,
     averageAge,
     totalMembers,
     gender,
-    users,
     groupName,
     inviteCode,
   } = groupData;
 
   let onClickHandler;
 
+
   const getButtonConfig = () => {
     switch (auth) {
       case "MEMBER":
         return { type: "apply", text: "이 그룹 나가기" };
-      // case "HOST":
-      //   return { type: "apply", text: "그룹 삭제하기" };
       case "USER":
         onClickHandler = async () => {
           const payload = {
@@ -82,16 +91,15 @@ const Group = () => {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              // Authorization: "Bearer " + getUserToken(),
             },
             body: JSON.stringify(payload),
           });
-          // const data = await response.json();
           console.log(payload);
 
           if (response.ok) {
           } else {
             const errorText = await response.text();
+            console.error(errorText);
           }
         };
         return { type: "cancel", text: "매칭 신청하기" };
@@ -115,9 +123,11 @@ const Group = () => {
       <GroupViewBody
         styles={styles}
         auth={auth}
-        users={users}
         groupId={id}
         inviteCode={inviteCode}
+        updateUsers={updateUsers}
+        users={groupUsers}
+        fetchGroupData={fetchGroupData}
       />
       {auth !== "HOST" && (
         <MtButtons
@@ -128,7 +138,7 @@ const Group = () => {
           className={styles.groupBtn}
         />
       )}
-      {auth === "HOST" && <RequestModal styles={styles} />}
+      {auth === "HOST" && <RequestModal groupId={id} styles={styles} />}
     </>
   );
 };

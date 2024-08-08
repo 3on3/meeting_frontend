@@ -66,6 +66,7 @@ const Group = () => {
 
   let onClickHandler;
 
+
   const getButtonConfig = () => {
     switch (auth) {
       case "MEMBER":
@@ -82,7 +83,6 @@ const Group = () => {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              // Authorization: "Bearer " + getUserToken(),
             },
             body: JSON.stringify(payload),
           });
@@ -128,7 +128,7 @@ const Group = () => {
           className={styles.groupBtn}
         />
       )}
-      {auth === "HOST" && <RequestModal styles={styles} />}
+      {auth === "HOST" && <RequestModal groupId={id} styles={styles} />}
     </>
   );
 };

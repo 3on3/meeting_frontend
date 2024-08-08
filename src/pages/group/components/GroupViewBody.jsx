@@ -1,11 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import MemberList from "../../../components/memberList/MemberList";
 import imgOriginUrl from "../../../assets/images/profile.jpg";
 import MtButtons from "../../../components/common/buttons/MtButtons";
 import DefaultInput from "../../../components/common/inputs/DefaultInput";
+import { getUserToken } from "../../../config/auth";
 
-const GroupViewBody = ({ auth, styles, users }) => {
+const GroupViewBody = ({ auth, styles, users, groupId, inviteCode }) => {
   const [tab, setTab] = useState("current");
+  const [applicants, setApplicants] = useState([]);
+
+  useEffect(() => {
+    if (auth === "HOST") {
+      const fetchApplicants = async () => {
+        try {
+          const response = await fetch(
+            `http://localhost:8253/group/invite/${groupId}`,
+            {
+              headers: {
+                Authorization: `Bearer ${getUserToken()}`,
+              },
+            }
+          );
+          if (response.ok) {
+            const data = await response.json();
+            setApplicants(data);
+          } else {
+            throw new Error("Failed to fetch applicants");
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      };
+
+      fetchApplicants();
+    }
+  }, [auth, groupId]);
+
+  console.log(applicants);
 
   return (
     <div className={styles.content2}>
@@ -13,7 +44,7 @@ const GroupViewBody = ({ auth, styles, users }) => {
         <>
           <div className={styles.textLine2}>초대코드</div>
           <div className={styles.copyWrap}>
-            <DefaultInput inputState={"disabled"} placeholder={"zN2D234HK"} />
+            <DefaultInput inputState={"disabled"} placeholder={inviteCode} />
             <button className={styles.copyBtn}></button>
           </div>
         </>
@@ -37,6 +68,7 @@ const GroupViewBody = ({ auth, styles, users }) => {
               tab === "applicants" ? styles.active : ""
             }`}
             onClick={() => setTab("applicants")}
+            e
           >
             참여 신청
           </div>
@@ -44,21 +76,29 @@ const GroupViewBody = ({ auth, styles, users }) => {
       )}
 
       <ul className={styles.ul}>
-        {tab === "current" ? (
-          users.map((user) => (
-            <MemberList
-              key={user.id}
-              imgUrl={imgOriginUrl}
-              userName={user.name}
-              univ={user.univName}
-              major={user.major}
-              bgColor="bgWhite"
-              isLeader={user.auth === "HOST"}
-            />
-          ))
-        ) : (
-          <>{/* 만약 참여 신청자 데이터가 필요없다면 이 부분을 비워둡니다 */}</>
-        )}
+        {tab === "current"
+          ? users.map((user) => (
+              <MemberList
+                key={user.id}
+                imgUrl={imgOriginUrl}
+                userName={user.name}
+                univ={user.univName}
+                major={user.major}
+                bgColor="bgWhite"
+                isLeader={user.auth === "HOST"}
+              />
+            ))
+          : applicants.map((applicant) => (
+              <MemberList
+                key={applicant.id}
+                imgUrl={imgOriginUrl}
+                userName={applicant.userName}
+                univ={applicant.userUnivName}
+                major={applicant.userMajor}
+                bgColor="bgWhite"
+                isLeader={true} // 신청자는 리더가 아닙니다.
+              />
+            ))}
       </ul>
     </div>
   );

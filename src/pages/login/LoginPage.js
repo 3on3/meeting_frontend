@@ -3,7 +3,6 @@ import logoImage from "../../assets/images/login/logo.svg";
 import MtButtons from "../../components/common/buttons/MtButtons";
 import styles from "./LoginPage.module.scss";
 import DefaultInput from "../../components/common/inputs/DefaultInput";
-import { useNavigate } from "react-router-dom";
 import { getUserToken } from "../../config/auth";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -85,18 +84,21 @@ const LoginPage = () => {
           };
 
           localStorage.setItem("userData", JSON.stringify(userData));
-          
-            // 로그인 후 이전 경로로 리디렉션
+
+          // 로그인 후 이전 경로로 리디렉션
           const redirectPath = localStorage.getItem("redirectPath") || "/";
           localStorage.removeItem("redirectPath");
           navigate(redirectPath);
-          
-          const profileResponse = await fetch("http://localhost:8253/user/profile", {
-            method: "GET",
-            headers: {
-              "Authorization": `Bearer ${getUserToken()}`,
-            },
-          });
+
+          const profileResponse = await fetch(
+            "http://localhost:8253/user/profile",
+            {
+              method: "GET",
+              headers: {
+                Authorization: `Bearer ${getUserToken()}`,
+              },
+            }
+          );
 
           if (!profileResponse.ok) {
             firstLoginNavigate();

@@ -80,7 +80,7 @@ function GroupBox({ state, group, className ,setIsChanged }) {
   return (
     <li>
       {state === "sky-request" && (
-      <RequestBtns group={group} styles={styles} setIsChanged={setIsChanged}/>
+      <RequestBtns request={group} styles={styles} setIsChanged={setIsChanged}/>
       )}
 
       <NavLink

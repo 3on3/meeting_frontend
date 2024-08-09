@@ -68,7 +68,7 @@
   height: calc(100vw * (37 / 500));
   border: calc(100vw * (1 / 500)) solid #271e33;
   font-weight: 600;
-  font-size: calc(100vw * (16 / 500));
+  font-size: calc(100vw * (14 / 500));
   line-height: calc(100vw * (37 / 500));
   border-radius: calc(100vw * (500 / 500));
   display: flex;
@@ -105,12 +105,9 @@
 .content2 {
   background: #f4f9ff;
   width: 100%;
-  height: calc(100vh - (100vw * (200 / 500)));
+  height: calc(100vh - (100vw * (150 / 500)));
   padding-bottom: calc(100vw * (130 / 500));
-  // padding-left: calc(100vw * (20 / 500));
-  // padding-right: calc(100vw * (20 / 500));
-  // overflow-y: scroll;
-  padding-top: calc(100vw * (60 / 500));
+  padding-top: calc(100vw * (40 / 500));
   .ul {
     padding: calc(100vw * (30 / 500)) calc(100vw * (20 / 500));
     height: calc(100% - (100vw * (130 / 500)));
@@ -122,20 +119,21 @@
     padding-bottom: calc(100vw * (20 / 500));
     padding-top: calc(100vw * (41 / 500));
   }
-  .textLine2 {
-    font-size: calc(100vw * (18 / 500));
-    padding-left: calc(100vw * (40 / 500));
-    padding-bottom: calc(100vw * (10 / 500));
-    text-align: left;
-  }
+  // .textLine2 {
+  //   font-size: calc(100vw * (18 / 500));
+  //   padding-left: calc(100vw * (40 / 500));
+  //   padding-bottom: calc(100vw * (10 / 500));
+  //   text-align: left;
+  // }
   .tabs {
     display: flex;
     justify-content: center;
-    margin: calc(100vw * (31 / 500)) calc(100vw * (20 / 500)) 0;
+    margin: calc(100vw * (40 / 500)) calc(100vw * (20 / 500)) 0;
 
     color: #9aa9ba;
     font-size: calc(100vw * (18 / 500));
     font-weight: 600;
+    position: relative;
 
     .tab {
       display: flex;
@@ -146,46 +144,41 @@
       padding-bottom: calc(100vw * (12 / 500));
       cursor: pointer;
       border-bottom: calc(100vw * (2 / 500)) solid #9aa9ba;
-      position: relative; // 부모 요소를 기준으로 위치를 설정할 수 있게 합니다.
-
-      &::after {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: calc(100vw * (2 / 500));
-        background-color: #8732f5;
-        transform: scaleX(0); // 처음에는 가로 길이를 0으로 설정합니다.
-        transform-origin: bottom center; // 애니메이션 시작점을 왼쪽으로 설정합니다.
-        transition: transform 0.2s ease; // 트랜지션을 설정합니다.
-      }
-
-      &.active::after {
-        transform: scaleX(
-          1
-        ); // 활성화된 탭에서는 가로 길이를 100%로 설정하여 채워지는 효과를 줍니다.
-      }
+      
+     
+  
+      
 
       &.active {
-        color: #8732f5;
+        color: var(--color-dark);
         font-weight: 600;
-        border-bottom: calc(100vw * (2 / 500)) solid #8732f5;
+        border-bottom: calc(100vw * (2 / 500)) solid var(--color-dark);
       }
+     
     }
+   
   }
   .copyWrap {
-    position: relative;
-    margin: 0 calc(100vw * (20 / 500));
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    font-size: calc(100vw * (16 / 500));
+    font-weight: 500;
+    color: var(--color-dark);
+    padding: 0 calc(100vw * (20 / 500));
     .copyBtn {
-      position: absolute;
-      right: calc(100vw * (20 / 500));
-      top: 50%;
-      transform: translateY(-50%);
-      width: calc(100vw * (30 / 500));
-      height: calc(100vw * (30 / 500));
+      width: calc(100vw * (34 / 500));
+      height: calc(100vw * (34 / 500));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      border: solid 1px var(--color-dark);
+      font-weight: 500;
       background: url(../../assets/images/icons/c-copy.svg) no-repeat
-        center/cover;
+      center/cover;
+      margin-left: calc(100vw * (10 / 500));
+    
     }
   }
 }
@@ -207,6 +200,8 @@
   bottom: calc(100vw * (110 / 500));
   width: calc(100% - (100vw * (40 / 500)));
   z-index: 105;
+    font-size: calc(100vw * (18 / 500));
+
   a{
     background-color: var(--color-point);
     border: none;

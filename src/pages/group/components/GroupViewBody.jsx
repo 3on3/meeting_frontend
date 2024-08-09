@@ -101,9 +101,9 @@ const GroupViewBody = ({
     <div className={styles.content2}>
       {(auth === "MEMBER" || auth === "HOST") && (
         <>
-          <div className={styles.textLine2}>초대코드</div>
           <div className={styles.copyWrap}>
-            <DefaultInput inputState={"disabled"} placeholder={inviteCode} />
+          <span>함께 미팅할 친구들을 초대해주세요!</span>
+
             <button className={styles.copyBtn}></button>
           </div>
         </>

@@ -138,7 +138,7 @@ const Group = () => {
           className={styles.groupBtn}
         />
       )}
-      {auth === "HOST" && <RequestModal groupId={id} styles={styles} />}
+      {auth === "HOST" && <RequestModal groupId={id} group={groupData} styles={styles} />}
     </>
   );
 };

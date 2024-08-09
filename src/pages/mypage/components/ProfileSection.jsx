@@ -128,8 +128,11 @@ const ProfileSection = () => {
                 onClick={editNameToggle}
               />
             </div>
+            <div className={styles.contentWrap}>
             <div className={styles.content2}>22세</div>
             <div className={styles.content3}>일반회원</div>
+            </div>
+         
           </div>
 
           <div className={styles.secondContents}>

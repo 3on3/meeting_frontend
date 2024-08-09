@@ -4,8 +4,7 @@ import MatchingButton from "../buttons/matchingButton/MatchingButton";
 import { NavLink } from "react-router-dom";
 import RequestBtns from "./RequestBtns";
 
-function GroupBox({ state,group, className ,setIsChanged }) {
-  
+function GroupBox({ state, group, className ,setIsChanged }) {
   // =============== param 스타일 가이드 ===============
   /**
    * li 태그라서 쓸때 ul 안에 사용하기

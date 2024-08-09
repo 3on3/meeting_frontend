@@ -69,7 +69,6 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <Main />,
-        loader: MainMeetingListFetch,
       },
       {
         path: "intro",

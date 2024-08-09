@@ -11,15 +11,15 @@ function Main() {
   // =====useState 선언=====
   // 필터 참여가능한 것만 보기 토글
   const [isMatched, setIsMatched] = useState(false);
-  console.log(`isMatched : ${isMatched}`);
+  // console.log(`isMatched : ${isMatched}`);
 
   // 필터 성별 필터 토글
   const [CheckGender, setCheckGender] = useState(null);
-  console.log(`CheckGender : ${CheckGender}`);
+  // console.log(`CheckGender : ${CheckGender}`);
 
   // 필터 인원 필터 토글
   const [CheckPersonnel, setCheckPersonnel] = useState(null);
-  console.log(`CheckPersonnel : ${CheckPersonnel}`);
+  // console.log(`CheckPersonnel : ${CheckPersonnel}`);
 
   // 필터 지역 DTO 받기
   const [selectedPlace, setSelectedPlace] = useState(null);
@@ -32,7 +32,7 @@ function Main() {
   const regionFilterDTO = (Place) => {
     setSelectedPlace(Place);
   };
-  console.log(`selectedPlace : ${selectedPlace}`);
+  // console.log(`selectedPlace : ${selectedPlace}`);
 
   // =====이벤트 함수=====
 

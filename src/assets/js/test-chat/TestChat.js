@@ -19,11 +19,12 @@ const TestChat = () => {
 
   useEffect(() => {
     // 웹소켓 설정
-    chatWebSocket(setSocket, setMessageList);
+    const cleanUp = chatWebSocket(setSocket, setMessageList);
 
     // 채팅방을 열면 이 채팅방의 메시지 받아오기
     fetchMessage(setMessageList);
 
+    return cleanUp;
   }, []);
 
   // input value
@@ -40,9 +41,18 @@ const TestChat = () => {
         message: value,
       }
 
-      const data = await saveMessage(payload);
+      const data = {
+        type: 'message',
+        message: await saveMessage(payload)
+      }
+
+      console.log(data);
+
+
 
       socket.send(JSON.stringify(data));
+
+      console.log(JSON.stringify(data));
       // setMessageList(prevState => [...prevState, data]);
       }
 

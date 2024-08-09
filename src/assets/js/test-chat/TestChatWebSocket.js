@@ -11,6 +11,7 @@ export const chatWebSocket = (setSocket, setMessageList) => {
 
     newSocket.onmessage = (event) => {
         const newMessage = JSON.parse(event.data);
+        console.log(newMessage);
         setMessageList(prevState => [...prevState, newMessage]);
     };
 

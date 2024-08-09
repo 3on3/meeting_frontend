@@ -51,7 +51,8 @@ const RequestBtns = ({ styles, request, setIsChanged }) => {
 
       if (response.ok) {
         const responseData = await response.text();
-        console.log(responseData);
+        console.log("abc", responseData);
+
         setIsChanged(true);
       } else {
         const errorText = await response.text();

@@ -1,12 +1,10 @@
 import {userDataLoader} from "../../../config/auth";
 
-export const MainWebSocket = (setSocket) => {
+export const MainWebSocket = (socketRef) => {
     // WebSocket 설정
     const mainSocket = new WebSocket("ws://localhost:8253/");
 
     const loginUserInfo = userDataLoader();
-
-    setSocket(mainSocket);
 
     mainSocket.onopen = () => {
         console.log("WebSocket connected");
@@ -33,10 +31,5 @@ export const MainWebSocket = (setSocket) => {
         console.log("WebSocket error:", error);
     };
 
-
-
-    // 컴포넌트 언마운트 시 소켓 연결 해제
-    return () => {
-        mainSocket.close();
-    };
+    socketRef.current = mainSocket;
 }

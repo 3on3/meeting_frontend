@@ -1,9 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {loginActions} from "../../store/Login-slice";
 
 const FloatingNavigation = ({ styles, active, setActive }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
+  const loginDispatch = useDispatch();
   const floatingRef = useRef(null); // FloatingNavigation 요소를 참조하는 ref
 
   // userData가 존재하면 로그인 상태인지 확인
@@ -21,7 +24,9 @@ const FloatingNavigation = ({ styles, active, setActive }) => {
     e.preventDefault();
     setActive(false);
     localStorage.removeItem("userData");
-    setIsLoggedIn(false);
+    setIsLoggedIn(false); // 로그아웃 상태로 변경
+    // 로그아웃 후 로그인 페이지로 리디렉션
+    loginDispatch(loginActions.loginAction());
     navigate("/login");
   };
 

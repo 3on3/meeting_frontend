@@ -51,6 +51,7 @@ const RequestBtns = ({ styles, request, setIsChanged }) => {
         const responseData = await response.json();
         console.log("responseData:", responseData.id);
 
+
         setIsChanged(true);
         navigate(`/chatroom/${responseData.id}`); // chatRoomId가 설정된 후 navigate 실행
       } else {

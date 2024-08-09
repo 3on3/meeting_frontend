@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {loginActions} from "../../store/Login-slice";
 
-const FloatingNavigation = ({ styles,active,setActive }) => {
+const FloatingNavigation = ({ styles, active, setActive }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
   const loginDispatch = useDispatch();
+  const floatingRef = useRef(null); // FloatingNavigation 요소를 참조하는 ref
 
-  // userData가 존재하면 로그인상태인 것을 확인
+  // userData가 존재하면 로그인 상태인지 확인
   useEffect(() => {
     const userData = localStorage.getItem("userData");
     setIsLoggedIn(!!userData);
   }, []);
 
   const floatingButtonOnClick = () => {
-    console.log("click");
     setActive(!active);
   };
 
@@ -23,7 +23,6 @@ const FloatingNavigation = ({ styles,active,setActive }) => {
   const logOutHandler = (e) => {
     e.preventDefault();
     setActive(false);
-    // 예시로 로컬 스토리지에서 토큰을 제거하는 방식
     localStorage.removeItem("userData");
     setIsLoggedIn(false); // 로그아웃 상태로 변경
     // 로그아웃 후 로그인 페이지로 리디렉션
@@ -31,8 +30,28 @@ const FloatingNavigation = ({ styles,active,setActive }) => {
     navigate("/login");
   };
 
+  const onClickNav = ()=>{
+    setActive(!active);
+  }
+  // FloatingNavigation 외부 클릭 시 active를 false로 설정
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (floatingRef.current && !floatingRef.current.contains(event.target)) {
+        setActive(false);
+      }
+    };
+
+    // 문서에 이벤트 리스너 추가하여 외부 클릭 감지
+    document.addEventListener("mousedown", handleClickOutside);
+
+    // 컴포넌트 언마운트 시 이벤트 리스너 제거
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [setActive]);
+
   return (
-    <div className={styles.floating}>
+    <div className={styles.floating} ref={floatingRef}>
       <button
         onClick={floatingButtonOnClick}
         className={active ? styles.isActive : ""}
@@ -40,8 +59,7 @@ const FloatingNavigation = ({ styles,active,setActive }) => {
         <i></i>
       </button>
       <nav className={active ? styles.isActive : ""}>
-        {/* <NavLink className={styles.invite_code_btn}>참여 코드</NavLink> */}
-        <NavLink className={styles.new_group_btn} to="/mypage/group/create">
+        <NavLink onClick={onClickNav} className={styles.new_group_btn} to="/mypage/group/create">
           새 그룹
         </NavLink>
         {isLoggedIn && (

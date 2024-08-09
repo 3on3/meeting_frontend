@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import logoImage from "../../assets/images/login/logo.svg";
 import MtButtons from "../../components/common/buttons/MtButtons";
 import styles from "./LoginPage.module.scss";
 import DefaultInput from "../../components/common/inputs/DefaultInput";
 import { getUserToken } from "../../config/auth";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ const LoginPage = () => {
     navigate("/login/first-login");
   };
 
-  const [idInput, setIdInput] = useState("");
+const [idInput, setIdInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
   const [idStatus, setIdStatus] = useState(true);
   const [autoLogin, setAutoLogin] = useState(false);
@@ -67,7 +67,7 @@ const LoginPage = () => {
 
         if (response.ok) {
           const data = await response.json();
-          console.log("로그인 성공:", data);
+          console.log("  성공:", data);
 
           const userData = {
             token: data.token,

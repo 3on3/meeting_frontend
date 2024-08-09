@@ -31,18 +31,28 @@ const FirstLoginNickName = () => {
     } else {
       setShowError(false);
       try {
-        const response = await fetch("http://localhost:8253/signup/update-nickname", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email, nickname: nickName }),
-        });
+        const response = await fetch(
+          "http://localhost:8253/signup/update-nickname",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email, nickname: nickName }),
+          }
+        );
 
         if (!response.ok) {
           throw new Error("Failed to update nickname");
         }
-        navigate('/');
+
+        // 닉네임이 업데이트된 경우 로컬 스토리지의 userData를 업데이트
+        const userData = JSON.parse(localStorage.getItem("userData"));
+        userData.nickname = nickName;
+        localStorage.setItem("userData", JSON.stringify(userData));
+
+        // 업데이트 후 홈으로 이동
+        navigate("/");
       } catch (error) {
         alert("Error updating nickname");
       }
@@ -60,7 +70,7 @@ const FirstLoginNickName = () => {
   };
 
   const skipClickHandler = () => {
-    navigate('/');
+    navigate("/");
   };
 
   return (
@@ -71,17 +81,29 @@ const FirstLoginNickName = () => {
         placeholder={"닉네임을 입력해주세요."}
         value={nickName}
         onChange={nickNameChangeHandler}
-        errorMessage={showError && <div className={styles.errorMessage}>사용할 수 없는 닉네임입니다.</div>}
+        errorMessage={
+          showError && (
+            <div className={styles.errorMessage}>
+              사용할 수 없는 닉네임입니다.
+            </div>
+          )
+        }
       />
       <div className={styles.buttonBox}>
         <MtButtons
-          buttonType={!isNickNameEmpty && isNickNameValid ? "apply" : "disabled"}
+          buttonType={
+            !isNickNameEmpty && isNickNameValid ? "apply" : "disabled"
+          }
           buttonText={"SUBMIT"}
           eventType={!isNickNameEmpty && isNickNameValid ? "click" : null}
-          eventHandler={!isNickNameEmpty && isNickNameValid ? isNickNameCheckHandler : null}
+          eventHandler={
+            !isNickNameEmpty && isNickNameValid ? isNickNameCheckHandler : null
+          }
         />
       </div>
-      <div className={styles.skip} onClick={skipClickHandler}>건너뛰기</div>
+      <div className={styles.skip} onClick={skipClickHandler}>
+        건너뛰기
+      </div>
     </div>
   );
 };

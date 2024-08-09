@@ -61,7 +61,7 @@ const GroupCreate = () => {
     });
 
     if (response.ok) {
-      navigate("/group");
+      navigate("/");
     } else {
       const errorText = await response.text();
       alert(errorText);

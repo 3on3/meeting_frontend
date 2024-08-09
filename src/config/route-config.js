@@ -69,6 +69,7 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <Main />,
+        loader: authCheckLoader, // 메인 페이지 접근 시 토큰 여부 확인
       },
       {
         path: "intro",
@@ -104,6 +105,7 @@ export const router = createBrowserRouter([
         path: "mypage",
         element: <MyPage />,
         children: mypageRouter,
+        // loader: authCheckLoader, // 마이페이지 접근 시에도 인증 확인
       },
       // 초대 링크 라우터 추가
       {

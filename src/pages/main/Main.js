@@ -4,9 +4,11 @@ import styles from "./Main.module.scss";
 import RegionFilter from "./components/RegionFilter";
 import MeetingList from "./components/MeetingList";
 import { getUserToken } from "../../config/auth";
+import { useNavigate, redirect } from "react-router-dom";
 
 function Main() {
   const { wrapper } = styles;
+  const navigate = useNavigate();
 
   // =====useState 선언=====
   // 필터 참여가능한 것만 보기 토글
@@ -25,6 +27,13 @@ function Main() {
   const [selectedPlace, setSelectedPlace] = useState(null);
 
   const [listData, setListData] = useState([]);
+
+  useEffect(() => {
+    const token = getUserToken();
+    if (!token) {
+      navigate("/intro");  // 토큰이 없으면 intro 페이지로 리디렉션
+    }
+  }, [navigate]);
 
   // =====함수=====
 
@@ -103,3 +112,22 @@ function Main() {
 }
 
 export default Main;
+
+export const MainMeetingListFetch = async () => {
+const response = await fetch("http://localhost:8253/main", {
+    headers: {
+      Authorization: "Bearer " + getUserToken(),
+    },
+  });
+
+  return response;
+};
+
+// 토큰여부 (로그인 여부)에 따른 홈으로 이동 확인 loader
+export const authCheckLoader = async () => {
+  const token = getUserToken();
+  if (!token) {
+    return redirect("/intro"); // 토큰이 없으면 intro 페이지로 이동
+  }
+  return null; // 토큰이 있으면 홈으로
+};

@@ -52,7 +52,7 @@ const RequestBtns = ({ styles, request, setIsChanged }) => {
         console.log("responseData:", responseData.id);
 
         setIsChanged(true);
-        navigate(`/chat/id=${responseData.id}`); // chatRoomId가 설정된 후 navigate 실행
+        navigate(`/chatroom/${responseData.id}`); // chatRoomId가 설정된 후 navigate 실행
       } else {
         const errorText = await response.text();
         console.error("Error:", errorText);

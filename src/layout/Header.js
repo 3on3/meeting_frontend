@@ -9,7 +9,9 @@ const Header = () => {
   const location = useLocation();
   const [floatingNaviActive, setFloatingNaviActive] = useState(false);
   return (
-    <header id={styles.header}>
+    <>
+    {location.pathname !== "/intro" &&(
+      <header id={styles.header}>
       <MainNavigation styles={styles} />
       <div className={ floatingNaviActive ? `${styles.layer} ${styles.active}`:`${styles.layer}`}></div>
       {(location.pathname === "/" || location.pathname =="/mypage/mygroup") && (
@@ -17,6 +19,10 @@ const Header = () => {
       )}
       <InvitingCodeModal/>
     </header>
+    )}
+    </>
+    
+    
   );
 };
 

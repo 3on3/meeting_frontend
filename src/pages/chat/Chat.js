@@ -4,13 +4,43 @@ import ChatBody from "./components/ChatBody";
 import ChatInput from "./components/ChatInput";
 import styles from "./Chat.module.scss";
 import ChatMembersModal from "./components/member_modal/ChatMembersModal";
+import { useParams } from "react-router-dom";
+import { CHATROOM_URL } from '../../config/host-config';
 
 
 const Chat = () => {
+  const {id} = useParams();
   // input value
   const [value, setValue] = useState("");
+  const [chatRoomData, setChatRoomData] = useState({});
 
+  console.log('id:',id);
+  
+  useEffect(()=>{
+    const fetchData = async () => {
+      try {
+        console.log("트라이에서 id", id);
+        
+        const response = await fetch(
+          `${CHATROOM_URL}/${id}`
+        );
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        // console.log("data ", data);
+        
+        setChatRoomData(data);
+        console.log("set DAta next : ",chatRoomData);
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
+    fetchData();
+    console.log("chatRoomData: ",chatRoomData);
+    
+  },[id])
   
 
 
@@ -73,7 +103,7 @@ const Chat = () => {
 
   return (
     <div className={styles.container}>
-      <ChatHead styles={styles} />
+      <ChatHead styles={styles} chatRoomData={chatRoomData}/>
       <ChatBody messageList={messageList} styles={styles} />
       <ChatInput
         onChangeInput={onChangeInput}

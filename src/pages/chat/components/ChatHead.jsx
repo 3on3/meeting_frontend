@@ -2,7 +2,7 @@ import React, { act, useState } from 'react';
 import ChatMenu from './ChatMenu';
 
 
-const ChatHead = ({styles}) => {
+const ChatHead = ({styles,chatRoomData}) => {
 
   const [active, setActive] = useState(false)
 
@@ -13,7 +13,7 @@ const ChatHead = ({styles}) => {
   
   return (
     <div className={styles.head}>
-      <h1>건국대 킹카</h1>
+      <h1>{chatRoomData.name}</h1>
       <button className={styles.chatMenuBtn} onClick={onClickChatMenuBtn}></button>
       <ChatMenu styles={styles} active={active}/>
     </div>

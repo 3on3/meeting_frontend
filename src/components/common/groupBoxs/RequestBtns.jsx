@@ -1,20 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { CHATROOM_URL, MYPAGEMATCHING_URL } from "../../../config/host-config";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const RequestBtns = ({ styles, request, setIsChanged }) => {
-  
-  
-  const {id: responseGroupId} = useParams();
+  const navigate = useNavigate();
+  const { id: responseGroupId } = useParams();
   const payload = {
     requestGroupId: request.id,
     responseGroupId,
   };
 
   console.log(payload);
-  
+
   const processFetch = async (requestUrl) => {
-    
     try {
       const response = await fetch(`${MYPAGEMATCHING_URL}/${requestUrl}`, {
         method: "POST",
@@ -37,9 +35,9 @@ const RequestBtns = ({ styles, request, setIsChanged }) => {
     }
   };
 
-  const createFetch = async()=>{
-   console.log(payload);
-   
+  const createFetch = async () => {
+    console.log(payload);
+
     try {
       const response = await fetch(`${CHATROOM_URL}/create`, {
         method: "POST",
@@ -50,10 +48,12 @@ const RequestBtns = ({ styles, request, setIsChanged }) => {
       });
 
       if (response.ok) {
-        const responseData = await response.text();
-        console.log("abc", responseData);
+        const responseData = await response.json();
+        console.log("responseData:", responseData.id);
+
 
         setIsChanged(true);
+        navigate(`/chatroom/${responseData.id}`); // chatRoomId가 설정된 후 navigate 실행
       } else {
         const errorText = await response.text();
         console.error("Error:", errorText);
@@ -61,12 +61,13 @@ const RequestBtns = ({ styles, request, setIsChanged }) => {
     } catch (error) {
       console.error("Error:", error);
     }
-  }
-  const onClickAccept = () => {
-    processFetch("response-accept")
-    setTimeout(()=>{createFetch()}, 300)
+  };
 
-  }
+  const onClickAccept = async () => {
+    await processFetch("response-accept"); // processFetch가 완료될 때까지 기다림
+    await createFetch(); // createFetch가 완료될 때까지 기다림
+  };
+
   return (
     <div className={styles.reqTit}>
       <span>매칭 신청이 도착했습니다</span>

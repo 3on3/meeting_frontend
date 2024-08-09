@@ -11,6 +11,8 @@ const GroupViewHead = ({
   place,
   groupName,
 }) => {
+  console.log(auth);
+  
   return (
     <>
       <div className={styles.content}>

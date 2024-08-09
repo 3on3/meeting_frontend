@@ -119,6 +119,7 @@ const Group = () => {
         totalMember={totalMembers}
         gender={gender}
         groupName={groupName}
+        auth={auth}
       />
       <GroupViewBody
         styles={styles}

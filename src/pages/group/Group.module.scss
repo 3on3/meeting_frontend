@@ -105,12 +105,12 @@
 .content2 {
   background: #f4f9ff;
   width: 100%;
-  height: calc(100vh - (100vw * (150 / 500)));
+  height: calc(100vh - (100vw * (200 / 500)));
   padding-bottom: calc(100vw * (130 / 500));
   padding-top: calc(100vw * (40 / 500));
   .ul {
     padding: calc(100vw * (30 / 500)) calc(100vw * (20 / 500));
-    height: calc(100% - (100vw * (130 / 500)));
+    height: calc(100% - (100vw * (110 / 500)));
     overflow-y: scroll;
   }
   .textLine {
@@ -144,6 +144,7 @@
       padding-bottom: calc(100vw * (12 / 500));
       cursor: pointer;
       border-bottom: calc(100vw * (2 / 500)) solid #9aa9ba;
+      transition: .1s;
       
      
   
@@ -176,7 +177,7 @@
       border: solid 1px var(--color-dark);
       font-weight: 500;
       background: url(../../assets/images/icons/c-copy.svg) no-repeat
-      center/cover;
+      center/cover #fff;
       margin-left: calc(100vw * (10 / 500));
     
     }

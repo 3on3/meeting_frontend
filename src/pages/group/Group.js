@@ -7,6 +7,7 @@ import MtButtons from "../../components/common/buttons/MtButtons";
 import { getUserToken } from "../../config/auth";
 import { MYPAGEMATCHING_URL } from "../../config/host-config";
 import RequestModal from "./components/modal/RequestModal";
+import { GROUP_URL } from "../../config/host-config";
 
 const Group = () => {
   const { id } = useParams();
@@ -20,7 +21,7 @@ const Group = () => {
 
   const fetchGroupData = async () => {
     try {
-      const response = await fetch(`http://localhost:8253/group/${id}`, {
+      const response = await fetch(`${GROUP_URL}/${id}`, {
         headers: {
           Authorization: `Bearer ${getUserToken()}`,
         },
@@ -76,10 +77,34 @@ const Group = () => {
 
   let onClickHandler;
 
-
   const getButtonConfig = () => {
     switch (auth) {
       case "MEMBER":
+        onClickHandler = async () => {
+          try {
+            const response = await fetch(`${GROUP_URL}/withdraw`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${getUserToken()}`,
+              },
+              body: JSON.stringify({ groupId: id }),
+            });
+
+            if (response.ok) {
+              // 성공 시 사용자에게 알림을 주거나 페이지를 리다이렉트
+              alert("성공적으로 그룹을 나갔습니다.");
+              window.location.href = "/";
+            } else {
+              const errorText = await response.text();
+              console.error("Failed to leave the group:", errorText);
+              alert("그룹을 나가는 데 실패했습니다.");
+            }
+          } catch (error) {
+            console.error("Error leaving the group:", error);
+            alert("그룹을 나가는 중 오류가 발생했습니다.");
+          }
+        };
         return { type: "apply", text: "이 그룹 나가기" };
       case "USER":
         onClickHandler = async () => {
@@ -141,7 +166,9 @@ const Group = () => {
           className={styles.groupBtn}
         />
       )}
-      {auth === "HOST" && <RequestModal groupId={id} group={groupData} styles={styles} />}
+      {auth === "HOST" && (
+        <RequestModal groupId={id} group={groupData} styles={styles} />
+      )}
     </>
   );
 };

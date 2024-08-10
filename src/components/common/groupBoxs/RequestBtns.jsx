@@ -1,71 +1,21 @@
-import React, { useState } from "react";
-import { CHATROOM_URL, MYPAGEMATCHING_URL } from "../../../config/host-config";
-import { useNavigate, useParams } from "react-router-dom";
+import React from "react";
+import { useParams } from "react-router-dom";
+import {useFetchRequest} from '../../../hook/useFetchRequest';
 
 const RequestBtns = ({ styles, request, setIsChanged }) => {
-  const navigate = useNavigate();
   const { id: responseGroupId } = useParams();
   const payload = {
     requestGroupId: request.id,
     responseGroupId,
   };
 
-  console.log(payload);
-
-  const processFetch = async (requestUrl) => {
-    try {
-      const response = await fetch(`${MYPAGEMATCHING_URL}/${requestUrl}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
-
-      if (response.ok) {
-        const responseData = await response.json();
-        console.log(responseData);
-        setIsChanged(true);
-      } else {
-        const errorText = await response.text();
-        console.error("Error:", errorText);
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
-
-  const createFetch = async () => {
-    console.log(payload);
-
-    try {
-      const response = await fetch(`${CHATROOM_URL}/create`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
-
-      if (response.ok) {
-        const responseData = await response.json();
-        console.log("responseData:", responseData.id);
-
-
-        setIsChanged(true);
-        navigate(`/chatroom/${responseData.id}`); // chatRoomId가 설정된 후 navigate 실행
-      } else {
-        const errorText = await response.text();
-        console.error("Error:", errorText);
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
+  const { processFetch, createFetch } = useFetchRequest();
 
   const onClickAccept = async () => {
-    await processFetch("response-accept"); // processFetch가 완료될 때까지 기다림
-    await createFetch(); // createFetch가 완료될 때까지 기다림
+    // await processFetch("response-accept"); // processFetch가 완료될 때까지 기다림
+  await processFetch("response-accept", payload, setIsChanged)
+
+    await createFetch(payload, setIsChanged); // createFetch가 완료될 때까지 기다림
   };
 
   return (

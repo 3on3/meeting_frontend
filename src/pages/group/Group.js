@@ -7,6 +7,7 @@ import MtButtons from "../../components/common/buttons/MtButtons";
 import { getUserToken } from "../../config/auth";
 import { MYPAGEMATCHING_URL } from "../../config/host-config";
 import RequestModal from "./components/modal/RequestModal";
+import { useFetchRequest } from "../../hook/useFetchRequest";
 
 const Group = () => {
   const { id } = useParams();
@@ -15,6 +16,7 @@ const Group = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [groupUsers, setGroupUsers] = useState([]);
+  const {requestFetch} = useFetchRequest();
 
   console.log(groupUsers);
 
@@ -76,7 +78,6 @@ const Group = () => {
 
   let onClickHandler;
 
-
   const getButtonConfig = () => {
     switch (auth) {
       case "MEMBER":
@@ -86,23 +87,11 @@ const Group = () => {
           console.log('ddd');
           
           const payload = {
-            requestGroupId: "1fc3a005-f582-4f44-9b54-410aa1a4b952",
-            responseGroupId: "56a6e4f5-62d8-4169-a29d-4b92143a20cf",
+            requestGroupId: "672f6643-441b-4eda-96c8-59f45f4149f4",
+            responseGroupId: id,
           };
-          const response = await fetch(`${MYPAGEMATCHING_URL}/createRequest`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(payload),
-          });
-          console.log(payload);
-
-          if (response.ok) {
-          } else {
-            const errorText = await response.text();
-            console.error(errorText);
-          }
+          requestFetch(payload);
+        
         };
         return { type: "cancel", text: "매칭 신청하기" };
       default:

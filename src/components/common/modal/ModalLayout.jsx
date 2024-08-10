@@ -19,7 +19,7 @@ const ModalLayout = ({ children, className, modalContent, boxType }) => {
   switch (boxType) {
     case "completeMode":
       // 배경이 보라색인 버튼
-      type = styles.complete;
+      type = styles.modal;
       break;
     case "originalMode":
       // 비활성화 버튼
@@ -31,7 +31,7 @@ const ModalLayout = ({ children, className, modalContent, boxType }) => {
     <div className={`${styles.backDropLayer} ${styles.isActive}`}>
       <div className={type}>
         <button className={styles.modalClose} onClick={closeModal}></button>
-        <h2 className={styles.modalTit}>{modalContent}asdasd</h2>
+        <h2 className={styles.modalTit}>{modalContent}</h2>
         {children}
       </div>
     </div>

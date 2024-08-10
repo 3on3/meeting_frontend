@@ -3,6 +3,7 @@ import MemberList from "../../../components/memberList/MemberList";
 import imgOriginUrl from "../../../assets/images/profile.jpg";
 import DefaultInput from "../../../components/common/inputs/DefaultInput";
 import { getUserToken } from "../../../config/auth";
+import { useModal } from "../../../context/ModalContext";
 
 const GroupViewBody = ({
   auth,
@@ -15,6 +16,7 @@ const GroupViewBody = ({
 }) => {
   const [tab, setTab] = useState("current");
   const [applicants, setApplicants] = useState([]);
+  const { openModal } = useModal();
 
   useEffect(() => {
     if (auth === "HOST") {
@@ -97,14 +99,28 @@ const GroupViewBody = ({
     }
   };
 
+  const handleCopyToClipboard = async () => {
+    try {
+      // 복사할 텍스트를 지정
+      await navigator.clipboard.writeText(inviteCode);
+      openModal("성공적으로 완료되었습니다.", "originalMode");
+    } catch (err) {
+      console.error("클립보드 복사 실패:", err);
+      openModal("에러가 발생했습니다.", "completeMode");
+    }
+  };
+
   return (
     <div className={styles.content2}>
       {(auth === "MEMBER" || auth === "HOST") && (
         <>
           <div className={styles.copyWrap}>
-          <span>함께 미팅할 친구들을 초대해주세요!</span>
+            <span>함께 미팅할 친구들을 초대해주세요!</span>
 
-            <button className={styles.copyBtn}></button>
+            <button
+              className={styles.copyBtn}
+              onClick={handleCopyToClipboard}
+            ></button>
           </div>
         </>
       )}

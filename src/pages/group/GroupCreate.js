@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./GroupCreate.module.scss";
 import DefaultInput from "../../components/common/inputs/DefaultInput";
 import MtButtons from "../../components/common/buttons/MtButtons";
 import { useNavigate } from "react-router-dom";
 import RadioButton from "../../components/common/buttons/radiobutton/RadioButton";
 import { GROUP_URL } from "../../config/host-config";
-import { getUserToken } from "../../config/auth";
+import { getUserToken, userDataLoader } from "../../config/auth";
 
 const GroupCreate = () => {
   const navigate = useNavigate();
@@ -13,6 +13,14 @@ const GroupCreate = () => {
   const [selectedRegion, setSelectedRegion] = useState("");
   const [groupGender, setGroupGender] = useState("");
   const [maxNum, setMaxNum] = useState("");
+
+  // 사용자 성별을 가져와서 초기화
+  const { gender: userGender } = userDataLoader();
+  const [gender, setGender] = useState(userGender);
+
+  useEffect(() => {
+    setGroupGender(userGender); // 그룹 성별을 사용자 성별로 초기화
+  }, [userGender]);
 
   const groupPageHandler = () => {
     navigate("/group");
@@ -56,7 +64,6 @@ const GroupCreate = () => {
         "Content-Type": "application/json",
         Authorization: "Bearer " + getUserToken(),
       },
-
       body: JSON.stringify(payload),
     });
 
@@ -120,21 +127,19 @@ const GroupCreate = () => {
         <div className={styles.genContainer}>
           <div className={styles.gender}>성별</div>
           <div className={styles.gen}>
-            <RadioButton
-              name="groupGender"
-              value="M"
-              text="남자"
-              onChange={handleGenderChange}
-              required
-            />
-            <RadioButton
-              name="groupGender"
-              value="F"
-              text="여자"
-              className={styles.female}
-              onChange={handleGenderChange}
-              required
-            />
+            <div
+              style={{
+                padding: "10px 20px",
+                margin: "5px",
+                fontSize: "calc(100vw * (16 / 500))",
+                borderRadius: "calc(100vw * (500 / 500))",
+                fontWeight: "700",
+                backgroundColor: "#fff",
+                color: "#C3BECB",
+              }}
+            >
+              {gender === "M" ? "남자" : "여자"}
+            </div>
           </div>
         </div>
         <div className={styles.numberContainer}>

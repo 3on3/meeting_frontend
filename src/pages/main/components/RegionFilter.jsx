@@ -48,7 +48,6 @@ function RegionFilter({ regionFilterDTO }) {
 
   // ==== useState 선언 ====
   const [clickRegion, setClickRegion] = useState(null);
-  console.log(`clickRegion : ${clickRegion}`);
 
   // ==== 핸들러 ====
   const activeHandler = (id) => {
@@ -58,7 +57,6 @@ function RegionFilter({ regionFilterDTO }) {
   useEffect(() => {
     const findRegion = regionArr.find((region) => region.id === clickRegion);
     const selectedPlace = findRegion ? findRegion.place : "";
-    console.log(`Selected Place: ${selectedPlace}`);
 
     // place 찾아서 보내주기
     regionFilterDTO(selectedPlace);

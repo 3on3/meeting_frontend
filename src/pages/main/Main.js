@@ -26,6 +26,7 @@ function Main() {
 
   const [listData, setListData] = useState([]);
 
+  const [isChanged, setIsChanged] = useState(false);
   // =====함수=====
 
   //필터 지역 이름 받기
@@ -50,6 +51,7 @@ function Main() {
   const filterPersonnelHandler = (personnel) => {
     setCheckPersonnel((prev) => (prev === personnel ? null : personnel));
   };
+
 
   // =====post fetch=====
   useEffect(() => {
@@ -84,7 +86,7 @@ function Main() {
       }
     };
     fetchFilterData();
-  }, [CheckGender, selectedPlace, CheckPersonnel, isMatched]);
+  }, [CheckGender, selectedPlace, CheckPersonnel, isMatched, isChanged]);
 
   return (
     <div className={wrapper}>
@@ -97,7 +99,7 @@ function Main() {
         filterPersonnelHandler={filterPersonnelHandler}
       />
       <RegionFilter regionFilterDTO={regionFilterDTO} />
-      <MeetingList meetingList={listData} />
+      <MeetingList meetingList={listData} setIsChanged={setIsChanged} />
     </div>
   );
 }

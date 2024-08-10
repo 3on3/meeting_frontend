@@ -103,7 +103,7 @@ const GroupViewBody = ({
     try {
       // 복사할 텍스트를 지정
       await navigator.clipboard.writeText(inviteCode);
-      openModal("성공적으로 완료되었습니다.", "originalMode");
+      openModal("성공적으로 완료되었습니다.", "completeMode");
     } catch (err) {
       console.error("클립보드 복사 실패:", err);
       openModal("에러가 발생했습니다.", "completeMode");

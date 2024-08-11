@@ -1,31 +1,47 @@
 .mamberList {
   display: flex;
   align-items: center;
-  padding: calc( 100vw * ( 9 / 500)) calc( 100vw * ( 10 / 500));
-  border-radius: calc( 100vw * ( 12 / 500));
-  margin-bottom: calc( 100vw * ( 12 / 500));
+  padding: calc(100vw * (9 / 500)) calc(100vw * (10 / 500));
+  border-radius: calc(100vw * (12 / 500));
+  margin-bottom: calc(100vw * (12 / 500));
   background-color: var(--color-wh);
   box-shadow: 0 0 10px rgba($color: #000000, $alpha: 0.1);
   position: relative;
+  .crown {
+    margin: 0 calc(100vw * (14 / 500)) 0 calc(100vw * (8 / 500));
+    width: calc(100vw * (33 / 500));
+    height: calc(100vw * (33 / 500));
+    background-image: url("../../assets/images/icons/c-crown.svg");
+    background-size: cover;
+    background-position: center;
+  }
+  .user {
+    margin: 0 calc(100vw * (14 / 500)) 0 calc(100vw * (8 / 500));
+    width: calc(100vw * (33 / 500));
+    height: calc(100vw * (33 / 500));
+    background-image: url("../../assets/images/icons/c-user.svg");
+    background-size: cover;
+    background-position: center;
+  }
   .leaderBtns {
     position: absolute;
-    right: calc( 100vw * ( 10 / 500));
+    right: calc(100vw * (10 / 500));
     top: 50%;
     transform: translateY(-50%);
     display: flex;
     button {
-      width: calc( 100vw * ( 40 / 500));
-      height: calc( 100vw * ( 29 / 500));
-      font-size: calc( 100vw * ( 12 / 500));
+      width: calc(100vw * (40 / 500));
+      height: calc(100vw * (29 / 500));
+      font-size: calc(100vw * (12 / 500));
       font-weight: 600;
-      margin-right: calc( 100vw * ( 4 / 500));
+      margin-right: calc(100vw * (4 / 500));
       background-color: var(--color-point);
       color: #fff;
-      border-radius: calc( 100vw * ( 8 / 500));
+      border-radius: calc(100vw * (8 / 500));
       &:last-child {
         margin-right: 0;
         background-color: #fff;
-        border: solid calc( 100vw * ( 1 / 500)) var(--color-point);
+        border: solid calc(100vw * (1 / 500)) var(--color-point);
         color: var(--color-point);
       }
     }
@@ -41,11 +57,11 @@
     background-color: #fff;
   }
   .img {
-    width: calc( 100vw * ( 40 / 500));
-    height: calc( 100vw * ( 40 / 500));
-    border-radius: calc( 100vw * ( 8 / 500));
+    width: calc(100vw * (40 / 500));
+    height: calc(100vw * (40 / 500));
+    border-radius: calc(100vw * (8 / 500));
     overflow: hidden;
-    margin-right: calc( 100vw * ( 12 / 500));
+    margin-right: calc(100vw * (12 / 500));
     img {
       width: 100%;
       height: 100%;
@@ -53,18 +69,18 @@
     }
   }
   .userName {
-    font-size: calc( 100vw * ( 16 / 500));
+    font-size: calc(100vw * (16 / 500));
     color: var(--color-dark);
-    margin-right: calc( 100vw * ( 8 / 500));
+    margin-right: calc(100vw * (8 / 500));
     font-weight: 500;
   }
   .userInfo {
-    font-size: calc( 100vw * ( 14 / 500));
+    font-size: calc(100vw * (14 / 500));
     color: #786e85;
     font-weight: 500;
 
     span {
-      margin-right: calc( 100vw * ( 6 / 500));
+      margin-right: calc(100vw * (6 / 500));
       &:last-child {
         margin-right: 0;
       }

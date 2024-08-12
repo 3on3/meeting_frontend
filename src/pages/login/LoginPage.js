@@ -25,6 +25,8 @@ const navigate = useNavigate();
   const [passwordInput, setPasswordInput] = useState("");
   const [idStatus, setIdStatus] = useState(true);
   const [autoLogin, setAutoLogin] = useState(false);
+  const [idError, setIdError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem("userData") || "{}");
@@ -42,10 +44,12 @@ const navigate = useNavigate();
 
   const idInputHandler = (e) => {
     setIdInput(e.target.value);
+    setIdError("");
   };
 
   const passwordInputHandler = (e) => {
     setPasswordInput(e.target.value);
+    setPasswordError("");
   };
 
   const autoLoginHandler = (e) => {
@@ -112,14 +116,22 @@ const navigate = useNavigate();
             loginNavigate();
           }
         } else {
-          const error = await response.text();
-          console.error("로그인 실패:", error);
+        const errorText = await response.text();
+        if (errorText.includes("User not found")) {
+          setIdError("존재하지 않는 아이디입니다.");
+        } else if (errorText.includes("Invalid password")) {
+          setPasswordError("비밀번호가 틀렸습니다.");
+        } else {
+          setIdError("로그인에 실패했습니다.");
+          setPasswordError("로그인에 실패했습니다.");
         }
-      } catch (error) {
-        console.error("Error:", error);
       }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("서버 오류가 발생했습니다.");
     }
-  };
+  }
+};
 
   const SignUpClickHandler = () => {
     navigate("/sign-up");
@@ -132,17 +144,17 @@ const navigate = useNavigate();
       </div>
       <div className={styles.input}>
         <DefaultInput
-          inputState={idInput ? (idStatus ? "" : "error") : ""}
+          inputState={idError ? "error" : idInput ? (idStatus ? "" : "error") : ""}
           placeholder={"아이디를 입력하세요."}
           onChange={idInputHandler}
-          errorMessage={"아이디가 이메일 형식이 아닙니다."}
+          errorMessage={idError || (idInput && !idStatus ? "아이디가 이메일 형식이 아닙니다." : "")}
           className={styles.inputCustom}
         />
         <DefaultInput
-          inputState={""}
+          inputState={passwordError ? "error" : ""}
           placeholder={"비밀번호를 입력하세요."}
           onChange={passwordInputHandler}
-          errorMessage={"비밀번호가 틀렸습니다."}
+          errorMessage={passwordError}
           className={styles.inputCustom}
           type={true}
         />

@@ -4,28 +4,16 @@ import styles from "./Main.module.scss";
 import RegionFilter from "./components/RegionFilter";
 import MeetingList from "./components/MeetingList";
 import { getUserToken } from "../../config/auth";
-import { useNavigate, redirect } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 
 function Main() {
   const { wrapper } = styles;
   const navigate = useNavigate();
 
-  // =====useState 선언=====
-  // 필터 참여가능한 것만 보기 토글
   const [isMatched, setIsMatched] = useState(false);
-  console.log(`isMatched : ${isMatched}`);
-
-  // 필터 성별 필터 토글
   const [CheckGender, setCheckGender] = useState(null);
-  console.log(`CheckGender : ${CheckGender}`);
-
-  // 필터 인원 필터 토글
   const [CheckPersonnel, setCheckPersonnel] = useState(null);
-  console.log(`CheckPersonnel : ${CheckPersonnel}`);
-
-  // 필터 지역 DTO 받기
   const [selectedPlace, setSelectedPlace] = useState(null);
-
   const [listData, setListData] = useState([]);
 
   useEffect(() => {
@@ -35,35 +23,24 @@ function Main() {
     }
   }, [navigate]);
 
-  // =====함수=====
-
-  //필터 지역 이름 받기
   const regionFilterDTO = (Place) => {
     setSelectedPlace(Place);
   };
-  console.log(`selectedPlace : ${selectedPlace}`);
 
-  // =====이벤트 함수=====
-
-  // 필터 참여가능한 것만 보기
   const filterPossibleHandler = () => {
     setIsMatched(!isMatched);
   };
 
-  // 필터 성별 토글 이벤트
   const filterGenderHandler = (Gender) => {
     setCheckGender((prev) => (prev === Gender ? null : Gender));
   };
 
-  //필터 인원 토글 이벤트
   const filterPersonnelHandler = (personnel) => {
     setCheckPersonnel((prev) => (prev === personnel ? null : personnel));
   };
 
-  // =====post fetch=====
   useEffect(() => {
     const fetchFilterData = async () => {
-      // DTO
       const payload = {
         gender: CheckGender,
         groupPlace: selectedPlace,
@@ -81,7 +58,6 @@ function Main() {
           body: JSON.stringify(payload),
         });
 
-        // 응답처리
         if (!response.ok) {
           throw new Error("오류");
         }
@@ -114,7 +90,7 @@ function Main() {
 export default Main;
 
 export const MainMeetingListFetch = async () => {
-const response = await fetch("http://localhost:8253/main", {
+  const response = await fetch("http://localhost:8253/main", {
     headers: {
       Authorization: "Bearer " + getUserToken(),
     },
@@ -123,11 +99,21 @@ const response = await fetch("http://localhost:8253/main", {
   return response;
 };
 
-// 토큰여부 (로그인 여부)에 따른 홈으로 이동 확인 loader
-export const authCheckLoader = async () => {
-  const token = getUserToken();
-  if (!token) {
-    return redirect("/intro"); // 토큰이 없으면 intro 페이지로 이동
+// 접근 권한을 확인하는 loader
+export const authCheckLoader = () => {
+  const userData = getUserToken();
+  
+  if (!userData) {
+    const hasVisited = localStorage.getItem("hasVisited");
+
+    if (!hasVisited) {
+      localStorage.setItem("hasVisited", "true");
+    } else {
+      alert("로그인이 필요한 서비스입니다.");
+    }
+    
+    return redirect("/intro");
   }
-  return null; // 토큰이 있으면 홈으로
+  
+  return null; // 현재 페이지에 머뭄
 };

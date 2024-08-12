@@ -22,7 +22,7 @@ export const authCheckLoader = () => {
   const userData = getUserData();
   if (!userData) {
     alert("로그인이 필요한 서비스입니다.");
-    return redirect("/login");
+    return redirect("/intro");
   }
   return null; // 현재 페이지에 머뭄
 };

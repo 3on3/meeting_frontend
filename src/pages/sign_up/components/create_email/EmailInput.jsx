@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import DefaultInput from "../../../../components/common/inputs/DefaultInput";
 import { emailVerification } from "../../../../assets/js/Verification";
 import MtButtons from "../../../../components/common/buttons/MtButtons";
+import styles1 from './EmailInput.module.scss'
 
 const EmailInput = ({
   styles,
@@ -20,11 +21,19 @@ const EmailInput = ({
   const emailInputHandler = (e) => {
     setEmailInput(e.target.value);
     setSignUpEmail(e.target.value);
+    // 이메일 입력 변경 시 에러 초기화
+    if (error) {
+      setError("");
+    }
   };
 
   const univNameInputHandler = (e) => {
     setUnivNameInput(e.target.value);
     setUnivName(e.target.value);
+    // 대학교 이름 입력 변경 시 에러 초기화
+    if (error) {
+      setError("");
+    }
   };
 
   useEffect(() => {
@@ -33,45 +42,46 @@ const EmailInput = ({
 
   const submitHandler = async () => {
     setLoading(true);
-    setError("");
+    setError(""); // 이전의 에러 메시지 초기화
     try {
-      const response = await fetch("http://localhost:8253/signup/check-email", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: emailInput,
-          univName: univNameInput,
-        }),
-      });
-      
-      console.log('Raw response:', response);
-      
-      const responseData = await response.text();
-      console.log('Response text:', responseData);
-      
-      let data;
-      try {
-        data = JSON.parse(responseData);
-      } catch (e) {
-        console.error('Failed to parse JSON:', e);
-        throw new Error('서버에서 유효하지 않은 응답을 받았습니다.');
-      }
-      
-      console.log("Parsed data:", data);
-  
-      if (!response.ok) {
-        throw new Error(data.message || `서버 에러: ${response.status}`);
-      }
-  
-      // 성공적인 응답 후 처리 로직
-      setIsSubmit([true, false, false]);
+        const response = await fetch("http://localhost:8253/signup/check-email", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                email: emailInput,
+                univName: univNameInput,
+            }),
+        });
+        
+        const responseData = await response.text();
+        
+        let data;
+        try {
+            data = JSON.parse(responseData);
+        } catch (e) {
+            console.error('Failed to parse JSON:', e);
+            throw new Error('서버에서 유효하지 않은 응답을 받았습니다.');
+        }
+
+        if (!response.ok) {
+            throw new Error(data.message || `서버 에러: ${response.status}`);
+        }
+
+        // 중복된 이메일인 경우 에러 메시지 설정
+        if (data) {
+            setError("이미 사용 중인 이메일입니다. 다른 이메일을 사용해 주세요.");
+            return;
+        }
+
+        // 성공적인 응답 후 처리 로직
+        setIsSubmit([true, false, false]);
     } catch (error) {
-      console.error('Error in submitHandler:', error);
-      setError(error.message || '알 수 없는 오류가 발생했습니다.');
+        console.error('Error in submitHandler:', error);
+        setError(error.message || '알 수 없는 오류가 발생했습니다.');
     } finally {
-      setLoading(false);
+        setLoading(false);
     }
   };
 
@@ -102,7 +112,7 @@ const EmailInput = ({
           />
         </div>
       )}
-      {error && <p className={styles.error}>{error}</p>}
+      {error && <p className={styles1.error}>{error}</p>}
     </>
   );
 };

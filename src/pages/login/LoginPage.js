@@ -17,7 +17,7 @@ const LoginPage = () => {
     navigate("/login/first-login");
   };
 
-const [idInput, setIdInput] = useState("");
+  const [idInput, setIdInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
   const [idStatus, setIdStatus] = useState(true);
   const [autoLogin, setAutoLogin] = useState(false);
@@ -116,6 +116,10 @@ const [idInput, setIdInput] = useState("");
     }
   };
 
+  const SignUpClickHandler = () => {
+    navigate("/sign-up");
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.logo}>
@@ -150,7 +154,12 @@ const [idInput, setIdInput] = useState("");
         />
       </div>
 
-      <p className={styles.findPassword}>비밀번호 찾기</p>
+      <div className={styles.findSection}>
+        <p className={styles.signUp} onClick={SignUpClickHandler}>
+          회원가입
+        </p>
+        <p className={styles.findPassword}>비밀번호 찾기</p>
+      </div>
     </div>
   );
 };

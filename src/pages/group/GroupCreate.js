@@ -88,7 +88,7 @@ const GroupCreate = () => {
 
   return (
     <form onSubmit={handleSubmit} className={styles.container}>
-      <h1 className={`title ${styles.text}`}>그룹 생성</h1>
+      <h1 className={`title ${styles.text}`}>새 그룹 만들기</h1>
       <DefaultInput
         inputState={""}
         placeholder={"그룹 이름을 입력해 주세요."}
@@ -125,7 +125,7 @@ const GroupCreate = () => {
       </ul>
       <div className={styles.choiceContainer}>
         <div className={styles.genContainer}>
-          <div className={styles.gender}>성별</div>
+          {/* <div className={styles.gender}>성별</div>
           <div className={styles.gen}>
             <div
               style={{
@@ -139,8 +139,8 @@ const GroupCreate = () => {
               }}
             >
               {gender === "M" ? "남자" : "여자"}
-            </div>
-          </div>
+            </div> */}
+          {/* </div> */}
         </div>
         <div className={styles.numberContainer}>
           <div className={styles.numberOfParticipants}>참여 인원</div>
@@ -168,18 +168,22 @@ const GroupCreate = () => {
             />
           </div>
         </div>
-        <MtButtons
-          buttonType={"apply"}
-          buttonText={"그룹 만들기"}
-          eventType={"submit"}
-          className={styles.groupBtn}
-        />
+        <div className={styles.btns}>
         <MtButtons
           buttonType={"cancel"}
           buttonText={"취소"}
           eventType={"button"}
           eventHandler={mainPageHandler}
         />
+        <MtButtons
+          buttonType={"apply"}
+          buttonText={"그룹 생성"}
+          eventType={"submit"}
+          className={styles.groupBtn}
+        />
+     
+        </div>
+       
       </div>
     </form>
   );

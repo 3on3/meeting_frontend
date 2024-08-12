@@ -20,7 +20,7 @@ const MyGroupSelectModal = ({setModalActive,setIsChanged,responseGroupId}) => {
 
   // 모달 닫기 버튼
   const onClickCancelBtn = ()=>{
-    MyGroupSelectModal(false)
+    setModalActive(false)
   }
 
 

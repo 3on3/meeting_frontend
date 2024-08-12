@@ -11,8 +11,8 @@
   margin: 0 calc(100vw * (20 / 500));
   // 공통 타이틀
   .filterTitle {
-    width: calc(100vw * (55 / 500));
-    font-size: calc(100vw * (18 / 500));
+    width: calc(100vw * (75 / 500));
+    font-size: calc(100vw * (16 / 500));
     font-weight: 700;
     color: var(--color-bk);
   }
@@ -70,11 +70,11 @@
 
       .filterTitle {
         font-weight: 600;
-        font-size: calc(100vw * (17 / 500));
+        font-size: calc(100vw * (16 / 500));
       }
 
       li {
-        margin-right: calc(100vw * (25 / 500));
+        margin-right: calc(100vw * (40 / 500));
         font-weight: 500;
         font-size: calc(100vw * (16 / 500));
       }

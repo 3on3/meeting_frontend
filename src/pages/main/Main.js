@@ -5,6 +5,8 @@ import RegionFilter from "./components/RegionFilter";
 import MeetingList from "./components/MeetingList";
 import { getUserToken } from "../../config/auth";
 import { useInView } from "react-intersection-observer";
+import EmptyGroups from "./EmptyGroups";
+import { debounce } from "lodash";
 
 function Main() {
   const { wrapper } = styles;
@@ -21,6 +23,7 @@ function Main() {
 
   // 필터 지역 DTO 받기
   const [selectedPlace, setSelectedPlace] = useState(null);
+  console.log(`바깥쪽 selectedPlace :`, selectedPlace);
 
   // meeting List Data
   const [listData, setListData] = useState([]);
@@ -33,6 +36,9 @@ function Main() {
 
   // 로딩 상태 추가
   const [isLoading, setIsLoading] = useState(false);
+
+  // 초기 로드 상태 추가
+  const [isFirstLoad, setIsFirstLoad] = useState(true);
 
   //scrollRef
   const [scrollRef, inView] = useInView({
@@ -63,6 +69,8 @@ function Main() {
   const filterPersonnelHandler = (personnel) => {
     setCheckPersonnel((prev) => (prev === personnel ? null : personnel));
   };
+  // =====debounce 함수 생성=====
+  const debouncedFetchFilterData = debounce(() => fetchFilterData(true), 500);
 
   // =====post fetch=====
   const fetchFilterData = async (isInitialLoad = false) => {
@@ -81,6 +89,8 @@ function Main() {
       pageNo: isInitialLoad ? 1 : pageNo,
       pageSize: 4,
     };
+    console.log(`payload :`, payload);
+    console.log(`selectedPlace :`, selectedPlace);
 
     try {
       const response = await fetch("http://localhost:8253/main", {
@@ -119,6 +129,8 @@ function Main() {
     } finally {
       // 로딩 상태 종료
       setIsLoading(false);
+      // 첫 로드 완료 후 상태 업데이트
+      setIsFirstLoad(false);
     }
   };
 
@@ -126,6 +138,7 @@ function Main() {
     setListData([]);
     setPageNo(1);
     setHasMore(true);
+    // debouncedFetchFilterData(); // 수정
     fetchFilterData(true);
   }, [CheckGender, selectedPlace, CheckPersonnel, isMatched]);
 
@@ -149,6 +162,7 @@ function Main() {
       />
       <RegionFilter regionFilterDTO={regionFilterDTO} />
 
+      {!isFirstLoad && listData.length === 0 && <EmptyGroups />}
       <MeetingList meetingList={listData} />
       <div ref={scrollRef} style={{ height: "100px" }}></div>
     </div>

@@ -93,7 +93,7 @@ export const router = createBrowserRouter([
       // 채팅 라우터
       {
         path: "chatroom/:id",
-        element: <Chat/>
+        element: <Chat />,
         // children: chatRouter,
       },
       {

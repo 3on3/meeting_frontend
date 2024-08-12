@@ -35,16 +35,34 @@
     display: flex;
     margin-left: calc(100vw * (20 / 500));
     margin-top: calc(100vw * (20 / 500));
-    font-size: calc(100vw * (14 / 500));
+    font-size: calc(100vw * (16 / 500));
     margin-bottom: calc(100vw * (50 / 500));
     justify-content: start;
     align-items: center;
 
     .numberOfParticipants {
-      font-weight: 700;
+      font-weight: 600;
     }
     .number {
       margin-left: calc(100vw * (24 / 500));
+      display: flex;
+      label {
+        margin-right: calc(100vw * (5 / 500));
+        width: fit-content;
+        &:last-child {
+          margin-right: calc(100vw * (10 / 500));
+        }
+      }
+    }
+  }
+  .btns {
+    display: flex;
+    margin-top: calc(100vw * (80 / 500));
+    button {
+      margin-right: calc(100vw * (10 / 500));
+      &:last-child {
+        margin-right: 0;
+      }
     }
   }
 }

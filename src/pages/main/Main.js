@@ -4,6 +4,7 @@ import styles from "./Main.module.scss";
 import RegionFilter from "./components/RegionFilter";
 import MeetingList from "./components/MeetingList";
 import { getUserToken } from "../../config/auth";
+import { redirect, useNavigate } from "react-router-dom";
 import ModalLayout from "../../components/common/modal/ModalLayout";
 import MyGroupSelectModal from "../../components/myGroupSelectModal/MyGroupSelectModal";
 import { useModal } from "../../context/ModalContext";
@@ -11,18 +12,11 @@ import { useInView } from "react-intersection-observer";
 
 function Main() {
   const { wrapper } = styles;
+  const navigate = useNavigate();
 
-  // =====useState 선언=====
-  // 필터 참여가능한 것만 보기 토글
   const [isMatched, setIsMatched] = useState(false);
-
-  // 필터 성별 필터 토글
   const [CheckGender, setCheckGender] = useState(null);
-
-  // 필터 인원 필터 토글
   const [CheckPersonnel, setCheckPersonnel] = useState(null);
-
-  // 필터 지역 DTO 받기
   const [selectedPlace, setSelectedPlace] = useState(null);
 
   // meeting List Data
@@ -43,30 +37,29 @@ function Main() {
     threshold: 1.0,
   });
 
-  // =====함수=====
+  useEffect(() => {
+    const token = getUserToken();
+    if (!token) {
+      navigate("/intro");  // 토큰이 없으면 intro 페이지로 리디렉션
+    }
+  }, [navigate]);
 
-  //필터 지역 이름 받기
   const regionFilterDTO = (Place) => {
     setSelectedPlace(Place);
   };
 
   // =====이벤트 함수=====
-
-  // 필터 참여가능한 것만 보기
   const filterPossibleHandler = () => {
     setIsMatched(!isMatched);
   };
 
-  // 필터 성별 토글 이벤트
   const filterGenderHandler = (Gender) => {
     setCheckGender((prev) => (prev === Gender ? null : Gender));
   };
 
-  //필터 인원 토글 이벤트
   const filterPersonnelHandler = (personnel) => {
     setCheckPersonnel((prev) => (prev === personnel ? null : personnel));
   };
-
   // =====post fetch=====
   const fetchFilterData = async (isInitialLoad = false) => {
     // 데이터가 더 이상 없으면 중복 호출 방지
@@ -165,3 +158,32 @@ function Main() {
 }
 
 export default Main;
+
+export const MainMeetingListFetch = async () => {
+  const response = await fetch("http://localhost:8253/main", {
+    headers: {
+      Authorization: "Bearer " + getUserToken(),
+    },
+  });
+
+  return response;
+};
+
+// 접근 권한을 확인하는 loader
+export const authCheckLoader = () => {
+  const userData = getUserToken();
+  
+  if (!userData) {
+    const hasVisited = localStorage.getItem("hasVisited");
+
+    if (!hasVisited) {
+      localStorage.setItem("hasVisited", "true");
+    } else {
+      alert("로그인이 필요한 서비스입니다.");
+    }
+    
+    return redirect("/intro");
+  }
+  
+  return null; // 현재 페이지에 머뭄
+};

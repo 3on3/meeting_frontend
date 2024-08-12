@@ -1,10 +1,10 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {Outlet} from 'react-router-dom';
+import {Outlet, useNavigate} from 'react-router-dom';
 import Header from './Header';
 import {MainWebSocket} from "../assets/js/webSocket/MainWebSocket";
 import {useSelector} from "react-redux";
 import {MainWebSocketContext} from "../context/MainWebSocketContext";
-
+import styles from "./alarm.module.scss"
 // import './RootLayout.css';
 
 const RootLayout = () => {
@@ -15,11 +15,17 @@ const RootLayout = () => {
 
     const socketRef = useRef(null);
 
+    const [alarmRoomId, setAlarmRoomId] = useState(null);
+
+    const [isAlarm, setIsAlarm] = useState(false);
+
+    const navigate = useNavigate();
+
     useEffect(() => {
 
         if(isLogin) {
 
-            MainWebSocket(socketRef);
+            MainWebSocket(socketRef, setAlarmRoomId, setIsAlarm);
 
             setMainSocket(socketRef.current);
 
@@ -37,6 +43,18 @@ const RootLayout = () => {
         }
     }, [isLogin]);
 
+    useEffect(() => {
+        if(isAlarm === true) {
+            setTimeout(() => {
+                setIsAlarm(false)
+            }, 30000)
+        }
+    }, [isAlarm]);
+
+    const alarmClickHandler = () => {
+        navigate("/group/"+alarmRoomId);
+        setIsAlarm(false);
+    }
 
   return (
 
@@ -45,9 +63,10 @@ const RootLayout = () => {
             mainWebSocket: mainSocket,
         }}
     >
-      <Header /> 
+      <Header />
       <main className='container'>
-        <Outlet />
+          {isAlarm && <div className={styles.alarm} onClick={alarmClickHandler}>매칭 신청이 도착했습니다!</div>}
+        <Outlet/>
       </main>
       
     </MainWebSocketContext.Provider>

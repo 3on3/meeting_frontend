@@ -20,7 +20,6 @@ export const useFetchRequest = () => {
         body: JSON.stringify(payload),
       });
       console.log(payload);
-
       if (response.ok) {
         setIsChanged(true);
 
@@ -35,6 +34,30 @@ export const useFetchRequest = () => {
     } finally {
       setIsLoading(false);
     }
+  }
+
+  const alarmFetch = async (responseGroupId) => {
+    console.log(responseGroupId);
+
+    const payload = {
+      responseGroupId: responseGroupId,
+    }
+
+    const response = await fetch(`${MYPAGEMATCHING_URL}/alarm`, {
+      method:'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    // console.log(response)
+
+    const data = await response.json();
+
+    return data;
+
+
   }
 
   const processFetch = async (requestUrl, payload, setIsChanged) => {
@@ -99,9 +122,9 @@ export const useFetchRequest = () => {
     }
   };
 
-  
 
   return {
+    alarmFetch,
     requestFetch,
     processFetch,
     createFetch,

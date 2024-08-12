@@ -139,6 +139,7 @@ const Group = () => {
         gender={gender}
         groupName={groupName}
         auth={auth}
+        id={id}
       />
       <GroupViewBody
         styles={styles}

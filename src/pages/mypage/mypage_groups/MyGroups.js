@@ -11,8 +11,6 @@ const MyGroups = () => {
     <ul className={styles.MyGroupsWrapper}>
       <p className={styles.myGroupsTitle}>내가 속한 그룹</p>
       {myGroupList.map(group => <GroupBox key={group.id} state={"sky"} group={group} />)}
-      
-
     </ul>
   );
 };

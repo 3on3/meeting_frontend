@@ -1,5 +1,7 @@
-li {
+
+.groupBoxWrap{
   list-style: none;
+  width: 100%;
 }
 
 .groupBox {
@@ -30,7 +32,7 @@ li {
 
     .groupTitle {
       font-size: calc(100vw * (22 / 500));
-      width: calc(100vw * (200 / 500));
+      // width: calc(100vw * (200 / 500));
       font-weight: 600;
     }
 

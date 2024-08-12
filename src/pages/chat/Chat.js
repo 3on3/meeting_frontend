@@ -6,13 +6,22 @@ import styles from "./Chat.module.scss";
 import ChatMembersModal from "./components/member_modal/ChatMembersModal";
 import { useParams } from "react-router-dom";
 import { CHATROOM_URL } from '../../config/host-config';
+import {chatWebSocket} from "./js/ChatWebSocket";
+import {fetchMessage, saveMessage} from "./js/ChatFetch"
 
 
 const Chat = () => {
   const {id} = useParams();
   // input value
   const [value, setValue] = useState("");
+
   const [chatRoomData, setChatRoomData] = useState({});
+
+  // 채팅 배열
+  const [messageList, setMessageList] = useState([]);
+
+  // 웹소켓
+  const [socket, setSocket] = useState(null);
 
   console.log('id:',id);
   
@@ -41,37 +50,17 @@ const Chat = () => {
     console.log("chatRoomData: ",chatRoomData);
     
   },[id])
-  
 
 
+  useEffect(() => {
+    // 웹소켓 설정
+    const cleanUp = chatWebSocket(setSocket, setMessageList);
 
-  // 채팅 배열
-  const [messageList, setMessageList] = useState([
-    {
-      id: 1,
-      userName: "유저1",
-      auth: "otherUser",
-      content: "하이루 방가방가",
-    },
-    {
-      id: 2,
-      userName: "유저1",
-      auth: "otherUser",
-      content: "몇 살?",
-    },
-    {
-      id: 3,
-      userName: "유저2",
-      auth: "user",
-      content: "23살",
-    },
-    {
-      id: 4,
-      userName: "유저1",
-      auth: "otherUser",
-      content: "ㅇㅇ",
-    },
-  ]);
+    // 채팅방을 열면 이 채팅방의 메시지 받아오기
+    fetchMessage(setMessageList, id);
+
+    return cleanUp;
+  }, []);
 
   // input value
   const onChangeInput = (e) => {
@@ -79,27 +68,31 @@ const Chat = () => {
   };
 
   // 메세지 보내기 버튼
-  const onClickSendBtn = () => {
+  const onClickSendBtn = async () => {
+
     if (value !== "") {
-      const newMessage = {
-        id: messageList.length + 1,
-        userName: "뉴유저",
-        auth: "user",
-        content: value,
-      };
+      const payload = {
+        roomId: id,
+        message: value,
+      }
 
-      setMessageList((prev) => [...prev, newMessage]);
-      setValue("");
+      const data = {
+        type: 'message',
+        message: await saveMessage(payload)
+      }
+
+      console.log(data);
+
+
+
+      socket.send(JSON.stringify(data));
+
+      console.log(JSON.stringify(data));
+      // setMessageList(prevState => [...prevState, data]);
     }
+
+    setValue("");
   };
-
-  useEffect(() => {}, [messageList]);
-
-  // 참여자 보기 버튼
-  // const [modalActive, setModalActive] = useState(false);
-  // const onClickViewMemberBtn = ()=>{
-  //   setModalActive(true)
-  // }
 
   return (
     <div className={styles.container}>
@@ -112,7 +105,7 @@ const Chat = () => {
         value={value}
       />
       {/* 모달 */}
-      <ChatMembersModal styles={styles} />
+      {/* <ChatMembersModal styles={styles} /> */}
     </div>
   );
 };

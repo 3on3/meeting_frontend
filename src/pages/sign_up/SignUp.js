@@ -1,13 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SignUpComplete from "./components/SignUpComplete";
 import CreateEmail from "./components/create_email/CreateEmail";
 import styles from "./components/SignUpComponent.module.scss";
 import CreateInformations from "./components/create_informations/CreateInformation";
-import CreatePassword from './components/create_password/CreatePassword';
+import CreatePassword from "./components/create_password/CreatePassword";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const [isEmailSubmit, setIsEmailSubmit] = useState([false, false, false]);
-  const [isInfoSubmit, setIsInfoSubmit] = useState([false, false, false, false]);
+  const [isInfoSubmit, setIsInfoSubmit] = useState([
+    false,
+    false,
+    false,
+    false,
+  ]);
   const [isPwSubmit, setIsPwSubmit] = useState([false, false]);
 
   const [email, setEmail] = useState(""); // 이메일 상태 추가
@@ -15,6 +21,7 @@ const SignUp = () => {
   const [major, setMajor] = useState(""); // 전공 상태 추가
   const [verifiedData, setVerifiedData] = useState(null); // 인증된 데이터 상태 추가
   const [userData, setUserData] = useState({}); // 사용자 정보 추가
+  const navigate = useNavigate();
 
   const handleVerificationSuccess = (data) => {
     setVerifiedData(data); // 인증된 데이터를 상위 상태에 저장
@@ -23,7 +30,7 @@ const SignUp = () => {
 
   const submitData = async (password) => {
     if (!verifiedData) {
-      console.error('인증되지 않은 데이터입니다.');
+      console.error("인증되지 않은 데이터입니다.");
       return;
     }
 
@@ -34,32 +41,32 @@ const SignUp = () => {
       phoneNumber: userData.phoneNumber,
       univName: univName,
       major: major,
-      gender: userData.gender === '남' ? 'M' : 'F',
+      gender: userData.gender === "남" ? "M" : "F",
       password: password,
-      nickname: null
+      nickname: null,
     };
-    console.log('payload: ', payload);
+    console.log("payload: ", payload);
 
     try {
-      const response = await fetch('http://localhost:8253/signup/join', {
-        method: 'POST',
+      const response = await fetch("http://localhost:8253/signup/join", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(payload),
       });
 
       if (!response.ok) {
         const error = await response.text();
-        console.error('Error:', error);
+        console.error("Error:", error);
       } else {
         const result = await response.json();
-        console.log('Success:', result);
+        console.log("Success:", result);
 
-        localStorage.setItem('userData', JSON.stringify(payload));
+        localStorage.setItem("userData", JSON.stringify(payload));
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
     }
   };
 
@@ -87,8 +94,9 @@ const SignUp = () => {
           setIsSubmit={setIsPwSubmit}
           submitData={submitData} // 서버로 데이터를 전송하는 함수 전달
         />
-      ) : <SignUpComplete />
-      }
+      ) : (
+        <SignUpComplete />
+      )}
     </div>
   );
 };

@@ -7,11 +7,14 @@ import { useLocation } from "react-router-dom";
 const Header = () => {
   const location = useLocation();
   const [floatingNaviActive, setFloatingNaviActive] = useState(false);
+
+  const showMainNavigation = (location.pathname === "/login");
+
   return (
     <>
     {location.pathname !== "/intro" &&(
       <header id={styles.header}>
-      <MainNavigation styles={styles} />
+      {!showMainNavigation && <MainNavigation styles={styles} />}
       <div
         className={
           floatingNaviActive

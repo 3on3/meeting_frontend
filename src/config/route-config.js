@@ -19,7 +19,6 @@ import MyGroups, {
 import GroupCreate from "../pages/group/GroupCreate";
 import Withdraw from "../pages/mypage/modify_information/withdraw/Withdraw";
 import MyChats from "../pages/mypage/mypage_chats/MyChats";
-import TestChat from "../assets/js/test-chat/TestChat";
 import InvitePage from "../pages/invite/InvitePage";
 import { authCheckLoader, autoCheckReturnLoader } from "./auth";
 
@@ -57,6 +56,7 @@ const chatRouter = [
   {
     path: "/chat",
     element: <Chat />,
+    loader: authCheckLoader,
   },
 ];
 
@@ -69,6 +69,7 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <Main />,
+        loader: authCheckLoader, // 메인 페이지 접근 시 토큰 여부 확인
       },
       {
         path: "intro",
@@ -96,15 +97,12 @@ export const router = createBrowserRouter([
         element: <Chat />,
         // children: chatRouter,
       },
-      {
-        path: "testChat",
-        element: <TestChat />,
-      },
       // 마이페이지 라우터
       {
         path: "mypage",
         element: <MyPage />,
         children: mypageRouter,
+        loader: authCheckLoader,
       },
       // 초대 링크 라우터 추가
       {

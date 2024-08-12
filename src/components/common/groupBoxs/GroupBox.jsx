@@ -89,7 +89,7 @@ function GroupBox({ state, group, className, setIsChanged }) {
 
   return (
     <>
-      <li>
+      <li className={styles.groupBoxWrap}>
         {state === "sky-request" && (
           <RequestBtns
             request={group}

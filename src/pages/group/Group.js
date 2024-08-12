@@ -8,6 +8,7 @@ import { getUserToken } from "../../config/auth";
 import RequestModal from "./components/modal/RequestModal";
 import { useFetchRequest } from "../../hook/useFetchRequest";
 import { GROUP_URL } from "../../config/host-config";
+import MyGroupSelectModal from '../../components/myGroupSelectModal/MyGroupSelectModal';
 import {MainWebSocketContext} from "../../context/MainWebSocketContext";
 
 const Group = () => {
@@ -17,8 +18,9 @@ const Group = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [groupUsers, setGroupUsers] = useState([]);
+  const [modalActive, setModalActive] = useState(false);
+  const [isChanged, setIsChanged] = useState(false)
   const {requestFetch, alarmFetch} = useFetchRequest();
-
   const mainSocket= useContext(MainWebSocketContext);
 
   console.log(groupUsers);
@@ -115,12 +117,13 @@ const Group = () => {
       case "USER":
         onClickHandler = async () => {
           console.log("ddd");
+          setModalActive(!modalActive)
+          // const payload = {
+          //   requestGroupId: "672f6643-441b-4eda-96c8-59f45f4149f4",
+          //   responseGroupId: id,
+          // };
+          // requestFetch(payload);
 
-          const payload = {
-            requestGroupId: "6b1f7b72-3c38-4cd6-8f05-9fd5e327c89e",
-            responseGroupId: id,
-          };
-          await requestFetch(payload);
 
           const hostUser = await alarmFetch(id);
 
@@ -179,6 +182,8 @@ const Group = () => {
       {auth === "HOST" && (
         <RequestModal groupId={id} group={groupData} styles={styles} />
       )}
+    {modalActive && <MyGroupSelectModal setIsChanged={setIsChanged} responseGroupId={id}/>}
+
     </>
   );
 };

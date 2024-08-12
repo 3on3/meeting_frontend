@@ -26,6 +26,7 @@ const GroupViewHead = ({
       <GroupDeleteModal groupName={groupName} id={id} />
     );
   };
+
   return (
     <>
       <div className={styles.content}>

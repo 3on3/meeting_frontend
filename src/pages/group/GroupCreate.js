@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import RadioButton from "../../components/common/buttons/radiobutton/RadioButton";
 import { GROUP_URL } from "../../config/host-config";
 import { getUserToken, userDataLoader } from "../../config/auth";
+import { useModal } from "../../context/ModalContext";
+import GroupCreateModal from "./components/modal/GroupCreateModal";
 
 const GroupCreate = () => {
   const navigate = useNavigate();
@@ -13,6 +15,7 @@ const GroupCreate = () => {
   const [selectedRegion, setSelectedRegion] = useState("");
   const [groupGender, setGroupGender] = useState("");
   const [maxNum, setMaxNum] = useState("");
+  const { openModal } = useModal();
 
   // 사용자 성별을 가져와서 초기화
   const { gender: userGender } = userDataLoader();
@@ -46,34 +49,34 @@ const GroupCreate = () => {
     setGroupName(e.target.value);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
 
-    const payload = {
-      groupName,
-      groupPlace: selectedRegion,
-      groupGender,
-      maxNum,
-    };
+  //   const payload = {
+  //     groupName,
+  //     groupPlace: selectedRegion,
+  //     groupGender,
+  //     maxNum,
+  //   };
 
-    console.log(payload);
+  //   console.log(payload);
 
-    const response = await fetch(`${GROUP_URL}/create`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + getUserToken(),
-      },
-      body: JSON.stringify(payload),
-    });
+  //   const response = await fetch(`${GROUP_URL}/create`, {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Authorization: "Bearer " + getUserToken(),
+  //     },
+  //     body: JSON.stringify(payload),
+  //   });
 
-    if (response.ok) {
-      navigate("/");
-    } else {
-      const errorText = await response.text();
-      alert(errorText);
-    }
-  };
+  //   if (response.ok) {
+  //     navigate("/");
+  //   } else {
+  //     const errorText = await response.text();
+  //     alert(errorText);
+  //   }
+  // };
 
   const regions = [
     { value: "SEOUL_GYEONGGI", label: "서울/경기" },
@@ -86,9 +89,22 @@ const GroupCreate = () => {
     { value: "JEJUDO", label: "제주도" },
   ];
 
+  const openConfirmModal = () => {
+    openModal(
+      "",
+      "completeMode",
+      <GroupCreateModal
+        groupName={groupName}
+        selectedRegion={selectedRegion}
+        groupGender={groupGender}
+        maxNum={maxNum}
+      />
+    );
+  };
+
   return (
-    <form onSubmit={handleSubmit} className={styles.container}>
-      <h1 className={`title ${styles.text}`}>그룹 생성</h1>
+    <div className={styles.container}>
+      <h1 className={`title ${styles.text}`}>새 그룹 만들기</h1>
       <DefaultInput
         inputState={""}
         placeholder={"그룹 이름을 입력해 주세요."}
@@ -125,7 +141,7 @@ const GroupCreate = () => {
       </ul>
       <div className={styles.choiceContainer}>
         <div className={styles.genContainer}>
-          <div className={styles.gender}>성별</div>
+          {/* <div className={styles.gender}>성별</div>
           <div className={styles.gen}>
             <div
               style={{
@@ -139,8 +155,8 @@ const GroupCreate = () => {
               }}
             >
               {gender === "M" ? "남자" : "여자"}
-            </div>
-          </div>
+            </div> */}
+          {/* </div> */}
         </div>
         <div className={styles.numberContainer}>
           <div className={styles.numberOfParticipants}>참여 인원</div>
@@ -168,20 +184,23 @@ const GroupCreate = () => {
             />
           </div>
         </div>
-        <MtButtons
-          buttonType={"apply"}
-          buttonText={"그룹 만들기"}
-          eventType={"submit"}
-          className={styles.groupBtn}
-        />
-        <MtButtons
-          buttonType={"cancel"}
-          buttonText={"취소"}
-          eventType={"button"}
-          eventHandler={mainPageHandler}
-        />
+        <div className={styles.btns}>
+          <MtButtons
+            buttonType={"cancel"}
+            buttonText={"취소"}
+            eventType={"button"}
+            eventHandler={mainPageHandler}
+          />
+          <MtButtons
+            buttonType={"apply"}
+            buttonText={"그룹 생성"}
+            eventType={"click"}
+            eventHandler={openConfirmModal}
+            className={styles.groupBtn}
+          />
+        </div>
       </div>
-    </form>
+    </div>
   );
 };
 

@@ -2,8 +2,8 @@
   display: inline-flex;
   align-items: center;
   cursor: pointer;
-  margin: 10px;
-  font-family: Arial, sans-serif;
+  // font-family: Arial, sans-serif;
+  width: 100%;
 }
 
 .radioInput {
@@ -20,6 +20,8 @@
   border-radius: 50%; 
   position: relative;
   transition: background-color 0.3s, border-color 0.3s;
+  flex-shrink: 0;
+
 }
 
 .radioInput + span::after {
@@ -52,7 +54,7 @@
 }
 
 .radioInput:checked + span + span {
-  font-weight: bold; /* 라디오 버튼이 선택된 경우 텍스트를 진하게 */
+  // font-weight: bold; /* 라디오 버튼이 선택된 경우 텍스트를 진하게 */
 }
 
 label span {

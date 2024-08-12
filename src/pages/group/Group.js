@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, {useContext, useEffect, useState} from "react";
 import { useParams } from "react-router-dom";
 import GroupViewHead from "./components/GroupViewHead";
 import styles from "./Group.module.scss";
 import GroupViewBody from "./components/GroupViewBody";
 import MtButtons from "../../components/common/buttons/MtButtons";
 import { getUserToken } from "../../config/auth";
-import { MYPAGEMATCHING_URL } from "../../config/host-config";
 import RequestModal from "./components/modal/RequestModal";
 import { useFetchRequest } from "../../hook/useFetchRequest";
 import { GROUP_URL } from "../../config/host-config";
+import MyGroupSelectModal from '../../components/myGroupSelectModal/MyGroupSelectModal';
+import {MainWebSocketContext} from "../../context/MainWebSocketContext";
 
 const Group = () => {
   const { id } = useParams();
@@ -18,6 +19,11 @@ const Group = () => {
   const [error, setError] = useState(null);
   const [groupUsers, setGroupUsers] = useState([]);
   const { requestFetch } = useFetchRequest();
+  const [modalActive, setModalActive] = useState(false);
+  const [isChanged, setIsChanged] = useState(false)
+  const {requestFetch, alarmFetch} = useFetchRequest();
+  const mainSocket= useContext(MainWebSocketContext);
+
 
   console.log(groupUsers);
 
@@ -113,6 +119,27 @@ const Group = () => {
       case "USER":
         onClickHandler = async () => {
           console.log("ddd");
+          setModalActive(!modalActive)
+          // const payload = {
+          //   requestGroupId: "672f6643-441b-4eda-96c8-59f45f4149f4",
+          //   responseGroupId: id,
+          // };
+          // requestFetch(payload);
+
+
+          const hostUser = await alarmFetch(id);
+
+          console.log(hostUser.email);
+
+          const socketMessage = {
+            type: "matching",
+            email: hostUser.email,
+            responseGroupId:id
+          }
+
+
+
+          mainSocket.mainWebSocket.send(JSON.stringify(socketMessage));
 
           const payload = {
             requestGroupId: "672f6643-441b-4eda-96c8-59f45f4149f4",
@@ -164,6 +191,8 @@ const Group = () => {
       {auth === "HOST" && (
         <RequestModal groupId={id} group={groupData} styles={styles} />
       )}
+    {modalActive && <MyGroupSelectModal MyGroupSelectModal={MyGroupSelectModal} setIsChanged={setIsChanged} responseGroupId={id}/>}
+
     </>
   );
 };

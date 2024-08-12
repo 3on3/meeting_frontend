@@ -4,6 +4,9 @@ import styles from "./Main.module.scss";
 import RegionFilter from "./components/RegionFilter";
 import MeetingList from "./components/MeetingList";
 import { getUserToken } from "../../config/auth";
+import ModalLayout from "../../components/common/modal/ModalLayout";
+import MyGroupSelectModal from "../../components/myGroupSelectModal/MyGroupSelectModal";
+import { useModal } from "../../context/ModalContext";
 import { useInView } from "react-intersection-observer";
 
 function Main() {
@@ -24,7 +27,7 @@ function Main() {
 
   // meeting List Data
   const [listData, setListData] = useState([]);
-
+  const [isChanged, setIsChanged] = useState(false);
   //페이징 번호
   const [pageNo, setPageNo] = useState(1);
 
@@ -127,7 +130,7 @@ function Main() {
     setPageNo(1);
     setHasMore(true);
     fetchFilterData(true);
-  }, [CheckGender, selectedPlace, CheckPersonnel, isMatched]);
+  }, [CheckGender, selectedPlace, CheckPersonnel, isMatched, isChanged]);
 
   useEffect(() => {
     // 요소가 뷰포트에 들어오고, 데이터가 더 있으며, 로딩 중이 아닐 때만 호출
@@ -138,7 +141,8 @@ function Main() {
   }, [inView, hasMore, isLoading]);
 
   return (
-    <div className={wrapper}>
+    <>
+      <div className={wrapper}>
       <MainFilter
         isMatched={isMatched}
         CheckGender={CheckGender}
@@ -148,10 +152,15 @@ function Main() {
         filterPersonnelHandler={filterPersonnelHandler}
       />
       <RegionFilter regionFilterDTO={regionFilterDTO} />
-
-      <MeetingList meetingList={listData} />
+      <MeetingList meetingList={listData} setIsChanged={setIsChanged}/>
       <div ref={scrollRef} style={{ height: "100px" }}></div>
     </div>
+    {/* <ModalLayout>
+      <MyGroupSelectModal/>
+    </ModalLayout> */}
+    {/* <MyGroupSelectModal setIsChanged={setIsChanged}/> */}
+    </>
+  
   );
 }
 

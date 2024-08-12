@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./GroupBox.module.scss";
 import MatchingButton from "../buttons/matchingButton/MatchingButton";
 import { NavLink } from "react-router-dom";
 import RequestBtns from "./RequestBtns";
 import { useFetchRequest } from "../../../hook/useFetchRequest";
+import { useModal } from "../../../context/ModalContext";
+import MyGroupSelectModal from "../../myGroupSelectModal/MyGroupSelectModal";
 
 function GroupBox({ state, group, className ,setIsChanged }) {
+  const [modalActive, setModalActive] = useState(false);
+
   // =============== param 스타일 가이드 ===============
   /**
    * li 태그라서 쓸때 ul 안에 사용하기
@@ -79,20 +83,30 @@ function GroupBox({ state, group, className ,setIsChanged }) {
   };
 
 
-  const {requestFetch} = useFetchRequest()
+  // const {requestFetch} = useFetchRequest()
   const onClickRequestBtn = (e)=>{
     e.preventDefault();
     
-    const payload = {
-      requestGroupId: "672f6643-441b-4eda-96c8-59f45f4149f4",
-      responseGroupId: group.id,
-    };
+    // const payload = {
+    //   requestGroupId: "672f6643-441b-4eda-96c8-59f45f4149f4",
+    //   responseGroupId: group.id,
+    // };
 
-    requestFetch( payload, setIsChanged);
-    setIsChanged(false);
+    // requestFetch( payload, setIsChanged);
+    // setIsChanged(false);
+    setModalActive(!modalActive)
   }
+  const {openModal} = useModal()
+
+  const onClickBtn = (e)=>{
+    e.preventDefault();
+    
+    // openModal("dddd","completeMode", <MyGroupSelectModal/>)
+  }
+
   return (
-    <li>
+    <>
+     <li>
       {state === "sky-request" && (
       <RequestBtns request={group} styles={styles} setIsChanged={setIsChanged}/>
       )}
@@ -147,11 +161,16 @@ function GroupBox({ state, group, className ,setIsChanged }) {
           </div>
 
           <div className={styles.matchingBt}>
-            <MatchingButton text={"매칭 신청"} onClickHandler={(e)=>  onClickRequestBtn(e)}/>
+            {/* <MatchingButton text={"매칭 신청"} onClickHandler={(e)=>  onClickRequestBtn(e)}/> */}
+            <MatchingButton text={"매칭 신청"}  onClickHandler={(e)=>  onClickRequestBtn(e)} />
           </div>
         </div>
       </NavLink>
     </li>
+    {modalActive && <MyGroupSelectModal setModalActive={setModalActive} setIsChanged={setIsChanged} responseGroupId={group.id}/>}
+
+    </>
+   
   );
 }
 

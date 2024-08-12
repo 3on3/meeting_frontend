@@ -56,6 +56,7 @@ const chatRouter = [
   {
     path: "/chat",
     element: <Chat />,
+    loader: authCheckLoader,
   },
 ];
 
@@ -101,6 +102,7 @@ export const router = createBrowserRouter([
         path: "mypage",
         element: <MyPage />,
         children: mypageRouter,
+        loader: authCheckLoader,
       },
       // 초대 링크 라우터 추가
       {

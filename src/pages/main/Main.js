@@ -19,15 +19,6 @@ function Main() {
   const [CheckPersonnel, setCheckPersonnel] = useState(null);
   const [selectedPlace, setSelectedPlace] = useState(null);
 
-  // 필터 성별 필터 토글
-  const [CheckGender, setCheckGender] = useState(null);
-
-  // 필터 인원 필터 토글
-  const [CheckPersonnel, setCheckPersonnel] = useState(null);
-
-  // 필터 지역 DTO 받기
-  const [selectedPlace, setSelectedPlace] = useState(null);
-
   // meeting List Data
   const [listData, setListData] = useState([]);
   const [isChanged, setIsChanged] = useState(false);

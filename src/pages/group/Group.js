@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, {useContext, useEffect, useState} from "react";
 import { useParams } from "react-router-dom";
 import GroupViewHead from "./components/GroupViewHead";
 import styles from "./Group.module.scss";
 import GroupViewBody from "./components/GroupViewBody";
 import MtButtons from "../../components/common/buttons/MtButtons";
 import { getUserToken } from "../../config/auth";
-import { MYPAGEMATCHING_URL } from "../../config/host-config";
 import RequestModal from "./components/modal/RequestModal";
 import { useFetchRequest } from "../../hook/useFetchRequest";
 import { GROUP_URL } from "../../config/host-config";
+import {MainWebSocketContext} from "../../context/MainWebSocketContext";
 
 const Group = () => {
   const { id } = useParams();
@@ -17,7 +17,9 @@ const Group = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [groupUsers, setGroupUsers] = useState([]);
-  const {requestFetch} = useFetchRequest();
+  const {requestFetch, alarmFetch} = useFetchRequest();
+
+  const mainSocket= useContext(MainWebSocketContext);
 
   console.log(groupUsers);
 
@@ -115,11 +117,25 @@ const Group = () => {
           console.log("ddd");
 
           const payload = {
-            requestGroupId: "672f6643-441b-4eda-96c8-59f45f4149f4",
+            requestGroupId: "6b1f7b72-3c38-4cd6-8f05-9fd5e327c89e",
             responseGroupId: id,
           };
-          requestFetch(payload);
-        
+          await requestFetch(payload);
+
+          const hostUser = await alarmFetch(id);
+
+          console.log(hostUser.email);
+
+          const socketMessage = {
+            type: "matching",
+            email: hostUser.email,
+            responseGroupId:id
+          }
+
+
+
+          mainSocket.mainWebSocket.send(JSON.stringify(socketMessage));
+
         };
         return { type: "cancel", text: "매칭 신청하기" };
       default:

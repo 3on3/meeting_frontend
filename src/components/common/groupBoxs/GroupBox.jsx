@@ -167,7 +167,7 @@ function GroupBox({ state, group, className ,setIsChanged }) {
         </div>
       </NavLink>
     </li>
-    {modalActive && <MyGroupSelectModal setIsChanged={setIsChanged} responseGroupId={group.id}/>}
+    {modalActive && <MyGroupSelectModal setModalActive={setModalActive} setIsChanged={setIsChanged} responseGroupId={group.id}/>}
 
     </>
    

@@ -182,7 +182,7 @@ const Group = () => {
       {auth === "HOST" && (
         <RequestModal groupId={id} group={groupData} styles={styles} />
       )}
-    {modalActive && <MyGroupSelectModal setIsChanged={setIsChanged} responseGroupId={id}/>}
+    {modalActive && <MyGroupSelectModal MyGroupSelectModal={MyGroupSelectModal} setIsChanged={setIsChanged} responseGroupId={id}/>}
 
     </>
   );

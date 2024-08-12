@@ -130,7 +130,7 @@ function Main() {
     setPageNo(1);
     setHasMore(true);
     fetchFilterData(true);
-  }, [CheckGender, selectedPlace, CheckPersonnel, isMatched]);
+  }, [CheckGender, selectedPlace, CheckPersonnel, isMatched, isChanged]);
 
   useEffect(() => {
     // 요소가 뷰포트에 들어오고, 데이터가 더 있으며, 로딩 중이 아닐 때만 호출

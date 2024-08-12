@@ -7,7 +7,7 @@ import { useFetchRequest } from "../../hook/useFetchRequest";
 import GroupBox from "../common/groupBoxs/GroupBox";
 import RadioButtonChil from "../common/buttons/radiobutton/RadioButtonChil";
 
-const MyGroupSelectModal = ({setIsChanged,responseGroupId}) => {
+const MyGroupSelectModal = ({setModalActive,setIsChanged,responseGroupId}) => {
   const [myGroupList, setMyGroupList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedGroupId, setSelectedGroupId] = useState(null);
@@ -17,6 +17,10 @@ const MyGroupSelectModal = ({setIsChanged,responseGroupId}) => {
   const handleRadioChange = (event) => {
     setSelectedGroupId(event.target.id);
   };
+
+  const onClickCancelBtn = ()=>{
+    MyGroupSelectModal(false)
+  }
 
 
   // 마이 그룹 리스트 페치
@@ -77,7 +81,7 @@ const MyGroupSelectModal = ({setIsChanged,responseGroupId}) => {
           })}
         </div>
         <div className={styles.btns}>
-          <MtButtons buttonType={"cancel"} buttonText={"취소"}/>
+          <MtButtons buttonType={"cancel"} buttonText={"취소"} eventType={"click"} eventHandler={onClickCancelBtn}/>
           <MtButtons buttonType={"apply"} buttonText={"확인"} eventType={"click"} eventHandler={onClickApplyBtn}/>
         </div>
       </div>

@@ -1,8 +1,10 @@
 .container {
-  width: 100%;
-  margin-top: calc( 100vw* ( 200 /500));
   padding: calc( 100vw* ( 30 /500)) calc( 100vw* ( 20 /500)) 0 calc( 100vw* ( 20 /500));
 
+  .textContainer {
+    margin-top: calc( 100vw* ( 70 /500));
+  }
+  
   h1 {
     margin-bottom: calc( 100vw* ( 60 /500));
   }

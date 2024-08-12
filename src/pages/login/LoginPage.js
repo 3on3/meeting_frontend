@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import logoImage from "../../assets/images/login/logo.svg";
 import MtButtons from "../../components/common/buttons/MtButtons";
 import styles from "./LoginPage.module.scss";
 import DefaultInput from "../../components/common/inputs/DefaultInput";
 import { getUserToken } from "../../config/auth";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {loginActions} from "../../store/Login-slice";
 
 const LoginPage = () => {
-  const navigate = useNavigate();
+const navigate = useNavigate();
   const loginDispatch = useDispatch();
 
 
@@ -71,7 +71,7 @@ const LoginPage = () => {
 
         if (response.ok) {
           const data = await response.json();
-          console.log("로그인 성공:", data);
+          console.log("  성공:", data);
 
           const userData = {
             token: data.token,
@@ -121,6 +121,10 @@ const LoginPage = () => {
     }
   };
 
+  const SignUpClickHandler = () => {
+    navigate("/sign-up");
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.logo}>
@@ -155,7 +159,12 @@ const LoginPage = () => {
         />
       </div>
 
-      <p className={styles.findPassword}>비밀번호 찾기</p>
+      <div className={styles.findSection}>
+        <p className={styles.signUp} onClick={SignUpClickHandler}>
+          회원가입
+        </p>
+        <p className={styles.findPassword}>비밀번호 찾기</p>
+      </div>
     </div>
   );
 };

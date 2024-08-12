@@ -44,11 +44,16 @@
     margin-bottom: calc( 100vw* ( 13 /500));
   }
 
-  .findPassword {
-    text-decoration: underline;
-    text-underline-position: under;
-    font-size: calc( 100vw* ( 18 /500));
+  .findSection {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
 
+    .findPassword, .signUp {
+      text-decoration: underline;
+      text-underline-position: under;
+      font-size: calc(100vw * (18 / 500));
+      cursor: pointer;
+    }
   }
-
 }

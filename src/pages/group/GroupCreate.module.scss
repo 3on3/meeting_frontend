@@ -57,7 +57,7 @@
   }
   .btns {
     display: flex;
-    margin-top: calc(100vw * (80 / 500));
+    margin-top: calc(100vw * (20 / 500));
     button {
       margin-right: calc(100vw * (10 / 500));
       &:last-child {
@@ -65,4 +65,27 @@
       }
     }
   }
+  // .infoText {
+  //   font-size: calc(100vw * (16 / 500));
+  //   padding: calc(100vw * (24 / 500)) calc(100vw * (20 / 500)) calc(100vw * (16 / 500)) calc(100vw * (24 / 500));
+  //   border-radius: calc(100vw * (12 / 500));
+  //   background-color: var(--color-wh);
+  //   border: solid 1px var(--color-dark);
+  //   b {
+  //     display: flex;
+  //     align-items: center;
+  //     font-weight: 500;
+  //     color: var(--color-dark);
+  //     margin-bottom: calc(100vw * (8 / 500));
+  //     &::before {
+  //       content: "";
+  //       display: inline-block;
+  //       width: 2px;
+  //       height: 2px;
+  //       border-radius: 50%;
+  //       background-color: var(--color-point);
+  //       margin-right: calc(100vw * (10 / 500));
+  //     }
+  //   }
+  // }
 }

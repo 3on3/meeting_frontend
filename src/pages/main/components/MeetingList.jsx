@@ -4,11 +4,6 @@ import styles from "./MeetingList.module.scss";
 
 // matchingState={"complete"} 이면 매칭 완료
 function MeetingList({ meetingList,setIsChanged }) {
-  // const [isChanged, setIsChanged] = useState(false);
-  
- console.log(meetingList);
- 
-
   return (
     <ul className={styles.meetingList}>
       {meetingList.map((group) => (

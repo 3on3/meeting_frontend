@@ -20,10 +20,10 @@ const Group = () => {
   const [groupUsers, setGroupUsers] = useState([]);
   const [modalActive, setModalActive] = useState(false);
   const [isChanged, setIsChanged] = useState(false);
-  const { requestFetch, alarmFetch } = useFetchRequest();
+  const { alarmFetch } = useFetchRequest();
   const mainSocket = useContext(MainWebSocketContext);
 
-  console.log(groupUsers);
+  // console.log(groupUsers);
 
   const fetchGroupData = async () => {
     try {
@@ -119,7 +119,7 @@ const Group = () => {
 
           const hostUser = await alarmFetch(id);
 
-          console.log(hostUser.email);
+          // console.log(hostUser.email);
 
           const socketMessage = {
             type: "matching",
@@ -179,6 +179,7 @@ const Group = () => {
           MyGroupSelectModal={MyGroupSelectModal}
           setIsChanged={setIsChanged}
           responseGroupId={id}
+          setModalActive={setModalActive}
         />
       )}
     </>

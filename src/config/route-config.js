@@ -19,7 +19,6 @@ import MyGroups, {
 import GroupCreate from "../pages/group/GroupCreate";
 import Withdraw from "../pages/mypage/modify_information/withdraw/Withdraw";
 import MyChats from "../pages/mypage/mypage_chats/MyChats";
-import TestChat from "../assets/js/test-chat/TestChat";
 import InvitePage from "../pages/invite/InvitePage";
 import { authCheckLoader, autoCheckReturnLoader } from "./auth";
 
@@ -93,12 +92,9 @@ export const router = createBrowserRouter([
       },
       // 채팅 라우터
       {
-        path: "chat",
-        children: chatRouter,
-      },
-      {
-        path: "testChat",
-        element: <TestChat />,
+        path: "chatroom/:id",
+        element: <Chat/>
+        // children: chatRouter,
       },
       // 마이페이지 라우터
       {

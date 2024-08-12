@@ -5,9 +5,14 @@ import styles from "./LoginPage.module.scss";
 import DefaultInput from "../../components/common/inputs/DefaultInput";
 import { getUserToken } from "../../config/auth";
 import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {loginActions} from "../../store/Login-slice";
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const loginDispatch = useDispatch();
+
 
   const loginNavigate = () => {
     navigate("/");
@@ -104,6 +109,7 @@ const LoginPage = () => {
             firstLoginNavigate();
             return;
           } else {
+            loginDispatch(loginActions.loginAction());
             loginNavigate();
           }
         } else {

@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import MainFilter from "./components/MainFilter";
 import styles from "./Main.module.scss";
 import RegionFilter from "./components/RegionFilter";
 import MeetingList from "./components/MeetingList";
 import { getUserToken } from "../../config/auth";
 import { redirect, useNavigate } from "react-router-dom";
+import ModalLayout from "../../components/common/modal/ModalLayout";
+import MyGroupSelectModal from "../../components/myGroupSelectModal/MyGroupSelectModal";
+import { useModal } from "../../context/ModalContext";
+import { useInView } from "react-intersection-observer";
 
 function Main() {
   const { wrapper } = styles;
@@ -14,7 +18,33 @@ function Main() {
   const [CheckGender, setCheckGender] = useState(null);
   const [CheckPersonnel, setCheckPersonnel] = useState(null);
   const [selectedPlace, setSelectedPlace] = useState(null);
+
+  // 필터 성별 필터 토글
+  const [CheckGender, setCheckGender] = useState(null);
+
+  // 필터 인원 필터 토글
+  const [CheckPersonnel, setCheckPersonnel] = useState(null);
+
+  // 필터 지역 DTO 받기
+  const [selectedPlace, setSelectedPlace] = useState(null);
+
+  // meeting List Data
   const [listData, setListData] = useState([]);
+  const [isChanged, setIsChanged] = useState(false);
+  //페이징 번호
+  const [pageNo, setPageNo] = useState(1);
+
+  // 더 가져올 데이터가 있는지 확인하는 상태
+  const [hasMore, setHasMore] = useState(true);
+
+  // 로딩 상태 추가
+  const [isLoading, setIsLoading] = useState(false);
+
+  //scrollRef
+  const [scrollRef, inView] = useInView({
+    // 요소가 100% 뷰포트에 들어왔을 때만 트리거
+    threshold: 1.0,
+  });
 
   useEffect(() => {
     const token = getUserToken();
@@ -27,6 +57,7 @@ function Main() {
     setSelectedPlace(Place);
   };
 
+  // =====이벤트 함수=====
   const filterPossibleHandler = () => {
     setIsMatched(!isMatched);
   };
@@ -38,41 +69,82 @@ function Main() {
   const filterPersonnelHandler = (personnel) => {
     setCheckPersonnel((prev) => (prev === personnel ? null : personnel));
   };
+  // =====post fetch=====
+  const fetchFilterData = async (isInitialLoad = false) => {
+    // 데이터가 더 이상 없으면 중복 호출 방지
+    if (!hasMore || isLoading) return;
 
-  useEffect(() => {
-    const fetchFilterData = async () => {
-      const payload = {
-        gender: CheckGender,
-        groupPlace: selectedPlace,
-        maxNum: CheckPersonnel,
-        isMatched: !isMatched,
-      };
+    // 로딩 상태 시작
+    setIsLoading(true);
 
-      try {
-        const response = await fetch("http://localhost:8253/main", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + getUserToken(),
-          },
-          body: JSON.stringify(payload),
-        });
+    // DTO
+    const payload = {
+      gender: CheckGender,
+      groupPlace: selectedPlace,
+      maxNum: CheckPersonnel,
+      isMatched: !isMatched,
+      pageNo: isInitialLoad ? 1 : pageNo,
+      pageSize: 4,
+    };
 
-        if (!response.ok) {
-          throw new Error("오류");
+    try {
+      const response = await fetch("http://localhost:8253/main", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + getUserToken(),
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await response.json();
+
+      // 응답처리
+      if (!response.ok) {
+        throw new Error("오류");
+      }
+
+      if (data.content.length === 0) {
+        // 가져올 데이터가 더 이상 없을 때
+        setHasMore(false);
+      } else {
+        if (isInitialLoad) {
+          // 초기 로드일 경우, 리스트 데이터를 덮어씌움
+          setListData(data.content);
+          setPageNo(2);
+        } else {
+          setListData((prev) => [...prev, ...data.content]);
+          setPageNo((page) => page + 1);
         }
 
-        const data = await response.json();
-        setListData(data);
-      } catch (error) {
-        console.error("FilterFetch error", error);
+        // setLoading(true);
       }
-    };
-    fetchFilterData();
+    } catch (error) {
+      console.error("FilterFetch error", error);
+    } finally {
+      // 로딩 상태 종료
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    setListData([]);
+    setPageNo(1);
+    setHasMore(true);
+    fetchFilterData(true);
   }, [CheckGender, selectedPlace, CheckPersonnel, isMatched]);
 
+  useEffect(() => {
+    // 요소가 뷰포트에 들어오고, 데이터가 더 있으며, 로딩 중이 아닐 때만 호출
+    if (inView && hasMore && !isLoading) {
+      console.log("무한 스크롤 생성");
+      fetchFilterData();
+    }
+  }, [inView, hasMore, isLoading]);
+
   return (
-    <div className={wrapper}>
+    <>
+      <div className={wrapper}>
       <MainFilter
         isMatched={isMatched}
         CheckGender={CheckGender}
@@ -82,8 +154,15 @@ function Main() {
         filterPersonnelHandler={filterPersonnelHandler}
       />
       <RegionFilter regionFilterDTO={regionFilterDTO} />
-      <MeetingList meetingList={listData} />
+      <MeetingList meetingList={listData} setIsChanged={setIsChanged}/>
+      <div ref={scrollRef} style={{ height: "100px" }}></div>
     </div>
+    {/* <ModalLayout>
+      <MyGroupSelectModal/>
+    </ModalLayout> */}
+    {/* <MyGroupSelectModal setIsChanged={setIsChanged}/> */}
+    </>
+  
   );
 }
 

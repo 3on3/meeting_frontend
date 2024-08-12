@@ -79,7 +79,6 @@ export const useFetchRequest = () => {
 
       if (response.ok) {
         const responseData = await response.json();
-        console.log(responseData);
         setIsChanged(true);
       } else {
         const errorText = await response.text();
@@ -110,7 +109,6 @@ export const useFetchRequest = () => {
 
       if (response.ok) {
         const responseData = await response.json();
-        console.log("responseData:", responseData.id);
 
         setIsChanged(true);
         navigate(`/chatroom/${responseData.id}`);

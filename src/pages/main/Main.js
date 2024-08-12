@@ -60,7 +60,6 @@ function Main() {
   const filterPersonnelHandler = (personnel) => {
     setCheckPersonnel((prev) => (prev === personnel ? null : personnel));
   };
-  // =====post fetch=====
   const fetchFilterData = async (isInitialLoad = false) => {
     // 데이터가 더 이상 없으면 중복 호출 방지
     if (!hasMore || isLoading) return;
@@ -148,10 +147,7 @@ function Main() {
       <MeetingList meetingList={listData} setIsChanged={setIsChanged}/>
       <div ref={scrollRef} style={{ height: "100px" }}></div>
     </div>
-    {/* <ModalLayout>
-      <MyGroupSelectModal/>
-    </ModalLayout> */}
-    {/* <MyGroupSelectModal setIsChanged={setIsChanged}/> */}
+  
     </>
   
   );

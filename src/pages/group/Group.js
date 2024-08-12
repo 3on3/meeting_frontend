@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import GroupViewHead from "./components/GroupViewHead";
 import styles from "./Group.module.scss";
@@ -8,8 +8,8 @@ import { getUserToken } from "../../config/auth";
 import RequestModal from "./components/modal/RequestModal";
 import { useFetchRequest } from "../../hook/useFetchRequest";
 import { GROUP_URL } from "../../config/host-config";
-import MyGroupSelectModal from '../../components/myGroupSelectModal/MyGroupSelectModal';
-import {MainWebSocketContext} from "../../context/MainWebSocketContext";
+import MyGroupSelectModal from "../../components/myGroupSelectModal/MyGroupSelectModal";
+import { MainWebSocketContext } from "../../context/MainWebSocketContext";
 
 const Group = () => {
   const { id } = useParams();
@@ -20,9 +20,9 @@ const Group = () => {
   const [groupUsers, setGroupUsers] = useState([]);
   const { requestFetch } = useFetchRequest();
   const [modalActive, setModalActive] = useState(false);
-  const [isChanged, setIsChanged] = useState(false)
-  const {requestFetch, alarmFetch} = useFetchRequest();
-  const mainSocket= useContext(MainWebSocketContext);
+  const [isChanged, setIsChanged] = useState(false);
+  const { requestFetch, alarmFetch } = useFetchRequest();
+  const mainSocket = useContext(MainWebSocketContext);
 
 
   console.log(groupUsers);
@@ -51,7 +51,6 @@ const Group = () => {
 
   useEffect(() => {
     fetchGroupData();
-    // console.log("asdasdasd" + groupData);
   }, [id]);
 
   if (loading) {
@@ -118,14 +117,7 @@ const Group = () => {
         return { type: "apply", text: "이 그룹 나가기" };
       case "USER":
         onClickHandler = async () => {
-          console.log("ddd");
-          setModalActive(!modalActive)
-          // const payload = {
-          //   requestGroupId: "672f6643-441b-4eda-96c8-59f45f4149f4",
-          //   responseGroupId: id,
-          // };
-          // requestFetch(payload);
-
+          setModalActive(!modalActive);
 
           const hostUser = await alarmFetch(id);
 
@@ -134,18 +126,11 @@ const Group = () => {
           const socketMessage = {
             type: "matching",
             email: hostUser.email,
-            responseGroupId:id
-          }
-
-
+            responseGroupId: id,
+          };
 
           mainSocket.mainWebSocket.send(JSON.stringify(socketMessage));
 
-          const payload = {
-            requestGroupId: "672f6643-441b-4eda-96c8-59f45f4149f4",
-            responseGroupId: id,
-          };
-          requestFetch(payload);
         };
         return { type: "cancel", text: "매칭 신청하기" };
       default:
@@ -191,8 +176,14 @@ const Group = () => {
       {auth === "HOST" && (
         <RequestModal groupId={id} group={groupData} styles={styles} />
       )}
-    {modalActive && <MyGroupSelectModal MyGroupSelectModal={MyGroupSelectModal} setIsChanged={setIsChanged} responseGroupId={id}/>}
-
+      {/* 신청자 그룹 선택 ㅊ모달 */}
+      {modalActive && (
+        <MyGroupSelectModal
+          MyGroupSelectModal={MyGroupSelectModal}
+          setIsChanged={setIsChanged}
+          responseGroupId={id}
+        />
+      )}
     </>
   );
 };

@@ -4,9 +4,6 @@ import styles from "./Main.module.scss";
 import RegionFilter from "./components/RegionFilter";
 import MeetingList from "./components/MeetingList";
 import { getUserToken } from "../../config/auth";
-import ModalLayout from "../../components/common/modal/ModalLayout";
-import MyGroupSelectModal from "../../components/myGroupSelectModal/MyGroupSelectModal";
-import { useModal } from "../../context/ModalContext";
 import { useInView } from "react-intersection-observer";
 
 function Main() {
@@ -67,7 +64,7 @@ function Main() {
     setCheckPersonnel((prev) => (prev === personnel ? null : personnel));
   };
 
-  // =====post fetch=====
+  // ===== post fetch =====
   const fetchFilterData = async (isInitialLoad = false) => {
     // 데이터가 더 이상 없으면 중복 호출 방지
     if (!hasMore || isLoading) return;
@@ -155,10 +152,7 @@ function Main() {
       <MeetingList meetingList={listData} setIsChanged={setIsChanged}/>
       <div ref={scrollRef} style={{ height: "100px" }}></div>
     </div>
-    {/* <ModalLayout>
-      <MyGroupSelectModal/>
-    </ModalLayout> */}
-    {/* <MyGroupSelectModal setIsChanged={setIsChanged}/> */}
+  
     </>
   
   );

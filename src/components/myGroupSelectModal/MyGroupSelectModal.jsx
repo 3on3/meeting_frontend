@@ -12,12 +12,13 @@ const MyGroupSelectModal = ({setModalActive,setIsChanged,responseGroupId}) => {
   const [loading, setLoading] = useState(true);
   const [selectedGroupId, setSelectedGroupId] = useState(null);
   const {requestFetch} = useFetchRequest()
-// const {MyGroupsListFetch} = useFetchRequest();
 
+  // 라디오 버튼 활성화
   const handleRadioChange = (event) => {
     setSelectedGroupId(event.target.id);
   };
 
+  // 모달 닫기 버튼
   const onClickCancelBtn = ()=>{
     MyGroupSelectModal(false)
   }

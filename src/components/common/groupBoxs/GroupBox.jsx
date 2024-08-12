@@ -3,11 +3,9 @@ import styles from "./GroupBox.module.scss";
 import MatchingButton from "../buttons/matchingButton/MatchingButton";
 import { NavLink } from "react-router-dom";
 import RequestBtns from "./RequestBtns";
-import { useFetchRequest } from "../../../hook/useFetchRequest";
-import { useModal } from "../../../context/ModalContext";
 import MyGroupSelectModal from "../../myGroupSelectModal/MyGroupSelectModal";
 
-function GroupBox({ state, group, className ,setIsChanged }) {
+function GroupBox({ state, group, className, setIsChanged }) {
   const [modalActive, setModalActive] = useState(false);
 
   // =============== param 스타일 가이드 ===============
@@ -82,95 +80,93 @@ function GroupBox({ state, group, className ,setIsChanged }) {
     }
   };
 
-
-  // const {requestFetch} = useFetchRequest()
-  const onClickRequestBtn = (e)=>{
+  // 매칭 요청 버튼 모달 활성화
+  const onClickRequestBtn = (e) => {
     e.preventDefault();
-    
-    // const payload = {
-    //   requestGroupId: "672f6643-441b-4eda-96c8-59f45f4149f4",
-    //   responseGroupId: group.id,
-    // };
+    setModalActive(!modalActive);
+  };
 
-    // requestFetch( payload, setIsChanged);
-    // setIsChanged(false);
-    setModalActive(!modalActive)
-  }
-  const {openModal} = useModal()
-
-  const onClickBtn = (e)=>{
-    e.preventDefault();
-    
-    // openModal("dddd","completeMode", <MyGroupSelectModal/>)
-  }
 
   return (
     <>
-     <li>
-      {state === "sky-request" && (
-      <RequestBtns request={group} styles={styles} setIsChanged={setIsChanged}/>
-      )}
-
-      <NavLink
-        className={`${styles.groupBox} ${groupBoxState} ${className}`}
-        key={group.id}
-        to={`/group/${group.id}`}
-      >
-        {/* 기본 & sky */}
-
-        {(state === "sky" || state ==="sky-request" || state === undefined) && (
-          <div className={styles.groupDetailText}>
-            <div className={styles.groupTitle}> {group.groupName}</div>
-            <div className={styles.groupInfoWrapper}>
-              <div className={styles.groupInfo}>
-                {groupGender(group.groupGender)} · {group.averageAge}세 ·{" "}
-                {state === "sky" ? group.memberCount : group.maxNum}명 ·
-                {groupPlace(group.groupPlace)}
-              </div>
-              <div className={styles.groupMajor}>{group.major}</div>
-            </div>
-          </div>
+      <li>
+        {state === "sky-request" && (
+          <RequestBtns
+            request={group}
+            styles={styles}
+            setIsChanged={setIsChanged}
+          />
         )}
 
-        {/* line */}
-        {state === "line" && (
-          <>
-            <div className={styles.lineGroupText}>
-              <div className={styles.lineGroupTextWrapper}>
-                <div className={styles.groupTitle}> {group.groupName}</div>
-                <div className={styles.groupMajor}>건국대 현대미술과</div>
-              </div>
-              <div className={styles.personnel}>6명</div>
-            </div>
-            <div className={styles.lineGroupInfo}>
-              여자 · 22세 · 3명 · 서울/경기
-            </div>
-          </>
-        )}
-
-        {/* 매칭 버튼 부분 */}
-        <div
-          className={`${styles.matchingWrapper} ${
-            group.isMatched ? styles.notMatching : styles.matchingBt
-          }`}
+        <NavLink
+          className={`${styles.groupBox} ${groupBoxState} ${className}`}
+          key={group.id}
+          to={`/group/${group.id}`}
         >
-          <div className={styles.matchingText}>
-            {group.isMatched
-              ? "이미 매칭된 그룹이예요."
-              : "매칭을 기다리고 있어요!"}
-          </div>
+          {/* 기본 & sky */}
 
-          <div className={styles.matchingBt}>
-            {/* <MatchingButton text={"매칭 신청"} onClickHandler={(e)=>  onClickRequestBtn(e)}/> */}
-            <MatchingButton text={"매칭 신청"}  onClickHandler={(e)=>  onClickRequestBtn(e)} />
-          </div>
-        </div>
-      </NavLink>
-    </li>
-    {modalActive && <MyGroupSelectModal setModalActive={setModalActive} setIsChanged={setIsChanged} responseGroupId={group.id}/>}
+          {(state === "sky" ||
+            state === "sky-request" ||
+            state === undefined) && (
+            <div className={styles.groupDetailText}>
+              <div className={styles.groupTitle}> {group.groupName}</div>
+              <div className={styles.groupInfoWrapper}>
+                <div className={styles.groupInfo}>
+                  {groupGender(group.groupGender)} · {group.averageAge}세 ·{" "}
+                  {state === "sky" ? group.memberCount : group.maxNum}명 ·
+                  {groupPlace(group.groupPlace)}
+                </div>
+                <div className={styles.groupMajor}>{group.major}</div>
+              </div>
+            </div>
+          )}
 
+          {/* line */}
+          {state === "line" && (
+            <>
+              <div className={styles.lineGroupText}>
+                <div className={styles.lineGroupTextWrapper}>
+                  <div className={styles.groupTitle}> {group.groupName}</div>
+                  <div className={styles.groupMajor}>건국대 현대미술과</div>
+                </div>
+                <div className={styles.personnel}>6명</div>
+              </div>
+              <div className={styles.lineGroupInfo}>
+                여자 · 22세 · 3명 · 서울/경기
+              </div>
+            </>
+          )}
+
+          {/* 매칭 버튼 부분 */}
+          <div
+            className={`${styles.matchingWrapper} ${
+              group.isMatched ? styles.notMatching : styles.matchingBt
+            }`}
+          >
+            <div className={styles.matchingText}>
+              {group.isMatched
+                ? "이미 매칭된 그룹이예요."
+                : "매칭을 기다리고 있어요!"}
+            </div>
+
+            <div className={styles.matchingBt}>
+              <MatchingButton
+                text={"매칭 신청"}
+                onClickHandler={(e) => onClickRequestBtn(e)}
+              />
+            </div>
+          </div>
+        </NavLink>
+      </li>
+      {/* 신청자 그룹 선택 모달 */}
+      {modalActive && (
+        <MyGroupSelectModal
+          setModalActive={setModalActive}
+          setIsChanged={setIsChanged}
+          responseGroupId={group.id}
+        />
+      )}
     </>
-   
   );
 }
 

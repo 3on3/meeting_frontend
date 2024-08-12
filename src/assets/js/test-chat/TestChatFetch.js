@@ -2,7 +2,7 @@
 import {userDataLoader} from "../../../config/auth";
 import {TESTCHT_URL} from "../../../config/host-config";
 export async function fetchMessage(setMessageList)  {
-    const response = await fetch(TESTCHT_URL+"/getMessage?chatRoomId=4b3fe6e3-64b2-4959-aa39-ba71b84d409a");
+    const response = await fetch(TESTCHT_URL+"/getMessage?chatRoomId=f56bdfc2-3395-4459-abdd-45ee265afd75");
 
     const data = await response.json();
 

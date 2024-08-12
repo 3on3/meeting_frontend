@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import MemberList from "../../../components/memberList/MemberList";
 import imgOriginUrl from "../../../assets/images/profile.jpg";
-import DefaultInput from "../../../components/common/inputs/DefaultInput";
 import { getUserToken } from "../../../config/auth";
+import InviteModal from "../../../components/common/modal/InviteModal";
 
 const GroupViewBody = ({
   auth,
@@ -12,9 +12,11 @@ const GroupViewBody = ({
   inviteCode,
   updateUsers,
   fetchGroupData,
+  hostUser,
 }) => {
   const [tab, setTab] = useState("current");
   const [applicants, setApplicants] = useState([]);
+  const [modalContent, setModalContent] = useState("");
 
   useEffect(() => {
     if (auth === "HOST") {
@@ -66,7 +68,7 @@ const GroupViewBody = ({
         );
         updateUsers(newUsers);
       } else {
-        throw new Error("가입 수락에 실패하였습니다,");
+        throw new Error("가입 수락에 실패하였습니다.");
       }
     } catch (error) {
       console.error(error);
@@ -90,21 +92,48 @@ const GroupViewBody = ({
           applicants.filter((applicant) => applicant.id !== applicantId)
         );
       } else {
-        throw new Error("가입 신청 거절에 실패하였습니다,");
+        throw new Error("가입 신청 거절에 실패하였습니다.");
       }
     } catch (error) {
       console.error(error);
     }
   };
 
+  const handleCopyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(inviteCode);
+      showModal("초대 코드가 클립보드에 복사되었습니다.");
+    } catch (err) {
+      console.error("클립보드 복사 실패:", err);
+      showModal("클립보드 복사에 실패하였습니다.");
+    }
+  };
+
+  const showModal = (message) => {
+    if (modalContent != "") return;
+    setModalContent(message);
+    // 3초 후에 모달 닫기
+    setTimeout(() => {
+      setModalContent("");
+    }, 1200);
+  };
+
+  // Modal content 업데이트를 감지
+  useEffect(() => {
+    if (modalContent) {
+    }
+  }, [modalContent]);
+
   return (
     <div className={styles.content2}>
       {(auth === "MEMBER" || auth === "HOST") && (
         <>
           <div className={styles.copyWrap}>
-          <span>함께 미팅할 친구들을 초대해주세요!</span>
-
-            <button className={styles.copyBtn}></button>
+            <span>함께 미팅할 친구들을 초대해주세요!</span>
+            <button
+              className={styles.copyBtn}
+              onClick={handleCopyToClipboard}
+            ></button>
           </div>
         </>
       )}
@@ -142,6 +171,9 @@ const GroupViewBody = ({
                 userName={user.name}
                 univ={user.univName}
                 major={user.major}
+                auth={user.auth}
+                id={user.id}
+                hostUser={hostUser}
                 bgColor="bgWhite"
                 isLeader={user.auth === "HOST"}
               />
@@ -160,6 +192,9 @@ const GroupViewBody = ({
               />
             ))}
       </ul>
+
+      {/* 모달 표시 */}
+      {modalContent && <InviteModal content={modalContent} />}
     </div>
   );
 };

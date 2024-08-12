@@ -10,32 +10,33 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 calc( 100vw * ( 20 / 500));
+  padding: 0 calc(100vw * (20 / 500));
   opacity: 0;
   pointer-events: none;
   .modal {
     width: 100%;
     background-color: #fff;
-    border-radius: calc( 100vw * ( 32 / 500));
-    padding: calc( 100vw * ( 35 / 500)) calc( 100vw * ( 20 / 500)) calc( 100vw * ( 20 / 500));
+    border-radius: calc(100vw * (32 / 500));
+    padding: calc(100vw * (35 / 500)) calc(100vw * (20 / 500))
+      calc(100vw * (20 / 500));
     pointer-events: none;
     opacity: 0;
-    transform: translateY(calc( 100vw * ( -10 / 500)));
+    transform: translateY(calc(100vw * (-10 / 500)));
     position: relative;
     .modalTit {
-      font-size: calc( 100vw * ( 20 / 500));
+      font-size: calc(100vw * (20 / 500));
       font-weight: 600;
       text-align: center;
     }
   }
-  .modalClose{
-    width: calc( 100vw * ( 30 / 500));
-    height: calc( 100vw * ( 30 / 500));
+  .modalClose {
+    width: calc(100vw * (30 / 500));
+    height: calc(100vw * (30 / 500));
     background: url(../../../assets/images/icons/c-modal-close.svg) no-repeat;
     background-size: cover;
     position: absolute;
-    top: calc( 100vw * ( 30 / 500));
-    right: calc( 100vw * ( 20 / 500));
+    top: calc(100vw * (30 / 500));
+    right: calc(100vw * (20 / 500));
   }
   &.isActive {
     opacity: 1;

@@ -18,12 +18,10 @@ const Group = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [groupUsers, setGroupUsers] = useState([]);
-  const { requestFetch } = useFetchRequest();
   const [modalActive, setModalActive] = useState(false);
   const [isChanged, setIsChanged] = useState(false);
   const { requestFetch, alarmFetch } = useFetchRequest();
   const mainSocket = useContext(MainWebSocketContext);
-
 
   console.log(groupUsers);
 
@@ -130,7 +128,6 @@ const Group = () => {
           };
 
           mainSocket.mainWebSocket.send(JSON.stringify(socketMessage));
-
         };
         return { type: "cancel", text: "매칭 신청하기" };
       default:

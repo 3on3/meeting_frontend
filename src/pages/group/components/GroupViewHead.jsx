@@ -3,6 +3,8 @@ import RegionFilterBox from "../../../components/common/regionFilterBoxs/RegionF
 import Information from "./Information";
 import { GROUP_URL } from "../../../config/host-config";
 import { getUserToken } from "../../../config/auth";
+import { useModal } from "../../../context/ModalContext";
+import GroupDeleteModal from "./modal/GroupDeleteModal";
 
 const GroupViewHead = ({
   styles,
@@ -13,37 +15,22 @@ const GroupViewHead = ({
   place,
   groupName,
   id,
+  groupSize,
 }) => {
-  const groupDeleteHandler = async () => {
-    try {
-      const response = await fetch(`${GROUP_URL}/delete`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${getUserToken()}`,
-        },
-        body: JSON.stringify({ groupId: id }),
-      });
+  const { openModal } = useModal();
 
-      if (response.ok) {
-        // 성공 시 사용자에게 알림을 주거나 페이지를 리다이렉트
-        alert("성공적으로 그룹을 삭제했습니다..");
-        window.location.href = "/";
-      } else {
-        const errorText = await response.text();
-        console.error("Failed to leave the group:", errorText);
-        alert(errorText);
-      }
-    } catch (error) {
-      console.error("Error leaving the group:", error);
-      alert("그룹을 삭제 중 오류가 발생했습니다.");
-    }
+  const openConfirmModal = () => {
+    openModal(
+      "그룹 삭제하기",
+      "completeMode",
+      <GroupDeleteModal groupName={groupName} id={id} />
+    );
   };
   return (
     <>
       <div className={styles.content}>
         {auth === "HOST" && (
-          <button className={styles.groupDelBtn} onClick={groupDeleteHandler}>
+          <button className={styles.groupDelBtn} onClick={openConfirmModal}>
             그룹 삭제
           </button>
         )}
@@ -57,6 +44,7 @@ const GroupViewHead = ({
             <Information
               age={age}
               totalMember={totalMember}
+              groupSize={groupSize}
               gender={gender}
               styles={styles}
             />

@@ -22,6 +22,7 @@ function Main() {
   // 필터 지역 DTO 받기
   const [selectedPlace, setSelectedPlace] = useState(null);
 
+  // meeting List Data
   const [listData, setListData] = useState([]);
 
   //페이징 번호
@@ -64,8 +65,7 @@ function Main() {
   };
 
   // =====post fetch=====
-  // useEffect(() => {
-  const fetchFilterData = async () => {
+  const fetchFilterData = async (isInitialLoad = false) => {
     // 데이터가 더 이상 없으면 중복 호출 방지
     if (!hasMore || isLoading) return;
 
@@ -78,7 +78,7 @@ function Main() {
       groupPlace: selectedPlace,
       maxNum: CheckPersonnel,
       isMatched: !isMatched,
-      pageNo: pageNo,
+      pageNo: isInitialLoad ? 1 : pageNo,
       pageSize: 4,
     };
 
@@ -103,8 +103,15 @@ function Main() {
         // 가져올 데이터가 더 이상 없을 때
         setHasMore(false);
       } else {
-        setListData((prev) => [...prev, ...data.content]);
-        setPageNo((page) => page + 1);
+        if (isInitialLoad) {
+          // 초기 로드일 경우, 리스트 데이터를 덮어씌움
+          setListData(data.content);
+          setPageNo(2);
+        } else {
+          setListData((prev) => [...prev, ...data.content]);
+          setPageNo((page) => page + 1);
+        }
+
         // setLoading(true);
       }
     } catch (error) {
@@ -114,13 +121,12 @@ function Main() {
       setIsLoading(false);
     }
   };
-  // }, [CheckGender, selectedPlace, CheckPersonnel, isMatched]);
 
   useEffect(() => {
     setListData([]);
     setPageNo(1);
     setHasMore(true);
-    fetchFilterData();
+    fetchFilterData(true);
   }, [CheckGender, selectedPlace, CheckPersonnel, isMatched]);
 
   useEffect(() => {

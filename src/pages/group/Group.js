@@ -18,10 +18,12 @@ const Group = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [groupUsers, setGroupUsers] = useState([]);
+  const { requestFetch } = useFetchRequest();
   const [modalActive, setModalActive] = useState(false);
   const [isChanged, setIsChanged] = useState(false)
   const {requestFetch, alarmFetch} = useFetchRequest();
   const mainSocket= useContext(MainWebSocketContext);
+
 
   console.log(groupUsers);
 
@@ -81,6 +83,7 @@ const Group = () => {
     groupName,
     inviteCode,
     hostUser,
+    groupSize,
   } = groupData;
 
   let onClickHandler;
@@ -100,7 +103,6 @@ const Group = () => {
             });
 
             if (response.ok) {
-              // 성공 시 사용자에게 알림을 주거나 페이지를 리다이렉트
               alert("성공적으로 그룹을 나갔습니다.");
               window.location.href = "/";
             } else {
@@ -139,6 +141,11 @@ const Group = () => {
 
           mainSocket.mainWebSocket.send(JSON.stringify(socketMessage));
 
+          const payload = {
+            requestGroupId: "672f6643-441b-4eda-96c8-59f45f4149f4",
+            responseGroupId: id,
+          };
+          requestFetch(payload);
         };
         return { type: "cancel", text: "매칭 신청하기" };
       default:
@@ -155,6 +162,7 @@ const Group = () => {
         place={meetingPlace}
         age={averageAge}
         totalMember={totalMembers}
+        groupSize={groupSize}
         gender={gender}
         groupName={groupName}
         auth={auth}
@@ -168,6 +176,7 @@ const Group = () => {
         users={groupUsers}
         hostUser={hostUser}
         auth={auth}
+        totalMember={totalMembers}
         fetchGroupData={fetchGroupData}
       />
       {auth !== "HOST" && (

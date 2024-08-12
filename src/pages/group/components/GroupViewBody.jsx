@@ -13,6 +13,8 @@ const GroupViewBody = ({
   updateUsers,
   fetchGroupData,
   hostUser,
+  groupSize,
+  totalMember,
 }) => {
   const [tab, setTab] = useState("current");
   const [applicants, setApplicants] = useState([]);
@@ -186,6 +188,7 @@ const GroupViewBody = ({
                 univ={applicant.userUnivName}
                 major={applicant.userMajor}
                 bgColor="bgWhite"
+                hostUser={hostUser}
                 isLeader={true}
                 onAccept={() => handleAccept(applicant.id)}
                 onCancel={() => handleCancel(applicant.id)}

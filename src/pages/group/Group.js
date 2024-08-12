@@ -36,7 +36,7 @@ const Group = () => {
         throw new Error("오류!");
       }
       const data = await response.json();
-      console.log(data);
+
       setGroupData(data);
       setGroupUsers(data.users);
       setAuth(data.groupAuth); // auth 값을 설정
@@ -49,6 +49,7 @@ const Group = () => {
 
   useEffect(() => {
     fetchGroupData();
+    // console.log("asdasdasd" + groupData);
   }, [id]);
 
   if (loading) {
@@ -79,6 +80,7 @@ const Group = () => {
     gender,
     groupName,
     inviteCode,
+    hostUser,
   } = groupData;
 
   let onClickHandler;
@@ -140,14 +142,16 @@ const Group = () => {
         gender={gender}
         groupName={groupName}
         auth={auth}
+        id={id}
       />
       <GroupViewBody
         styles={styles}
-        auth={auth}
         groupId={id}
         inviteCode={inviteCode}
         updateUsers={updateUsers}
         users={groupUsers}
+        hostUser={hostUser}
+        auth={auth}
         fetchGroupData={fetchGroupData}
       />
       {auth !== "HOST" && (

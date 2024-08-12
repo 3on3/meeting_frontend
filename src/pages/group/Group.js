@@ -9,6 +9,7 @@ import { MYPAGEMATCHING_URL } from "../../config/host-config";
 import RequestModal from "./components/modal/RequestModal";
 import { useFetchRequest } from "../../hook/useFetchRequest";
 import { GROUP_URL } from "../../config/host-config";
+import MyGroupSelectModal from '../../components/myGroupSelectModal/MyGroupSelectModal';
 
 const Group = () => {
   const { id } = useParams();
@@ -17,7 +18,10 @@ const Group = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [groupUsers, setGroupUsers] = useState([]);
-  const {requestFetch} = useFetchRequest();
+  const { requestFetch } = useFetchRequest();
+  const [modalActive, setModalActive] = useState(false);
+  const [isChanged, setIsChanged] = useState(false)
+
 
   console.log(groupUsers);
 
@@ -110,14 +114,13 @@ const Group = () => {
         return { type: "apply", text: "이 그룹 나가기" };
       case "USER":
         onClickHandler = async () => {
-          console.log('ddd');
-          
-          const payload = {
-            requestGroupId: "672f6643-441b-4eda-96c8-59f45f4149f4",
-            responseGroupId: id,
-          };
-          requestFetch(payload);
-        
+          console.log("ddd");
+          setModalActive(!modalActive)
+          // const payload = {
+          //   requestGroupId: "672f6643-441b-4eda-96c8-59f45f4149f4",
+          //   responseGroupId: id,
+          // };
+          // requestFetch(payload);
         };
         return { type: "cancel", text: "매칭 신청하기" };
       default:
@@ -159,6 +162,8 @@ const Group = () => {
       {auth === "HOST" && (
         <RequestModal groupId={id} group={groupData} styles={styles} />
       )}
+    {modalActive && <MyGroupSelectModal setIsChanged={setIsChanged} responseGroupId={id}/>}
+
     </>
   );
 };

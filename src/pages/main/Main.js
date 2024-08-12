@@ -4,6 +4,9 @@ import styles from "./Main.module.scss";
 import RegionFilter from "./components/RegionFilter";
 import MeetingList from "./components/MeetingList";
 import { getUserToken } from "../../config/auth";
+import ModalLayout from "../../components/common/modal/ModalLayout";
+import MyGroupSelectModal from "../../components/myGroupSelectModal/MyGroupSelectModal";
+import { useModal } from "../../context/ModalContext";
 
 function Main() {
   const { wrapper } = styles;
@@ -27,6 +30,8 @@ function Main() {
   const [listData, setListData] = useState([]);
 
   const [isChanged, setIsChanged] = useState(false);
+
+//  const {openModal} = useModal();
   // =====함수=====
 
   //필터 지역 이름 받기
@@ -89,7 +94,8 @@ function Main() {
   }, [CheckGender, selectedPlace, CheckPersonnel, isMatched, isChanged]);
 
   return (
-    <div className={wrapper}>
+    <>
+      <div className={wrapper}>
       <MainFilter
         isMatched={isMatched}
         CheckGender={CheckGender}
@@ -99,8 +105,14 @@ function Main() {
         filterPersonnelHandler={filterPersonnelHandler}
       />
       <RegionFilter regionFilterDTO={regionFilterDTO} />
-      <MeetingList meetingList={listData} setIsChanged={setIsChanged} />
+      <MeetingList meetingList={listData} setIsChanged={setIsChanged}/>
     </div>
+    {/* <ModalLayout>
+      <MyGroupSelectModal/>
+    </ModalLayout> */}
+    {/* <MyGroupSelectModal setIsChanged={setIsChanged}/> */}
+    </>
+  
   );
 }
 

@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { CHATROOM_URL, MYPAGEMATCHING_URL } from "../config/host-config";
+import { CHATROOM_URL, MYPAGE_URL, MYPAGEMATCHING_URL } from "../config/host-config";
 import { useNavigate } from "react-router-dom";
+import { getUserToken } from "../config/auth";
 
 export const useFetchRequest = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -8,6 +9,7 @@ export const useFetchRequest = () => {
   const navigate = useNavigate();
 
 
+  // 매칭 요청 페치
   const requestFetch = async (payload , setIsChanged) => {
     setIsLoading(true);
     setError(null);
@@ -37,6 +39,7 @@ export const useFetchRequest = () => {
     }
   }
 
+  // 매칭 프로세스 페치 - 수락(requsetUrl = "response-accept")/거절(requsetUrl = "response-deny")
   const processFetch = async (requestUrl, payload, setIsChanged) => {
     setIsLoading(true);
     setError(null);
@@ -67,6 +70,7 @@ export const useFetchRequest = () => {
     }
   };
 
+  // 채팅방 생성 페치
   const createFetch = async (payload, setIsChanged) => {
     setIsLoading(true);
     setError(null);
@@ -99,12 +103,30 @@ export const useFetchRequest = () => {
     }
   };
 
+  // 마이 그룹 리스트 페치
+  // const MyGroupsListFetch = async () => {
+  //   try {
+  //     const response = await fetch(`${MYPAGE_URL}/mygroup`, {
+  //       headers: {
+  //         Authorization: "Bearer " + getUserToken(),
+  //       },
+  //     });
+  //     const data = await response.json();
+  //     setMyGroupList(data);
+  //     setIsLoading(false);
+  //   } catch (error) {
+  //     console.error("Error fetching the group list:", error);
+  //     setIsLoading(false);
+  //   }
+  // };
+  
   
 
   return {
     requestFetch,
     processFetch,
     createFetch,
+    // MyGroupsListFetch,
     isLoading,
     error,
   };

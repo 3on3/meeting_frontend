@@ -10,6 +10,8 @@ import { useFetchRequest } from "../../hook/useFetchRequest";
 import { GROUP_URL } from "../../config/host-config";
 import MyGroupSelectModal from "../../components/myGroupSelectModal/MyGroupSelectModal";
 import { MainWebSocketContext } from "../../context/MainWebSocketContext";
+import GroupViewHeadSkeleton from "./components/skeleton/GroupViewHeadSkeleton";
+import GroupViewBodySkeleton from "./components/skeleton/GroupViewBodySkeleton";
 
 const Group = () => {
   const { id } = useParams();
@@ -51,8 +53,17 @@ const Group = () => {
     fetchGroupData();
   }, [id]);
 
+  // if (loading) {
+  //   return <div>Loading...</div>;
+  // }
+
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <>
+        <GroupViewHeadSkeleton />
+        <GroupViewBodySkeleton />
+      </>
+    );
   }
 
   if (error) {

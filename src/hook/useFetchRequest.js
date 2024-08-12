@@ -22,7 +22,6 @@ export const useFetchRequest = () => {
         body: JSON.stringify(payload),
       });
       console.log(payload);
-
       if (response.ok) {
         setIsChanged(true);
 
@@ -39,6 +38,31 @@ export const useFetchRequest = () => {
     }
   }
 
+
+
+  const alarmFetch = async (responseGroupId) => {
+    console.log(responseGroupId);
+
+    const payload = {
+      responseGroupId: responseGroupId,
+    }
+
+    const response = await fetch(`${MYPAGEMATCHING_URL}/alarm`, {
+      method:'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    // console.log(response)
+
+    const data = await response.json();
+
+    return data;
+
+
+  }
   // 매칭 프로세스 페치 - 수락(requsetUrl = "response-accept")/거절(requsetUrl = "response-deny")
   const processFetch = async (requestUrl, payload, setIsChanged) => {
     setIsLoading(true);
@@ -103,6 +127,7 @@ export const useFetchRequest = () => {
     }
   };
 
+
   // 마이 그룹 리스트 페치
   // const MyGroupsListFetch = async () => {
   //   try {
@@ -123,6 +148,7 @@ export const useFetchRequest = () => {
   
 
   return {
+    alarmFetch,
     requestFetch,
     processFetch,
     createFetch,

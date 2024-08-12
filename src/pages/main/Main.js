@@ -12,24 +12,12 @@ function Main() {
   // =====useState 선언=====
   // 필터 참여가능한 것만 보기 토글
   const [isMatched, setIsMatched] = useState(false);
-<<<<<<< HEAD
 
   // 필터 성별 필터 토글
   const [CheckGender, setCheckGender] = useState(null);
 
   // 필터 인원 필터 토글
   const [CheckPersonnel, setCheckPersonnel] = useState(null);
-=======
-  // console.log(`isMatched : ${isMatched}`);
-
-  // 필터 성별 필터 토글
-  const [CheckGender, setCheckGender] = useState(null);
-  // console.log(`CheckGender : ${CheckGender}`);
-
-  // 필터 인원 필터 토글
-  const [CheckPersonnel, setCheckPersonnel] = useState(null);
-  // console.log(`CheckPersonnel : ${CheckPersonnel}`);
->>>>>>> main2
 
   // 필터 지역 DTO 받기
   const [selectedPlace, setSelectedPlace] = useState(null);
@@ -37,7 +25,6 @@ function Main() {
   // meeting List Data
   const [listData, setListData] = useState([]);
 
-<<<<<<< HEAD
   //페이징 번호
   const [pageNo, setPageNo] = useState(1);
 
@@ -53,19 +40,12 @@ function Main() {
     threshold: 1.0,
   });
 
-=======
-  const [isChanged, setIsChanged] = useState(false);
->>>>>>> main2
   // =====함수=====
 
   //필터 지역 이름 받기
   const regionFilterDTO = (Place) => {
     setSelectedPlace(Place);
   };
-<<<<<<< HEAD
-=======
-  // console.log(`selectedPlace : ${selectedPlace}`);
->>>>>>> main2
 
   // =====이벤트 함수=====
 
@@ -83,7 +63,6 @@ function Main() {
   const filterPersonnelHandler = (personnel) => {
     setCheckPersonnel((prev) => (prev === personnel ? null : personnel));
   };
-
 
   // =====post fetch=====
   const fetchFilterData = async (isInitialLoad = false) => {
@@ -135,7 +114,6 @@ function Main() {
 
         // setLoading(true);
       }
-
     } catch (error) {
       console.error("FilterFetch error", error);
     } finally {
@@ -170,12 +148,9 @@ function Main() {
         filterPersonnelHandler={filterPersonnelHandler}
       />
       <RegionFilter regionFilterDTO={regionFilterDTO} />
-<<<<<<< HEAD
+
       <MeetingList meetingList={listData} />
       <div ref={scrollRef} style={{ height: "100px" }}></div>
-=======
-      <MeetingList meetingList={listData} setIsChanged={setIsChanged} />
->>>>>>> main2
     </div>
   );
 }

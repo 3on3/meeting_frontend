@@ -17,7 +17,6 @@ function Main() {
   const [CheckGender, setCheckGender] = useState(null);
   const [CheckPersonnel, setCheckPersonnel] = useState(null);
   const [selectedPlace, setSelectedPlace] = useState(null);
-
   useEffect(() => {
     const token = getUserToken();
     if (!token) {
@@ -121,7 +120,7 @@ function Main() {
         />
         <RegionFilter regionFilterDTO={regionFilterDTO} />
 
-        <MeetingList />
+        <MeetingList/>
       </div>
     </>
   );

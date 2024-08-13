@@ -186,7 +186,7 @@ input[type='radio']:disabled+label {
 
 a {
   text-decoration: none;
-  color: #333;
+  color: var(--color-dark);
 }
 
 input::-ms-clear {

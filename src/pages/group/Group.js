@@ -12,6 +12,9 @@ import MyGroupSelectModal from "../../components/myGroupSelectModal/MyGroupSelec
 import { MainWebSocketContext } from "../../context/MainWebSocketContext";
 import GroupViewHeadSkeleton from "./components/skeleton/GroupViewHeadSkeleton";
 import GroupViewBodySkeleton from "./components/skeleton/GroupViewBodySkeleton";
+import GroupDeleteModal from "./components/modal/GroupDeleteModal";
+import { useModal } from "../../context/ModalContext";
+import GroupLeaveModal from "./components/modal/GroupLeaveModal";
 
 const Group = () => {
   const { id } = useParams();
@@ -24,6 +27,16 @@ const Group = () => {
   const [isChanged, setIsChanged] = useState(false);
   const { alarmFetch } = useFetchRequest();
   const mainSocket = useContext(MainWebSocketContext);
+
+  const { openModal } = useModal();
+
+  const openConfirmModal = () => {
+    openModal(
+      "그룹 나가기",
+      "completeMode",
+      <GroupLeaveModal groupName={groupName} id={id} />
+    );
+  };
 
   // console.log(groupUsers);
 
@@ -94,61 +107,39 @@ const Group = () => {
     groupSize,
   } = groupData;
 
-  let onClickHandler;
-
   const getButtonConfig = () => {
     switch (auth) {
       case "MEMBER":
-        onClickHandler = async () => {
-          console.log(id);
+        return {
+          type: "apply",
+          text: "이 그룹 나가기",
 
-          try {
-            const response = await fetch(`${GROUP_URL}/withdraw`, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${getUserToken()}`,
-              },
-              body: JSON.stringify({ groupId: id }),
-            });
-
-            if (response.ok) {
-              alert("성공적으로 그룹을 나갔습니다.");
-              window.location.href = "/";
-            } else {
-              const errorText = await response.text();
-              console.error("Failed to leave the group:", errorText);
-              alert("그룹을 나가는 데 실패했습니다.");
-            }
-          } catch (error) {
-            console.error("Error leaving the group:", error);
-            alert("그룹을 나가는 중 오류가 발생했습니다.");
-          }
+          onClickHandler: openConfirmModal, // 여기에서 모달 열기 함수 호출
         };
-        return { type: "apply", text: "이 그룹 나가기" };
       case "USER":
-        onClickHandler = async () => {
-          setModalActive(!modalActive);
+        return {
+          type: "cancel",
+          text: "매칭 신청하기",
+          onClickHandler: async () => {
+            setModalActive(!modalActive);
 
-          const hostUser = await alarmFetch(id);
+            const hostUser = await alarmFetch(id);
 
-          // console.log(hostUser.email);
+            const socketMessage = {
+              type: "matching",
+              email: hostUser.email,
+              responseGroupId: id,
+            };
 
-          const socketMessage = {
-            type: "matching",
-            email: hostUser.email,
-            responseGroupId: id,
-          };
-
-          mainSocket.mainWebSocket.send(JSON.stringify(socketMessage));
+            mainSocket.mainWebSocket.send(JSON.stringify(socketMessage));
+          },
         };
-        return { type: "cancel", text: "매칭 신청하기" };
       default:
-        return { type: "", text: "" };
+        return { type: "", text: "", onClickHandler: null };
     }
   };
 
-  const { type, text } = getButtonConfig();
+  const { type, text, onClickHandler } = getButtonConfig();
 
   return (
     <>

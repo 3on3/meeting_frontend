@@ -49,10 +49,13 @@
   white-space: nowrap;
   justify-content: center; // 수평 가운데 정렬
   width: max-content;
+  
 
   li {
-    margin-right: calc(100vw * (6 / 500));
+    margin-right: calc(100vw * (8 / 500));
     cursor: pointer;
+    box-shadow: 0 0 5px rgba($color: #000000, $alpha: 0.1);
+
   }
 }
 .groupBtn {
@@ -76,10 +79,12 @@
   padding: 0 calc(100vw * (12 / 500));
   justify-content: center; // 수평 가운데 정렬
   align-items: center; // 수직 가운데 정렬
+  box-shadow: 0 0 5px rgba($color: #000000, $alpha: 0.1);
 
   p {
     display: flex;
     align-items: center;
+
 
     span {
       display: flex;
@@ -92,7 +97,7 @@
         height: calc(100vw * (2 / 500));
         background-color: var(--color-dark);
         border-radius: 50%;
-        margin: 0 calc(100vw * (14 / 500));
+        margin: 0 calc(100vw * (6 / 500));
       }
 
       &:last-child::after {

@@ -1,3 +1,4 @@
+
 .groupBoxWrap{
   list-style: none;
   width: 100%;
@@ -148,29 +149,25 @@
   }
 }
 
-
-
-
-  .reqTit{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: calc(100vw * (12 / 500));
-    color: var(--color-point);
-    font-size: calc(100vw * (16 / 500));
-    padding: 0 calc(100vw * (25 / 500));
-    font-weight: 500;
+.reqTit {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: calc(100vw * (12 / 500));
+  color: var(--color-point);
+  font-size: calc(100vw * (16 / 500));
+  padding: 0 calc(100vw * (25 / 500));
+  font-weight: 500;
   animation: chatAni 0.6s ease-out forwards;
 
-    button{
-      font-weight: 600;
-      margin-right: calc(100vw * (18 / 500));
+  button {
+    font-weight: 600;
+    margin-right: calc(100vw * (18 / 500));
     font-size: calc(100vw * (18 / 500));
     color: var(--color-point);
 
-      &:last-child{
-        margin-right: 0;
-      }
+    &:last-child {
+      margin-right: 0;
     }
   }
-
+}

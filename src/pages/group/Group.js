@@ -100,6 +100,8 @@ const Group = () => {
     switch (auth) {
       case "MEMBER":
         onClickHandler = async () => {
+          console.log(id);
+
           try {
             const response = await fetch(`${GROUP_URL}/withdraw`, {
               method: "POST",

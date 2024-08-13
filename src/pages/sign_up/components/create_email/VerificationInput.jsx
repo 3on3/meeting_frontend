@@ -11,57 +11,61 @@ const VerificationInput = ({styles,isSubmit,setIsSubmit, email, univName, onVeri
 
     const verificationInputHandler = e => {
         setEmailVerificationInput(e.target.value);
+        // 사용자가 입력을 시작하면 에러 메시지와 상태 초기화
+        if (error) {
+          setError('');
+          setInputState('');
+        }
     }
 
 
     // 인증번호 입력 후 버튼 클릭시 인증번호가 일치한다면 다음 단계로 넘어감
     // 인증번호가 일치하지 않는다면 error 메시지 출력
     const verificationHandler = async () => {
-        setLoading(true);
-        try {
-          console.log('Verification Input Email:', email);
-          console.log('Verification Input UnivName:', univName);
-          
-          const response = await fetch('http://localhost:8253/signup/code', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              // key: process.env.REACT_APP_MAIL_API,
-              email: email,
-              univName: univName,
-              code: emailVerificationInput,
-            }),
-          });
-          console.log('VerificationInput response: ', response);
-          
+      setLoading(true);
+      setError('');
+      setInputState('');
+      try {
+        const response = await fetch('http://localhost:8253/signup/code', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: email,
+            univName: univName,
+            code: emailVerificationInput,
+          }),
+        });
     
-          if (!response.ok) {
-            throw new Error('인증에 실패하였습니다.');
-          }
-    
-          const data = await response.json();
+        const data = await response.json();
+        console.log('VerificationInput response: ', response);
+        console.log('data: ', data);
 
-    
-          // 인증 성공 처리 로직
-          setInputState('correct');
-          onVerified(data);
-          setIsSubmit([true, true, false]);
-        } catch (error) {
-          setInputState('error');
-          setError(error.message);
-        } finally {
-          setLoading(false);
+        if (response.ok && data === true) { // 인증 성공: 응답 데이터도 확인
+            setInputState('correct');
+            onVerified(data);
+            setIsSubmit([true, true, false]);
+        } else {
+            // 인증 실패
+            setInputState('error');
+            setError(data.message || '인증번호가 일치하지 않습니다. 다시 시도해주세요.');
         }
-      }
+    } catch (error) {
+        setInputState('error');
+        setError(error.message || '인증 과정에서 오류가 발생했습니다.');
+    } finally {
+        setLoading(false);
+    }
+};
+
 
 
 
     return (
         <>
             <DefaultInput inputState={inputState}
-                          errorMessage={'인증번호가 일치하지 않습니다.'}
+                          errorMessage={inputState === 'error' ? error : ''}
                           onChange={verificationInputHandler}
                           placeholder={'인증코드 입력'}
             />
@@ -72,7 +76,7 @@ const VerificationInput = ({styles,isSubmit,setIsSubmit, email, univName, onVeri
                            eventHandler={verificationHandler}
                            disabled={loading}/>
             </div>)}
-            {error && <p className={styles.error}>{error}</p>}
+            {/* {error && <p className={styles.error}>{error}</p>} */}
         </>
     );
 };

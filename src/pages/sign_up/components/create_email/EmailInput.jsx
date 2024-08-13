@@ -89,14 +89,14 @@ const EmailInput = ({
     <>
       <DefaultInput
         inputState={
-          !univNameInput ? "" : univNameInput.length > 0 ? "correct" : "error"
+          isSubmit[0] ? "disabled" : !univNameInput ? "" : univNameInput.length > 0 ? "correct" : "error"
         }
         errorMessage={"대학교 이름을 입력해주세요."}
         onChange={univNameInputHandler}
         placeholder={"대학교 이름 입력"}
       />
       <DefaultInput
-        inputState={!emailInput ? "" : isEmail ? "correct" : "error"}
+        inputState={isSubmit[0] ? "disabled" : !emailInput ? "" : isEmail ? "correct" : "error"}
         errorMessage={"이메일 형식이 아닙니다."}
         onChange={emailInputHandler}
         placeholder={"학교 이메일 입력"}

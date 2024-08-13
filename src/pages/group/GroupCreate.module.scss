@@ -1,9 +1,10 @@
 .container {
   width: 100%;
-  padding: calc(100vw * (120 / 500)) calc(100vw * (20 / 500)) 0
-    calc(100vw * (20 / 500));
+  padding: calc(100vw * (120 / 500)) 0 0;
 
   .groupInput {
+    width: calc(100% - (100vw * (40 / 500)));
+    margin: 0 calc(100vw * (20 / 500));
     margin-top: calc(100vw * (50 / 500));
   }
   .region {
@@ -11,10 +12,17 @@
     overflow-x: auto;
     white-space: nowrap; /* 줄 바꿈 없이 가로로 펼쳐짐 */
     margin-top: calc(100vw * (20 / 500));
+    padding: 0 calc(100vw * (20 / 500));
   }
   .region li {
     margin-right: calc(100vw * (5 / 500));
     cursor: pointer;
+    padding: 9px 10px;
+    margin-right: 6px;
+    cursor: pointer;
+    font-size: calc(100vw * (16 / 500));
+    border-radius: calc(100vw * (500 / 500));
+    font-weight: 600;
   }
   .genContainer {
     display: flex;
@@ -33,8 +41,8 @@
   }
   .numberContainer {
     display: flex;
-    margin-left: calc(100vw * (20 / 500));
-    margin-top: calc(100vw * (20 / 500));
+    padding: 0 calc(100vw * (30 / 500));
+    margin-top: calc(100vw * (60 / 500));
     font-size: calc(100vw * (16 / 500));
     margin-bottom: calc(100vw * (50 / 500));
     justify-content: start;
@@ -57,7 +65,8 @@
   }
   .btns {
     display: flex;
-    margin-top: calc(100vw * (20 / 500));
+    margin-top: calc(100vw * (80 / 500));
+    padding: 0 calc(100vw * (20 / 500));
     button {
       margin-right: calc(100vw * (10 / 500));
       &:last-child {

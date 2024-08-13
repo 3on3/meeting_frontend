@@ -119,6 +119,8 @@
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+  pointer-events: none;
+
     a {
       display: flex;
       padding: calc( 100vw * ( 17 / 500)) calc( 100vw * ( 16 / 500));
@@ -147,6 +149,8 @@
       }
     }
     &.isActive {
+  pointer-events: all;
+
       a {
         opacity: 1;
         transform: translateX(0);

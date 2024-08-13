@@ -61,9 +61,9 @@ const MyGroupSelectModal = ({
     }
   }, [myGroupList]);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  // if (loading) {
+  //   return <div>Loading...</div>;
+  // }
 
   const onClickApplyBtn = () => {
     setModalActive(false);

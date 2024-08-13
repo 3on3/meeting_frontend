@@ -24,16 +24,31 @@ const JoinGroupWithInvite = () => {
           );
 
           if (response.ok) {
-            alert("Successfully joined the group.");
-            navigate("/mypage");
+            const resultDto = await response.json(); // 서버에서 보낸 InviteResultResponseDto를 받아옴
+            navigate("/inviteresult", {
+              state: {
+                success: true,
+                result: resultDto, // 받은 결과 데이터를 함께 전달
+              },
+            });
           } else {
             const errorText = await response.text();
-            console.error("Error joining group:", errorText);
-            alert("Failed to join the group. Please try again.");
+
+            navigate("/inviteresult", {
+              state: {
+                success: false,
+                message: errorText,
+              },
+            });
           }
         } catch (error) {
           console.error("Error joining group:", error);
-          alert("An error occurred. Please try again.");
+          navigate("/inviteresult", {
+            state: {
+              success: false,
+              message: error,
+            },
+          });
         }
       };
 

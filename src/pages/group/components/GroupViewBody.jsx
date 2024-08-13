@@ -59,7 +59,11 @@ const GroupViewBody = ({
           },
         }
       );
+
+      const message = await response.text();
+
       if (response.ok) {
+        alert(message);
         fetchGroupData();
         const newUser = applicants.find(
           (applicant) => applicant.id === applicantId
@@ -70,7 +74,7 @@ const GroupViewBody = ({
         );
         updateUsers(newUsers);
       } else {
-        throw new Error("가입 수락에 실패하였습니다.");
+        alert(`가입 수락에 실패하였습니다: ${message}`);
       }
     } catch (error) {
       console.error(error);
@@ -159,7 +163,7 @@ const GroupViewBody = ({
             }`}
             onClick={() => setTab("applicants")}
           >
-            참여 신청
+            참여 신청 {applicants.length > 0 && `(${applicants.length})`}
           </div>
         </div>
       )}

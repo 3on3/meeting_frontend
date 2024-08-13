@@ -21,6 +21,7 @@ import Withdraw from "../pages/mypage/modify_information/withdraw/Withdraw";
 import MyChats from "../pages/mypage/mypage_chats/MyChats";
 import InvitePage from "../pages/invite/InvitePage";
 import { authCheckLoader, autoCheckReturnLoader } from "./auth";
+import JoinEndPage from "../pages/invite/components/JoinEndPage";
 
 // 마이페이지 라우터
 const mypageRouter = [
@@ -94,8 +95,7 @@ export const router = createBrowserRouter([
       // 채팅 라우터
       {
         path: "chatroom/:id",
-        element: <Chat/>
-        // children: chatRouter,
+        element: <Chat />,
       },
       // 마이페이지 라우터
       {
@@ -119,6 +119,10 @@ export const router = createBrowserRouter([
       {
         path: "group/:id",
         element: <Group />,
+      },
+      {
+        path: "inviteresult",
+        element: <JoinEndPage />,
       },
     ],
   },

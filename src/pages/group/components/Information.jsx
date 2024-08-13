@@ -5,7 +5,7 @@ const Information = ({ age, totalMember, gender, styles, groupSize }) => {
   return (
     <p>
       <span>{gender}</span>
-      <span>{age}세</span>
+      <span>{age} 세</span>
       <span>
         {totalMember}/{groupSize}명
       </span>

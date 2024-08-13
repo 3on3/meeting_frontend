@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import logoImage from "../../assets/images/login/logo.svg";
 import MtButtons from "../../components/common/buttons/MtButtons";
 import styles from "./LoginPage.module.scss";
 import DefaultInput from "../../components/common/inputs/DefaultInput";
 import { getUserToken } from "../../config/auth";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {loginActions} from "../../store/Login-slice";
 
 const LoginPage = () => {
-  const navigate = useNavigate();
+const navigate = useNavigate();
   const loginDispatch = useDispatch();
 
 
@@ -25,6 +25,8 @@ const LoginPage = () => {
   const [passwordInput, setPasswordInput] = useState("");
   const [idStatus, setIdStatus] = useState(true);
   const [autoLogin, setAutoLogin] = useState(false);
+  const [idError, setIdError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem("userData") || "{}");
@@ -42,10 +44,12 @@ const LoginPage = () => {
 
   const idInputHandler = (e) => {
     setIdInput(e.target.value);
+    setIdError("");
   };
 
   const passwordInputHandler = (e) => {
     setPasswordInput(e.target.value);
+    setPasswordError("");
   };
 
   const autoLoginHandler = (e) => {
@@ -71,7 +75,7 @@ const LoginPage = () => {
 
         if (response.ok) {
           const data = await response.json();
-          console.log("로그인 성공:", data);
+          console.log("  성공:", data);
 
           const userData = {
             token: data.token,
@@ -112,13 +116,25 @@ const LoginPage = () => {
             loginNavigate();
           }
         } else {
-          const error = await response.text();
-          console.error("로그인 실패:", error);
+        const errorText = await response.text();
+        if (errorText.includes("User not found")) {
+          setIdError("존재하지 않는 아이디입니다.");
+        } else if (errorText.includes("Invalid password")) {
+          setPasswordError("비밀번호가 틀렸습니다.");
+        } else {
+          setIdError("로그인에 실패했습니다.");
+          setPasswordError("로그인에 실패했습니다.");
         }
-      } catch (error) {
-        console.error("Error:", error);
       }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("서버 오류가 발생했습니다.");
     }
+  }
+};
+
+  const SignUpClickHandler = () => {
+    navigate("/sign-up");
   };
 
   return (
@@ -128,17 +144,17 @@ const LoginPage = () => {
       </div>
       <div className={styles.input}>
         <DefaultInput
-          inputState={idInput ? (idStatus ? "" : "error") : ""}
+          inputState={idError ? "error" : idInput ? (idStatus ? "" : "error") : ""}
           placeholder={"아이디를 입력하세요."}
           onChange={idInputHandler}
-          errorMessage={"아이디가 이메일 형식이 아닙니다."}
+          errorMessage={idError || (idInput && !idStatus ? "아이디가 이메일 형식이 아닙니다." : "")}
           className={styles.inputCustom}
         />
         <DefaultInput
-          inputState={""}
+          inputState={passwordError ? "error" : ""}
           placeholder={"비밀번호를 입력하세요."}
           onChange={passwordInputHandler}
-          errorMessage={"비밀번호가 틀렸습니다."}
+          errorMessage={passwordError}
           className={styles.inputCustom}
           type={true}
         />
@@ -155,7 +171,12 @@ const LoginPage = () => {
         />
       </div>
 
-      <p className={styles.findPassword}>비밀번호 찾기</p>
+      <div className={styles.findSection}>
+        <p className={styles.signUp} onClick={SignUpClickHandler}>
+          회원가입
+        </p>
+        <p className={styles.findPassword}>비밀번호 찾기</p>
+      </div>
     </div>
   );
 };

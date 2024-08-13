@@ -1,0 +1,54 @@
+.skeletonContent {
+  width: 100%;
+  height: calc(100vw * (200 / 500));
+  padding-top: calc(100vw * (70 / 500));
+  position: relative;
+  padding-left: calc(100vw * (150 / 500));
+  padding-right: calc(100vw * (20 / 500));
+  background-color: #f0f0f0;
+  box-shadow: 0 0 10px rgba(#000000, 0.1);
+
+  .skeletonButton {
+    width: calc(100vw * (70 / 500));
+    height: calc(100vw * (20 / 500));
+    background-color: #e0e0e0;
+    position: absolute;
+    top: calc(100vw * (30 / 500));
+    right: calc(100vw * (25 / 500));
+    border-radius: 4px;
+  }
+
+  .skeletonTitle {
+    width: calc(100vw * (200 / 500));
+    height: calc(100vw * (45 / 500));
+    background-color: #e0e0e0;
+    border-radius: 4px;
+    margin: calc(100vw * (30 / 500)) 0;
+  }
+
+  .skeletonLabelsWrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: absolute;
+    bottom: calc(100vw * (-18 / 500));
+    left: 50%;
+    transform: translateX(-50%);
+    margin-left: calc(100vw * (10 / 500));
+  }
+
+  .skeletonRegionFilter {
+    width: calc(100vw * (70 / 500));
+    height: calc(100vw * (35 / 500));
+    background-color: #e0e0e0;
+    border-radius: 20px;
+  }
+
+  .skeletonInformationFilter {
+    width: calc(100vw * (160 / 500));
+    height: calc(100vw * (35 / 500));
+    background-color: #e0e0e0;
+    border-radius: 20px;
+  }
+}

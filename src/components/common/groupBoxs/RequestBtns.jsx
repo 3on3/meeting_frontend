@@ -12,10 +12,8 @@ const RequestBtns = ({ styles, request, setIsChanged }) => {
   const { processFetch, createFetch } = useFetchRequest();
 
   const onClickAccept = async () => {
-    // await processFetch("response-accept"); // processFetch가 완료될 때까지 기다림
   await processFetch("response-accept", payload, setIsChanged)
-
-    await createFetch(payload, setIsChanged); // createFetch가 완료될 때까지 기다림
+    await createFetch(payload, setIsChanged);
   };
 
   return (

@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import GroupViewHead from "./components/GroupViewHead";
 import styles from "./Group.module.scss";
@@ -8,7 +8,10 @@ import { getUserToken } from "../../config/auth";
 import RequestModal from "./components/modal/RequestModal";
 import { useFetchRequest } from "../../hook/useFetchRequest";
 import { GROUP_URL } from "../../config/host-config";
-import {MainWebSocketContext} from "../../context/MainWebSocketContext";
+import MyGroupSelectModal from "../../components/myGroupSelectModal/MyGroupSelectModal";
+import { MainWebSocketContext } from "../../context/MainWebSocketContext";
+import GroupViewHeadSkeleton from "./components/skeleton/GroupViewHeadSkeleton";
+import GroupViewBodySkeleton from "./components/skeleton/GroupViewBodySkeleton";
 
 const Group = () => {
   const { id } = useParams();
@@ -17,11 +20,12 @@ const Group = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [groupUsers, setGroupUsers] = useState([]);
-  const {requestFetch, alarmFetch} = useFetchRequest();
+  const [modalActive, setModalActive] = useState(false);
+  const [isChanged, setIsChanged] = useState(false);
+  const { alarmFetch } = useFetchRequest();
+  const mainSocket = useContext(MainWebSocketContext);
 
-  const mainSocket= useContext(MainWebSocketContext);
-
-  console.log(groupUsers);
+  // console.log(groupUsers);
 
   const fetchGroupData = async () => {
     try {
@@ -47,11 +51,19 @@ const Group = () => {
 
   useEffect(() => {
     fetchGroupData();
-    // console.log("asdasdasd" + groupData);
   }, [id]);
 
+  // if (loading) {
+  //   return <div>Loading...</div>;
+  // }
+
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <>
+        <GroupViewHeadSkeleton />
+        <GroupViewBodySkeleton />
+      </>
+    );
   }
 
   if (error) {
@@ -79,6 +91,7 @@ const Group = () => {
     groupName,
     inviteCode,
     hostUser,
+    groupSize,
   } = groupData;
 
   let onClickHandler;
@@ -98,7 +111,6 @@ const Group = () => {
             });
 
             if (response.ok) {
-              // 성공 시 사용자에게 알림을 주거나 페이지를 리다이렉트
               alert("성공적으로 그룹을 나갔습니다.");
               window.location.href = "/";
             } else {
@@ -114,28 +126,19 @@ const Group = () => {
         return { type: "apply", text: "이 그룹 나가기" };
       case "USER":
         onClickHandler = async () => {
-          console.log("ddd");
-
-          const payload = {
-            requestGroupId: "6b1f7b72-3c38-4cd6-8f05-9fd5e327c89e",
-            responseGroupId: id,
-          };
-          await requestFetch(payload);
+          setModalActive(!modalActive);
 
           const hostUser = await alarmFetch(id);
 
-          console.log(hostUser.email);
+          // console.log(hostUser.email);
 
           const socketMessage = {
             type: "matching",
             email: hostUser.email,
-            responseGroupId:id
-          }
-
-
+            responseGroupId: id,
+          };
 
           mainSocket.mainWebSocket.send(JSON.stringify(socketMessage));
-
         };
         return { type: "cancel", text: "매칭 신청하기" };
       default:
@@ -152,9 +155,11 @@ const Group = () => {
         place={meetingPlace}
         age={averageAge}
         totalMember={totalMembers}
+        groupSize={groupSize}
         gender={gender}
         groupName={groupName}
         auth={auth}
+        id={id}
       />
       <GroupViewBody
         styles={styles}
@@ -164,6 +169,7 @@ const Group = () => {
         users={groupUsers}
         hostUser={hostUser}
         auth={auth}
+        totalMember={totalMembers}
         fetchGroupData={fetchGroupData}
       />
       {auth !== "HOST" && (
@@ -177,6 +183,15 @@ const Group = () => {
       )}
       {auth === "HOST" && (
         <RequestModal groupId={id} group={groupData} styles={styles} />
+      )}
+      {/* 신청자 그룹 선택 ㅊ모달 */}
+      {modalActive && (
+        <MyGroupSelectModal
+          MyGroupSelectModal={MyGroupSelectModal}
+          setIsChanged={setIsChanged}
+          responseGroupId={id}
+          setModalActive={setModalActive}
+        />
       )}
     </>
   );

@@ -5,7 +5,7 @@ import { useModal } from "../../../context/ModalContext";
 const ModalLayout = ({ children, className, modalContent, boxType }) => {
   const { closeModal } = useModal();
 
-  console.log(modalContent);
+  console.log("asdasd"  + modalContent);
   console.log(boxType);
 
   // // 모달 타입에 따라 클래스 네임을 변경

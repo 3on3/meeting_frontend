@@ -105,7 +105,7 @@ const Chat = () => {
         value={value}
       />
       {/* 모달 */}
-      <ChatMembersModal styles={styles} />
+      {/* <ChatMembersModal styles={styles} /> */}
     </div>
   );
 };

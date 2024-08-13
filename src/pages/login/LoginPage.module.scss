@@ -10,16 +10,10 @@
 
 
   .logo {
-    width: calc( 100vw* ( 160 /500));
-    height: calc( 100vw* ( 117 /500));
+    width: calc( 100vw * ( 300 /500));
+    height: auto;
     margin: 0 auto calc( 100vw* ( 40 /500));
-    overflow: hidden;
-
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+    // overflow: hidden;
   }
 
   .input {
@@ -41,14 +35,41 @@
 
   .button {
     width: 100%;
-    margin-bottom: calc( 100vw* ( 13 /500));
+    margin-top: calc( 100vw* ( 20 /500));
+    // margin-bottom: calc( 100vw* ( 13 /500));
   }
 
-  .findPassword {
-    text-decoration: underline;
-    text-underline-position: under;
-    font-size: calc( 100vw* ( 18 /500));
+  .findSection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    width: 100%;
+    margin-top: calc( 100vw * ( 30 / 500));
+    p{
+      text-align: center;
+      color: var(--color-dark);
+      opacity: 0.8;
 
+    }
+    p::after{
+      content: '';
+      display: inline-block;
+      width: 2px;
+      height: 2px;
+      background-color: var(--color-gr);
+      border-radius: 50%;
+      margin: 0 calc( 100vw * ( 10 / 500));
+      transform: translateY(calc( -100vw * ( 4 / 500)));
+    }
+    p:last-child::after{
+      display: none;
+    }
+    .findPassword, .signUp {
+      text-decoration: underline;
+      text-underline-position: under;
+      font-size: calc(100vw * (18 / 500));
+      cursor: pointer;
+    }
   }
-
 }

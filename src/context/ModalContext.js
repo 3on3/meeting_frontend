@@ -4,18 +4,21 @@ import ModalLayout from "../components/common/modal/ModalLayout";
 const ModalContext = createContext();
 export const ModalProvider = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [modalContent, setModalContent] = useState(null);
+  const [modalData, setModalData] = useState(null);
   const [boxType, setBoxType] = useState(null);
 
-  const openModal = (content, type) => {
-    setModalContent(content);
-    setIsOpen(true);
-    setBoxType(type);
+  const openModal = (content, type, children) => {
+    setModalData({
+      content,
+      type,
+      children,
+    });
+    setIsOpen(true)
   };
 
   const closeModal = () => {
     setIsOpen(false);
-    setModalContent(null);
+    setModalData(null);
   };
 
   return (
@@ -23,8 +26,9 @@ export const ModalProvider = ({ children }) => {
       {children}
       {isOpen && (
         <ModalLayout
-          modalContent={modalContent}
-          boxType={boxType}
+          modalContent={modalData.content}
+          boxType={modalData.type}
+          children={modalData.children}
         ></ModalLayout>
       )}
     </ModalContext.Provider>

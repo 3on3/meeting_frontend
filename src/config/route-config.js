@@ -56,6 +56,7 @@ const chatRouter = [
   {
     path: "/chat",
     element: <Chat />,
+    loader: authCheckLoader,
   },
 ];
 
@@ -68,6 +69,7 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <Main />,
+        loader: authCheckLoader, // 메인 페이지 접근 시 토큰 여부 확인
       },
       {
         path: "intro",
@@ -100,6 +102,7 @@ export const router = createBrowserRouter([
         path: "mypage",
         element: <MyPage />,
         children: mypageRouter,
+        loader: authCheckLoader,
       },
       // 초대 링크 라우터 추가
       {

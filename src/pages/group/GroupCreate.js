@@ -119,16 +119,12 @@ const GroupCreate = () => {
           <li
             key={region.value}
             style={{
-              padding: "10px 20px",
-              margin: "5px",
+             
               border:
                 selectedRegion === region.value
                   ? "calc(100vw * (1 / 500)) solid #271E33"
                   : "calc(100vw * (1 / 500)) solid #C3BECB",
-              cursor: "pointer",
-              fontSize: "calc(100vw * (16 / 500))",
-              borderRadius: "calc(100vw * (500 / 500))",
-              fontWeight: "600",
+            
               backgroundColor:
                 selectedRegion === region.value ? "#fff" : "#fff",
               color: selectedRegion === region.value ? "#271E33" : "#C3BECB",
@@ -140,7 +136,7 @@ const GroupCreate = () => {
         ))}
       </ul>
       <div className={styles.choiceContainer}>
-        <div className={styles.genContainer}>
+        {/* <div className={styles.genContainer}> */}
           {/* <div className={styles.gender}>성별</div>
           <div className={styles.gen}>
             <div
@@ -157,7 +153,7 @@ const GroupCreate = () => {
               {gender === "M" ? "남자" : "여자"}
             </div> */}
           {/* </div> */}
-        </div>
+        {/* </div> */}
         <div className={styles.numberContainer}>
           <div className={styles.numberOfParticipants}>참여 인원</div>
           <div className={styles.number}>

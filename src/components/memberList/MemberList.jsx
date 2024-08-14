@@ -18,7 +18,7 @@ const MemberList = ({
 
   return (
     <li className={`${styles.mamberList} ${styles[bgColor]}`}>
-      {id === hostUser ? (
+      { id === hostUser ? (
         <p className={styles.crown}></p>
       ) : (
         <p className={styles.user}></p>

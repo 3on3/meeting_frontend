@@ -24,13 +24,14 @@
   &::after {
     content: "";
     display: inline-block;
-    width: calc(100vw * (15 / 500));
-    height: calc(100vw * (15 / 500));
+    width: calc(100vw * (20 / 500));
+    height: calc(100vw * (13 / 500));
     position: absolute;
     right: calc(100vw * (20 / 500));
     top: calc(100vw * (22 / 500));
     background-repeat: no-repeat;
     background-position: center;
+    background-size: cover;
   }
 
   // 오류

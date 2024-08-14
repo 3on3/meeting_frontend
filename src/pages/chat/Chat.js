@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 import { CHATROOM_URL } from '../../config/host-config';
 import {chatWebSocket} from "./js/ChatWebSocket";
 import {fetchMessage, saveMessage} from "./js/ChatFetch"
+import {useModal} from "../../context/ModalContext";
 
 
 const Chat = () => {
@@ -22,6 +23,12 @@ const Chat = () => {
 
   // 웹소켓
   const [socket, setSocket] = useState(null);
+
+  // 채팅 유저
+  const [memberList, setMemberList] = useState(null);
+
+  // 모달 활성화 여부
+  const [openModal, setOpenModal] = useState(false);
 
   console.log('id:',id);
   
@@ -96,7 +103,7 @@ const Chat = () => {
 
   return (
     <div className={styles.container}>
-      <ChatHead styles={styles} chatRoomData={chatRoomData}/>
+      <ChatHead styles={styles} chatRoomData={chatRoomData} setMember={setMemberList} setOpenModal={setOpenModal}/>
       <ChatBody messageList={messageList} styles={styles} />
       <ChatInput
         onChangeInput={onChangeInput}
@@ -104,8 +111,6 @@ const Chat = () => {
         styles={styles}
         value={value}
       />
-      {/* 모달 */}
-      {/* <ChatMembersModal styles={styles} /> */}
     </div>
   );
 };

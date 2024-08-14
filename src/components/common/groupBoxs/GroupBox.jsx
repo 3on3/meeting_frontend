@@ -140,13 +140,13 @@ function GroupBox({ state, group, className, setIsChanged }) {
           {/* 매칭 버튼 부분 */}
           <div
             className={`${styles.matchingWrapper} ${
-              group.existMatchingHistory ? styles.notMatching : styles.matchingBt
+              group.matchingStatus !== "NONE" ? styles.notMatching : styles.matchingBt
             }`}
           >
             <div className={styles.matchingText}>
-              {group.existMatchingHistory
-                ? "이미 매칭 신청 중인 그룹이예요."
-                : "매칭을 기다리고 있어요!"}
+              {group.matchingStatus === "NONE" && "매칭을 기다리고 있어요!"}
+              {group.matchingStatus === "REQUESITNG" && "이미 매칭 신청 중인 그룹이예요."}
+              {group.matchingStatus === "RESPONSE" && "내 그룹에 매칭을 신청한 그룹이예요."}
             </div>
 
             <div className={styles.matchingBt}>

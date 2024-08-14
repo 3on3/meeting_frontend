@@ -96,6 +96,7 @@ const LoginPage = () => {
             major: data.major,
             gender: data.gender,
             nickname: data.nickname,
+            password: data.password,
           };
 
           localStorage.setItem("userData", JSON.stringify(userData));

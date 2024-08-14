@@ -1,7 +1,7 @@
 import { redirect } from "react-router-dom";
 
 //로그인한 유저의 정보 가져오기
-const getUserData = () => {
+export const getUserData = () => {
   const userDataJson = localStorage.getItem("userData");
   const userData = JSON.parse(userDataJson);
   return userData;
@@ -39,4 +39,8 @@ export const autoCheckReturnLoader = ({ request }) => {
     return redirect("/login");
   }
   return null; // 현재 페이지에 머뭄
+};
+
+export const removeUserToken = () => {
+  localStorage.removeItem('userData');
 };

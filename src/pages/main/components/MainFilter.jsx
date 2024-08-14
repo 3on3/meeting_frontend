@@ -1,23 +1,62 @@
 import React, { useState } from "react";
 import styles from "./MainFilter.module.scss";
+import { useDispatch } from "react-redux";
+import { filterAction } from "../../../store/Filter-slice";
 
-function MainFilter({
-  isMatched,
-  CheckGender,
-  CheckPersonnel,
-  filterPossibleHandler,
-  filterGenderHandler,
-  filterPersonnelHandler,
-}) {
+function MainFilter({}) {
   // =====useState 선언=====
   // 필터 더보기 토글
   const [isMoreActive, setIsMoreActive] = useState(false);
+
+  // 필터 성별
+  const [CheckGender, setCheckGender] = useState(null);
+
+  // 필터 인원수
+  const [CheckPersonnel, setCheckPersonnel] = useState(null);
+
+  // 필터 매칭 된 사람
+  const [CheckIsMatched, setIsMatched] = useState(false);
+
+  const dispatch = useDispatch();
 
   // =====이벤트 함수=====
 
   // 필터 더보기 클릭 시 이벤트
   const moreClickHandler = (e) => {
     setIsMoreActive(!isMoreActive);
+  };
+
+  // 필터 매칭 된 사람
+  const filterPossibleHandler = () => {
+    const newIsMatched = !CheckIsMatched;
+    setIsMatched(newIsMatched);
+    dispatch(
+      filterAction.filterModifyDto({
+        isMatched: newIsMatched,
+      })
+    );
+  };
+
+  // 성별 클릭 이벤트
+  const filterGenderHandler = (Gender) => {
+    const newGender = CheckGender === Gender ? null : Gender;
+    setCheckGender(newGender);
+    dispatch(
+      filterAction.filterModifyDto({
+        gender: newGender,
+      })
+    );
+  };
+
+  // 인원수 클릭 이벤트
+  const filterPersonnelHandler = (personnel) => {
+    const newPersonnel = CheckPersonnel === personnel ? null : personnel;
+    setCheckPersonnel(newPersonnel);
+    dispatch(
+      filterAction.filterModifyDto({
+        maxNum: newPersonnel,
+      })
+    );
   };
 
   return (
@@ -35,7 +74,7 @@ function MainFilter({
         {/* styles.check : 활성화되는 class */}
         <p
           className={`${styles.filterPossible} ${
-            isMatched ? styles.check : ""
+            CheckIsMatched ? styles.check : ""
           }`}
           onClick={filterPossibleHandler}
         >

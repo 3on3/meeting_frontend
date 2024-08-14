@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styles from "./RegionFilter.module.scss";
 import RegionFilterBox from "../../../components/common/regionFilterBoxs/RegionFilterBox";
+import { useDispatch } from "react-redux";
+import { filterAction } from "../../../store/Filter-slice";
 
-function RegionFilter({ regionFilterDTO }) {
+function RegionFilter({}) {
   const regionArr = [
     {
       id: 0,
@@ -49,6 +51,18 @@ function RegionFilter({ regionFilterDTO }) {
   // ==== useState 선언 ====
   const [clickRegion, setClickRegion] = useState(null);
 
+  // DTO이름으로 변환
+  const [selectedPlace, setSelectedPlace] = useState(null);
+  console.log("selectedPlace : ", selectedPlace);
+
+  // 리덕스로 상태 변경
+  const dispatch = useDispatch();
+  dispatch(
+    filterAction.filterModifyDto({
+      groupPlace: selectedPlace,
+    })
+  );
+
   // ==== 핸들러 ====
   const activeHandler = (id) => {
     setClickRegion((prev) => (prev === id ? null : id));
@@ -59,8 +73,8 @@ function RegionFilter({ regionFilterDTO }) {
     const selectedPlace = findRegion ? findRegion.place : "";
 
     // place 찾아서 보내주기
-    regionFilterDTO(selectedPlace);
-  }, [clickRegion, regionFilterDTO]);
+    setSelectedPlace(selectedPlace);
+  }, [clickRegion]);
 
   return (
     <ul className={styles.regionFilter}>

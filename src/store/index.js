@@ -6,7 +6,7 @@ import FilterReducer from "./Filter-slice";
 const store = configureStore({
   reducer: {
     login: loginReducer,
-    // filter: FilterReducer,
+    filter: FilterReducer,
   },
 });
 

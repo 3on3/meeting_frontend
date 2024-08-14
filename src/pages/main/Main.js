@@ -13,11 +13,6 @@ function Main() {
   const { wrapper } = styles;
   const navigate = useNavigate();
 
-  const [isMatched, setIsMatched] = useState(false);
-  const [CheckGender, setCheckGender] = useState(null);
-  const [CheckPersonnel, setCheckPersonnel] = useState(null);
-  const [selectedPlace, setSelectedPlace] = useState(null);
-
   useEffect(() => {
     const token = getUserToken();
     if (!token) {
@@ -25,22 +20,6 @@ function Main() {
     }
   }, [navigate]);
 
-  const regionFilterDTO = (Place) => {
-    setSelectedPlace(Place);
-  };
-
-  // =====이벤트 함수=====
-  const filterPossibleHandler = () => {
-    setIsMatched(!isMatched);
-  };
-
-  const filterGenderHandler = (Gender) => {
-    setCheckGender((prev) => (prev === Gender ? null : Gender));
-  };
-
-  const filterPersonnelHandler = (personnel) => {
-    setCheckPersonnel((prev) => (prev === personnel ? null : personnel));
-  };
   // // =====debounce 함수 생성=====
   // const debouncedFetchFilterData = debounce(() => fetchFilterData(true), 500);
 
@@ -106,21 +85,11 @@ function Main() {
   //   }
   // };
 
- 
-
   return (
     <>
       <div className={wrapper}>
-        <MainFilter
-          isMatched={isMatched}
-          CheckGender={CheckGender}
-          CheckPersonnel={CheckPersonnel}
-          filterPossibleHandler={filterPossibleHandler}
-          filterGenderHandler={filterGenderHandler}
-          filterPersonnelHandler={filterPersonnelHandler}
-        />
-        <RegionFilter regionFilterDTO={regionFilterDTO} />
-
+        <MainFilter />
+        <RegionFilter />
         <MeetingList />
       </div>
     </>

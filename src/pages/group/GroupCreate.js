@@ -184,7 +184,7 @@ const GroupCreate = () => {
           <MtButtons
             buttonType={"cancel"}
             buttonText={"취소"}
-            eventType={"button"}
+            eventType={"click"}
             eventHandler={mainPageHandler}
           />
           <MtButtons

@@ -64,6 +64,7 @@ const Group = () => {
 
   useEffect(() => {
     fetchGroupData();
+    console.log(groupData);
   }, [id]);
 
   // if (loading) {

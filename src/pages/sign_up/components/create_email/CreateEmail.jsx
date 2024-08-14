@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styles from "../SignUpComponent.module.scss";
-import MtButtons from "../../../../components/common/buttons/MtButtons";
 import EmailInput from "./EmailInput";
 import VerificationInput from "./VerificationInput";
 import MajorInput from "./MajorInput";
-import { useNavigate } from "react-router-dom";
 
-const CreateEmail = ({ isSubmit, setIsSubmit, onVerificationSuccess, setEmail, setUnivName, setMajor  }) => {
+const CreateEmail = ({ isSubmit, setIsSubmit, onVerificationSuccess, setEmail, setUnivName, setMajor }) => {
   const [signUpEmail, setSignUpEmail] = useState("");
   const [isEmail, setIsEmail] = useState(false);
   const [univName, setUnivNameState] = useState("");
@@ -32,7 +30,7 @@ const CreateEmail = ({ isSubmit, setIsSubmit, onVerificationSuccess, setEmail, s
         isSubmit={isSubmit}
         setIsSubmit={setIsSubmit}
         setUnivName={univNameChangeHandler}
-        setSignUpEmail= {emailChangeHandler}
+        setSignUpEmail={emailChangeHandler}
       />
       {isSubmit[0] && !isSubmit[1] && (
         <VerificationInput

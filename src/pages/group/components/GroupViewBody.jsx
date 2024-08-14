@@ -63,7 +63,7 @@ const GroupViewBody = ({
       const message = await response.text();
 
       if (response.ok) {
-        alert(message);
+        showModal(message);
         fetchGroupData();
         const newUser = applicants.find(
           (applicant) => applicant.id === applicantId
@@ -74,7 +74,7 @@ const GroupViewBody = ({
         );
         updateUsers(newUsers);
       } else {
-        alert(`가입 수락에 실패하였습니다: ${message}`);
+        showModal(message);
       }
     } catch (error) {
       console.error(error);

@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import {
   birthVerification,
   firstPhoneNumberVerification,
   genderVerification,
-  nameVerification, 
-  secondPhoneNumberVerification
+  nameVerification,
+  secondPhoneNumberVerification,
 } from "../../../../assets/js/Verification";
 import styles from "../SignUpComponent.module.scss";
 import DefaultInput from "../../../../components/common/inputs/DefaultInput";
@@ -13,9 +13,9 @@ import RadioButton from "../../../../components/common/buttons/radiobutton/Radio
 
 // yyMMdd를 yyyy-MM-dd로 변환하는 함수
 const convertToFullDate = (shortDate) => {
-  if (!/^\d{6}$/.test(shortDate)) return ''; // 형식이 맞지 않으면 빈 문자열 반환
+  if (!/^\d{6}$/.test(shortDate)) return ""; // 형식이 맞지 않으면 빈 문자열 반환
 
-  const yearPrefix = shortDate.startsWith('9') ? '19' : '20'; // 첫 자리에 따라 결정
+  const yearPrefix = shortDate.startsWith("9") ? "19" : "20"; // 첫 자리에 따라 결정
   const year = `${yearPrefix}${shortDate.substring(0, 2)}`;
   const month = shortDate.substring(2, 4);
   const day = shortDate.substring(4, 6);
@@ -23,15 +23,36 @@ const convertToFullDate = (shortDate) => {
   return `${year}-${month}-${day}`;
 };
 
-const CreateInformations = ({ isSubmit, setIsSubmit, verifiedData, setUserData }) => {
-  
+// 생년월일을 바탕으로 나이를 계산하는 함수
+const calculateAge = (birthDate) => {
+  const birth = new Date(birthDate);
+  const today = new Date();
+  let age = today.getFullYear() - birth.getFullYear();
+  const monthDifference = today.getMonth() - birth.getMonth();
+
+  if (
+    monthDifference < 0 ||
+    (monthDifference === 0 && today.getDate() < birth.getDate())
+  ) {
+    age--;
+  }
+
+  return age;
+};
+
+const CreateInformations = ({
+  isSubmit,
+  setIsSubmit,
+  verifiedData,
+  setUserData,
+}) => {
   // input에 입력되는 값들을 저장하기 위한 useState
-  const [userName, setUserName] = useState('');
-  const [userBirth, setUserBirth] = useState('');
-  const [userGender, setUserGender] = useState('');
-  const [firstPhoneNumber, setFirstPhoneNumber] = useState('');
-  const [secondPhoneNumber, setSecondPhoneNumber] = useState('');
-  const [lastPhoneNumber, setLastPhoneNumber] = useState('');
+  const [userName, setUserName] = useState("");
+  const [userBirth, setUserBirth] = useState("");
+  const [userGender, setUserGender] = useState("");
+  const [firstPhoneNumber, setFirstPhoneNumber] = useState("");
+  const [secondPhoneNumber, setSecondPhoneNumber] = useState("");
+  const [lastPhoneNumber, setLastPhoneNumber] = useState("");
 
   // input에 입력된 값들이 조건에 만족하는지를 관리하는 useState
   const [isName, setIsName] = useState(false);
@@ -41,6 +62,7 @@ const CreateInformations = ({ isSubmit, setIsSubmit, verifiedData, setUserData }
   const [firstPhoneNoStatus, setFirstPhoneNoStatus] = useState(false);
   const [secondPhoneNoStatus, setSecondPhoneNoStatus] = useState(false);
   const [lastPhoneNoStatus, setLastPhoneNoStatus] = useState(false);
+  const [birthErrorMessage, setBirthErrorMessage] = useState("");
 
   // 버튼의 활성상태를 관리하기 위한 useState
   const [buttonStatus, setButtonStatus] = useState(false);
@@ -52,7 +74,7 @@ const CreateInformations = ({ isSubmit, setIsSubmit, verifiedData, setUserData }
     } else {
       setButtonStatus(false);
     }
-  }
+  };
 
   // 각 input 값들이 변결될때마다 버튼 활성화 여부 검증
   useEffect(() => {
@@ -60,9 +82,9 @@ const CreateInformations = ({ isSubmit, setIsSubmit, verifiedData, setUserData }
   }, [isName, isBirth, isGender, isPhoneNumber]);
 
   // 유저 이름 상태관리
-  const userNameInputHandler = e => {
+  const userNameInputHandler = (e) => {
     setUserName(e.target.value);
-  }
+  };
 
   useEffect(() => {
     setIsName(nameVerification(userName));
@@ -73,22 +95,51 @@ const CreateInformations = ({ isSubmit, setIsSubmit, verifiedData, setUserData }
   };
 
   // 생년월일 상태관리 (yyMMdd 형식)
-  const userBirthInputHandler = e => {
-    setUserBirth(e.target.value);
-  }
+  const userBirthInputHandler = (e) => {
+    const inputBirth = e.target.value;
+    setUserBirth(inputBirth);
+    if (inputBirth.length === 6 && birthVerification(inputBirth)) {
+      if (!checkAge(inputBirth)) {
+        setIsBirth(false);
+      } else {
+        setIsBirth(true);
+      }
+    } else {
+      setBirthErrorMessage("");
+      setIsBirth(false);
+    }
+  };
 
   useEffect(() => {
     setIsBirth(birthVerification(userBirth));
   }, [userBirth]);
 
+  const checkAge = (birthDate) => {
+    const fullBirthDate = convertToFullDate(birthDate);
+    const age = calculateAge(fullBirthDate);
+    const birthYear = parseInt(fullBirthDate.substring(0, 4), 10);
+
+    // 한국 나이 기준으로 2005년생까지 가입 허용 (20세까지 가입 가능)
+    if (age < 20 || birthYear > 2005) {
+      setBirthErrorMessage("20세 이상만 가입이 가능합니다.");
+      return false;
+    }
+    setBirthErrorMessage("");
+    return true;
+  };
+
   const birthBtnHandler = () => {
-    setIsSubmit([true, true, false, false]);
+    if (checkAge(userBirth)) {
+      setIsSubmit([true, true, false, false]);
+    } else {
+      setIsBirth(false);
+    }
   };
 
   // 성별 상태관리
-  const userGenderInputHandler = e => {
+  const userGenderInputHandler = (e) => {
     setUserGender(e.target.value);
-  }
+  };
 
   useEffect(() => {
     setIsGender(genderVerification(userGender));
@@ -99,15 +150,15 @@ const CreateInformations = ({ isSubmit, setIsSubmit, verifiedData, setUserData }
   };
 
   // 전화번호 상태관리
-  const firstPhoneNumberInputHandler = e => {
+  const firstPhoneNumberInputHandler = (e) => {
     setFirstPhoneNumber(e.target.value);
-  }
-  const secondPhoneNumberInputHandler = e => {
+  };
+  const secondPhoneNumberInputHandler = (e) => {
     setSecondPhoneNumber(e.target.value);
-  }
-  const lastPhoneNumberInputHandler = e => {
+  };
+  const lastPhoneNumberInputHandler = (e) => {
     setLastPhoneNumber(e.target.value);
-  }
+  };
 
   useEffect(() => {
     setFirstPhoneNoStatus(firstPhoneNumberVerification(firstPhoneNumber));
@@ -122,119 +173,148 @@ const CreateInformations = ({ isSubmit, setIsSubmit, verifiedData, setUserData }
   }, [lastPhoneNumber]);
 
   useEffect(() => {
-    setIsPhoneNumber((firstPhoneNoStatus && secondPhoneNoStatus && lastPhoneNoStatus))
+    setIsPhoneNumber(
+      firstPhoneNoStatus && secondPhoneNoStatus && lastPhoneNoStatus
+    );
   }, [firstPhoneNoStatus, secondPhoneNoStatus, lastPhoneNoStatus]);
 
   const phoneNoBtnHandler = () => {
     const fullBirthDate = convertToFullDate(userBirth);
-
-    setIsSubmit([true, true, true, true]);
-    setUserData({
-      name: userName,
-      birth: fullBirthDate,
-      gender: userGender,
-      phoneNumber: `${firstPhoneNumber}-${secondPhoneNumber}-${lastPhoneNumber}`
-    });
+    if (checkAge(userBirth)) {
+      setIsSubmit([true, true, true, true]);
+      setUserData({
+        name: userName,
+        birth: fullBirthDate,
+        gender: userGender,
+        phoneNumber: `${firstPhoneNumber}-${secondPhoneNumber}-${lastPhoneNumber}`,
+      });
+    }
   };
 
   return (
-      <>
-        <h1 className={'title'}>개인정보 설정</h1>
+    <>
+      <h1 className={"title"}>개인정보 설정</h1>
 
-        <div className={styles.inputTitle}>이름</div>
-        <DefaultInput inputState={!userName ? '' : isName ? 'correct' : 'error'}
-                      errorMessage={'필수 값입니다.'}
-                      onChange={userNameInputHandler}
-                      placeholder={'이름을 입력해 주세요.'}
-        />
-        {!isSubmit[0] &&
+      <div className={styles.inputTitle}>이름</div>
+      <DefaultInput
+        inputState={!userName ? "" : isName ? "correct" : "error"}
+        errorMessage={"필수 값입니다."}
+        onChange={userNameInputHandler}
+        placeholder={"이름을 입력해 주세요."}
+      />
+      {!isSubmit[0] && (
+        <div className={styles.button}>
+          <MtButtons
+            buttonText={"SUBMIT"}
+            buttonType={isName ? "apply" : "disabled"}
+            eventType={"click"}
+            eventHandler={nameBtnHandler}
+          />
+        </div>
+      )}
+{ isSubmit[0] &&
+        <>
+          <div className={styles.inputTitle}>생년월일</div>
+          <DefaultInput 
+            inputState={!userBirth ? '' : isBirth ? 'correct' : 'error'}
+            errorMessage={birthErrorMessage || '필수 값입니다. 6자리 생년월일을 입력해 주세요.'}
+            onChange={userBirthInputHandler}
+            placeholder={'생년월일을 입력해 주세요.  ex) 970610'}
+            value={userBirth}
+          />
+          {!isSubmit[1] &&
             <div className={styles.button}>
-              <MtButtons buttonText={'SUBMIT'}
-                         buttonType={isName ? 'apply' : 'disabled'}
-                         eventType={'click'}
-                         eventHandler={nameBtnHandler}/>
-            </div>
-        }
-        { isSubmit[0] &&
-            <>
-              <div className={styles.inputTitle}>생년월일</div>
-              <DefaultInput inputState={!userBirth ? '' : isBirth ? 'correct' : 'error'}
-                            errorMessage={'필수 값입니다. 6자리 생년월일을 입력해 주세요.'}
-                            onChange={userBirthInputHandler}
-                            placeholder={'생년월일을 입력해 주세요.  ex) 240729'}
+              <MtButtons 
+                buttonText={'SUBMIT'}
+                buttonType={isBirth ? 'apply' : 'disabled'}
+                eventType={'click'}
+                eventHandler={birthBtnHandler}
               />
-              {!isSubmit[1] &&
-                  <div className={styles.button}>
-                    <MtButtons buttonText={'SUBMIT'}
-                               buttonType={isBirth ? 'apply' : 'disabled'}
-                               eventType={'click'}
-                               eventHandler={birthBtnHandler}/>
-                  </div>
+            </div>
+          }
+        </>
+      }
+      {isSubmit[1] && (
+        <>
+          <div className={styles.inputTitle}>성별</div>
+        <div className={styles.radioTitle}>
+            <RadioButton
+              text={"남성"}
+              value={"남"}
+              name={"gender"}
+              onChange={userGenderInputHandler}
+            />
+            <RadioButton
+              text={"여성"}
+              value={"여"}
+              name={"gender"}
+              onChange={userGenderInputHandler}
+            />
+          </div>
+          {!isSubmit[2] && (
+            <div className={styles.button}>
+              <MtButtons
+                buttonText={"SUBMIT"}
+                buttonType={isGender ? "apply" : "disabled"}
+                eventType={"click"}
+                eventHandler={genderBtnHandler}
+              />
+            </div>
+          )}
+        </>
+      )}
+      {isSubmit[2] && (
+        <>
+          <div className={styles.inputTitle}>전화번호</div>
+          <div className={styles.phoneNumber}>
+            <DefaultInput
+              inputState={
+                !firstPhoneNumber ? "" : isPhoneNumber ? "correct" : "error"
               }
-            </>
-        }
-        { isSubmit[1] &&
-            <>
-              <div className={styles.inputTitle}>성별</div>
-              <div className={styles.radioTitle}>
-                <RadioButton
-                  text={"남성"}
-                  value={"남"}
-                  name={'gender'}
-                  onChange={userGenderInputHandler}
-                  />
-                <RadioButton
-                    text={"여성"}
-                    value={"여"}
-                    name={'gender'}
-                    onChange={userGenderInputHandler}
-                />
-              </div>
-              {!isSubmit[2] &&
-                  <div className={styles.button}>
-                    <MtButtons buttonText={'SUBMIT'}
-                               buttonType={isGender ? 'apply' : 'disabled'}
-                               eventType={'click'}
-                               eventHandler={genderBtnHandler}/>
-                  </div>
+              errorMessage={
+                "필수 값입니다. 휴대폰 번호를 양식에 맞게 입력해 주세요."
               }
-            </>
-        }
-        {isSubmit[2] &&
-            <>
-              <div className={styles.inputTitle}>전화번호</div>
-              <div className={styles.phoneNumber}>
-                <DefaultInput inputState={!firstPhoneNumber ? '' : isPhoneNumber ? 'correct' : 'error'}
-                              errorMessage={'필수 값입니다. 휴대폰 번호를 양식에 맞게 입력해 주세요.'}
-                              onChange={firstPhoneNumberInputHandler}
-                              placeholder={'010'}
-                              className={styles.pno1}
-                />
-                <p> - </p>
-                <DefaultInput inputState={!secondPhoneNumber ? '' : isPhoneNumber ? 'correct' : 'error'}
-                              errorMessage={'필수 값입니다. 휴대폰 번호를 양식에 맞게 입력해 주세요.'}
-                              onChange={secondPhoneNumberInputHandler}
-                              placeholder={'XXXX'}
-                              className={styles.pno2}
-                />
-                <p> - </p>
-                <DefaultInput inputState={!lastPhoneNumber ? '' : isPhoneNumber ? 'correct' : 'error'}
-                              errorMessage={'필수 값입니다. 휴대폰 번호를 양식에 맞게 입력해 주세요.'}
-                              onChange={lastPhoneNumberInputHandler}
-                              placeholder={'XXXX'}
-                              className={styles.pno3}
-                />
-              </div>
+              onChange={firstPhoneNumberInputHandler}
+              placeholder={"010"}
+              className={styles.pno1}
+            />
+            <p> - </p>
+            <DefaultInput
+              inputState={
+                !secondPhoneNumber ? "" : isPhoneNumber ? "correct" : "error"
+              }
+              errorMessage={
+                "필수 값입니다. 휴대폰 번호를 양식에 맞게 입력해 주세요."
+              }
+              onChange={secondPhoneNumberInputHandler}
+              placeholder={"XXXX"}
+              className={styles.pno2}
+            />
+            <p> - </p>
+            <DefaultInput
+              inputState={
+                !lastPhoneNumber ? "" : isPhoneNumber ? "correct" : "error"
+              }
+              errorMessage={
+                "필수 값입니다. 휴대폰 번호를 양식에 맞게 입력해 주세요."
+              }
+              onChange={lastPhoneNumberInputHandler}
+              placeholder={"XXXX"}
+              className={styles.pno3}
+            />
+          </div>
 
-              <div className={styles.button}>
-                <MtButtons buttonText={'SUBMIT'}
-                           buttonType={buttonStatus ? 'apply' : 'disabled'}
-                           eventType={'click'}
-                           eventHandler={phoneNoBtnHandler}/>
-              </div>
-            </>
-        }
-      </>
+          <div className={styles.button}>
+            <MtButtons
+              buttonText={"SUBMIT"}
+              buttonType={buttonStatus ? "apply" : "disabled"}
+              eventType={"click"}
+              eventHandler={phoneNoBtnHandler}
+            />
+          </div>
+        </>
+      )}
+    </>
   );
 };
 

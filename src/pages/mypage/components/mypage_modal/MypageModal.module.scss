@@ -1,8 +1,10 @@
 .profileMenu {
   position: absolute;
-  top: calc(100vw * (56 / 500));
+  top: 50%;
   right: 0;
+  transform: translateY(-50%);
   z-index: 10;
+  width: fit-content;
 
   button {
     width: calc(100vw * (100 / 500));
@@ -18,6 +20,8 @@
     opacity: 0;
     transition: 0.5s ease-out;
     pointer-events: none;
+    box-shadow: 0 0 10px rgba($color: #000000, $alpha: 0.1);
+
 
     &:last-child {
       margin-bottom: 0;

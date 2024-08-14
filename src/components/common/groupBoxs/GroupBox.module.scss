@@ -48,6 +48,7 @@
       .groupMajor {
         font-size: calc(100vw * (15 / 500));
         color: var(--color-gr);
+        // font-weight: 500;
         margin-top: calc(100vw * (9 / 500));
       }
     }
@@ -62,6 +63,7 @@
     .matchingText {
       color: var(--color-point);
       font-size: calc(100vw * (14 / 500));
+      font-weight: 500;
 
       display: flex;
       align-items: center;
@@ -74,8 +76,9 @@
 
     &.notMatching {
       .matchingText {
-        color: var(--color-bk);
+        color: var(--color-gr);
         align-items: end;
+
       }
 
       .matchingBt {

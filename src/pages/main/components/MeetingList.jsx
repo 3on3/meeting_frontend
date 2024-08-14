@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { filterAction } from "../../../store/Filter-slice";
 
 // matchingState={"complete"} 이면 매칭 완료
-function MeetingList({ setIsChanged }) {
+function MeetingList() {
   //페이징 번호
   const [pageNo, setPageNo] = useState(1);
 
@@ -20,6 +20,8 @@ function MeetingList({ setIsChanged }) {
 
   // 로딩 상태 체크
   const [loading, setLoading] = useState(false);
+  const [isChanged, setIsChanged] = useState(false)
+
 
   // 초기 랜더링
   const [initialLoad, setInitialLoad] = useState(true);
@@ -114,7 +116,7 @@ function MeetingList({ setIsChanged }) {
   // 초기 랜더링
   useEffect(() => {
     MainMeetingListFetch();
-  }, []);
+  }, [isChanged]);
 
   // 스크롤이 트리거될 때마다 데이터 로드
   useEffect(() => {

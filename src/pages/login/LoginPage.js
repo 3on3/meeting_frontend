@@ -1,17 +1,18 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import logoImage from "../../assets/images/login/logo.svg";
 import MtButtons from "../../components/common/buttons/MtButtons";
 import styles from "./LoginPage.module.scss";
 import DefaultInput from "../../components/common/inputs/DefaultInput";
 import { getUserToken } from "../../config/auth";
 import { useNavigate } from "react-router-dom";
-import {useDispatch} from "react-redux";
-import {loginActions} from "../../store/Login-slice";
+import { useDispatch } from "react-redux";
+import { loginActions } from "../../store/Login-slice";
+import RadioButton from "../../components/common/buttons/radiobutton/RadioButton";
+import Checkbox from "../../components/common/buttons/checkboxbutton/Checkbox";
 
 const LoginPage = () => {
-const navigate = useNavigate();
+  const navigate = useNavigate();
   const loginDispatch = useDispatch();
-
 
   const loginNavigate = () => {
     navigate("/");
@@ -27,6 +28,7 @@ const navigate = useNavigate();
   const [autoLogin, setAutoLogin] = useState(false);
   const [idError, setIdError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [loginError, setLoginError] = useState("");
 
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem("userData") || "{}");
@@ -52,8 +54,8 @@ const navigate = useNavigate();
     setPasswordError("");
   };
 
-  const autoLoginHandler = (e) => {
-    setAutoLogin(e.target.checked);
+  const autoLoginHandler = (isChecked) => {
+    setAutoLogin(isChecked);
   };
 
   const loginHandler = async () => {
@@ -75,7 +77,12 @@ const navigate = useNavigate();
 
         if (response.ok) {
           const data = await response.json();
-          console.log("  성공:", data);
+
+          // 탈퇴여부가 true이면 error 알려주고 return
+          if (data.isWithdrawn) {
+            setLoginError("이 계정은 탈퇴된 회원입니다.");
+            return;
+          }
 
           const userData = {
             token: data.token,
@@ -93,7 +100,6 @@ const navigate = useNavigate();
 
           localStorage.setItem("userData", JSON.stringify(userData));
 
-          // 로그인 후 이전 경로로 리디렉션
           const redirectPath = localStorage.getItem("redirectPath") || "/";
           localStorage.removeItem("redirectPath");
           navigate(redirectPath);
@@ -116,22 +122,21 @@ const navigate = useNavigate();
             loginNavigate();
           }
         } else {
-        const errorText = await response.text();
-        if (errorText.includes("User not found")) {
-          setIdError("존재하지 않는 아이디입니다.");
-        } else if (errorText.includes("Invalid password")) {
-          setPasswordError("비밀번호가 틀렸습니다.");
-        } else {
-          setIdError("로그인에 실패했습니다.");
-          setPasswordError("로그인에 실패했습니다.");
+          const errorText = await response.text();
+          if (errorText.includes("User not found")) {
+            setIdError("존재하지 않는 아이디입니다.");
+          } else if (errorText.includes("Invalid password")) {
+            setPasswordError("비밀번호가 틀렸습니다.");
+          } else {
+            setIdError("로그인에 실패했습니다.");
+          }
         }
+      } catch (error) {
+        console.error("Error:", error);
+        alert("서버 오류가 발생했습니다.");
       }
-    } catch (error) {
-      console.error("Error:", error);
-      alert("서버 오류가 발생했습니다.");
     }
-  }
-};
+  };
 
   const SignUpClickHandler = () => {
     navigate("/sign-up");
@@ -144,10 +149,15 @@ const navigate = useNavigate();
       </div>
       <div className={styles.input}>
         <DefaultInput
-          inputState={idError ? "error" : idInput ? (idStatus ? "" : "error") : ""}
+          inputState={
+            idError ? "error" : idInput ? (idStatus ? "" : "error") : ""
+          }
           placeholder={"아이디를 입력하세요."}
           onChange={idInputHandler}
-          errorMessage={idError || (idInput && !idStatus ? "아이디가 이메일 형식이 아닙니다." : "")}
+          errorMessage={
+            idError ||
+            (idInput && !idStatus ? "아이디가 이메일 형식이 아닙니다." : "")
+          }
           className={styles.inputCustom}
         />
         <DefaultInput
@@ -160,7 +170,9 @@ const navigate = useNavigate();
         />
       </div>
       <div className={styles.checkbox}>
-        <input type="checkbox" onChange={autoLoginHandler} /> 자동로그인
+        <Checkbox checked={autoLogin} onChange={autoLoginHandler}>
+          자동로그인
+        </Checkbox>
       </div>
       <div className={styles.button}>
         <MtButtons
@@ -170,6 +182,8 @@ const navigate = useNavigate();
           eventType={"click"}
         />
       </div>
+
+      {loginError && <p className={styles.errorMessage}>{loginError}</p>}
 
       <div className={styles.findSection}>
         <p className={styles.signUp} onClick={SignUpClickHandler}>

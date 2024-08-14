@@ -42,7 +42,7 @@ const ProfileSection = ({ userId }) => {
 
       console.log("프로필 정보 업데이트를 시작합니다.");
       const response = await fetch(`http://localhost:8253/mypage/userInfo/update/${userId}`, {
-        method: "POST",
+        method: "PUT",
         headers: {
           Authorization: `Bearer ${getUserToken()}`,
           "Content-Type": "application/json",

@@ -19,15 +19,15 @@ const Withdraw = () => {
   const [isPasswordValid, setIsPasswordValid] = useState(false);
   const [isSubmit, setIsSubmit] = useState([false, false]);
   const [showVerification, setShowVerification] = useState(false);
-
+// 페이지 이동을 위한 navigate 함수
   const navigate = useNavigate();
-
+// '확인' 버튼 클릭 시 실행되는 함수
   const handleWithdrawClick = () => {
     if (isEmailValid) {
       setShowVerification(true);
     }
   }
-
+// 이메일 입력 변경 시 실행되는 함수
   const handleEmailChange = (e) => {
     setIsInitial(false);
     setEmail(e.target.value);
@@ -38,26 +38,26 @@ const Withdraw = () => {
     setIsEmailValid(isValidEmail);
     setIsSubmit([isValidEmail, false]);
   }
-
+  // 인증 제출 시 실행되는 함수
   const handleVerificationSubmit = () => {
     setShowPassword(true);
   }
-
+  // 비밀번호 입력 변경 시 실행되는 함수
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
 
     const isValidPassword = e.target.value.length >= 8; 
     setIsPasswordValid(isValidPassword);
   }
-
+  // 비밀번호 제출 시 실행되는 함수
   const handlePasswordSubmit = () => {
     setShowConfirm(true);
   }
-
+  // 탈퇴 확인 화면을 보여주는 조건
   if (showConfirm) {
     return <ConfirmWithdraw email={email} />;
   }
-
+ // 비밀번호 입력 화면을 보여주는 조건
   if (showPassword) {
     return (
       <div className={styles.container}>
@@ -86,7 +86,7 @@ const Withdraw = () => {
       </div>
     );
   }
-
+  // 인증 입력 화면을 보여주는 조건
   if (showVerification) {
     return (
       <div className={styles.container}>
@@ -115,7 +115,7 @@ const Withdraw = () => {
       </div>
     );
   }
-
+ // 기본 이메일 입력 화면을 렌더링
   return (
     <div className={styles.container}>
       <h1 className={`title ${styles.text}`}>회원탈퇴</h1>

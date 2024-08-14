@@ -34,7 +34,7 @@ const ProfileSection = ({ userId }) => {
   const editNameToggle = () => {
     setIsEditingName(!isEditingName); // 현재 편집 모드 상태를 반전시킴
   };
-
+0
   // 프로필 소개 편집 모드 토글 (활성화/비활성화)
   const editDescriptionToggle = () => {
     setIsEditingDescription(!isEditingDescription); // 현재 편집 모드 상태를 반전시킴
@@ -121,49 +121,9 @@ const ProfileSection = ({ userId }) => {
         console.error("프로필 정보를 불러오는 중 오류가 발생했습니다:", error);
       });
 
-      // 사용자 프로필 정보를 서버로 전송하는 PUT 요청 핸들러
-  const saveProfileHandler = () => {
-    const profileData = {
-      nickname, 
-      // age, 
-      profileIntroduce, 
-      // univ, 
-      major, 
-    };
 
-    // 로그 1: 전송할 데이터 확인
-    console.log("전송할 프로필 데이터:", profileData);
-
-    fetch(`http://localhost:8253/mypage/userInfo/update`, {
-      method: "PUT", 
-      headers: {
-        Authorization: `Bearer ${getUserToken()}`,
-        "Content-Type": "application/json", 
-      },
-      body: JSON.stringify(profileData), 
-    })
-    .then((response) => {
-      // 로그 2: 응답 상태 코드 확인
-      console.log("서버 응답 상태:", response.status);
-
-      if (response.ok) {
-        return response.json();
-      } else {
-        throw new Error("프로필 정보를 업데이트하는 중 오류가 발생했습니다.");
-      }
-    })
-    .then((data) => {
-      // 로그 3: 서버에서 반환된 데이터 확인
-      console.log("프로필이 성공적으로 업데이트되었습니다:", data);
-    })
-    .catch((error) => {
-      // 로그 4: 오류가 발생한 경우의 로그
-      console.error("프로필 정보를 업데이트하는 중 오류가 발생했습니다:", error);
-    });
-  };
-
-    // 사용자 프로필 이미지를 가져오는 GET 요청
-    fetch(`http://localhost:8253/mypage/profileImage/${userId}`, {
+    // 사용자 프로필 이미지를 서버로부터 URL 형태로 받아옴
+    fetch(`http://localhost:8253/mypage/profile/${userId}`, {
       method: "GET", 
       headers: {
         Authorization: `Bearer ${getUserToken()}`,
@@ -172,15 +132,14 @@ const ProfileSection = ({ userId }) => {
     })
       .then((response) => {
         if (response.ok) {
-          return response.blob(); 
+          return response.json(); // 서버에서 JSON 응답을 받아옴
         } else {
           throw new Error("프로필 이미지를 불러오는 중 오류가 발생했습니다.");
         }
       })
-      .then((blob) => {
-        const imageUrl = URL.createObjectURL(blob); 
-        setProfileImg(imageUrl); // 프로필 이미지 상태 설정
-        console.log("받은 프로필 이미지:", imageUrl); 
+      .then((data) => {
+        setProfileImg(data.profileImageUrl); // 서버에서 받은 이미지 URL을 프로필 이미지 상태에 설정
+        console.log("받은 프로필 이미지 URL:", data.profileImageUrl); 
       })
       .catch((error) => {
         console.error("프로필 이미지를 불러오는 중 오류가 발생했습니다:", error);

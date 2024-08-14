@@ -68,7 +68,6 @@ const ProfileSection = ({ userId }) => {
     }
   };
   // 수정된 부분 끝
-
   // 닉네임 편집 모드 토글 (활성화/비활성화)
   const editNameToggle = () => {
     if (isEditingName) {

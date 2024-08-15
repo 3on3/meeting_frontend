@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 import RequestBtns from "./RequestBtns";
 import MyGroupSelectModal from "../../myGroupSelectModal/MyGroupSelectModal";
 
-function GroupBox({ state, group, className, setIsChanged }) {
+function GroupBox({ state, group, className, setIsChanged, matchingStatus }) {
   const [modalActive, setModalActive] = useState(false);
 
   // =============== param 스타일 가이드 ===============
@@ -101,7 +101,7 @@ function GroupBox({ state, group, className, setIsChanged }) {
         <NavLink
           className={`${styles.groupBox} ${groupBoxState} ${className}`}
           key={group.id}
-          to={`/group/${group.id}`}
+          to={`/group/${group.id}?status=${matchingStatus}`}
         >
           {/* 기본 & sky */}
 

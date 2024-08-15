@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import GroupViewHead from "./components/GroupViewHead";
 import styles from "./Group.module.scss";
 import GroupViewBody from "./components/GroupViewBody";
@@ -27,9 +27,15 @@ const Group = () => {
   const [isChanged, setIsChanged] = useState(false);
   const { alarmFetch } = useFetchRequest();
   const mainSocket = useContext(MainWebSocketContext);
+  const [searchParams] = useSearchParams();
+  const status = searchParams.get("status")
+  
 
+  
   const { openModal } = useModal();
 
+  console.log("groupData: " ,groupData);
+  
   const openConfirmModal = () => {
     openModal(
       "그룹 나가기",
@@ -165,13 +171,31 @@ const Group = () => {
         totalMember={totalMembers}
         fetchGroupData={fetchGroupData}
       />
-      {auth !== "HOST" && (
+      {auth !== "HOST" && status!== "REQUESITNG" && status !== "RESPONSE" && (
         <MtButtons
           eventType={"click"}
           buttonType={type}
           buttonText={text}
           eventHandler={onClickHandler}
           className={styles.groupBtn}
+        />
+      )}
+      {status === "REQUESITNG" && (
+          <MtButtons
+          eventType={"click"}
+          buttonType={"disabled"}
+          buttonText={"이미 매칭 신청 중인 그룹이예요."}
+          className={`${styles.groupBtn} ${styles.disable}`}
+          // className={}
+        />
+      )}
+      {status === "RESPONSE" && (
+          <MtButtons
+          eventType={"click"}
+          buttonType={"disabled"}
+          buttonText={"내 그룹에 매칭을 신청한 그룹이예요."}
+          className={`${styles.groupBtn} ${styles.disable}`}
+          // className={}
         />
       )}
       {auth === "HOST" && (

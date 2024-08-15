@@ -83,7 +83,7 @@ function MeetingList() {
       <ul className={styles.meetingList}>
         {loading || (listData.length === 0 && <EmptyGroups />)}
         {listData.map((group) => (
-          <GroupBox key={group.id} group={group} setIsChanged={setIsChanged} />
+          <GroupBox key={group.id} group={group} setIsChanged={setIsChanged} matchingStatus={group.matchingStatus} />
         ))}
         <div ref={scrollRef} style={{ height: "100px" }}></div>
       </ul>

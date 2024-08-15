@@ -12,10 +12,6 @@ const MyChats = () => {
         console.log(data);
     }, []);
 
-    useEffect(() => {
-        console.log(chatList)
-    }, [chatList]);
-
   return (
     <ul className={styles.myChatsWrapper}>
       <p className={styles.myGroupsTitle}>내가 속한 채팅</p>

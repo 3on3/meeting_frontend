@@ -22,6 +22,7 @@ import MyChats from "../pages/mypage/mypage_chats/MyChats";
 import InvitePage from "../pages/invite/InvitePage";
 import { authCheckLoader, autoCheckReturnLoader } from "./auth";
 import JoinEndPage from "../pages/invite/components/JoinEndPage";
+import FindPassword from "../pages/login/components/FindPassword";
 
 // 마이페이지 라우터
 const mypageRouter = [
@@ -88,6 +89,10 @@ export const router = createBrowserRouter([
         path: "login/first-login",
         element: <FirstLoginPage />,
       },
+      {
+        path: "find-password",
+        element: <FindPassword />,
+      },  
       {
         path: "group/create",
         element: <GroupCreate />,

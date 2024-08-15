@@ -64,12 +64,16 @@ const CreateInformations = ({
   const [lastPhoneNoStatus, setLastPhoneNoStatus] = useState(false);
   const [birthErrorMessage, setBirthErrorMessage] = useState("");
 
+  // 전화번호 중복 확인 관련 상태
+  const [isPhoneNumberDuplicate, setIsPhoneNumberDuplicate] = useState(false);
+  const [phoneNumberErrorMessage, setPhoneNumberErrorMessage] = useState("");
+
   // 버튼의 활성상태를 관리하기 위한 useState
   const [buttonStatus, setButtonStatus] = useState(false);
 
   // 모든 입력된 값들이 조건에 만족할시 버튼 활성화
   const checkButtonStatus = () => {
-    if (isName && isBirth && isGender && isPhoneNumber) {
+    if (isName && isBirth && isGender && isPhoneNumber && !isPhoneNumberDuplicate) {
       setButtonStatus(true);
     } else {
       setButtonStatus(false);
@@ -79,7 +83,7 @@ const CreateInformations = ({
   // 각 input 값들이 변결될때마다 버튼 활성화 여부 검증
   useEffect(() => {
     checkButtonStatus();
-  }, [isName, isBirth, isGender, isPhoneNumber]);
+  }, [isName, isBirth, isGender, isPhoneNumber, isPhoneNumberDuplicate]);
 
   // 유저 이름 상태관리
   const userNameInputHandler = (e) => {
@@ -152,12 +156,22 @@ const CreateInformations = ({
   // 전화번호 상태관리
   const firstPhoneNumberInputHandler = (e) => {
     setFirstPhoneNumber(e.target.value);
+    resetPhoneNumberState(); // 번호 입력 시 상태 초기화
   };
   const secondPhoneNumberInputHandler = (e) => {
     setSecondPhoneNumber(e.target.value);
+    resetPhoneNumberState(); // 번호 입력 시 상태 초기화
   };
   const lastPhoneNumberInputHandler = (e) => {
     setLastPhoneNumber(e.target.value);
+    resetPhoneNumberState(); // 번호 입력 시 상태 초기화
+  };
+
+  // 전화번호 상태 초기화 함수
+  const resetPhoneNumberState = () => {
+    setIsPhoneNumberDuplicate(false);
+    setPhoneNumberErrorMessage("");
+    setIsPhoneNumber(false);
   };
 
   useEffect(() => {
@@ -178,16 +192,68 @@ const CreateInformations = ({
     );
   }, [firstPhoneNoStatus, secondPhoneNoStatus, lastPhoneNoStatus]);
 
-  const phoneNoBtnHandler = () => {
-    const fullBirthDate = convertToFullDate(userBirth);
-    if (checkAge(userBirth)) {
-      setIsSubmit([true, true, true, true]);
-      setUserData({
-        name: userName,
-        birth: fullBirthDate,
-        gender: userGender,
-        phoneNumber: `${firstPhoneNumber}-${secondPhoneNumber}-${lastPhoneNumber}`,
+  // 전화번호 중복 확인 함수
+  const checkPhoneNumberDuplicate = async (phoneNumber) => {
+    try {
+      const encodedPhoneNumber = encodeURIComponent(phoneNumber);
+      console.log('encodedPhoneNumber: ', encodedPhoneNumber);
+
+      const response = await fetch(`http://localhost:8253/signup/check-phone-number?phoneNumber=${encodedPhoneNumber}`, {
+        method: 'GET',
       });
+      console.log('response: ', response);
+
+      const data = await response.json();
+      console.log('Server response data:', data);
+
+      if (data === true) {
+        // 중복된 전화번호인 경우
+        setIsPhoneNumberDuplicate(true);
+        setPhoneNumberErrorMessage("이미 사용 중인 전화번호입니다. 다른 전화번호를 입력해 주세요.");
+        setIsPhoneNumber(false); // 제출 불가 상태로 설정
+        return true;
+      }
+
+      if (data.error) {
+        // 데이터가 오류를 포함하고 있는 경우
+        setPhoneNumberErrorMessage(data.error);
+        return true;
+      }
+
+      // 중복되지 않은 경우
+      setIsPhoneNumberDuplicate(false);
+      setPhoneNumberErrorMessage("");
+      return false;
+    } catch (error) {
+      console.error("전화번호 중복 확인 중 오류 발생:", error);
+      setPhoneNumberErrorMessage("전화번호 중복 확인 중 오류가 발생했습니다.");
+      return true;
+    }
+  };
+
+  // 전화번호 입력 완료 후 중복 확인
+  const phoneNoBtnHandler = async () => {
+    const fullPhoneNumber = `${firstPhoneNumber}-${secondPhoneNumber}-${lastPhoneNumber}`;
+    
+    const isDuplicate = await checkPhoneNumberDuplicate(fullPhoneNumber);
+    console.log('isDuplicate: ', isDuplicate);
+    
+    if (isDuplicate) {
+      // 중복된 경우 버튼 비활성화
+      return;
+    } else {
+      setIsPhoneNumberDuplicate(false);
+      setPhoneNumberErrorMessage("");
+      const fullBirthDate = convertToFullDate(userBirth);
+      if (checkAge(userBirth)) {
+        setIsSubmit([true, true, true, true]);
+        setUserData({
+          name: userName,
+          birth: fullBirthDate,
+          gender: userGender,
+          phoneNumber: fullPhoneNumber,
+        });
+      }
     }
   };
 
@@ -198,7 +264,7 @@ const CreateInformations = ({
       <div className={styles.inputTitle}>이름</div>
       <DefaultInput
         inputState={!userName ? "" : isName ? "correct" : "error"}
-        errorMessage={"필수 값입니다."}
+        errorMessage={"이름은 필수 값입니다."}
         onChange={userNameInputHandler}
         placeholder={"이름을 입력해 주세요."}
       />
@@ -212,17 +278,17 @@ const CreateInformations = ({
           />
         </div>
       )}
-{ isSubmit[0] &&
+      {isSubmit[0] && (
         <>
           <div className={styles.inputTitle}>생년월일</div>
           <DefaultInput 
             inputState={!userBirth ? '' : isBirth ? 'correct' : 'error'}
-            errorMessage={birthErrorMessage || '필수 값입니다. 6자리 생년월일을 입력해 주세요.'}
+            errorMessage={birthErrorMessage || '생년월일은 필수 값입니다. 6자리 생년월일을 입력해 주세요.'}
             onChange={userBirthInputHandler}
             placeholder={'생년월일을 입력해 주세요.  ex) 970610'}
             value={userBirth}
           />
-          {!isSubmit[1] &&
+          {!isSubmit[1] && (
             <div className={styles.button}>
               <MtButtons 
                 buttonText={'SUBMIT'}
@@ -231,13 +297,13 @@ const CreateInformations = ({
                 eventHandler={birthBtnHandler}
               />
             </div>
-          }
+          )}
         </>
-      }
+      )}
       {isSubmit[1] && (
         <>
           <div className={styles.inputTitle}>성별</div>
-        <div className={styles.radioTitle}>
+          <div className={styles.radioTitle}>
             <RadioButton
               text={"남성"}
               value={"남"}
@@ -272,7 +338,9 @@ const CreateInformations = ({
                 !firstPhoneNumber ? "" : isPhoneNumber ? "correct" : "error"
               }
               errorMessage={
-                "필수 값입니다. 휴대폰 번호를 양식에 맞게 입력해 주세요."
+                isPhoneNumberDuplicate
+                  ? phoneNumberErrorMessage
+                  : "전화번호는 필수 값입니다. 양식에 맞게 입력해 주세요."
               }
               onChange={firstPhoneNumberInputHandler}
               placeholder={"010"}
@@ -284,7 +352,9 @@ const CreateInformations = ({
                 !secondPhoneNumber ? "" : isPhoneNumber ? "correct" : "error"
               }
               errorMessage={
-                "필수 값입니다. 휴대폰 번호를 양식에 맞게 입력해 주세요."
+                isPhoneNumberDuplicate
+                  ? phoneNumberErrorMessage
+                  : "전화번호는 필수 값입니다. 양식에 맞게 입력해 주세요."
               }
               onChange={secondPhoneNumberInputHandler}
               placeholder={"XXXX"}
@@ -296,7 +366,9 @@ const CreateInformations = ({
                 !lastPhoneNumber ? "" : isPhoneNumber ? "correct" : "error"
               }
               errorMessage={
-                "필수 값입니다. 휴대폰 번호를 양식에 맞게 입력해 주세요."
+                isPhoneNumberDuplicate
+                  ? phoneNumberErrorMessage
+                  : "전화번호는 필수 값입니다. 양식에 맞게 입력해 주세요."
               }
               onChange={lastPhoneNumberInputHandler}
               placeholder={"XXXX"}

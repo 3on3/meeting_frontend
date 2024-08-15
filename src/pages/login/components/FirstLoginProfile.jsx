@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import styles from "./FirstLoginProfile.module.scss";
 import MtButtons from "../../../components/common/buttons/MtButtons";
-import defaultImg from "../../../assets/images/mypage/coong.jpg";
+import defaultImg from "../../../assets/images/login/defaultProfile.png";
 import ProfileMenuModal from "./ProfileModal/ProfileMenuModal";
 import { getUserToken } from "../../../config/auth";
 

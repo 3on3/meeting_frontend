@@ -22,6 +22,7 @@ import MyChats from "../pages/mypage/mypage_chats/MyChats";
 import InvitePage from "../pages/invite/InvitePage";
 import { authCheckLoader, autoCheckReturnLoader } from "./auth";
 import JoinEndPage from "../pages/invite/components/JoinEndPage";
+import PasswordResetPage from "../pages/login/components/PasswordResetPage";
 
 // 마이페이지 라우터
 const mypageRouter = [
@@ -87,6 +88,11 @@ export const router = createBrowserRouter([
       {
         path: "login/first-login",
         element: <FirstLoginPage />,
+      },
+       // 비밀번호 재설정 라우터
+       {
+        path: "password-reset",
+        element: <PasswordResetPage />,
       },
       {
         path: "group/create",

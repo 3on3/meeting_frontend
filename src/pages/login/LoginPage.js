@@ -150,7 +150,7 @@ const LoginPage = () => {
   };
 
   const findPasswordClickHandler = () => {
-    navigate("/find-password");
+    navigate("/password-reset");
   };
 
   return (

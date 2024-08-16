@@ -4,13 +4,18 @@ import styles from "./MeetingList.module.scss";
 import { useInView } from "react-intersection-observer";
 import { getUserToken } from "../../../config/auth";
 import EmptyGroups from "../EmptyGroups";
-import { useDispatch, useSelector } from "react-redux";
-import { filterAction } from "../../../store/Filter-slice";
+
+import { useSearchParams } from "react-router-dom";
+import { throttle } from "lodash";
 
 // matchingState={"complete"} 이면 매칭 완료
 function MeetingList() {
-  //페이징 번호
-  const [pageNo, setPageNo] = useState(1);
+  //URL 파라미터를 가져오고 관리할 수 있는 훅
+  const [searchParams, setSearchParams] = useSearchParams();
+  const pageNo = Number(searchParams.get("pageNo")) ?? 1;
+  const gender = searchParams.get("gender");
+  const region = searchParams.get("region");
+  const personnel = searchParams.get("personnel");
 
   // List 데이터
   const [listData, setListData] = useState([]);
@@ -18,13 +23,8 @@ function MeetingList() {
   // 더이상 가져올 데이터가 있는지 확인
   const [isFinish, setIsFinish] = useState(false);
 
-  // 로딩 상태 체크
+  // 로딩 중인지
   const [loading, setLoading] = useState(false);
-  const [isChanged, setIsChanged] = useState(false)
-
-
-  // 초기 랜더링
-  const [initialLoad, setInitialLoad] = useState(true);
 
   //scrollRef
   const [scrollRef, inView] = useInView({
@@ -32,114 +32,74 @@ function MeetingList() {
     threshold: 1.0,
   });
 
-  //===== get fetch =====
+  //===== get fetch : 미팅리스트  =====
   const MainMeetingListFetch = async () => {
-    if (isFinish || loading) {
-      console.log("loading finished!");
-      return;
-    }
-
-    console.log("start loading...");
+    if (loading || isFinish) return;
     setLoading(true);
+    console.log("로딩중입니다...");
 
     try {
-      const response = await fetch(`http://localhost:8253/main/${pageNo}`, {
+      // 동적 url 만들기
+      let url = `http://localhost:8253/main?pageNo=${pageNo}`;
+      if (gender) {
+        url += `&gender=${gender}`;
+      }
+      if (personnel) {
+        url += `&personnel=${personnel}`;
+      }
+      if (region) {
+        url += `&region=${region}`;
+      }
+
+      const response = await fetch(url, {
         method: "GET",
         headers: {
           Authorization: "Bearer " + getUserToken(),
         },
       });
 
-      // 업데이트 리스트 전달
+      // 데이터 받기
       const list = await response.json();
       const { content, totalElements } = list;
-      const updatedMeetingList = [...listData, ...content];
-      console.log("Get!!! updatedMeetingList : ", updatedMeetingList);
+      const updatedListData = [...listData, ...content];
+      console.log("updatedListData : ", updatedListData);
+      setListData(updatedListData);
 
-      setTimeout(() => {
-        setLoading(false);
-        setListData(updatedMeetingList);
-        // 로딩이 끝나면 페이지번호를 1 늘려놓는다.
-        setPageNo((prevPage) => prevPage + 1);
-        console.log("end loading!!");
-        // 초기 로드 완료 후 상태 변경
-        setInitialLoad(false);
-        // 로딩이 끝나면 더 이상 가져올게 있는지 여부를 체크한다.
-        setIsFinish(totalElements === updatedMeetingList.length);
-      }, 500);
+      //더 불러올 데이터가 있는지
+      if (totalElements === content.length) {
+        setIsFinish(true);
+      }
+
+      setLoading(false);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
 
-  // ===== POST fetch =====
-  // filter-slice에서 변경된 filterDto 받기
-
-  const filterDto = useSelector((state) => state.filter.filterDto);
-
-  const FilterMainMeetingListFetch = async () => {
-    // 초기 로드 시에는 POST 요청이 실행되지 않도록 함
-    if (initialLoad) {
-      return;
-    }
-    console.log("start loading...");
-    setLoading(true);
-
-    try {
-      const response = await fetch("http://localhost:8253/main/filter", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + getUserToken(),
-        },
-        body: JSON.stringify(filterDto),
-      });
-
-      const data = await response.json();
-      const { content, totalElements } = data;
-
-      setLoading(false);
-      setListData(content);
-
-      setIsFinish(totalElements === data.content.length);
-      console.log("POST!!!FilterMainMeetingListFetch data : ", data);
-
-      // 응답처리
-      if (!response.ok) {
-        throw new Error("오류");
-      }
-    } catch (error) {
-      console.error("FilterFetch error", error);
-    }
-  };
-
-  // 초기 랜더링
+  // 컴포넌트가 마운트될 때 데이터 페칭
   useEffect(() => {
     MainMeetingListFetch();
-  }, [isChanged]);
+  }, [gender, region, personnel]); // 빈 배열을 전달하여 컴포넌트가 처음 렌더링될 때 한 번만 실행되도록 설정
 
-  // 스크롤이 트리거될 때마다 데이터 로드
+  // 1초 간격으로 호출 제한
+  const throttledFetch = throttle(MainMeetingListFetch, 1000);
+
   useEffect(() => {
-    if (inView) {
-      if (initialLoad) {
-        MainMeetingListFetch();
-      } else {
-        FilterMainMeetingListFetch();
-      }
+    if (inView && !loading && !isFinish) {
+      throttledFetch();
+      setSearchParams((prev) => ({
+        ...prev,
+        pageNo: pageNo + 1,
+      }));
     }
   }, [inView]);
-
-  // filterDto가 변경될때마다 fetch 요청
-  useEffect(() => {
-    FilterMainMeetingListFetch();
-  }, [filterDto]);
 
   return (
     <>
       <ul className={styles.meetingList}>
         {loading || (listData.length === 0 && <EmptyGroups />)}
         {listData.map((group) => (
-          <GroupBox key={group.id} group={group} setIsChanged={setIsChanged} />
+          <GroupBox key={group.id} group={group} />
         ))}
         <div ref={scrollRef} style={{ height: "100px" }}></div>
       </ul>

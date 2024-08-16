@@ -86,7 +86,6 @@ function GroupBox({ state, group, className, setIsChanged }) {
     setModalActive(!modalActive);
   };
 
-
   return (
     <>
       <li className={styles.groupBoxWrap}>
@@ -140,7 +139,9 @@ function GroupBox({ state, group, className, setIsChanged }) {
           {/* 매칭 버튼 부분 */}
           <div
             className={`${styles.matchingWrapper} ${
-              group.existMatchingHistory ? styles.notMatching : styles.matchingBt
+              group.existMatchingHistory
+                ? styles.notMatching
+                : styles.matchingBt
             }`}
           >
             <div className={styles.matchingText}>

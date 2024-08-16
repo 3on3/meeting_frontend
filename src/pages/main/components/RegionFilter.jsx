@@ -3,6 +3,7 @@ import styles from "./RegionFilter.module.scss";
 import RegionFilterBox from "../../../components/common/regionFilterBoxs/RegionFilterBox";
 import { useDispatch } from "react-redux";
 import { filterAction } from "../../../store/Filter-slice";
+import { useSearchParams } from "react-router-dom";
 
 function RegionFilter({}) {
   const regionArr = [
@@ -49,32 +50,20 @@ function RegionFilter({}) {
   ];
 
   // ==== useState 선언 ====
-  const [clickRegion, setClickRegion] = useState(null);
-
-  // DTO이름으로 변환
-  const [selectedPlace, setSelectedPlace] = useState(null);
-  console.log("selectedPlace : ", selectedPlace);
-
-  // 리덕스로 상태 변경
-  const dispatch = useDispatch();
-  dispatch(
-    filterAction.filterModifyDto({
-      groupPlace: selectedPlace,
-    })
-  );
+  // const [clickRegion, setClickRegion] = useState(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const paramsRegion = searchParams.get("region");
 
   // ==== 핸들러 ====
-  const activeHandler = (id) => {
-    setClickRegion((prev) => (prev === id ? null : id));
+  const activeHandler = (place) => {
+    const newRegion = paramsRegion === place ? null : place;
+    if (newRegion === null) {
+      searchParams.delete("region");
+    } else {
+      searchParams.set("region", newRegion);
+    }
+    setSearchParams(searchParams);
   };
-
-  useEffect(() => {
-    const findRegion = regionArr.find((region) => region.id === clickRegion);
-    const selectedPlace = findRegion ? findRegion.place : "";
-
-    // place 찾아서 보내주기
-    setSelectedPlace(selectedPlace);
-  }, [clickRegion]);
 
   return (
     <ul className={styles.regionFilter}>
@@ -82,9 +71,9 @@ function RegionFilter({}) {
         <RegionFilterBox
           key={region.id}
           text={region.text}
-          clickRegion={clickRegion === region.id}
+          clickRegion={paramsRegion === region.place}
           activeHandler={() => {
-            activeHandler(region.id);
+            activeHandler(region.place);
           }}
         />
       ))}

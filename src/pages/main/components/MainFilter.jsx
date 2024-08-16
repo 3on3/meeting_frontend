@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styles from "./MainFilter.module.scss";
-import { useDispatch } from "react-redux";
-import { filterAction } from "../../../store/Filter-slice";
+import { useSearchParams } from "react-router-dom";
 
 function MainFilter({}) {
   // =====useState 선언=====
@@ -9,15 +8,14 @@ function MainFilter({}) {
   const [isMoreActive, setIsMoreActive] = useState(false);
 
   // 필터 성별
-  const [CheckGender, setCheckGender] = useState(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const paramsGender = searchParams.get("gender");
 
   // 필터 인원수
-  const [CheckPersonnel, setCheckPersonnel] = useState(null);
+  const paramsPersonnel = searchParams.get("personnel");
 
   // 필터 매칭 된 사람
   const [CheckIsMatched, setIsMatched] = useState(false);
-
-  const dispatch = useDispatch();
 
   // =====이벤트 함수=====
 
@@ -30,33 +28,28 @@ function MainFilter({}) {
   const filterPossibleHandler = () => {
     const newIsMatched = !CheckIsMatched;
     setIsMatched(newIsMatched);
-    dispatch(
-      filterAction.filterModifyDto({
-        isMatched: newIsMatched,
-      })
-    );
   };
 
-  // 성별 클릭 이벤트
+  // 성별 클릭 이벤트 & params에 보내기
   const filterGenderHandler = (Gender) => {
-    const newGender = CheckGender === Gender ? null : Gender;
-    setCheckGender(newGender);
-    dispatch(
-      filterAction.filterModifyDto({
-        gender: newGender,
-      })
-    );
+    const newGender = paramsGender === Gender ? null : Gender;
+    if (newGender === null) {
+      searchParams.delete("gender");
+    } else {
+      searchParams.set("gender", newGender);
+    }
+    setSearchParams(searchParams);
   };
 
-  // 인원수 클릭 이벤트
+  // 인원수 클릭 이벤트 & params에 보내기
   const filterPersonnelHandler = (personnel) => {
-    const newPersonnel = CheckPersonnel === personnel ? null : personnel;
-    setCheckPersonnel(newPersonnel);
-    dispatch(
-      filterAction.filterModifyDto({
-        maxNum: newPersonnel,
-      })
-    );
+    const newPersonnel = paramsPersonnel === personnel ? null : personnel;
+    if (newPersonnel === null) {
+      searchParams.delete("personnel");
+    } else {
+      searchParams.set("personnel", newPersonnel);
+    }
+    setSearchParams(searchParams);
   };
 
   return (
@@ -91,7 +84,7 @@ function MainFilter({}) {
           <p className={styles.filterTitle}>성별</p>
           {/* styles.filterCheck : 성별, 인원 활성화  */}
           <li
-            className={CheckGender === "F" ? styles.filterCheck : ""}
+            className={paramsGender === "F" ? styles.filterCheck : ""}
             onClick={() => {
               filterGenderHandler("F");
             }}
@@ -99,7 +92,7 @@ function MainFilter({}) {
             여자
           </li>
           <li
-            className={CheckGender === "M" ? styles.filterCheck : ""}
+            className={paramsGender === "M" ? styles.filterCheck : ""}
             onClick={() => {
               filterGenderHandler("M");
             }}
@@ -112,19 +105,19 @@ function MainFilter({}) {
         <ul className={styles.filterHeder}>
           <p className={styles.filterTitle}>인원</p>
           <li
-            className={CheckPersonnel === "3" ? styles.filterCheck : ""}
+            className={paramsPersonnel === "3" ? styles.filterCheck : ""}
             onClick={() => filterPersonnelHandler("3")}
           >
             3:3
           </li>
           <li
-            className={CheckPersonnel === "4" ? styles.filterCheck : ""}
+            className={paramsPersonnel === "4" ? styles.filterCheck : ""}
             onClick={() => filterPersonnelHandler("4")}
           >
             4:4
           </li>
           <li
-            className={CheckPersonnel === "5" ? styles.filterCheck : ""}
+            className={paramsPersonnel === "5" ? styles.filterCheck : ""}
             onClick={() => filterPersonnelHandler("5")}
           >
             5:5

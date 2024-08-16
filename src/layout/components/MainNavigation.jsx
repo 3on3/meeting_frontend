@@ -4,19 +4,24 @@ import { NavLink, useLocation } from "react-router-dom";
 const MainNavigation = ({ styles }) => {
   const location = useLocation();
 
-  const activeClassFn = (path) => ({ isActive }) => {
-    if (path === "/mypage" && location.pathname === "/mypage/mygroup") {
-      return undefined;
-    }
-    return isActive ? styles.active : undefined;
-  };
+  const activeClassFn =
+    (path) =>
+    ({ isActive }) => {
+      if (path === "/mypage" && location.pathname === "/mypage/mygroup") {
+        return "";
+      }
+      return isActive ? styles.active : "";
+    };
 
   return (
     <nav className={styles.nav}>
       <NavLink to="/" className={activeClassFn("/")}>
         <i className={styles.home}></i>홈
       </NavLink>
-      <NavLink to="/mypage/mygroup" className={activeClassFn("/mypage/mygroup")}>
+      <NavLink
+        to="/mypage/mygroup"
+        className={activeClassFn("/mypage/mygroup")}
+      >
         <i className={styles.group}></i>내 그룹
       </NavLink>
       <NavLink to="/mypage/myChat" className={activeClassFn}>

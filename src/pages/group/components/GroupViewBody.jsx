@@ -105,15 +105,15 @@ const GroupViewBody = ({
     }
   };
 
-  const handleCopyToClipboard = async () => {
-    try {
-      await navigator.clipboard.writeText(inviteCode);
-      showModal("초대 코드가 클립보드에 복사되었습니다.");
-    } catch (err) {
-      console.error("클립보드 복사 실패:", err);
-      showModal("클립보드 복사에 실패하였습니다.");
-    }
-  };
+  // const handleCopyToClipboard = async () => {
+  //   try {
+  //     await navigator.clipboard.writeText(inviteCode);
+  //     showModal("초대 코드가 클립보드에 복사되었습니다.");
+  //   } catch (err) {
+  //     console.error("클립보드 복사 실패:", err);
+  //     showModal("클립보드 복사에 실패하였습니다.");
+  //   }
+  // };
 
   const showModal = (message) => {
     if (modalContent != "") return;
@@ -132,17 +132,11 @@ const GroupViewBody = ({
 
   return (
     <div className={styles.content2}>
-      {(auth === "MEMBER" || auth === "HOST") && (
-        <>
-          <div className={styles.copyWrap}>
-            <span>함께 미팅할 친구들을 초대해주세요!</span>
+      {/* <span>함께 미팅할 친구들을 초대해주세요!</span>
             <button
               className={styles.copyBtn}
-              onClick={handleCopyToClipboard}
-            ></button>
-          </div>
-        </>
-      )}
+              // onClick={handleCopyToClipboard}
+            ></button> */}
 
       {(auth === "MEMBER" || auth === "USER") && (
         <div className={styles.textLine}>현재 참여자</div>

@@ -99,7 +99,8 @@ const ProfileSection = ({ userId }) => {
   // 프로필 소개 변경 핸들러
   const descriptionChangeHandler = (e) => {
     setProfileIntroduce(e.target.value); // 입력 필드의 값을 프로필 소개 상태에 저장
-  };
+};
+
 
   // 전공 변경 핸들러
   const majorChangeHandler = (e) => {

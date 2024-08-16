@@ -64,6 +64,14 @@
   left: 50%;
   bottom: calc(100vw * (110 / 500));
   transform: translateX(-50%);
+
+  &.disable{
+    background-color: transparent;
+    box-shadow: none;
+   >div{
+    font-weight: 500;
+   }
+  }
 }
 .informationFilter {
   background: #ffffff;

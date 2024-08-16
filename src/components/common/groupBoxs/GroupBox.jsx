@@ -4,10 +4,18 @@ import MatchingButton from "../buttons/matchingButton/MatchingButton";
 import { NavLink } from "react-router-dom";
 import RequestBtns from "./RequestBtns";
 import MyGroupSelectModal from "../../myGroupSelectModal/MyGroupSelectModal";
+import InviteModal from '../modal/InviteModal';
 
 function GroupBox({ state, group, className, setIsChanged, matchingStatus }) {
   const [modalActive, setModalActive] = useState(false);
-
+  const [isRequestSuccess, setIsRequestSuccess] = useState(false);
+  const onClickAndSuccess = () => {
+    setIsRequestSuccess(true);
+    // 3초 후에 모달 닫기
+    setTimeout(() => {
+      setIsRequestSuccess(false);
+    }, 1200);
+  };
   // =============== param 스타일 가이드 ===============
   /**
    * li 태그라서 쓸때 ul 안에 사용하기
@@ -164,8 +172,11 @@ function GroupBox({ state, group, className, setIsChanged, matchingStatus }) {
           setModalActive={setModalActive}
           setIsChanged={setIsChanged}
           responseGroupId={group.id}
+          onClickAndSuccess={onClickAndSuccess}
         />
       )}
+      {isRequestSuccess && <InviteModal content={"매칭신청이 완료되었습니다."} />}
+
     </>
   );
 }

@@ -15,6 +15,7 @@ import GroupViewBodySkeleton from "./components/skeleton/GroupViewBodySkeleton";
 import GroupDeleteModal from "./components/modal/GroupDeleteModal";
 import { useModal } from "../../context/ModalContext";
 import GroupLeaveModal from "./components/modal/GroupLeaveModal";
+import InviteModal from "../../components/common/modal/InviteModal";
 
 const Group = () => {
   const { id } = useParams();
@@ -33,7 +34,14 @@ const Group = () => {
 
   
   const { openModal } = useModal();
-
+  const [isRequestSuccess, setIsRequestSuccess] = useState(false);
+  const onClickAndSuccess = () => {
+    setIsRequestSuccess(true);
+    // 3초 후에 모달 닫기
+    setTimeout(() => {
+      setIsRequestSuccess(false);
+    }, 1200);
+  };
   console.log("groupData: " ,groupData);
   
   const openConfirmModal = () => {
@@ -70,7 +78,7 @@ const Group = () => {
   useEffect(() => {
     fetchGroupData();
     console.log(groupData);
-  }, [id]);
+  }, [id,isChanged]);
 
   // if (loading) {
   //   return <div>Loading...</div>;
@@ -208,8 +216,11 @@ const Group = () => {
           setIsChanged={setIsChanged}
           responseGroupId={id}
           setModalActive={setModalActive}
+          onClickAndSuccess={onClickAndSuccess}
         />
       )}
+    {isRequestSuccess && <InviteModal content={"매칭신청이 완료되었습니다."} />}
+
     </>
   );
 };

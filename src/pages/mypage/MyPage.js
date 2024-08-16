@@ -10,7 +10,8 @@ const MyPage = () => {
     <div>
       {isRootPath && (
         <>
-          <ProfileSection />
+          <ProfileSection/>
+
         </>
       )}
       <Outlet />

@@ -30,44 +30,39 @@ const ProfileSection = ({ userId }) => {
   // 파일 입력 필드를 참조하기 위한 ref
   const fileInputRef = useRef(null);
 
-  // 수정된 부분 시작: 서버에 수정된 데이터를 저장하는 fetch 함수
   const updateProfileInfo = async () => {
     const updatedProfileData = {
-      nickname: nickname,
-      profileIntroduce: profileIntroduce,
-      major: major,
+        nickname: nickname,
+        profileIntroduce: profileIntroduce,
+        major: major,
     };
 
     try {
+        console.log("프로필 정보 업데이트를 시작합니다.");
+        const response = await fetch(`http://localhost:8253/mypage/userInfo/update`, {
+            method: "PUT",
+            headers: {
+                Authorization: `Bearer ${getUserToken()}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(updatedProfileData),
+        });
 
-      console.log("프로필 정보 업데이트를 시작합니다.");
-      const response = await fetch(`http://localhost:8253/mypage/userInfo/update/${userId}`, {
-        method: "PUT",
-        headers: {
-          Authorization: `Bearer ${getUserToken()}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedProfileData),
-
-
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        console.log("프로필 정보가 성공적으로 업데이트되었습니다:", data);
-        // 저장 후, 수정 모드를 종료
-        setIsEditingName(false);
-        setIsEditingDescription(false);
-        setIsEditingMajor(false);
-      } else {
-        console.error("응답이 실패했습니다:", response.status, response.statusText);
-        throw new Error("프로필 정보를 업데이트하는 중 오류가 발생했습니다.");
-      }
+        if (response.ok) {
+            const data = await response.json();
+            console.log("프로필 정보가 성공적으로 업데이트되었습니다:", data);
+            setIsEditingName(false);
+            setIsEditingDescription(false);
+            setIsEditingMajor(false);
+        } else {
+            console.error("응답이 실패했습니다:", response.status, response.statusText);
+            throw new Error("프로필 정보를 업데이트하는 중 오류가 발생했습니다.");
+        }
     } catch (error) {
-      console.error("프로필 정보를 업데이트하는 중 오류가 발생했습니다:", error);
+        console.error("프로필 정보를 업데이트하는 중 오류가 발생했습니다:", error);
     }
-  };
-  // 수정된 부분 끝
+};
+
 
   // 닉네임 편집 모드 토글 (활성화/비활성화)
   const editNameToggle = () => {

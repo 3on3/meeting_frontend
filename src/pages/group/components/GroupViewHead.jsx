@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import RegionFilterBox from "../../../components/common/regionFilterBoxs/RegionFilterBox";
 import Information from "./Information";
 import { GROUP_URL } from "../../../config/host-config";
 import { getUserToken } from "../../../config/auth";
 import { useModal } from "../../../context/ModalContext";
 import GroupDeleteModal from "./modal/GroupDeleteModal";
+import GroupSettingModal from "./modal/GroupSettingModal";
 
 const GroupViewHead = ({
   styles,
@@ -18,6 +19,7 @@ const GroupViewHead = ({
   groupSize,
 }) => {
   const { openModal } = useModal();
+  const [isSettingModalOpen, setSettingModalOpen] = useState(false);
 
   const openConfirmModal = () => {
     openModal(
@@ -25,6 +27,16 @@ const GroupViewHead = ({
       "completeMode",
       <GroupDeleteModal groupName={groupName} id={id} />
     );
+  };
+
+  const settingOpenHandler = () => {
+    console.log("sdad");
+
+    setSettingModalOpen(true); // 모달 열림
+  };
+
+  const closeSettingModal = () => {
+    setSettingModalOpen(false); // 모달 닫기
   };
 
   return (
@@ -50,6 +62,22 @@ const GroupViewHead = ({
               styles={styles}
             />
           </div>
+          {auth === "HOST" && (
+            <div className={styles.wrapBtn}>
+              {/* 버튼 */}
+              <button className={styles.setting} onClick={settingOpenHandler}>
+                <p className={styles.setBtn}></p>
+              </button>
+              {/* 모달 */}
+              {isSettingModalOpen && (
+                <GroupSettingModal
+                  styles={styles}
+                  groupName={groupName}
+                  id={id}
+                />
+              )}
+            </div>
+          )}
         </div>
       </div>
     </>

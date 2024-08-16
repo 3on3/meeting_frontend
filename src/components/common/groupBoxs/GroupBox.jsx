@@ -4,10 +4,18 @@ import MatchingButton from "../buttons/matchingButton/MatchingButton";
 import { NavLink } from "react-router-dom";
 import RequestBtns from "./RequestBtns";
 import MyGroupSelectModal from "../../myGroupSelectModal/MyGroupSelectModal";
+import InviteModal from "../modal/InviteModal";
 
-function GroupBox({ state, group, className, setIsChanged }) {
+function GroupBox({ state, group, className, setIsChanged, matchingStatus }) {
   const [modalActive, setModalActive] = useState(false);
-
+  const [isRequestSuccess, setIsRequestSuccess] = useState(false);
+  const onClickAndSuccess = () => {
+    setIsRequestSuccess(true);
+    // 3초 후에 모달 닫기
+    setTimeout(() => {
+      setIsRequestSuccess(false);
+    }, 1200);
+  };
   // =============== param 스타일 가이드 ===============
   /**
    * li 태그라서 쓸때 ul 안에 사용하기
@@ -100,7 +108,7 @@ function GroupBox({ state, group, className, setIsChanged }) {
         <NavLink
           className={`${styles.groupBox} ${groupBoxState} ${className}`}
           key={group.id}
-          to={`/group/${group.id}`}
+          to={`/group/${group.id}?status=${matchingStatus}`}
         >
           {/* 기본 & sky */}
 
@@ -139,15 +147,17 @@ function GroupBox({ state, group, className, setIsChanged }) {
           {/* 매칭 버튼 부분 */}
           <div
             className={`${styles.matchingWrapper} ${
-              group.existMatchingHistory
+              group.matchingStatus !== "NONE"
                 ? styles.notMatching
                 : styles.matchingBt
             }`}
           >
             <div className={styles.matchingText}>
-              {group.existMatchingHistory
-                ? "이미 매칭 신청 중인 그룹이예요."
-                : "매칭을 기다리고 있어요!"}
+              {group.matchingStatus === "NONE" && "매칭을 기다리고 있어요!"}
+              {group.matchingStatus === "REQUESITNG" &&
+                "이미 매칭 신청 중인 그룹이예요."}
+              {group.matchingStatus === "RESPONSE" &&
+                "내 그룹에 매칭을 신청한 그룹이예요."}
             </div>
 
             <div className={styles.matchingBt}>
@@ -165,7 +175,11 @@ function GroupBox({ state, group, className, setIsChanged }) {
           setModalActive={setModalActive}
           setIsChanged={setIsChanged}
           responseGroupId={group.id}
+          onClickAndSuccess={onClickAndSuccess}
         />
+      )}
+      {isRequestSuccess && (
+        <InviteModal content={"매칭신청이 완료되었습니다."} />
       )}
     </>
   );

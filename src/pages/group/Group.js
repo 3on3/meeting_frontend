@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import GroupViewHead from "./components/GroupViewHead";
 import styles from "./Group.module.scss";
 import GroupViewBody from "./components/GroupViewBody";
@@ -15,6 +15,7 @@ import GroupViewBodySkeleton from "./components/skeleton/GroupViewBodySkeleton";
 import GroupDeleteModal from "./components/modal/GroupDeleteModal";
 import { useModal } from "../../context/ModalContext";
 import GroupLeaveModal from "./components/modal/GroupLeaveModal";
+import InviteModal from "../../components/common/modal/InviteModal";
 
 const Group = () => {
   const { id } = useParams();
@@ -27,9 +28,22 @@ const Group = () => {
   const [isChanged, setIsChanged] = useState(false);
   const { alarmFetch } = useFetchRequest();
   const mainSocket = useContext(MainWebSocketContext);
+  const [searchParams] = useSearchParams();
+  const status = searchParams.get("status")
+  
 
+  
   const { openModal } = useModal();
-
+  const [isRequestSuccess, setIsRequestSuccess] = useState(false);
+  const onClickAndSuccess = () => {
+    setIsRequestSuccess(true);
+    // 3초 후에 모달 닫기
+    setTimeout(() => {
+      setIsRequestSuccess(false);
+    }, 1200);
+  };
+  console.log("groupData: " ,groupData);
+  
   const openConfirmModal = () => {
     openModal(
       "그룹 나가기",
@@ -38,7 +52,6 @@ const Group = () => {
     );
   };
 
-  // console.log(groupUsers);
 
   const fetchGroupData = async () => {
     try {
@@ -65,7 +78,7 @@ const Group = () => {
   useEffect(() => {
     fetchGroupData();
     console.log(groupData);
-  }, [id]);
+  }, [id,isChanged]);
 
   // if (loading) {
   //   return <div>Loading...</div>;
@@ -166,13 +179,31 @@ const Group = () => {
         totalMember={totalMembers}
         fetchGroupData={fetchGroupData}
       />
-      {auth !== "HOST" && (
+      {auth !== "HOST" && status!== "REQUESITNG" && status !== "RESPONSE" && (
         <MtButtons
           eventType={"click"}
           buttonType={type}
           buttonText={text}
           eventHandler={onClickHandler}
           className={styles.groupBtn}
+        />
+      )}
+      {status === "REQUESITNG" && (
+          <MtButtons
+          eventType={"click"}
+          buttonType={"disabled"}
+          buttonText={"이미 매칭 신청 중인 그룹이예요."}
+          className={`${styles.groupBtn} ${styles.disable}`}
+          // className={}
+        />
+      )}
+      {status === "RESPONSE" && (
+          <MtButtons
+          eventType={"click"}
+          buttonType={"disabled"}
+          buttonText={"내 그룹에 매칭을 신청한 그룹이예요."}
+          className={`${styles.groupBtn} ${styles.disable}`}
+          // className={}
         />
       )}
       {auth === "HOST" && (
@@ -185,8 +216,11 @@ const Group = () => {
           setIsChanged={setIsChanged}
           responseGroupId={id}
           setModalActive={setModalActive}
+          onClickAndSuccess={onClickAndSuccess}
         />
       )}
+    {isRequestSuccess && <InviteModal content={"매칭신청이 완료되었습니다."} />}
+
     </>
   );
 };

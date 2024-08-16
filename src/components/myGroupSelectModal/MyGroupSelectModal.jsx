@@ -6,18 +6,20 @@ import MtButtons from "../common/buttons/MtButtons";
 import { useFetchRequest } from "../../hook/useFetchRequest";
 import GroupBox from "../common/groupBoxs/GroupBox";
 import RadioButtonChil from "../common/buttons/radiobutton/RadioButtonChil";
+import InviteModal from '../common/modal/InviteModal';
 
 const MyGroupSelectModal = ({
   setModalActive,
   setIsChanged,
   responseGroupId,
+  onClickAndSuccess
 }) => {
   const [myGroupList, setMyGroupList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedGroupId, setSelectedGroupId] = useState(null);
   const { requestFetch } = useFetchRequest();
   const [isNull,setIsNull] = useState(true)
-
+  
   // 라디오 버튼 활성화
   const handleRadioChange = (event) => {
     setSelectedGroupId(event.target.id);
@@ -66,6 +68,7 @@ const MyGroupSelectModal = ({
   // }
 
   const onClickApplyBtn = () => {
+    onClickAndSuccess()
     setModalActive(false);
 
     if (handleRadioChange != null) {
@@ -80,6 +83,7 @@ const MyGroupSelectModal = ({
   };
 
   return (
+    <>
     <div className={styles.modalLayer}>
       <div className={styles.modal}>
         <h2>내 그룹을 선택해주세요</h2>
@@ -126,6 +130,8 @@ const MyGroupSelectModal = ({
         </div>
       </div>
     </div>
+    </>
+    
   );
 };
 

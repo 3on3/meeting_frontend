@@ -1,3 +1,4 @@
+// LoginPage.js
 import React, { useEffect, useState } from "react";
 import logoImage from "../../assets/images/login/logo.svg";
 import MtButtons from "../../components/common/buttons/MtButtons";
@@ -7,7 +8,6 @@ import { getUserToken } from "../../config/auth";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loginActions } from "../../store/Login-slice";
-import RadioButton from "../../components/common/buttons/radiobutton/RadioButton";
 import Checkbox from "../../components/common/buttons/checkboxbutton/Checkbox";
 
 const LoginPage = () => {
@@ -96,6 +96,7 @@ const LoginPage = () => {
             major: data.major,
             gender: data.gender,
             nickname: data.nickname,
+            password: data.password,
           };
 
           localStorage.setItem("userData", JSON.stringify(userData));
@@ -123,12 +124,18 @@ const LoginPage = () => {
           }
         } else {
           const errorText = await response.text();
-          if (errorText.includes("User not found")) {
+          if (errorText.includes("User not found") && errorText.includes("Invalid password")) {
+            setIdError("아이디와 비밀번호가 모두 틀렸습니다.");
+            setPasswordError(""); // 비밀번호 오류 메시지 초기화
+          } else if (errorText.includes("User not found")) {
             setIdError("존재하지 않는 아이디입니다.");
+            setPasswordError(""); // 비밀번호 오류 메시지 초기화
           } else if (errorText.includes("Invalid password")) {
             setPasswordError("비밀번호가 틀렸습니다.");
+            setIdError(""); // 아이디 오류 메시지 초기화
           } else {
             setIdError("로그인에 실패했습니다.");
+            setPasswordError(""); // 비밀번호 오류 메시지 초기화
           }
         }
       } catch (error) {
@@ -140,6 +147,10 @@ const LoginPage = () => {
 
   const SignUpClickHandler = () => {
     navigate("/sign-up");
+  };
+
+  const findPasswordClickHandler = () => {
+    navigate("/find-password");
   };
 
   return (
@@ -189,8 +200,10 @@ const LoginPage = () => {
         <p className={styles.signUp} onClick={SignUpClickHandler}>
           회원가입
         </p>
-        <p className={styles.findPassword}>비밀번호 찾기</p>
-      </div>
+        <p className={styles.findPassword} onClick={findPasswordClickHandler}>
+          비밀번호 찾기
+        </p>
+    </div>
     </div>
   );
 };

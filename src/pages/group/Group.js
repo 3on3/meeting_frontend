@@ -38,7 +38,6 @@ const Group = () => {
     );
   };
 
-  // console.log(groupUsers);
 
   const fetchGroupData = async () => {
     try {

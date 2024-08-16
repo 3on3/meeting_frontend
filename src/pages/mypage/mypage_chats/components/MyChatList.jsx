@@ -60,11 +60,11 @@ const MyChatList = ({chat}) => {
                 </div>
                 <div className={styles.member}>
                     <i className={styles.userGroup}></i>
-                    {chat.maxNum * 2}명
+                    {chat.chatMemberCount}명
                 </div>
             </div>
             <div className={styles.boxGroupInfo}>
-                <div>{groupGender(chat.gender)} · {chat.age}세 · {chat.maxNum}명 · {groupPlace(chat.groupPlace)}</div>
+                <div>{groupGender(chat.gender)} · {chat.age}세 · {chat.groupMemberCount}명 · {groupPlace(chat.groupPlace)}</div>
             </div>
         </div>
     );

@@ -34,7 +34,7 @@ function MeetingList() {
   });
 
   //===== get fetch : 미팅리스트  =====
-  const MainMeetingListFetch = async (isInitialLoad = false) => {
+  const MainMeetingListFetch = async () => {
     if (loading || isFinish) return;
     setLoading(true);
     console.log("로딩중입니다...");
@@ -45,6 +45,7 @@ function MeetingList() {
       if (gender) {
         url += `&gender=${gender}`;
       }
+
       if (personnel) {
         url += `&personnel=${personnel}`;
       }
@@ -64,27 +65,21 @@ function MeetingList() {
 
       const { content, totalElements } = list;
       const updatedListData = [...listData, ...content];
-      console.log("updatedListData : ", updatedListData);
 
-      // setTimeout(() => {
-
-      if (isInitialLoad) {
-        setListData(content);
-        setPageNo(2);
-      } else {
+      setTimeout(() => {
         setListData(updatedListData);
-      }
 
-      // 다음 페이지
-      setPageNo((prevPage) => prevPage + 1);
+        // 다음 페이지
+        setPageNo((prevPage) => prevPage + 1);
 
-      setLoading(false);
+        setLoading(false);
+        console.log("end loading!!");
 
-      //더 불러올 데이터가 있는지
-      if (totalElements === updatedListData.length) {
-        setIsFinish(true);
-      }
-      // }, 500);
+        //더 불러올 데이터가 있는지
+        if (totalElements === updatedListData.length) {
+          setIsFinish(true);
+        }
+      }, 500);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -105,7 +100,7 @@ function MeetingList() {
     if (inView && !loading && !isFinish) {
       MainMeetingListFetch();
     }
-  }, [inView]);
+  }, [inView, loading, isFinish]);
 
   return (
     <>

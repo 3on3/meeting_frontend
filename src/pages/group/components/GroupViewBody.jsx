@@ -18,7 +18,6 @@ const GroupViewBody = ({
 }) => {
   const [tab, setTab] = useState("current");
   const [applicants, setApplicants] = useState([]);
-  const [modalContent, setModalContent] = useState("");
 
   useEffect(() => {
     if (auth === "HOST") {
@@ -63,7 +62,6 @@ const GroupViewBody = ({
       const message = await response.text();
 
       if (response.ok) {
-        showModal(message);
         fetchGroupData();
         const newUser = applicants.find(
           (applicant) => applicant.id === applicantId
@@ -73,8 +71,6 @@ const GroupViewBody = ({
           applicants.filter((applicant) => applicant.id !== applicantId)
         );
         updateUsers(newUsers);
-      } else {
-        showModal(message);
       }
     } catch (error) {
       console.error(error);
@@ -104,31 +100,6 @@ const GroupViewBody = ({
       console.error(error);
     }
   };
-
-  // const handleCopyToClipboard = async () => {
-  //   try {
-  //     await navigator.clipboard.writeText(inviteCode);
-  //     showModal("초대 코드가 클립보드에 복사되었습니다.");
-  //   } catch (err) {
-  //     console.error("클립보드 복사 실패:", err);
-  //     showModal("클립보드 복사에 실패하였습니다.");
-  //   }
-  // };
-
-  const showModal = (message) => {
-    if (modalContent != "") return;
-    setModalContent(message);
-    // 3초 후에 모달 닫기
-    setTimeout(() => {
-      setModalContent("");
-    }, 1200);
-  };
-
-  // Modal content 업데이트를 감지
-  useEffect(() => {
-    if (modalContent) {
-    }
-  }, [modalContent]);
 
   return (
     <div className={styles.content2}>
@@ -195,7 +166,7 @@ const GroupViewBody = ({
       </ul>
 
       {/* 모달 표시 */}
-      {modalContent && <InviteModal content={modalContent} />}
+      
     </div>
   );
 };

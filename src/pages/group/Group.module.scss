@@ -114,6 +114,7 @@
 }
 .wrapBtn {
   position: relative;
+
   .setting {
     border-radius: calc(100vw * (500 / 500));
     background-color: #373040;
@@ -133,6 +134,7 @@
         center / contain;
     }
   }
+
   .modal {
     display: flex;
     // position: fixed;
@@ -145,6 +147,22 @@
     background-color: #fff;
     width: calc(100vw * (163 / 500));
     border-radius: calc(100vw * (20 / 500));
+    animation: chatAni 0.6s ease-out forwards;
+    @keyframes chatAni {
+      0% {
+        opacity: 0;
+        transform: translateY(calc(100vw * (-10 / 500)));
+      }
+      100% {
+        opacity: 1;
+        transform: 0;
+      }
+    }
+    .modalTit {
+      font-size: calc(100vw * (20 / 500));
+      font-weight: 600;
+      text-align: center;
+    }
   }
 
   /* 모달 내용 */

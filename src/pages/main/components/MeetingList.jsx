@@ -15,8 +15,6 @@ function MeetingList() {
   //URL 파라미터를 가져오고 관리할 수 있는 훅
   const [searchParams, setSearchParams] = useSearchParams();
   const gender = searchParams.get("gender");
-  console.log("gender : ", gender);
-
   const region = searchParams.get("region");
   const personnel = searchParams.get("personnel");
 
@@ -36,7 +34,7 @@ function MeetingList() {
   });
 
   //===== get fetch : 미팅리스트  =====
-  const MainMeetingListFetch = async () => {
+  const MainMeetingListFetch = async (isInitialLoad = false) => {
     if (loading || isFinish) return;
     setLoading(true);
     console.log("로딩중입니다...");
@@ -70,8 +68,9 @@ function MeetingList() {
 
       // setTimeout(() => {
 
-      if (pageNo === 1) {
+      if (isInitialLoad) {
         setListData(content);
+        setPageNo(2);
       } else {
         setListData(updatedListData);
       }

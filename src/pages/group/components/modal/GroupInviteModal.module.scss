@@ -1,4 +1,3 @@
-/* GroupDeleteModal.module.scss */
 .container {
   background: #f4f9ff;
   text-align: center;
@@ -9,16 +8,9 @@
   margin-top: calc(100vw * (20 / 500));
 }
 
-.deleteBox {
-  padding: calc(100vw * (10 / 500));
-  border-radius: calc(100vw * (8 / 500));
-  margin-bottom: calc(100vw * (20 / 500));
-}
-
 .deleteMessage {
   font-size: calc(100vw * (18 / 500));
   font-weight: bold;
-  // margin-bottom: calc(100vw * (10 / 500));
 }
 
 .groupName {
@@ -27,10 +19,42 @@
 
 .information {
   font-size: calc(100vw * (18 / 500));
-  // color: #333;
   margin-top: calc(100vw * (10 / 500));
   line-height: 1.5;
   font-weight: 400;
+}
+
+.linkWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: calc(100vw * (10 / 500));
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: calc(100vw * (10 / 500));
+  padding: calc(100vw * (4 / 500));
+}
+
+.inviteLink {
+  flex: 1;
+  border: none;
+  font-size: calc(100vw * (16 / 500));
+  text-align: left;
+  padding: calc(100vw * (5 / 500));
+  outline: none;
+  background-color: transparent;
+}
+
+.copyButton {
+  border: none;
+  background-color: #8732f5;
+  color: white;
+  padding: calc(100vw * (10 / 500)) calc(100vw * (20 / 500));
+  font-size: calc(100vw * (16 / 500));
+  border-radius: calc(100vw * (5 / 500));
+  cursor: pointer;
+  margin-left: calc(100vw * (10 / 500));
 }
 
 .btns {
@@ -42,5 +66,14 @@
     &:last-child {
       margin-right: 0;
     }
+  }
+}
+
+.message {
+  padding-top: calc(100vw * (25 / 500));
+  color: #959595;
+  font-size: calc(100vw * (15 / 500));
+  .textMessage {
+    font-weight: 600;
   }
 }

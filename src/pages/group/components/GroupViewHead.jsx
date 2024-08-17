@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import RegionFilterBox from "../../../components/common/regionFilterBoxs/RegionFilterBox";
 import Information from "./Information";
-import { GROUP_URL } from "../../../config/host-config";
-import { getUserToken } from "../../../config/auth";
 import { useModal } from "../../../context/ModalContext";
 import GroupDeleteModal from "./modal/GroupDeleteModal";
 import GroupSettingModal from "./modal/GroupSettingModal";
@@ -30,13 +28,17 @@ const GroupViewHead = ({
   };
 
   const settingOpenHandler = () => {
-    console.log("sdad");
-
-    setSettingModalOpen(true); // 모달 열림
+    setSettingModalOpen((prev) => !prev); // 모달 열림/닫힘 토글
   };
 
   const closeSettingModal = () => {
     setSettingModalOpen(false); // 모달 닫기
+  };
+
+  const handleBackdropClick = (e) => {
+    if (e.target === e.currentTarget) {
+      closeSettingModal();
+    }
   };
 
   return (
@@ -70,11 +72,13 @@ const GroupViewHead = ({
               </button>
               {/* 모달 */}
               {isSettingModalOpen && (
-                <GroupSettingModal
-                  styles={styles}
-                  groupName={groupName}
-                  id={id}
-                />
+            
+                  <GroupSettingModal
+                    styles={styles}
+                    groupName={groupName}
+                    id={id}
+                  />
+
               )}
             </div>
           )}

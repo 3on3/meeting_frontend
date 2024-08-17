@@ -13,7 +13,7 @@
   padding: 0 calc(100vw * (20 / 500));
   opacity: 1;
   pointer-events: none;
-  animation: fadeOut 1s ease-in .2s forwards;
+  animation: fadeOut 1s ease-in 0.2s forwards;
   // animation: name duration timing-function delay iteration-count direction fill-mode;
   &.complete {
     width: fit-content;
@@ -29,14 +29,18 @@
       color: #fff;
       border-radius: calc(100vw * (14 / 500));
       padding: calc(100vw * (9 / 500)) calc(100vw * (12 / 500));
+      white-space: nowrap;
       .modalClose {
         display: none;
       }
     }
   }
-
 }
 @keyframes fadeOut {
-  0%{opacity: 1;}
-  100%{opacity: 0;}
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }

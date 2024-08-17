@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styles from "./RegionFilter.module.scss";
 import RegionFilterBox from "../../../components/common/regionFilterBoxs/RegionFilterBox";
+import { useDispatch } from "react-redux";
+import { filterAction } from "../../../store/Filter-slice";
+import { useSearchParams } from "react-router-dom";
 
-function RegionFilter({ regionFilterDTO }) {
+function RegionFilter({}) {
   const regionArr = [
     {
       id: 0,
@@ -47,20 +50,20 @@ function RegionFilter({ regionFilterDTO }) {
   ];
 
   // ==== useState 선언 ====
-  const [clickRegion, setClickRegion] = useState(null);
+  // const [clickRegion, setClickRegion] = useState(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const paramsRegion = searchParams.get("region");
 
   // ==== 핸들러 ====
-  const activeHandler = (id) => {
-    setClickRegion((prev) => (prev === id ? null : id));
+  const activeHandler = (place) => {
+    const newRegion = paramsRegion === place ? null : place;
+    if (newRegion === null) {
+      searchParams.delete("region");
+    } else {
+      searchParams.set("region", newRegion);
+    }
+    setSearchParams(searchParams);
   };
-
-  useEffect(() => {
-    const findRegion = regionArr.find((region) => region.id === clickRegion);
-    const selectedPlace = findRegion ? findRegion.place : "";
-
-    // place 찾아서 보내주기
-    regionFilterDTO(selectedPlace);
-  }, [clickRegion, regionFilterDTO]);
 
   return (
     <ul className={styles.regionFilter}>
@@ -68,9 +71,9 @@ function RegionFilter({ regionFilterDTO }) {
         <RegionFilterBox
           key={region.id}
           text={region.text}
-          clickRegion={clickRegion === region.id}
+          clickRegion={paramsRegion === region.place}
           activeHandler={() => {
-            activeHandler(region.id);
+            activeHandler(region.place);
           }}
         />
       ))}

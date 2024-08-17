@@ -5,10 +5,18 @@ import { useInView } from "react-intersection-observer";
 import { getUserToken } from "../../../config/auth";
 import EmptyGroups from "../EmptyGroups";
 
+import { useSearchParams } from "react-router-dom";
+import { throttle } from "lodash";
+
 // matchingState={"complete"} 이면 매칭 완료
 function MeetingList() {
-  //페이징 번호
+  // 페이지 번호
   const [pageNo, setPageNo] = useState(1);
+  //URL 파라미터를 가져오고 관리할 수 있는 훅
+  const [searchParams, setSearchParams] = useSearchParams();
+  const gender = searchParams.get("gender");
+  const region = searchParams.get("region");
+  const personnel = searchParams.get("personnel");
 
   // List 데이터
   const [listData, setListData] = useState([]);
@@ -16,10 +24,8 @@ function MeetingList() {
   // 더이상 가져올 데이터가 있는지 확인
   const [isFinish, setIsFinish] = useState(false);
 
-  // 로딩 상태 체크
+  // 로딩 중인지
   const [loading, setLoading] = useState(false);
-  const [isChanged, setIsChanged] = useState(false)
-
 
   //scrollRef
   const [scrollRef, inView] = useInView({
@@ -27,63 +33,81 @@ function MeetingList() {
     threshold: 1.0,
   });
 
-  //===== get fetch =====
+  //===== get fetch : 미팅리스트  =====
   const MainMeetingListFetch = async () => {
-    if (isFinish || loading) {
-      console.log("loading finished!");
-      return;
-    }
-
-    console.log("start loading...");
+    if (loading || isFinish) return;
     setLoading(true);
+    console.log("로딩중입니다...");
 
     try {
-      const response = await fetch(`http://localhost:8253/main/${pageNo}`, {
+      // 동적 url 만들기
+      let url = `http://localhost:8253/main?pageNo=${pageNo}`;
+      if (gender) {
+        url += `&gender=${gender}`;
+      }
+
+      if (personnel) {
+        url += `&personnel=${personnel}`;
+      }
+      if (region) {
+        url += `&region=${region}`;
+      }
+
+      const response = await fetch(url, {
         method: "GET",
         headers: {
           Authorization: "Bearer " + getUserToken(),
         },
       });
 
-      // 업데이트 리스트 전달
+      // 데이터 받기
       const list = await response.json();
+
       const { content, totalElements } = list;
-      const updatedMeetingList = [...listData, ...content];
-      console.log("updatedMeetingList : ", updatedMeetingList);
+      const updatedListData = [...listData, ...content];
 
       setTimeout(() => {
-        setLoading(false);
-        setListData(updatedMeetingList);
-        // 로딩이 끝나면 페이지번호를 1 늘려놓는다.
+        setListData(updatedListData);
+
+        // 다음 페이지
         setPageNo((prevPage) => prevPage + 1);
+
+        setLoading(false);
         console.log("end loading!!");
 
-        // 로딩이 끝나면 더 이상 가져올게 있는지 여부를 체크한다.
-        setIsFinish(totalElements === updatedMeetingList.length);
+        //더 불러올 데이터가 있는지
+        if (totalElements === updatedListData.length) {
+          setIsFinish(true);
+        }
       }, 500);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
 
-  // 초기 랜더링
-  useEffect(() => {
-    MainMeetingListFetch();
-  }, [isChanged]);
+  // 1초 간격으로 호출 제한
+  const throttledFetch = throttle(MainMeetingListFetch, 1000);
 
-  // 스크롤이 트리거될 때마다 데이터 로드
+  // 컴포넌트가 마운트될 때 데이터 페칭
   useEffect(() => {
-    if (inView) {
+    setListData([]);
+    setPageNo(1);
+    setIsFinish(false);
+    MainMeetingListFetch();
+  }, [gender, region, personnel]); // 빈 배열을 전달하여 컴포넌트가 처음 렌더링될 때 한 번만 실행되도록 설정
+
+  useEffect(() => {
+    if (inView && !loading && !isFinish) {
       MainMeetingListFetch();
     }
-  }, [inView]);
+  }, [inView, loading, isFinish]);
 
   return (
     <>
       <ul className={styles.meetingList}>
         {loading || (listData.length === 0 && <EmptyGroups />)}
         {listData.map((group) => (
-          <GroupBox key={group.id} group={group} setIsChanged={setIsChanged} matchingStatus={group.matchingStatus} />
+          <GroupBox key={group.id} group={group} />
         ))}
         <div ref={scrollRef} style={{ height: "100px" }}></div>
       </ul>

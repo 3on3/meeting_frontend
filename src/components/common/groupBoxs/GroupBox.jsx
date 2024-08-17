@@ -4,7 +4,7 @@ import MatchingButton from "../buttons/matchingButton/MatchingButton";
 import { NavLink } from "react-router-dom";
 import RequestBtns from "./RequestBtns";
 import MyGroupSelectModal from "../../myGroupSelectModal/MyGroupSelectModal";
-import InviteModal from '../modal/InviteModal';
+import InviteModal from "../modal/InviteModal";
 
 function GroupBox({ state, group, className, setIsChanged, matchingStatus }) {
   const [modalActive, setModalActive] = useState(false);
@@ -94,7 +94,6 @@ function GroupBox({ state, group, className, setIsChanged, matchingStatus }) {
     setModalActive(!modalActive);
   };
 
-
   return (
     <>
       <li className={styles.groupBoxWrap}>
@@ -148,13 +147,17 @@ function GroupBox({ state, group, className, setIsChanged, matchingStatus }) {
           {/* 매칭 버튼 부분 */}
           <div
             className={`${styles.matchingWrapper} ${
-              group.matchingStatus !== "NONE" ? styles.notMatching : styles.matchingBt
+              group.matchingStatus !== "NONE"
+                ? styles.notMatching
+                : styles.matchingBt
             }`}
           >
             <div className={styles.matchingText}>
               {group.matchingStatus === "NONE" && "매칭을 기다리고 있어요!"}
-              {group.matchingStatus === "REQUESITNG" && "이미 매칭 신청 중인 그룹이예요."}
-              {group.matchingStatus === "RESPONSE" && "내 그룹에 매칭을 신청한 그룹이예요."}
+              {group.matchingStatus === "REQUESITNG" &&
+                "이미 매칭 신청 중인 그룹이예요."}
+              {group.matchingStatus === "RESPONSE" &&
+                "내 그룹에 매칭을 신청한 그룹이예요."}
             </div>
 
             <div className={styles.matchingBt}>
@@ -175,8 +178,9 @@ function GroupBox({ state, group, className, setIsChanged, matchingStatus }) {
           onClickAndSuccess={onClickAndSuccess}
         />
       )}
-      {isRequestSuccess && <InviteModal content={"매칭신청이 완료되었습니다."} />}
-
+      {isRequestSuccess && (
+        <InviteModal content={"매칭신청이 완료되었습니다."} />
+      )}
     </>
   );
 }

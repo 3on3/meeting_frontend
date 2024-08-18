@@ -15,6 +15,8 @@ const GroupViewHead = ({
   groupName,
   id,
   groupSize,
+  users,
+  hostUser,
 }) => {
   const { openModal } = useModal();
   const [isSettingModalOpen, setSettingModalOpen] = useState(false);
@@ -72,13 +74,13 @@ const GroupViewHead = ({
               </button>
               {/* 모달 */}
               {isSettingModalOpen && (
-            
-                  <GroupSettingModal
-                    styles={styles}
-                    groupName={groupName}
-                    id={id}
-                  />
-
+                <GroupSettingModal
+                  styles={styles}
+                  groupName={groupName}
+                  id={id}
+                  hostUser={hostUser}
+                  users={users}
+                />
               )}
             </div>
           )}

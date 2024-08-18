@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import DefaultInput from "../../../../components/common/inputs/DefaultInput";
-import styles from "../withdraw/Withdraw.module.scss";
+// import styles from "../Withdraw/Withdraw.module.scss";
 
 const VerificationInput = ({ styles, isSubmit, setIsSubmit }) => {
 

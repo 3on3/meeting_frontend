@@ -42,7 +42,7 @@ const Group = () => {
       setIsRequestSuccess(false);
     }, 1200);
   };
-  console.log("groupData: " ,groupData);
+  console.log("grou🎨pData: " ,groupData);
   
   const openConfirmModal = () => {
     openModal(

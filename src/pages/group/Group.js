@@ -112,6 +112,8 @@ const Group = () => {
     averageAge,
     totalMembers,
     gender,
+    nickname,
+    profileImageUrl,
     groupName,
     inviteCode,
     hostUser,
@@ -165,6 +167,7 @@ const Group = () => {
         auth={auth}
         id={id}
         users={groupUsers}
+        hostUser={hostUser}
       />
       <GroupViewBody
         styles={styles}

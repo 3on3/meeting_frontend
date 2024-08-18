@@ -16,6 +16,7 @@ const GroupViewHead = ({
   id,
   groupSize,
   users,
+  hostUser,
 }) => {
   const { openModal } = useModal();
   const [isSettingModalOpen, setSettingModalOpen] = useState(false);
@@ -77,6 +78,7 @@ const GroupViewHead = ({
                   styles={styles}
                   groupName={groupName}
                   id={id}
+                  hostUser={hostUser}
                   users={users}
                 />
               )}

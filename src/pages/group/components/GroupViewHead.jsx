@@ -15,17 +15,12 @@ const GroupViewHead = ({
   groupName,
   id,
   groupSize,
+  users,
+  hostUser,
+  updateUsers,
 }) => {
   const { openModal } = useModal();
   const [isSettingModalOpen, setSettingModalOpen] = useState(false);
-
-  const openConfirmModal = () => {
-    openModal(
-      "그룹 삭제하기",
-      "completeMode",
-      <GroupDeleteModal groupName={groupName} id={id} />
-    );
-  };
 
   const settingOpenHandler = () => {
     setSettingModalOpen((prev) => !prev); // 모달 열림/닫힘 토글
@@ -44,12 +39,6 @@ const GroupViewHead = ({
   return (
     <>
       <div className={styles.content}>
-        {auth === "HOST" && (
-          <button className={styles.groupDelBtn} onClick={openConfirmModal}>
-            그룹 삭제
-          </button>
-        )}
-
         <h1 className={`title ${styles.text}`}>{groupName}</h1>
         <div className={styles.labelsWrap}>
           <ul className={styles.regionFilter}>
@@ -72,13 +61,14 @@ const GroupViewHead = ({
               </button>
               {/* 모달 */}
               {isSettingModalOpen && (
-            
-                  <GroupSettingModal
-                    styles={styles}
-                    groupName={groupName}
-                    id={id}
-                  />
-
+                <GroupSettingModal
+                  styles={styles}
+                  groupName={groupName}
+                  id={id}
+                  hostUser={hostUser}
+                  users={users}
+                  updateUsers={updateUsers}
+                />
               )}
             </div>
           )}

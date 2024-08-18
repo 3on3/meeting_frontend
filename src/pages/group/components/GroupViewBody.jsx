@@ -141,6 +141,8 @@ const GroupViewBody = ({
                 imgUrl={imgOriginUrl}
                 userName={user.name}
                 univ={user.univName}
+                nickname={user.nickname}
+                profileImg={user.profileImageUrl}
                 major={user.major}
                 auth={user.auth}
                 id={user.id}
@@ -166,7 +168,6 @@ const GroupViewBody = ({
       </ul>
 
       {/* 모달 표시 */}
-      
     </div>
   );
 };

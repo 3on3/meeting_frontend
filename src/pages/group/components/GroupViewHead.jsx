@@ -17,6 +17,7 @@ const GroupViewHead = ({
   groupSize,
   users,
   hostUser,
+  updateUsers,
 }) => {
   const { openModal } = useModal();
   const [isSettingModalOpen, setSettingModalOpen] = useState(false);
@@ -80,6 +81,7 @@ const GroupViewHead = ({
                   id={id}
                   hostUser={hostUser}
                   users={users}
+                  updateUsers={updateUsers}
                 />
               )}
             </div>

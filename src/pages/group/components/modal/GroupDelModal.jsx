@@ -5,12 +5,11 @@ import { useModal } from "../../../../context/ModalContext";
 import { GROUP_URL } from "../../../../config/host-config";
 import { getUserToken } from "../../../../config/auth";
 
-const GroupDelModal = ({ name, nickname, memberId, groupId }) => {
+const GroupDelModal = ({ name, nickname, memberId, groupId, onUserExiled }) => {
   const { closeModal } = useModal();
   const [loading, setLoading] = useState(false);
 
   const handleDelete = async () => {
-
     setLoading(true); // 로딩 상태 설정
     try {
       const response = await fetch(`${GROUP_URL}/exile`, {
@@ -26,6 +25,7 @@ const GroupDelModal = ({ name, nickname, memberId, groupId }) => {
       });
 
       if (response.ok) {
+        onUserExiled(memberId); // 추방된 유저의 ID를 상위 컴포넌트로 전달
         closeModal();
       } else {
         const errorText = await response.text();

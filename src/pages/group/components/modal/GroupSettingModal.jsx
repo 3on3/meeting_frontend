@@ -6,7 +6,14 @@ import { GROUP_URL } from "../../../../config/host-config";
 import { getUserToken } from "../../../../config/auth";
 import GroupExileModal from "./GroupExileModal";
 
-const GroupSettingModal = ({ styles, groupName, id, users, hostUser }) => {
+const GroupSettingModal = ({
+  styles,
+  groupName,
+  id,
+  users,
+  hostUser,
+  updateUsers,
+}) => {
   const { openModal } = useModal();
 
   const deleteConfirmModal = () => {
@@ -21,7 +28,12 @@ const GroupSettingModal = ({ styles, groupName, id, users, hostUser }) => {
     openModal(
       "유저 목록",
       "completeMode",
-      <GroupExileModal members={users} id={id} hostUser={hostUser} />
+      <GroupExileModal
+        members={users}
+        id={id}
+        hostUser={hostUser}
+        updateUsers={updateUsers}
+      />
     );
   };
 

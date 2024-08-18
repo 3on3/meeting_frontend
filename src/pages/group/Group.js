@@ -168,6 +168,7 @@ const Group = () => {
         id={id}
         users={groupUsers}
         hostUser={hostUser}
+        updateUsers={updateUsers}
       />
       <GroupViewBody
         styles={styles}

@@ -105,34 +105,37 @@ const ProfileSection = ({ userId }) => {
     setMajor(e.target.value); // 입력 필드의 값을 전공 상태에 저장
   };
 
-  // 프로필 이미지 조회
-  const fetchProfileImage = async () => {
-    try {
-      const response = await fetch(`http://localhost:8253/mypage/profileImage`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${getUserToken()}`,
-        },
-      });
+// 프로필 이미지 조회
+const fetchProfileImage = async () => {
+  try {
+    const response = await fetch(`http://localhost:8253/mypage/profileImage`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${getUserToken()}`,
+      },
+    });
 
-      if (response.ok) {
-        const imageUrl = await response.text();
-        setProfileImg(imageUrl);
-      } else {
-        throw new Error("Failed to fetch profile image");
-      }
-    } catch (error) {
-      console.error("Error fetching profile image:", error);
+    if (response.ok) {
+      const imageUrl = await response.json(); // 또는 response.json(), 응답 형태에 따라
+      setProfileImg(imageUrl);
+    } else {
+      const errorMessage = `프로필 이미지를 가져오지 못했습니다.: ${response.status} ${response.statusText}`;
+      throw new Error(errorMessage);
     }
-  };
+  } catch (error) {
+    console.error("프로필 이미지를 가져오는 중에 오류가 발생했습니다.:", error.message);
+    // 필요에 따라 사용자에게 알림을 제공하거나 재시도 로직을 추가할 수 있습니다.
+  }
+};
 
-  // 프로필 이미지 업데이트
+
+  //프로필 이미지 업데이트
   const updateProfileImage = async (file) => {
     const formData = new FormData();
-    formData.append("file", file);
+    formData.append("profileImage", file); // 필드 이름을 "profileImage"로 변경
 
     try {
-      const response = await fetch("http://localhost:8253/mypage/profileImage/update", {
+      const response = await fetch("http://localhost:8253/mypage/profileImage/upload", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${getUserToken()}`,
@@ -142,15 +145,16 @@ const ProfileSection = ({ userId }) => {
 
       if (response.ok) {
         const result = await response.text();
-        console.log("Profile image updated successfully:", result);
+        console.log("프로필 이미지가 업데이트되었습니다.:", result);
         fetchProfileImage(); // 업데이트 후 새로 이미지를 가져옴
       } else {
-        throw new Error("Failed to update profile image");
+        throw new Error("프로필 이미지를 업데이트 하지 못했습니다.");
       }
     } catch (error) {
-      console.error("Error updating profile image:", error);
+      console.error("프로필 이미지를 업데이트하는 중에 오류가 발생했습니다.:", error);
     }
   };
+
 
   // 프로필 이미지를 기본 이미지로 리셋
   const resetProfileImage = async () => {
@@ -163,13 +167,13 @@ const ProfileSection = ({ userId }) => {
       });
 
       if (response.ok) {
-        console.log("Profile image reset to default successfully");
+        console.log("프로필 이미지가 기본값으로 재설정되었습니다.");
         setProfileImg(defaultImg); // 기본 이미지로 설정
       } else {
-        throw new Error("Failed to reset profile image");
+        throw new Error("프로필 이미지를 재설정하지 못했습니다.");
       }
     } catch (error) {
-      console.error("Error resetting profile image:", error);
+      console.error("프로필 이미지를 재설정하는 중에 오류가 발생했습니다.:", error);
     }
   };
 

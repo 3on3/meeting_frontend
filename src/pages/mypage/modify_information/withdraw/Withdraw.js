@@ -32,7 +32,9 @@ const Withdraw = () => {
     setIsInitial(false);
     setEmail(e.target.value);
 
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    // const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailPattern = /^[^\s@]+@[^\s@]+\.com$/;
+
     const isValidEmail = emailPattern.test(e.target.value);
 
     setIsEmailValid(isValidEmail);

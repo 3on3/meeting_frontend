@@ -29,10 +29,8 @@ const Group = () => {
   const { alarmFetch } = useFetchRequest();
   const mainSocket = useContext(MainWebSocketContext);
   const [searchParams] = useSearchParams();
-  const status = searchParams.get("status")
-  
+  const status = searchParams.get("status");
 
-  
   const { openModal } = useModal();
   const [isRequestSuccess, setIsRequestSuccess] = useState(false);
   const onClickAndSuccess = () => {
@@ -42,8 +40,10 @@ const Group = () => {
       setIsRequestSuccess(false);
     }, 1200);
   };
-  console.log("grou🎨pData: " ,groupData);
-  
+
+  console.log("groupData: ", groupData);
+
+
   const openConfirmModal = () => {
     openModal(
       "그룹 나가기",
@@ -51,7 +51,6 @@ const Group = () => {
       <GroupLeaveModal groupName={groupName} id={id} />
     );
   };
-
 
   const fetchGroupData = async () => {
     try {
@@ -78,7 +77,7 @@ const Group = () => {
   useEffect(() => {
     fetchGroupData();
     console.log(groupData);
-  }, [id,isChanged]);
+  }, [id, isChanged]);
 
   // if (loading) {
   //   return <div>Loading...</div>;
@@ -115,6 +114,8 @@ const Group = () => {
     averageAge,
     totalMembers,
     gender,
+    nickname,
+    profileImageUrl,
     groupName,
     inviteCode,
     hostUser,
@@ -167,6 +168,9 @@ const Group = () => {
         groupName={groupName}
         auth={auth}
         id={id}
+        users={groupUsers}
+        hostUser={hostUser}
+        updateUsers={updateUsers}
       />
       <GroupViewBody
         styles={styles}
@@ -179,7 +183,7 @@ const Group = () => {
         totalMember={totalMembers}
         fetchGroupData={fetchGroupData}
       />
-      {auth !== "HOST" && status!== "REQUESITNG" && status !== "RESPONSE" && (
+      {auth !== "HOST" && status !== "REQUESITNG" && status !== "RESPONSE" && (
         <MtButtons
           eventType={"click"}
           buttonType={type}
@@ -189,7 +193,7 @@ const Group = () => {
         />
       )}
       {status === "REQUESITNG" && (
-          <MtButtons
+        <MtButtons
           eventType={"click"}
           buttonType={"disabled"}
           buttonText={"이미 매칭 신청 중인 그룹이예요."}
@@ -198,7 +202,7 @@ const Group = () => {
         />
       )}
       {status === "RESPONSE" && (
-          <MtButtons
+        <MtButtons
           eventType={"click"}
           buttonType={"disabled"}
           buttonText={"내 그룹에 매칭을 신청한 그룹이예요."}
@@ -219,8 +223,9 @@ const Group = () => {
           onClickAndSuccess={onClickAndSuccess}
         />
       )}
-    {isRequestSuccess && <InviteModal content={"매칭신청이 완료되었습니다."} />}
-
+      {isRequestSuccess && (
+        <InviteModal content={"매칭신청이 완료되었습니다."} />
+      )}
     </>
   );
 };

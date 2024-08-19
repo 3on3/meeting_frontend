@@ -4,8 +4,16 @@ import GroupDeleteModal from "./GroupDeleteModal";
 import GroupInviteModal from "./GroupInviteModal";
 import { GROUP_URL } from "../../../../config/host-config";
 import { getUserToken } from "../../../../config/auth";
+import GroupExileModal from "./GroupExileModal";
 
-const GroupSettingModal = ({ styles, groupName, id }) => {
+const GroupSettingModal = ({
+  styles,
+  groupName,
+  id,
+  users,
+  hostUser,
+  updateUsers,
+}) => {
   const { openModal } = useModal();
 
   const deleteConfirmModal = () => {
@@ -13,6 +21,19 @@ const GroupSettingModal = ({ styles, groupName, id }) => {
       "그룹 삭제하기",
       "completeMode",
       <GroupDeleteModal groupName={groupName} id={id} />
+    );
+  };
+
+  const exileUserModal = () => {
+    openModal(
+      "유저 목록",
+      "completeMode",
+      <GroupExileModal
+        members={users}
+        id={id}
+        hostUser={hostUser}
+        updateUsers={updateUsers}
+      />
     );
   };
 
@@ -67,7 +88,9 @@ const GroupSettingModal = ({ styles, groupName, id }) => {
             <li className={styles.modalOption} onClick={deleteConfirmModal}>
               그룹 삭제
             </li>
-            <li className={styles.modalOption}>참여자 추방</li>
+            <li className={styles.modalOption} onClick={exileUserModal}>
+              참여자 추방
+            </li>
           </ul>
         </div>
       </div>

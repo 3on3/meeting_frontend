@@ -21,6 +21,11 @@ const ActionSection = () => {
     navigate("/mypage/mychat");
   };
 
+  // 회원탈퇴 핸들러
+  const withdrawClickHandler = () => {
+    navigate("/mypage/withDraw");
+  };
+
   return (
     <div className={styles.container}>
       <MtButtons
@@ -44,6 +49,13 @@ const ActionSection = () => {
         eventHandler={myChatHandler}
         className={styles.mtButton}
       />
+      <div className={styles.findSection}>
+        <p 
+          className={styles.signUp} 
+          onClick={withdrawClickHandler}>
+          회원탈퇴
+        </p>
+    </div>
     </div>
   );
 };

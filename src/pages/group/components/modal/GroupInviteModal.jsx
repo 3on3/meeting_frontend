@@ -96,12 +96,6 @@ const GroupInviteModal = ({ groupName, inviteCode, remainingTime }) => {
           eventType={"click"}
           eventHandler={closeModal}
         />
-        <MtButtons
-          buttonType={"apply"}
-          buttonText={"확인"}
-          eventType={"click"}
-          eventHandler={closeModal}
-        />
       </div>
       {modalContent && <InviteModal content={modalContent} />}
     </>

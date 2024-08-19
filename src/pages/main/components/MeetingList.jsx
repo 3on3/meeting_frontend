@@ -58,6 +58,7 @@ function MeetingList() {
         method: "GET",
         headers: {
           Authorization: "Bearer " + getUserToken(),
+          "Content-Type": "application/json",
         },
       });
 
@@ -104,13 +105,18 @@ function MeetingList() {
   }, [inView, loading, isFinish]);
 
   // console.log(listData);
-  
+
   return (
     <>
       <ul className={styles.meetingList}>
         {loading || (listData.length === 0 && <EmptyGroups />)}
         {listData.map((group) => (
-          <GroupBox key={group.id} group={group} setIsChanged={setIsChanged} matchingStatus={group.matchingStatus} />
+          <GroupBox
+            key={group.id}
+            group={group}
+            setIsChanged={setIsChanged}
+            matchingStatus={group.matchingStatus}
+          />
         ))}
         <div ref={scrollRef} style={{ height: "100px" }}></div>
       </ul>

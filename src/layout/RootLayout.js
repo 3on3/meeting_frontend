@@ -74,8 +74,10 @@ const RootLayout = () => {
 
 
     const alarmBtnHandler = () => {
-        navigate("/alarm");
-        if(isAlarm) setIsAlarm(false);
+        if(alarmList || isAlarm ) {
+            navigate("/alarm");
+            if(isAlarm) setIsAlarm(false);
+        }
     }
 
   return (
@@ -89,7 +91,7 @@ const RootLayout = () => {
       <main className='container'>
           <div className={styles.goBackBtn} onClick={goBackBtnHandler}></div>
           {isAlarm && <div className={styles.alarm} onClick={alarmClickHandler}>매칭 신청이 도착했습니다!</div>}
-          <div className={alarmList ? styles.activeAlarmBtn : (isAlarm ? styles.activeAlarmBtn : styles.alarmBtn)} onClick={alarmList ? alarmBtnHandler : isAlarm ? alarmBtnHandler : ''}></div>
+          <div className={alarmList ? styles.activeAlarmBtn : (isAlarm ? styles.activeAlarmBtn : styles.alarmBtn)} onClick={alarmBtnHandler}></div>
         <Outlet/>
       </main>
       

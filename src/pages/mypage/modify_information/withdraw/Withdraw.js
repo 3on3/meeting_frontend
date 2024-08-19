@@ -9,7 +9,7 @@ import PasswordInput from '../components/PasswordInput';
 
 const Withdraw = () => {
 
-  // 상태 변수 정의
+  // 상태 변수 정의함.
   const [isEmailValid, setIsEmailValid] = useState(false); 
   const [isInitial, setIsInitial] = useState(true); 
   const [showConfirm, setShowConfirm] = useState(false); 

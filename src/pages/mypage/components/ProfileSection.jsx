@@ -130,20 +130,22 @@ const ProfileSection = ({ userId }) => {
         }
       );
 
+      if (response.ok) {
+        const imageUrl = await response.json(); // 또는 response.json(), 응답 형태에 따라
 
-    if (response.ok) {
-      const imageUrl = await response.json(); // 또는 response.json(), 응답 형태에 따라
-      setProfileImg(imageUrl);
-    } else {
-      const errorMessage = `프로필 이미지를 가져오지 못했습니다.: ${response.status} ${response.statusText}`;
-      throw new Error(errorMessage);
+        setProfileImg(imageUrl.profileImg);
+      } else {
+        const errorMessage = `프로필 이미지를 가져오지 못했습니다.: ${response.status} ${response.statusText}`;
+        throw new Error(errorMessage);
+      }
+    } catch (error) {
+      console.error(
+        "프로필 이미지를 가져오는 중에 오류가 발생했습니다.:",
+        error.message
+      );
+      // 필요에 따라 사용자에게 알림을 제공하거나 재시도 로직을 추가할 수 있습니다.
     }
-  } catch (error) {
-    console.error("프로필 이미지를 가져오는 중에 오류가 발생했습니다.:", error.message);
-    // 필요에 따라 사용자에게 알림을 제공하거나 재시도 로직을 추가할 수 있습니다.
-  }
-};
-
+  };
 
   //프로필 이미지 업데이트
   const updateProfileImage = async (file) => {
@@ -162,7 +164,6 @@ const ProfileSection = ({ userId }) => {
         }
       );
 
-
       if (response.ok) {
         const result = await response.text();
         console.log("프로필 이미지가 업데이트되었습니다.:", result);
@@ -171,10 +172,12 @@ const ProfileSection = ({ userId }) => {
         throw new Error("프로필 이미지를 업데이트 하지 못했습니다.");
       }
     } catch (error) {
-      console.error("프로필 이미지를 업데이트하는 중에 오류가 발생했습니다.:", error);
+      console.error(
+        "프로필 이미지를 업데이트하는 중에 오류가 발생했습니다.:",
+        error
+      );
     }
   };
-
 
   // 프로필 이미지를 기본 이미지로 리셋
   const resetProfileImage = async () => {
@@ -196,7 +199,10 @@ const ProfileSection = ({ userId }) => {
         throw new Error("프로필 이미지를 재설정하지 못했습니다.");
       }
     } catch (error) {
-      console.error("프로필 이미지를 재설정하는 중에 오류가 발생했습니다.:", error);
+      console.error(
+        "프로필 이미지를 재설정하는 중에 오류가 발생했습니다.:",
+        error
+      );
     }
   };
 

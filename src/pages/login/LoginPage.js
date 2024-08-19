@@ -113,6 +113,7 @@ const LoginPage = () => {
               method: "GET",
               headers: {
                 Authorization: `Bearer ${getUserToken()}`,
+                'Content-Type': 'application/json'
               },
             }
           );

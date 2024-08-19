@@ -35,7 +35,7 @@ const GroupCreateModal = ({
     });
 
     if (response.ok) {
-      window.location.href = "/";
+      window.location.href = "/mypage/mygroup";
     } else {
       const errorText = await response.text();
       alert(errorText);

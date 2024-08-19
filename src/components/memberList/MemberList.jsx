@@ -31,7 +31,7 @@ const MemberList = ({
       ) : (
         <p className={styles.user}></p>
       )}
-
+  
       <p className={`${styles.img} ${styles.imgBlur}`}>
         <img src={imgUrl} alt="유저프로필 이미지" />
       </p>

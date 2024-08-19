@@ -23,7 +23,8 @@ const Header = () => {
         }
       ></div>
       {(location.pathname === "/" ||
-        location.pathname == "/mypage/mygroup") && (
+        location.pathname == "/mypage/mygroup" ||
+        location.pathname == "/mypage/myChat") && (
         <FloatingNavigation
           styles={styles}
           active={floatingNaviActive}

@@ -55,8 +55,8 @@
     p::after{
       content: '';
       display: inline-block;
-      width: 2px;
-      height: 2px;
+      width: calc(100vw * (2 / 500));
+      height: calc(100vw * (2 / 500));
       background-color: var(--color-gr);
       border-radius: 50%;
       margin: 0 calc( 100vw * ( 10 / 500));

@@ -11,7 +11,7 @@ const MyGroups = () => {
   return (
     <ul className={styles.MyGroupsWrapper}>
       <p className={styles.myGroupsTitle}>내가 속한 그룹</p>
-      {myGroupList.length === 0 && <EmptyGroups />}
+      {myGroupList.length === 0 && <div className={styles.empty}><EmptyGroups text={"그룹"}/></div>}
       {myGroupList.map((group) => (
         <GroupBox key={group.id} state={"sky"} group={group} />
       ))}

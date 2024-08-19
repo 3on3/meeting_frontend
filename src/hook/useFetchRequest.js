@@ -24,7 +24,6 @@ export const useFetchRequest = () => {
       console.log(payload);
       if (response.ok) {
         setIsChanged(true);
-
       } else {
         const errorText = await response.text();
         setError(errorText);

@@ -77,8 +77,7 @@ const Group = () => {
 
   useEffect(() => {
     fetchGroupData();
-    console.log(groupData);
-  }, [id,isChanged]);
+  }, [id, isChanged]);
 
   if (loading) {
     return <div></div>;

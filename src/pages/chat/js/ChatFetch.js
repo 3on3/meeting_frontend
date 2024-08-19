@@ -55,3 +55,25 @@ export const showMemberList = async (roomId, setMemberList) => {
 
     setMemberList(json);
 }
+
+export const deleteChatRoom = async (roomId) => {
+
+    const loginUser = userDataLoader();
+
+    const payload = {
+        chatroomId:roomId
+    }
+
+    const response = await fetch(CHATROOM_URL+`/deleteChat`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization:
+                "Bearer " +
+                loginUser.token
+
+        },
+        body: JSON.stringify(payload),
+    });
+
+}

@@ -2,9 +2,10 @@ import React, {useEffect, useRef, useState} from 'react';
 import {Outlet, useNavigate} from 'react-router-dom';
 import Header from './Header';
 import {MainWebSocket} from "../assets/js/webSocket/MainWebSocket";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {MainWebSocketContext} from "../context/MainWebSocketContext";
 import styles from "./alarm.module.scss"
+import {alarmListFetch} from "./alarmFetch";
 // import './RootLayout.css';
 
 const RootLayout = () => {
@@ -18,6 +19,8 @@ const RootLayout = () => {
     const [alarmRoomId, setAlarmRoomId] = useState(null);
 
     const [isAlarm, setIsAlarm] = useState(false);
+
+    const [alarmList, setAlarmList] = useState(null);
 
     const navigate = useNavigate();
 
@@ -51,9 +54,30 @@ const RootLayout = () => {
         }
     }, [isAlarm]);
 
+    useEffect(() => {
+        if(isLogin) {
+            alarmListFetch(setAlarmList);
+        }
+    }, []);
+
+
+
     const alarmClickHandler = () => {
         navigate("/group/"+alarmRoomId);
         setIsAlarm(false);
+    };
+
+    const goBackBtnHandler = () => {
+        navigate(-1);
+    };
+
+
+
+    const alarmBtnHandler = () => {
+        if(alarmList || isAlarm ) {
+            navigate("/alarm");
+            if(isAlarm) setIsAlarm(false);
+        }
     }
 
   return (
@@ -65,7 +89,9 @@ const RootLayout = () => {
     >
       <Header />
       <main className='container'>
+          <div className={styles.goBackBtn} onClick={goBackBtnHandler}></div>
           {isAlarm && <div className={styles.alarm} onClick={alarmClickHandler}>매칭 신청이 도착했습니다!</div>}
+          <div className={alarmList ? styles.activeAlarmBtn : (isAlarm ? styles.activeAlarmBtn : styles.alarmBtn)} onClick={alarmBtnHandler}></div>
         <Outlet/>
       </main>
       

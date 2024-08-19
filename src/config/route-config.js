@@ -25,6 +25,7 @@ import JoinEndPage from "../pages/invite/components/JoinEndPage";
 import PasswordResetPage from "../pages/login/components/PasswordResetPage";
 import Payment from "../pages/payment/Payment";
 import PaymentApproval from "../pages/payment/PaymentApproval";
+import AlarmPage from "../pages/alarm/AlarmPage";
 
 // 마이페이지 라우터
 const mypageRouter = [
@@ -99,6 +100,10 @@ export const router = createBrowserRouter([
       {
         path: "group/create",
         element: <GroupCreate />,
+      },
+      {
+        path: "alarm",
+        element: <AlarmPage />
       },
       // 채팅 라우터
       {

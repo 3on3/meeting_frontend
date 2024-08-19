@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { CHATROOM_URL, MYPAGE_URL, MYPAGEMATCHING_URL } from "../config/host-config";
 import { useNavigate } from "react-router-dom";
-import { getUserToken } from "../config/auth";
+import {getUserToken, userDataLoader} from "../config/auth";
 
 export const useFetchRequest = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -43,6 +43,8 @@ export const useFetchRequest = () => {
   const alarmFetch = async (responseGroupId) => {
     console.log(responseGroupId);
 
+    const loginUser = userDataLoader();
+
     const payload = {
       responseGroupId: responseGroupId,
     }
@@ -51,6 +53,9 @@ export const useFetchRequest = () => {
       method:'POST',
       headers: {
         "Content-Type": "application/json",
+        Authorization:
+            "Bearer " +
+            loginUser.token
       },
       body: JSON.stringify(payload),
     });

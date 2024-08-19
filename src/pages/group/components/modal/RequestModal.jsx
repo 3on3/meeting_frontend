@@ -1,17 +1,23 @@
 import React, { useEffect, useState } from "react";
 import GroupBox from "../../../../components/common/groupBoxs/GroupBox";
 import { MYPAGEMATCHING_URL } from "../../../../config/host-config";
+import { getUserToken } from "../../../../config/auth";
 
 const RequestModal = ({ styles, groupId }) => {
   const [requestList, setRequestList] = useState([]);
   const [isChanged, setIsChanged] = useState(false);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(
           `${MYPAGEMATCHING_URL}/response?groupId=${groupId}`
-        );
+        ,{
+          method: 'GET',
+          headers: {
+            Authorization: "Bearer " + getUserToken(),
+              'Content-Type': 'application/json',
+          },
+        });
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }

@@ -10,6 +10,11 @@ const MainNavigation = ({ styles }) => {
       if (path === "/mypage" && location.pathname === "/mypage/mygroup") {
         return "";
       }
+
+        if (path === "/mypage" && location.pathname === "/mypage/myChat") {
+            return "";
+        }
+
       return isActive ? styles.active : "";
     };
 
@@ -24,7 +29,7 @@ const MainNavigation = ({ styles }) => {
       >
         <i className={styles.group}></i>내 그룹
       </NavLink>
-      <NavLink to="/mypage/myChat" className={activeClassFn}>
+      <NavLink to="/mypage/myChat" className={activeClassFn("/mypage/myChat")}>
         <i className={styles.chat}></i>내 채팅
       </NavLink>
       <NavLink to="/mypage" className={activeClassFn("/mypage")}>

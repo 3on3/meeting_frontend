@@ -97,6 +97,7 @@ const LoginPage = () => {
             gender: data.gender,
             nickname: data.nickname,
             password: data.password,
+            profileImg: data.profileImg
           };
 
           localStorage.setItem("userData", JSON.stringify(userData));

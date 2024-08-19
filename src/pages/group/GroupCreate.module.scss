@@ -17,8 +17,8 @@
   .region li {
     margin-right: calc(100vw * (5 / 500));
     cursor: pointer;
-    padding: 9px 10px;
-    margin-right: 6px;
+    padding: calc(100vw * (9 / 500)) calc(100vw * (10 / 500));
+    margin-right: calc(100vw * (6 / 500));
     cursor: pointer;
     font-size: calc(100vw * (16 / 500));
     border-radius: calc(100vw * (500 / 500));

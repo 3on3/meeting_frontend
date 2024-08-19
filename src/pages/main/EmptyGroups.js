@@ -4,7 +4,7 @@ import logo from "../../assets/images/login/logo.svg";
 import styles from "./Main.module.scss";
 import { useNavigate } from "react-router-dom";
 
-const EmptyGroups = () => {
+const EmptyGroups = ({text}) => {
   const navigate = useNavigate();
   const onClickHandler = () => {
     navigate("/group/create");
@@ -14,7 +14,7 @@ const EmptyGroups = () => {
       <div className={styles.logo}>
         <img src={logo}></img>
       </div>
-      <div className={styles.topText}>아직 생성된 그룹이 없습니다.</div>
+      <div className={styles.topText}>아직 생성된 {text}이 없습니다</div>
       <div className={styles.text}>
         그룹을 생성해서
         <br />

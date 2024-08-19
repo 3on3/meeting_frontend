@@ -103,12 +103,12 @@ function MeetingList() {
     }
   }, [inView, loading, isFinish]);
 
-  // console.log(listData);
+  console.log(listData);
   
   return (
     <>
       <ul className={styles.meetingList}>
-        {loading || (listData.length === 0 && <EmptyGroups />)}
+        {loading || (listData.length === 0 && <EmptyGroups text={"그룹"} />)}
         {listData.map((group) => (
           <GroupBox key={group.id} group={group} setIsChanged={setIsChanged} matchingStatus={group.matchingStatus} />
         ))}

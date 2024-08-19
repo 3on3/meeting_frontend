@@ -253,9 +253,11 @@ const ProfileSection = ({ userId }) => {
 
   return (
     <div className={styles.container}>
+      <h1 className={`title ${styles.text}`}>마이페이지</h1>
+      
       <div className={styles.profileContainer}>
+
         <div className={styles.contentsBox}>
-          <h1 className={`title ${styles.text}`}>마이페이지</h1>
           {/* 프로필 이미지 클릭 시 모달을 여는 영역 */}
           <div className={styles.profile} onClick={profileClickHandler}>
             <img src={profileImg} alt="프로필 이미지" />{" "}

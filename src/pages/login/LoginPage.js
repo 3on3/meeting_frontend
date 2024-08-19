@@ -98,6 +98,7 @@ const LoginPage = () => {
             nickname: data.nickname,
             password: data.password,
             membershipAuth: data.membershipAuth,
+            profileImg: data.profileImg
           };
 
           localStorage.setItem("userData", JSON.stringify(userData));

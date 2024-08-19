@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styles from "./FirstLoginProfile.module.scss";
 import MtButtons from "../../../components/common/buttons/MtButtons";
 import defaultImg from "../../../assets/images/login/defaultProfile.png";
@@ -12,41 +12,64 @@ const FirstLoginProfile = ({ nextHandler }) => {
   const [modalPosition, setModalPosition] = useState({ x: 0, y: 0 });
   const fileInputRef = useRef(null);
 
+  // 프로필 이미지를 로컬 스토리지에서 불러오거나 기본 이미지를 설정
+  useEffect(() => {
+    const userData = JSON.parse(localStorage.getItem("userData") || "{}");
+    if (userData.profileImg) {
+      setProfileImg(userData.profileImg);
+    }
+  }, []);
+
   const fileChangeHandler = (e) => {
     const file = e.target.files[0];
     setSelectedFile(file);
 
     const reader = new FileReader();
     reader.onload = () => {
-      setProfileImg(reader.result);
+      const result = reader.result;
+      setProfileImg(result);
+      const userData = JSON.parse(localStorage.getItem("userData") || "{}");
+      userData.profileImg = result;
+      localStorage.setItem("userData", JSON.stringify(userData));
     };
     reader.readAsDataURL(file);
   };
 
   const submitHandler = async () => {
-    // 비동기 폼 생성
     const formData = new FormData();
     if (selectedFile) {
       formData.append("profileImage", selectedFile);
     } else {
-      // 기본 이미지를 Blob 객체로 전송
       const response = await fetch(defaultImg);
       const blob = await response.blob();
       formData.append("profileImage", new File([blob], "default.png", { type: blob.type }));
     }
-
+  
     try {
       const response = await fetch("http://localhost:8253/file/upload", {
         method: "POST",
         headers: {
-          "Authorization": `Bearer ` + getUserToken(),
+          Authorization: `Bearer ${getUserToken()}`,
         },
         body: formData,
       });
-
+  
       if (response.ok) {
-        console.log("프로필 이미지 업로드 성공");
-        nextHandler();
+        // 서버에서 JSON 응답을 반환했는지 확인
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+          const data = await response.json();
+          const newProfileImgUrl = data.profileImgUrl;
+  
+          const userData = JSON.parse(localStorage.getItem("userData") || "{}");
+          userData.profileImg = newProfileImgUrl;
+          localStorage.setItem("userData", JSON.stringify(userData));
+  
+          setProfileImg(newProfileImgUrl);
+          nextHandler();
+        } else {
+          console.error("서버가 JSON 응답을 반환하지 않았습니다.");
+        }
       } else {
         console.error("프로필 이미지 업로드 실패:", await response.text());
       }
@@ -54,6 +77,7 @@ const FirstLoginProfile = ({ nextHandler }) => {
       console.error("Error:", error);
     }
   };
+  
 
   const skipHandler = () => {
     submitHandler();
@@ -63,6 +87,10 @@ const FirstLoginProfile = ({ nextHandler }) => {
     setProfileImg(defaultImg);
     setSelectedFile(null);
     setModalActive(false);
+
+    const userData = JSON.parse(localStorage.getItem("userData") || "{}");
+    userData.profileImg = defaultImg;
+    localStorage.setItem("userData", JSON.stringify(userData));
   };
 
   const changeProfileHandler = () => {

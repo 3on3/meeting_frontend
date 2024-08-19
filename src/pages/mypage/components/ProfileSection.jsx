@@ -6,6 +6,7 @@ import checkImg from "../../../assets/images/mypage/check.svg";
 import ActionSection from "./ActionSection";
 import MypageModal from "../components/mypage_modal/MypageModal";
 import { getUserToken } from "../../../config/auth";
+import paymentImg from "../../../assets/images/mypage/payment.svg";
 
 // ProfileSection 컴포넌트 정의
 const ProfileSection = ({ userId }) => {
@@ -20,6 +21,7 @@ const ProfileSection = ({ userId }) => {
   const [profileIntroduce, setProfileIntroduce] = useState(""); // 프로필 소개
   const [univ, setUniv] = useState(""); // 대학교
   const [major, setMajor] = useState(""); // 학과
+  const [membership, setMembership] = useState(""); // 멤버십 상태
 
   // 프로필 이미지를 관리하기 위한 상태 변수들
   const [profileImg, setProfileImg] = useState(defaultImg); // 프로필 이미지 (기본 이미지는 defaultImg)
@@ -32,35 +34,45 @@ const ProfileSection = ({ userId }) => {
 
   const updateProfileInfo = async () => {
     const updatedProfileData = {
-        nickname: nickname,
-        profileIntroduce: profileIntroduce,
-        major: major,
+      nickname: nickname,
+      profileIntroduce: profileIntroduce,
+      major: major,
     };
 
     try {
-        console.log("프로필 정보 업데이트를 시작합니다.");
-        const response = await fetch(`http://localhost:8253/mypage/userInfo/update`, {
-            method: "PUT",
-            headers: {
-                Authorization: `Bearer ${getUserToken()}`,
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(updatedProfileData),
-        });
-
-        if (response.ok) {
-            const data = await response.json();
-            console.log("프로필 정보가 성공적으로 업데이트되었습니다:", data);
-            setIsEditingName(false);
-            setIsEditingDescription(false);
-            setIsEditingMajor(false);
-        } else {
-            console.error("응답이 실패했습니다:", response.status, response.statusText);
-            throw new Error("프로필 정보를 업데이트하는 중 오류가 발생했습니다.");
+      console.log("프로필 정보 업데이트를 시작합니다.");
+      const response = await fetch(
+        `http://localhost:8253/mypage/userInfo/update`,
+        {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${getUserToken()}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedProfileData),
         }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("프로필 정보가 성공적으로 업데이트되었습니다:", data);
+        setIsEditingName(false);
+        setIsEditingDescription(false);
+        setIsEditingMajor(false);
+      } else {
+        console.error(
+          "응답이 실패했습니다:",
+          response.status,
+          response.statusText
+        );
+        throw new Error("프로필 정보를 업데이트하는 중 오류가 발생했습니다.");
+      }
     } catch (error) {
-        console.error("프로필 정보를 업데이트하는 중 오류가 발생했습니다:", error);
-    }    
+      console.error(
+        "프로필 정보를 업데이트하는 중 오류가 발생했습니다:",
+        error
+      );
+    }
   };
 
   // 닉네임 편집 모드 토글 (활성화/비활성화)
@@ -108,68 +120,83 @@ const ProfileSection = ({ userId }) => {
   // 프로필 이미지 조회
   const fetchProfileImage = async () => {
     try {
-      const response = await fetch(`http://localhost:8253/mypage/profileImage`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${getUserToken()}`,
-        },
-      });
+      const response = await fetch(
+        `http://localhost:8253/mypage/profileImage`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${getUserToken()}`,
+          },
+        }
+      );
 
-      if (response.ok) {
-        const imageUrl = await response.text();
-        setProfileImg(imageUrl);
-      } else {
-        throw new Error("Failed to fetch profile image");
-      }
-    } catch (error) {
-      console.error("Error fetching profile image:", error);
+
+    if (response.ok) {
+      const imageUrl = await response.json(); // 또는 response.json(), 응답 형태에 따라
+      setProfileImg(imageUrl);
+    } else {
+      const errorMessage = `프로필 이미지를 가져오지 못했습니다.: ${response.status} ${response.statusText}`;
+      throw new Error(errorMessage);
     }
-  };
+  } catch (error) {
+    console.error("프로필 이미지를 가져오는 중에 오류가 발생했습니다.:", error.message);
+    // 필요에 따라 사용자에게 알림을 제공하거나 재시도 로직을 추가할 수 있습니다.
+  }
+};
 
-  // 프로필 이미지 업데이트
+
+  //프로필 이미지 업데이트
   const updateProfileImage = async (file) => {
     const formData = new FormData();
-    formData.append("file", file);
+    formData.append("profileImage", file); // 필드 이름을 "profileImage"로 변경
 
     try {
-      const response = await fetch("http://localhost:8253/mypage/profileImage/update", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${getUserToken()}`,
-        },
-        body: formData,
-      });
+      const response = await fetch(
+        "http://localhost:8253/mypage/profileImage/update",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${getUserToken()}`,
+          },
+          body: formData,
+        }
+      );
+
 
       if (response.ok) {
         const result = await response.text();
-        console.log("Profile image updated successfully:", result);
+        console.log("프로필 이미지가 업데이트되었습니다.:", result);
         fetchProfileImage(); // 업데이트 후 새로 이미지를 가져옴
       } else {
-        throw new Error("Failed to update profile image");
+        throw new Error("프로필 이미지를 업데이트 하지 못했습니다.");
       }
     } catch (error) {
-      console.error("Error updating profile image:", error);
+      console.error("프로필 이미지를 업데이트하는 중에 오류가 발생했습니다.:", error);
     }
   };
+
 
   // 프로필 이미지를 기본 이미지로 리셋
   const resetProfileImage = async () => {
     try {
-      const response = await fetch("http://localhost:8253/mypage/profileImage/reset", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${getUserToken()}`,
-        },
-      });
+      const response = await fetch(
+        "http://localhost:8253/mypage/profileImage/reset",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${getUserToken()}`,
+          },
+        }
+      );
 
       if (response.ok) {
-        console.log("Profile image reset to default successfully");
+        console.log("프로필 이미지가 기본값으로 재설정되었습니다.");
         setProfileImg(defaultImg); // 기본 이미지로 설정
       } else {
-        throw new Error("Failed to reset profile image");
+        throw new Error("프로필 이미지를 재설정하지 못했습니다.");
       }
     } catch (error) {
-      console.error("Error resetting profile image:", error);
+      console.error("프로필 이미지를 재설정하는 중에 오류가 발생했습니다.:", error);
     }
   };
 
@@ -180,41 +207,42 @@ const ProfileSection = ({ userId }) => {
 
     const reader = new FileReader();
     reader.onload = () => {
-      setProfileImg(reader.result); 
+      setProfileImg(reader.result);
     };
-    reader.readAsDataURL(file); 
+    reader.readAsDataURL(file);
 
     updateProfileImage(file); // 파일 업로드하여 프로필 이미지 업데이트
   };
 
   const profileClickHandler = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect(); 
+    const rect = e.currentTarget.getBoundingClientRect();
     setModalPosition({
       x: rect.left + rect.width / 2 + 40,
-      y: rect.top + window.scrollY + 80 
+      y: rect.top + window.scrollY + 80,
     });
-    setModalActive(!modalActive); 
+    setModalActive(!modalActive);
   };
 
   useEffect(() => {
     // 사용자 프로필 정보를 가져오는 GET 요청
     fetch(`http://localhost:8253/mypage/userInfo`, {
-      method: "GET", 
+      method: "GET",
       headers: {
         Authorization: `Bearer ${getUserToken()}`,
         "Content-Type": "application/json",
       },
     })
-      .then((response) => response.json()) 
+      .then((response) => response.json())
       .then((data) => {
         // 서버에서 받은 데이터를 상태에 저장하여 화면에 표시함
-        console.log("받은 사용자 프로필 데이터:", data); 
-        setNickname(data.nickname); 
-        setAge(data.age); 
+        console.log("받은 사용자 프로필 데이터:", data);
+        setNickname(data.nickname);
+        setAge(data.age);
         setProfileIntroduce(data.profileIntroduce);
-        console.log("소개 정보:", data.profileIntroduce); 
-        setUniv(data.univ); 
-        setMajor(data.major); 
+        console.log("소개 정보:", data.profileIntroduce);
+        setUniv(data.univ);
+        setMajor(data.major);
+        setMembership(data.membership === "PRIMIUM" ? "프리미엄" : "일반회원");
       })
       .catch((error) => {
         console.error("프로필 정보를 불러오는 중 오류가 발생했습니다:", error);
@@ -230,7 +258,8 @@ const ProfileSection = ({ userId }) => {
           <h1 className={`title ${styles.text}`}>마이페이지</h1>
           {/* 프로필 이미지 클릭 시 모달을 여는 영역 */}
           <div className={styles.profile} onClick={profileClickHandler}>
-            <img src={profileImg} alt="프로필 이미지" /> {/* 프로필 이미지 표시 */}
+            <img src={profileImg} alt="프로필 이미지" />{" "}
+            {/* 프로필 이미지 표시 */}
           </div>
           {/* 파일 선택 입력 필드 (화면에는 보이지 않음) */}
           <input
@@ -241,14 +270,14 @@ const ProfileSection = ({ userId }) => {
             className={styles.fileInput}
           />
           {/* 모달이 활성화된 경우에만 표시 */}
-          {modalActive && 
+          {modalActive && (
             <MypageModal
               active={modalActive}
               position={modalPosition}
               onDefaultImage={resetProfileImage}
               onChangeProfile={() => fileInputRef.current.click()}
             />
-          }
+          )}
           {/* 첫 번째 컨텐츠 영역: 닉네임, 나이, 멤버십 */}
           <div className={styles.firstContents}>
             <div className={styles.content1}>
@@ -276,7 +305,15 @@ const ProfileSection = ({ userId }) => {
             </div>
             <div className={styles.contentWrap}>
               <div className={styles.content2}>{age}세</div> {/* 나이 표시 */}
-              <div className={styles.content3}>일반회원</div> {/* 멤버십 등급 표시 */}
+              <div className={styles.content3}>{membership}</div>{" "}
+              {/* 멤버십 등급 표시 */}
+              <div className={styles.paymentBox}>
+                <img
+                  src={paymentImg}
+                  alt={"결제버튼"}
+                  // onClick={editNameToggle} // 수정된 부분: 클릭 시 저장 또는 수정 모드로 전환
+                />
+              </div>
             </div>
           </div>
 

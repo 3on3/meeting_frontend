@@ -29,6 +29,7 @@ const Group = () => {
   const { alarmFetch } = useFetchRequest();
   const mainSocket = useContext(MainWebSocketContext);
   const [searchParams] = useSearchParams();
+
   const status = searchParams.get("status");
 
   const { openModal } = useModal();
@@ -77,11 +78,11 @@ const Group = () => {
   useEffect(() => {
     fetchGroupData();
     console.log(groupData);
-  }, [id, isChanged]);
+  }, [id,isChanged]);
 
-  // if (loading) {
-  //   return <div>Loading...</div>;
-  // }
+  if (loading) {
+    return <div></div>;
+  }
 
   if (loading) {
     return (
@@ -216,7 +217,7 @@ const Group = () => {
       {/* 신청자 그룹 선택 ㅊ모달 */}
       {modalActive && (
         <MyGroupSelectModal
-          MyGroupSelectModal={MyGroupSelectModal}
+          // MyGroupSelectModal={MyGroupSelectModal}
           setIsChanged={setIsChanged}
           responseGroupId={id}
           setModalActive={setModalActive}

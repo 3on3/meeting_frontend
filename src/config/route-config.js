@@ -23,6 +23,9 @@ import InvitePage from "../pages/invite/InvitePage";
 import { authCheckLoader, autoCheckReturnLoader } from "./auth";
 import JoinEndPage from "../pages/invite/components/JoinEndPage";
 import PasswordResetPage from "../pages/login/components/PasswordResetPage";
+import Payment from "../pages/payment/Payment";
+import PaymentApproval from "../pages/payment/PaymentApproval";
+import AlarmPage from "../pages/alarm/AlarmPage";
 
 // 마이페이지 라우터
 const mypageRouter = [
@@ -98,6 +101,10 @@ export const router = createBrowserRouter([
         path: "group/create",
         element: <GroupCreate />,
       },
+      {
+        path: "alarm",
+        element: <AlarmPage />
+      },
       // 채팅 라우터
       {
         path: "chatroom/:id",
@@ -117,7 +124,15 @@ export const router = createBrowserRouter([
         element: <InvitePage />,
         loader: autoCheckReturnLoader,
       },
-
+      // 카카오페이 라우터 추가
+      {
+        path: "payment/ready",
+        element: <Payment />,
+      },
+      {
+        path: "payment/approval",
+        element: <PaymentApproval />,
+      },
       // 이하로는 임시페이지임
       {
         path: "error",

@@ -10,6 +10,7 @@ import styles from "../SignUpComponent.module.scss";
 import DefaultInput from "../../../../components/common/inputs/DefaultInput";
 import MtButtons from "../../../../components/common/buttons/MtButtons";
 import RadioButton from "../../../../components/common/buttons/radiobutton/RadioButton";
+import { getUserToken } from "../../../../config/auth";
 
 // yyMMdd를 yyyy-MM-dd로 변환하는 함수
 const convertToFullDate = (shortDate) => {
@@ -200,6 +201,10 @@ const CreateInformations = ({
 
       const response = await fetch(`http://localhost:8253/signup/check-phone-number?phoneNumber=${encodedPhoneNumber}`, {
         method: 'GET',
+        headers: {
+          Authorization: `Bearer ${getUserToken()}`,
+          'Content-Type': 'application/json',
+        },
       });
       console.log('response: ', response);
 

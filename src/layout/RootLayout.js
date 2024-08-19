@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {Outlet, useNavigate} from 'react-router-dom';
+import {Outlet, useLocation, useNavigate} from 'react-router-dom';
 import Header from './Header';
 import {MainWebSocket} from "../assets/js/webSocket/MainWebSocket";
 import {useDispatch, useSelector} from "react-redux";
@@ -23,6 +23,8 @@ const RootLayout = () => {
     const [alarmList, setAlarmList] = useState(null);
 
     const navigate = useNavigate();
+
+    const location = useLocation();
 
     useEffect(() => {
 
@@ -56,9 +58,12 @@ const RootLayout = () => {
 
     useEffect(() => {
         if(isLogin) {
+            setAlarmList(null);
             alarmListFetch(setAlarmList);
+        } else {
+            setAlarmList(null);
         }
-    }, []);
+    }, [location]);
 
 
 

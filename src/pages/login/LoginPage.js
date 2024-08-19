@@ -97,6 +97,7 @@ const LoginPage = () => {
             gender: data.gender,
             nickname: data.nickname,
             password: data.password,
+            membershipAuth: data.membershipAuth,
             profileImg: data.profileImg
           };
 
@@ -125,7 +126,10 @@ const LoginPage = () => {
           }
         } else {
           const errorText = await response.text();
-          if (errorText.includes("User not found") && errorText.includes("Invalid password")) {
+          if (
+            errorText.includes("User not found") &&
+            errorText.includes("Invalid password")
+          ) {
             setIdError("아이디와 비밀번호가 모두 틀렸습니다.");
             setPasswordError(""); // 비밀번호 오류 메시지 초기화
           } else if (errorText.includes("User not found")) {
@@ -204,7 +208,7 @@ const LoginPage = () => {
         <p className={styles.findPassword} onClick={findPasswordClickHandler}>
           비밀번호 찾기
         </p>
-    </div>
+      </div>
     </div>
   );
 };

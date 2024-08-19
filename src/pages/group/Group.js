@@ -41,7 +41,9 @@ const Group = () => {
       setIsRequestSuccess(false);
     }, 1200);
   };
+
   console.log("groupData: ", groupData);
+
 
   const openConfirmModal = () => {
     openModal(

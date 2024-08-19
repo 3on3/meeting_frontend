@@ -1,6 +1,12 @@
 import React from "react";
 import styles from "./MemberList.module.scss";
 
+/**
+ *
+ * @param {*} param0
+ * @returns
+ * @styles imgBlur - 일반회원이면 이미지 블러 스타일 적용
+ */
 const MemberList = ({
   imgUrl,
   nickname,
@@ -25,8 +31,9 @@ const MemberList = ({
       ) : (
         <p className={styles.user}></p>
       )}
-      <p className={styles.img}>
-        <img src={profileImg} alt="유저프로필 이미지" />
+  
+      <p className={`${styles.img} ${styles.imgBlur}`}>
+        <img src={imgUrl} alt="유저프로필 이미지" />
       </p>
       <p className={styles.userName}>{nickname}</p>
       <p className={styles.userInfo}>

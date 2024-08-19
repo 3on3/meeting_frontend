@@ -92,8 +92,8 @@ export const router = createBrowserRouter([
         path: "login/first-login",
         element: <FirstLoginPage />,
       },
-       // 비밀번호 재설정 라우터
-       {
+      // 비밀번호 재설정 라우터
+      {
         path: "password-reset",
         element: <PasswordResetPage />,
       },
@@ -103,7 +103,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "alarm",
-        element: <AlarmPage />
+        element: <AlarmPage />,
       },
       // 채팅 라우터
       {

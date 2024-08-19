@@ -19,7 +19,7 @@ const Withdraw = () => {
   const [isPasswordValid, setIsPasswordValid] = useState(false); 
   const [isSubmit, setIsSubmit] = useState([false, false]); 
   const [showVerification, setShowVerification] = useState(false); 
-  const navigate = useNavigate(); k
+  const navigate = useNavigate();
 
   // '확인' 버튼 클릭 시 호출되는 함수 (이메일이 유효한 경우 인증 화면 표시)
   const handleWithdrawClick = () => {

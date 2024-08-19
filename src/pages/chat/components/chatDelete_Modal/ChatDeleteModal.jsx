@@ -21,8 +21,10 @@ const ChatDeleteModal = ({roomId, navigate}) => {
 
     return (
         <div className={styles.deleteChatModal}>
-            <div className={styles.text}> 채팅을 삭제하면 매칭이 자동으로 취소되며,</div>
-            <div className={styles.text}> 이 채팅에 참여하고 있는 그룹은 삭제됩니다.</div>
+            <div className={styles.text}> 채팅을 삭제하면 매칭이 자동으로 취소되며, <br/>
+                현재 채팅에 참여하고 있는 두 그룹 모두 삭제됩니다.
+                <b>그래도 삭제하시겠습니까?</b>
+                </div>
             <div className={styles.deleteButton}>
                 <MtButtons buttonType={'apply'} buttonText={'삭제하기'} eventType={'click'} eventHandler={deleteChatHandler}></MtButtons>
                 <MtButtons buttonType={'cancel'} buttonText={'취소'} eventType={'click'} eventHandler={cancelDeleteChatHandler}></MtButtons>

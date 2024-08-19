@@ -17,14 +17,14 @@
       height: calc(100vw * (16 / 500));
       background-color: #e0e0e0;
       margin-right: calc(100vw * (10 / 500));
-      border-radius: 4px;
+      border-radius: calc(100vw * (4 / 500));
     }
 
     .skeletonButton {
       width: calc(100vw * (34 / 500));
       height: calc(100vw * (34 / 500));
       background-color: #e0e0e0;
-      border-radius: 8px;
+      border-radius: calc(100vw * (8 / 500));
     }
   }
 
@@ -38,7 +38,7 @@
       height: calc(100vw * (40 / 500));
       background-color: #e0e0e0;
       border-bottom: calc(100vw * (2 / 500)) solid #e0e0e0;
-      border-radius: 4px;
+      border-radius: calc(100vw * (4 / 500));
     }
   }
 
@@ -51,7 +51,7 @@
       width: calc(100vw * (460 / 500));
       height: calc(100vw * (60 / 500));
       background-color: #e0e0e0;
-      border-radius: 10px;
+      border-radius: calc(100vw * (10 / 500));
       margin-bottom: calc(100vw * (20 / 500));
     }
   }

@@ -30,7 +30,14 @@ const PasswordUpdateModal = ({ passwordInput, confirmPassword }) => {
   
       console.log('Response:', response); 
   
-      const responseData = await response.json();
+      let responseData;
+      const contentType = response.headers.get("content-type");
+      if (contentType && contentType.includes("application/json")) {
+        responseData = await response.json();
+      } else {
+        responseData = await response.text(); // JSON이 아닌 응답을 처리
+      }
+  
       console.log('Response data:', responseData); 
   
       if (response.ok) {

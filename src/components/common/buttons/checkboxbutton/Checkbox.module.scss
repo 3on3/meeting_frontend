@@ -6,10 +6,10 @@
 
 .checkboxInput + span {
   display: inline-block;
-  width: 20px;
-  height: 20px;
+  width: calc(100vw * (20 / 500));
+  height: calc(100vw * (20 / 500));
   background-color: #e0e0e0;
-  border-radius: 4px;
+  border-radius: calc(100vw * (4 / 500));
   position: relative;
   transition: background-color 0.3s, border-color 0.3s;
 }
@@ -17,12 +17,12 @@
 .checkboxInput + span::after {
   content: '';
   position: absolute;
-  left: 7px;
-  top: 3px;
-  width: 4px;
-  height: 8px;
+  left: calc(100vw * (7 / 500));
+  top: calc(100vw * (3 / 500));
+  width: calc(100vw * (4 / 500));
+  height: calc(100vw * (8 / 500));
   border: solid #a3a3a3; // 체크되지 않은 상태의 회색 V 표시
-  border-width: 0 2px 2px 0;
+  border-width: 0 calc(100vw * (2 / 500)) calc(100vw * (2 / 500)) 0;
   transform: rotate(45deg);
 }
 
@@ -50,5 +50,5 @@ label {
 }
 
 label span {
-  margin-right: 8px;
+  margin-right: calc(100vw * (8 / 500));
 }

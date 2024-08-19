@@ -2,15 +2,15 @@
   width: 100%;
   text-align: center;
   margin: 0 auto;
-  padding: 0 calc( 100vw* ( 20 /500)) calc( 100vw* ( 130 /500)) calc( 100vw* ( 20 /500));
+  padding:calc( 100vw* ( 80 /500)) calc( 100vw* ( 20 /500)) calc( 100vw* ( 130 /500));
 
   .profileContainer {
-    border-radius: 0 0 calc( 100vw* ( 20 /500)) calc( 100vw* ( 20 /500));
-    box-shadow: 0 0 calc( 100vw* ( 10 /500)) rgba($color:#000000, $alpha: 0.1);
+    border-radius: calc( 100vw* ( 20 /500));
+    // box-shadow: 0 0 calc( 100vw* ( 10 /500)) rgba($color:#000000, $alpha: 0.1);
     padding-bottom: calc( 100vw* ( 20 /500));
   }
   .contentsBox {
-    padding-top: calc( 100vw* ( 50 /500));
+    padding-top: calc( 100vw* ( 20 /500));
 
     .fileInput {
       display: none;
@@ -76,6 +76,7 @@
     display: flex;
     justify-content: center;
     padding-right: calc( 100vw* ( 20 /500));
+    padding-top: calc( 100vw* ( 10 /500));
 
   }
   .content1 {
@@ -107,7 +108,7 @@
     width: calc( 100vw* ( 30 /500));
     height: calc( 100vw* ( 26 /500));
     overflow: hidden;
-    border-radius: calc( 100vw* ( 10 /500));
+    border-radius: calc( 100vw* ( 4 /500));
     position: relative;
     left: calc( 100vw* ( 10 /500));
     box-shadow: 0 0 calc( 100vw* ( 10 /500)) rgba($color:#000000, $alpha: 0.1);
@@ -115,8 +116,7 @@
   .paymentBox img {
     width: calc( 100vw* ( 22 /500));
     height: calc( 100vw* ( 15 /500));
-    margin-right: calc( 100vw* ( 5 /500));
-    padding-bottom: calc( 100vw* ( 1 /500));
+   
 
   }
 }

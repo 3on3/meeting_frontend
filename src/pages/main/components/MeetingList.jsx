@@ -17,6 +17,7 @@ function MeetingList() {
   const gender = searchParams.get("gender");
   const region = searchParams.get("region");
   const personnel = searchParams.get("personnel");
+  const [isChanged, setIsChanged] = useState(false);
 
   // List 데이터
   const [listData, setListData] = useState([]);
@@ -94,7 +95,7 @@ function MeetingList() {
     setPageNo(1);
     setIsFinish(false);
     MainMeetingListFetch();
-  }, [gender, region, personnel]); // 빈 배열을 전달하여 컴포넌트가 처음 렌더링될 때 한 번만 실행되도록 설정
+  }, [gender, region, personnel, isChanged]); // 빈 배열을 전달하여 컴포넌트가 처음 렌더링될 때 한 번만 실행되도록 설정
 
   useEffect(() => {
     if (inView && !loading && !isFinish) {
@@ -102,12 +103,14 @@ function MeetingList() {
     }
   }, [inView, loading, isFinish]);
 
+  // console.log(listData);
+  
   return (
     <>
       <ul className={styles.meetingList}>
         {loading || (listData.length === 0 && <EmptyGroups />)}
         {listData.map((group) => (
-          <GroupBox key={group.id} group={group} />
+          <GroupBox key={group.id} group={group} setIsChanged={setIsChanged} matchingStatus={group.matchingStatus} />
         ))}
         <div ref={scrollRef} style={{ height: "100px" }}></div>
       </ul>

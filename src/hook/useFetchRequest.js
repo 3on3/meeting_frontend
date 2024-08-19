@@ -1,22 +1,26 @@
 import { useState } from "react";
-import { CHATROOM_URL, MYPAGE_URL, MYPAGEMATCHING_URL } from "../config/host-config";
+import {
+  CHATROOM_URL,
+  MYPAGE_URL,
+  MYPAGEMATCHING_URL,
+} from "../config/host-config";
 import { useNavigate } from "react-router-dom";
-import { getUserToken } from "../config/auth";
+import {getUserToken, userDataLoader} from "../config/auth";
 
 export const useFetchRequest = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-
   // 매칭 요청 페치
-  const requestFetch = async (payload , setIsChanged) => {
+  const requestFetch = async (payload, setIsChanged) => {
     setIsLoading(true);
     setError(null);
     try {
       const response = await fetch(`${MYPAGEMATCHING_URL}/createRequest`, {
         method: "POST",
         headers: {
+          Authorization: "Bearer " + getUserToken(),
           "Content-Type": "application/json",
         },
         body: JSON.stringify(payload),
@@ -24,11 +28,9 @@ export const useFetchRequest = () => {
       console.log(payload);
       if (response.ok) {
         setIsChanged(true);
-
       } else {
         const errorText = await response.text();
         setError(errorText);
-
       }
     } catch (err) {
       console.error("Error:", err);
@@ -36,21 +38,24 @@ export const useFetchRequest = () => {
     } finally {
       setIsLoading(false);
     }
-  }
-
-
+  };
 
   const alarmFetch = async (responseGroupId) => {
     console.log(responseGroupId);
 
+    const loginUser = userDataLoader();
+
     const payload = {
       responseGroupId: responseGroupId,
-    }
+    };
 
     const response = await fetch(`${MYPAGEMATCHING_URL}/alarm`, {
-      method:'POST',
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization:
+            "Bearer " +
+            loginUser.token
       },
       body: JSON.stringify(payload),
     });
@@ -60,9 +65,7 @@ export const useFetchRequest = () => {
     const data = await response.json();
 
     return data;
-
-
-  }
+  };
   // 매칭 프로세스 페치 - 수락(requsetUrl = "response-accept")/거절(requsetUrl = "response-deny")
   const processFetch = async (requestUrl, payload, setIsChanged) => {
     setIsLoading(true);
@@ -72,6 +75,7 @@ export const useFetchRequest = () => {
       const response = await fetch(`${MYPAGEMATCHING_URL}/${requestUrl}`, {
         method: "POST",
         headers: {
+          Authorization: "Bearer " + getUserToken(),
           "Content-Type": "application/json",
         },
         body: JSON.stringify(payload),
@@ -102,6 +106,7 @@ export const useFetchRequest = () => {
       const response = await fetch(`${CHATROOM_URL}/create`, {
         method: "POST",
         headers: {
+          Authorization: "Bearer " + getUserToken(),
           "Content-Type": "application/json",
         },
         body: JSON.stringify(payload),
@@ -125,7 +130,6 @@ export const useFetchRequest = () => {
     }
   };
 
-
   // 마이 그룹 리스트 페치
   // const MyGroupsListFetch = async () => {
   //   try {
@@ -142,8 +146,6 @@ export const useFetchRequest = () => {
   //     setIsLoading(false);
   //   }
   // };
-  
-  
 
   return {
     alarmFetch,

@@ -26,8 +26,10 @@ const GroupViewBody = ({
           const response = await fetch(
             `http://localhost:8253/group/invite/${groupId}`,
             {
+              method: "GET",
               headers: {
                 Authorization: `Bearer ${getUserToken()}`,
+                "Content-Type": "application/json",
               },
             }
           );

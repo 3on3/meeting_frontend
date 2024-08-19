@@ -40,7 +40,7 @@ const ChatMembersModal = ({ styles, memberList }) => {
                   <ChatMemberList
                       key={member.userId}
                       imgUrl={member.imgUrl}
-                      userName={member.userNickname}
+                      nickname={member.userNickname}
                       univ={member.univ}
                       major={member.major}
                       id={member.userId}
@@ -51,7 +51,7 @@ const ChatMembersModal = ({ styles, memberList }) => {
                   <ChatMemberList
                       key={member.userId}
                       imgUrl={member.imgUrl}
-                      userName={member.userNickname}
+                      nickname={member.userNickname}
                       univ={member.univ}
                       major={member.major}
                       id={member.userId}

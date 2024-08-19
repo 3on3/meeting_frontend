@@ -39,7 +39,7 @@
   padding: calc(100vw * (5 / 500));
 
   button {
-    margin-right: 10px;
+    margin-right: calc(100vw * (10 / 500));
     &:last-child {
       margin-right: 0;
     }

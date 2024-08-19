@@ -8,7 +8,7 @@ const Header = () => {
   const location = useLocation();
   const [floatingNaviActive, setFloatingNaviActive] = useState(false);
 
-  const showMainNavigation = (location.pathname === "/login" || location.pathname === "/sign-up" || location.pathname === "/password-reset");
+  const showMainNavigation = (location.pathname === "/login" || location.pathname === "/sign-up" || location.pathname === "/password-reset" || location.pathname === "/login/first-login");
 
   return (
     <>

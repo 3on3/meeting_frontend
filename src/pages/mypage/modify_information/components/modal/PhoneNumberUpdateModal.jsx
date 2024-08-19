@@ -21,9 +21,17 @@ const PhoneNumberUpdateModal = ({ phoneNumber }) => {
           }),
         }
       );
+  
+      let responseData;
+      const contentType = response.headers.get("content-type");
+      if (contentType && contentType.includes("application/json")) {
+        responseData = await response.json();
+      } else {
+        responseData = await response.text(); // JSON이 아닌 응답 처리
+      }
 
-      const responseData = await response.json();
-
+      console.log('response: ', response);
+      
       if (response.ok) {
         // 전화번호 변경시 userData 에서도 변경
         const userData = JSON.parse(localStorage.getItem("userData"));

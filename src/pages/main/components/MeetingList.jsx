@@ -43,6 +43,7 @@ function MeetingList() {
     try {
       // 동적 url 만들기
       let url = `http://localhost:8253/main?pageNo=${pageNo}`;
+
       if (gender) {
         url += `&gender=${gender}`;
       }
@@ -91,12 +92,17 @@ function MeetingList() {
   const throttledFetch = throttle(MainMeetingListFetch, 1000);
 
   // 컴포넌트가 마운트될 때 데이터 페칭
+  // 빈 배열을 전달하여 컴포넌트가 처음 렌더링될 때 한 번만 실행되도록 설정
   useEffect(() => {
     setListData([]);
     setPageNo(1);
+    setLoading(false);
     setIsFinish(false);
+  }, [gender, region, personnel, isChanged]);
+
+  useEffect(() => {
     MainMeetingListFetch();
-  }, [gender, region, personnel, isChanged]); // 빈 배열을 전달하여 컴포넌트가 처음 렌더링될 때 한 번만 실행되도록 설정
+  }, [isFinish]);
 
   useEffect(() => {
     if (inView && !loading && !isFinish) {

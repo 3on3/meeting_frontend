@@ -14,21 +14,11 @@ function MainFilter({}) {
   // 필터 인원수
   const paramsPersonnel = searchParams.get("personnel");
 
-  // 필터 매칭 된 사람
-  // const [CheckIsMatched, setIsMatched] = useState(false);
-
   // =====이벤트 함수=====
-
   // 필터 더보기 클릭 시 이벤트
   const moreClickHandler = (e) => {
     setIsMoreActive(!isMoreActive);
   };
-
-  // 필터 매칭 된 사람
-  // const filterPossibleHandler = () => {
-  //   const newIsMatched = !CheckIsMatched;
-  //   setIsMatched(newIsMatched);
-  // };
 
   // 성별 클릭 이벤트 & params에 보내기
   const filterGenderHandler = (Gender) => {
@@ -64,15 +54,6 @@ function MainFilter({}) {
       {/* 필터 */}
       <div className={styles.filterHeder}>
         <p className={styles.filterTitle}>필터</p>
-        {/* styles.check : 활성화되는 class */}
-        {/* <p
-          className={`${styles.filterPossible} ${
-            CheckIsMatched ? styles.check : ""
-          }`}
-          onClick={filterPossibleHandler}
-        >
-          참여가능한 것만 보기
-        </p> */}
       </div>
       <div
         className={`${styles.filterDetail} ${

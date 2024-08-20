@@ -144,3 +144,14 @@
     }
   }
 }
+.inputBox {
+  position: fixed;
+  bottom: calc(100vw * (130 / 500));
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  padding: 0 calc(100vw * (20 / 500));
+  input {
+    border: solid 1px var(--color-wh);
+  }
+}

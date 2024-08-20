@@ -16,6 +16,7 @@ import GroupDeleteModal from "./components/modal/GroupDeleteModal";
 import { useModal } from "../../context/ModalContext";
 import GroupLeaveModal from "./components/modal/GroupLeaveModal";
 import InviteModal from "../../components/common/modal/InviteModal";
+import Loading from "../../components/common/loading/Loading";
 
 const Group = () => {
   const { id } = useParams();
@@ -79,16 +80,14 @@ const Group = () => {
     console.log(groupData);
   }, [id, isChanged]);
 
-  if (loading) {
-    return <div></div>;
-  }
+ 
 
   if (loading) {
     return (
-      <>
-        <GroupViewHeadSkeleton />
-        <GroupViewBodySkeleton />
-      </>
+      <div className={styles.groupContainer}>
+      <Loading/>
+
+      </div>
     );
   }
 

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { BOARD_URL } from "../../../config/host-config";
 import { getUserToken } from "../../../config/auth";
 import BoardBox from "./BoardBox";
+import Loading from "../../../components/common/loading/Loading";
+import EmptyGroups from '../../main/EmptyGroups';
 
 const BoardList = ({ className, styles, activeTab }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -47,8 +49,10 @@ const BoardList = ({ className, styles, activeTab }) => {
   }, [activeTab]);
   console.log("boardList: ", boardList);
 
+  if(isLoading) return <Loading/>
   return (
     <ul className={className}>
+      {/* {boardList.length === 0 && <EmptyGroups/>} */}
       {boardList.map((board) => {
         return <BoardBox key={board.id} board={board} styles={styles} />;
       })}

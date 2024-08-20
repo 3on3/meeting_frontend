@@ -28,6 +28,7 @@ import PaymentApproval from "../pages/payment/PaymentApproval";
 import AlarmPage from "../pages/alarm/AlarmPage";
 import Board from "../pages/board/Board";
 import BoardWrite from "../pages/board/boardWrite/BoardWrite";
+import BoardDetail from "../pages/board/board_detail/BoardDetail";
 
 // 마이페이지 라우터
 const mypageRouter = [
@@ -67,15 +68,17 @@ const chatRouter = [
   },
 ];
 
-
 // 익명게시판 라우터
 const boardRouter = [
   {
     path: "write",
     element: <BoardWrite />,
   },
+  {
+    path: "detail",
+    element: <BoardDetail />,
+  },
 ];
-
 
 export const router = createBrowserRouter([
   {
@@ -149,7 +152,7 @@ export const router = createBrowserRouter([
       // -----------------------
       {
         path: "board",
-        element:  <Board />,
+        element: <Board />,
         children: boardRouter,
       },
 

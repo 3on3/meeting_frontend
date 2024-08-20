@@ -8,4 +8,9 @@
   font-weight: 500;
   padding: calc(100vw * (20 / 500));
   border: none;
+  font-family: "Pretendard", sans-serif;
+  line-height: 140%;
+  .textarea::placeholder {
+    font-weight: 500;
+  }
 }

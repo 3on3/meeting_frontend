@@ -37,6 +37,7 @@ const ChatBody = ({ styles, messageList, myMessage }) => {
                                     message.userEmail !== loginUser.email ? styles.otherUser : styles.user
                                 }
                                 content={message.messageContent}
+                                imgUrl={message.profileImg}
                                 sameUser={true}
                             />
                         );
@@ -50,6 +51,7 @@ const ChatBody = ({ styles, messageList, myMessage }) => {
                                 message.userEmail !== loginUser.email ? styles.otherUser : styles.user
                             }
                             content={message.messageContent}
+                            imgUrl={message.profileImg}
                             sameUser={false}
                         />
                     );

@@ -25,13 +25,16 @@ const ModalLayout = ({ children, className, modalContent, boxType }) => {
       // 비활성화 버튼
       type = styles.original;
       break;
+    case "imgMode":
+      type = styles.imgModal;
+      break;
   }
 
   return (
     <div className={`${styles.backDropLayer} ${styles.isActive}`}>
       <div className={type}>
-        <button className={styles.modalClose} onClick={closeModal}></button>
-        <h2 className={styles.modalTit}>{modalContent}</h2>
+        <button className={boxType !== "imgMode"  ? styles.modalClose : styles.imgModalClose} onClick={closeModal}></button>
+        {boxType !== "imgMode"  && <h2 className={styles.modalTit}>{modalContent}</h2>}
         {children}
       </div>
     </div>

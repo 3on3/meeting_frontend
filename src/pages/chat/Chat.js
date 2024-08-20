@@ -31,6 +31,9 @@ const Chat = () => {
   // 모달 활성화 여부
   const [openModal, setOpenModal] = useState(false);
 
+  // 메시지 보냈는지 여부
+  const [sendMyMessage, setSendMyMessage] = useState(false);
+
   console.log('id:',id);
   
   useEffect(()=>{
@@ -109,6 +112,8 @@ const Chat = () => {
 
       console.log(JSON.stringify(data));
       // setMessageList(prevState => [...prevState, data]);
+
+      setSendMyMessage(prevState => !prevState);
     }
 
     setValue("");
@@ -117,7 +122,7 @@ const Chat = () => {
   return (
     <div className={styles.container}>
       <ChatHead styles={styles} chatRoomData={chatRoomData} setMember={setMemberList} setOpenModal={setOpenModal}/>
-      <ChatBody messageList={messageList} styles={styles} />
+      <ChatBody messageList={messageList} styles={styles} myMessage={sendMyMessage}/>
       <ChatInput
         onChangeInput={onChangeInput}
         onClickSendBtn={onClickSendBtn}

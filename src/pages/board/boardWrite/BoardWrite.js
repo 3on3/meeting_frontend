@@ -10,9 +10,9 @@ function BoardWrite() {
       <div className={styles.boardWriteTitle}>익명게시판</div>
       <DefaultInput />
       <div className={styles.textareaMargin}>
-        <Textarea />
+        <Textarea placeholder={"내용을 작성하세요"} />
       </div>
-      <MtButtons />
+      <MtButtons buttonType={"apply"} buttonText={"등록하기"} />
     </div>
   );
 }

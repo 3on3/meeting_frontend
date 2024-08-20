@@ -6,7 +6,8 @@ import DetailBottom from "../components/DetailBottom";
 import { useParams, useSearchParams } from "react-router-dom";
 import { BOARD_URL } from "../../../config/host-config";
 import { getUserToken } from "../../../config/auth";
-
+import ChatInput from "../../chat/components/ChatInput";
+import inputStyles from "../../chat/Chat.module.scss";
 
 const BoardDetail = () => {
   const {id} = useParams();
@@ -54,6 +55,9 @@ const BoardDetail = () => {
         <DetailHead className={styles.MainText} styles={styles} boardData={boardData}/>
         <DetailBody className={styles.TextWrite} styles={styles}  content={boardData.content}/>
         <DetailBottom className={styles.ReplyList} styles={styles} viewCount={boardData.viewCount}/>
+        <div className={styles.inputBox}>
+        <ChatInput styles={inputStyles} />
+        </div>
       </div>
       )
     </>

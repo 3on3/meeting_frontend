@@ -77,7 +77,7 @@ const Chat = () => {
 
   useEffect(() => {
     // 웹소켓 설정
-    const cleanUp = chatWebSocket(setSocket, setMessageList);
+    const cleanUp = chatWebSocket(setSocket, setMessageList, id);
 
     // 채팅방을 열면 이 채팅방의 메시지 받아오기
     fetchMessage(setMessageList, id);
@@ -101,7 +101,8 @@ const Chat = () => {
 
       const data = {
         type: 'message',
-        message: await saveMessage(payload)
+        message: await saveMessage(payload),
+        chatroomId: id
       }
 
       console.log(data);

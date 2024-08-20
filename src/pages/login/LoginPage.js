@@ -10,6 +10,17 @@ import { useDispatch } from "react-redux";
 import { loginActions } from "../../store/Login-slice";
 import Checkbox from "../../components/common/buttons/checkboxbutton/Checkbox";
 
+// URL에서 경로를 추출하는 함수
+const extractPathFromUrl = (url) => {
+  try {
+    const urlObj = new URL(url);
+    return urlObj.pathname; // 경로만 추출
+  } catch (e) {
+    console.error('Invalid URL:', e);
+    return null;
+  }
+};
+
 const LoginPage = () => {
   const navigate = useNavigate();
   const loginDispatch = useDispatch();
@@ -77,7 +88,8 @@ const LoginPage = () => {
 
         if (response.ok) {
           const data = await response.json();
-
+          console.log('data: ', data);
+          
           // 탈퇴여부가 true이면 error 알려주고 return
           if (data.isWithdrawn) {
             setLoginError("이 계정은 탈퇴된 회원입니다.");
@@ -100,30 +112,31 @@ const LoginPage = () => {
             membershipAuth: data.membershipAuth,
             profileImg: data.profileImg
           };
-
           localStorage.setItem("userData", JSON.stringify(userData));
 
-          const redirectPath = localStorage.getItem("redirectPath") || "/";
-          localStorage.removeItem("redirectPath");
-          navigate(redirectPath);
-
+          // 프로필 이미지를 확인하는 API 호출
           const profileResponse = await fetch(
             "http://localhost:8253/user/profile",
             {
               method: "GET",
               headers: {
-                Authorization: `Bearer ${getUserToken()}`,
+                Authorization: `Bearer ${data.token}`, // 로그인 시 받은 token 사용
                 'Content-Type': 'application/json'
               },
             }
           );
 
-          if (!profileResponse.ok) {
-            firstLoginNavigate();
-            return;
+          if (profileResponse.ok) {
+            const profileData = await profileResponse.json();
+            if (profileData.profileImg === "https://spring-file-bucket-yocong.s3.ap-northeast-2.amazonaws.com/2024/default_profile.png") {
+              // 프로필 이미지가 기본 이미지인 경우
+              firstLoginNavigate();
+            } else {
+              loginDispatch(loginActions.loginAction());
+              loginNavigate();
+            }
           } else {
-            loginDispatch(loginActions.loginAction());
-            loginNavigate();
+            firstLoginNavigate();
           }
         } else {
           const errorText = await response.text();

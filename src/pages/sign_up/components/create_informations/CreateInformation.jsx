@@ -201,14 +201,10 @@ const CreateInformations = ({
 
       const response = await fetch(`http://localhost:8253/signup/check-phone-number?phoneNumber=${encodedPhoneNumber}`, {
         method: 'GET',
-        headers: {
-          Authorization: `Bearer ${getUserToken()}`,
-          'Content-Type': 'application/json',
-        },
       });
       console.log('response: ', response);
 
-      const data = await response.json();
+      const data = await response.json(); 
       console.log('Server response data:', data);
 
       if (data === true) {

@@ -26,6 +26,7 @@ import PasswordResetPage from "../pages/login/components/PasswordResetPage";
 import Payment from "../pages/payment/Payment";
 import PaymentApproval from "../pages/payment/PaymentApproval";
 import AlarmPage from "../pages/alarm/AlarmPage";
+import Board from "../pages/board/Board";
 
 // 마이페이지 라우터
 const mypageRouter = [
@@ -145,6 +146,11 @@ export const router = createBrowserRouter([
       {
         path: "inviteresult",
         element: <JoinEndPage />,
+      },
+      // 익게 - 수정
+      {
+        path: "board",
+        element: <Board />,
       },
     ],
   },

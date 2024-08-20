@@ -26,6 +26,7 @@ import PasswordResetPage from "../pages/login/components/PasswordResetPage";
 import Payment from "../pages/payment/Payment";
 import PaymentApproval from "../pages/payment/PaymentApproval";
 import AlarmPage from "../pages/alarm/AlarmPage";
+import BoardWrite from "../pages/board/boardWrite/BoardWrite";
 
 // 마이페이지 라우터
 const mypageRouter = [
@@ -64,6 +65,19 @@ const chatRouter = [
     loader: authCheckLoader,
   },
 ];
+
+// -----------------------
+// 익명게시판 children
+
+// const boardRouter = [
+//   {
+//     path: "write",
+//     element: <BoardWrite />,
+//   },
+// ];
+
+// 익명게시판 children 끝
+// -----------------------
 
 export const router = createBrowserRouter([
   {
@@ -133,6 +147,17 @@ export const router = createBrowserRouter([
         path: "payment/approval",
         element: <PaymentApproval />,
       },
+
+      // -----------------------
+      // 익명게시판 예진(정리해 알아서)
+      {
+        path: "board",
+        element: <BoardWrite />,
+        // children: boardRouter,
+      },
+      // 익명게시판 끝
+      // -----------------------
+
       // 이하로는 임시페이지임
       {
         path: "error",

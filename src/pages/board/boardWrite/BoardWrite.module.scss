@@ -12,7 +12,8 @@
   }
 
   .textareaMargin {
-    margin-top: calc(100vw * (25 / 500));
+    margin: calc(100vw * (25 / 500)) 0 calc(100vw * (50 / 500)) 0;
+
     height: calc(100vw * (250 / 500));
   }
 }

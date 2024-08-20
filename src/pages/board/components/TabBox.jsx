@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 
-const TabBox = ({styles,className, activeTab, setActiveTab}) => {
+const TabBox = ({styles,className, activeTab, setActiveTab,isLoading}) => {
 
     const onClickActive = (tab) => {
-      setActiveTab(tab); // 클릭된 탭의 상태를 설정
+      if(!isLoading) setActiveTab(tab);
+       // 클릭된 탭의 상태를 설정
     };
   return (
     <div className={className}>

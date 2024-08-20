@@ -5,8 +5,7 @@ import BoardBox from "./BoardBox";
 import Loading from "../../../components/common/loading/Loading";
 import EmptyGroups from '../../main/EmptyGroups';
 
-const BoardList = ({ className, styles, activeTab }) => {
-  const [isLoading, setIsLoading] = useState(false);
+const BoardList = ({ className, styles, activeTab,isLoading ,setIsLoading }) => {
   const [error, setError] = useState(false);
   const [boardList, setBoardList] = useState([]);
  // activeTab에 따른 URL 결정
@@ -40,19 +39,25 @@ const BoardList = ({ className, styles, activeTab }) => {
       console.error("Error:", err);
       setError(err.message);
     } finally {
-      setIsLoading(false);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 500)
+      
     }
   };
 
   useEffect(() => {
-    getListFetch();
+    if(!isLoading){
+      getListFetch();
+
+    }
   }, [activeTab]);
-  console.log("boardList: ", boardList);
+  // console.log("boardList: ", boardList);
 
   if(isLoading) return <Loading/>
   return (
     <ul className={className}>
-      {/* {boardList.length === 0 && <EmptyGroups/>} */}
+      {boardList.length === 0 && <div className={styles.empty}>게시글이 없습니다</div>}
       {boardList.map((board) => {
         return <BoardBox key={board.id} board={board} styles={styles} />;
       })}

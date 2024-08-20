@@ -9,6 +9,7 @@ const Board = () => {
   const isRootPath = location.pathname === "/board";
 
   const [activeTab, setActiveTab] = useState('all'); // 기본값은 '전체 글' 탭
+  const [isLoading, setIsLoading] = useState(false);
 
   
   return (
@@ -16,8 +17,8 @@ const Board = () => {
       {isRootPath && (
         <div className={styles.boardContainer}>
           <h1 className="title">익명 게시판</h1>
-          <TabBox className={styles.tabBtns} styles={styles} activeTab={activeTab} setActiveTab={setActiveTab}/>
-          <BoardList className={styles.boardList} styles={styles} activeTab={activeTab}/>
+          <TabBox className={styles.tabBtns} styles={styles} activeTab={activeTab} setActiveTab={setActiveTab} isLoading={isLoading}/>
+          <BoardList className={styles.boardList} styles={styles} activeTab={activeTab} isLoading={isLoading} setIsLoading={setIsLoading}/>
           <button className={styles.newBoardBtn}>새 게시글 +</button>
         </div>
       )}

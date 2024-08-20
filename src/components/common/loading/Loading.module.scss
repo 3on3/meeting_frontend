@@ -11,13 +11,13 @@
     height: 50px;
     background: url(../../../assets/images/icons/c-logo.svg) no-repeat;
     background-size: cover;
-    animation: floating 2s ease-in-out infinite;
+    animation: floating .6s ease-in-out infinite;
     @keyframes floating {
       0%{
         transform: 0;
       }
       50%{
-        transform: translateY(-6px);
+        transform: translateY(-5px);
       }
       100%{
         transform: 0;

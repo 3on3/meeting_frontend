@@ -1,12 +1,25 @@
+import {userDataLoader} from "../../../config/auth";
+import {saveMessage} from "./ChatFetch";
 
-export const chatWebSocket = (setSocket, setMessageList) => {
+export const chatWebSocket = (setSocket, setMessageList, id) => {
+
+    const loginUser = userDataLoader();
     // WebSocket 설정
-    const newSocket = new WebSocket("ws://localhost:8253/Chat");
+    const newSocket = new WebSocket("ws://localhost:8253/socket/Chat");
 
     setSocket(newSocket);
 
-    newSocket.onopen = () => {
-        console.log("WebSocket connected");
+    newSocket.onopen = async () => {
+
+        const data = {
+            type: 'enter',
+            chatroomId: id,
+        }
+
+        newSocket.send(JSON.stringify(data));
+
+        console.log("webSocket connected")
+
     };
 
     newSocket.onmessage = (event) => {

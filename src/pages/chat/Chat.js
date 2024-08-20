@@ -9,6 +9,7 @@ import { CHATROOM_URL } from '../../config/host-config';
 import {chatWebSocket} from "./js/ChatWebSocket";
 import {fetchMessage, saveMessage} from "./js/ChatFetch"
 import {useModal} from "../../context/ModalContext";
+import {userDataLoader} from "../../config/auth";
 
 
 const Chat = () => {
@@ -30,16 +31,31 @@ const Chat = () => {
   // 모달 활성화 여부
   const [openModal, setOpenModal] = useState(false);
 
+  // 메시지 보냈는지 여부
+  const [sendMyMessage, setSendMyMessage] = useState(false);
+
   console.log('id:',id);
   
   useEffect(()=>{
+
+    const loginUser = userDataLoader();
+
     const fetchData = async () => {
       try {
         console.log("트라이에서 id", id);
         
         const response = await fetch(
           `${CHATROOM_URL}/${id}`
-        );
+        , {
+              method: 'GET',
+              headers:  {
+                "Content-Type": "application/json",
+                Authorization:
+                    "Bearer " +
+                    loginUser.token
+
+              },
+            });
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -61,7 +77,7 @@ const Chat = () => {
 
   useEffect(() => {
     // 웹소켓 설정
-    const cleanUp = chatWebSocket(setSocket, setMessageList);
+    const cleanUp = chatWebSocket(setSocket, setMessageList, id);
 
     // 채팅방을 열면 이 채팅방의 메시지 받아오기
     fetchMessage(setMessageList, id);
@@ -85,7 +101,8 @@ const Chat = () => {
 
       const data = {
         type: 'message',
-        message: await saveMessage(payload)
+        message: await saveMessage(payload),
+        roomId: id
       }
 
       console.log(data);
@@ -96,6 +113,8 @@ const Chat = () => {
 
       console.log(JSON.stringify(data));
       // setMessageList(prevState => [...prevState, data]);
+
+      setSendMyMessage(prevState => !prevState);
     }
 
     setValue("");
@@ -104,7 +123,7 @@ const Chat = () => {
   return (
     <div className={styles.container}>
       <ChatHead styles={styles} chatRoomData={chatRoomData} setMember={setMemberList} setOpenModal={setOpenModal}/>
-      <ChatBody messageList={messageList} styles={styles} />
+      <ChatBody messageList={messageList} styles={styles} myMessage={sendMyMessage}/>
       <ChatInput
         onChangeInput={onChangeInput}
         onClickSendBtn={onClickSendBtn}

@@ -67,18 +67,15 @@ const chatRouter = [
   },
 ];
 
-// -----------------------
-// 익명게시판 children
 
-// const boardRouter = [
-//   {
-//     path: "write",
-//     element: <BoardWrite />,
-//   },
-// ];
+// 익명게시판 라우터
+const boardRouter = [
+  {
+    path: "write",
+    element: <BoardWrite />,
+  },
+];
 
-// 익명게시판 children 끝
-// -----------------------
 
 export const router = createBrowserRouter([
   {
@@ -150,14 +147,11 @@ export const router = createBrowserRouter([
       },
 
       // -----------------------
-      // 익명게시판 예진(정리해 알아서)
       {
         path: "board",
-        element: <BoardWrite />,
-        // children: boardRouter,
+        element:  <Board />,
+        children: boardRouter,
       },
-      // 익명게시판 끝
-      // -----------------------
 
       // 이하로는 임시페이지임
       {
@@ -171,11 +165,6 @@ export const router = createBrowserRouter([
       {
         path: "inviteresult",
         element: <JoinEndPage />,
-      },
-      // 익게 - 수정
-      {
-        path: "board",
-        element: <Board />,
       },
     ],
   },

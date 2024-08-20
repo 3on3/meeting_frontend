@@ -1,12 +1,15 @@
 import React from "react";
 
-const DetailBottom = ({ className, styles }) => {
+const DetailBottom = ({ className, styles, viewCount }) => {
   return (
     <div className={className}>
-      <div className={styles.messageBox}>
-        <div className={styles.imageB}></div>
-        <div className={styles.count}>3</div>
+      <div className={styles.info}>
+        <p className={`${styles.messageBox} ${styles.viewCount}`}>
+          {viewCount}
+        </p>
+        <p className={`${styles.messageBox} ${styles.count}`}>3</p>
       </div>
+
       <ul>
         <li>
           <div className={styles.headWrap}>

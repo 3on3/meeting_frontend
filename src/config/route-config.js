@@ -75,7 +75,7 @@ const boardRouter = [
     element: <BoardWrite />,
   },
   {
-    path: "detail",
+    path: "detail/:id",
     element: <BoardDetail />,
   },
 ];

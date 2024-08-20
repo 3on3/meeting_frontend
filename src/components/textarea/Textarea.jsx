@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import styles from "./Textarea.module.scss";
 
 /**
@@ -8,16 +8,17 @@ import styles from "./Textarea.module.scss";
  * @param maxLength :글자수 제한
  *
  */
-function Textarea({ placeholder, text, maxLength }) {
+const Textarea = forwardRef(({ placeholder, text, maxLength },ref) =>{
   return (
     <textarea
       className={styles.textarea}
       placeholder={placeholder}
       maxLength={maxLength}
+      ref={ref}
     >
       {text}
     </textarea>
   );
-}
+})
 
 export default Textarea;

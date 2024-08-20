@@ -1,7 +1,10 @@
+import {userDataLoader} from "../../../config/auth";
 
 export const chatWebSocket = (setSocket, setMessageList) => {
+
+    const loginUser = userDataLoader();
     // WebSocket 설정
-    const newSocket = new WebSocket("ws://localhost:8253/Chat");
+    const newSocket = new WebSocket("ws://localhost:8253/socket/Chat");
 
     setSocket(newSocket);
 

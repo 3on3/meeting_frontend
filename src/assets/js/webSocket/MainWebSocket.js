@@ -2,7 +2,7 @@ import {userDataLoader} from "../../../config/auth";
 
 export const MainWebSocket = (socketRef, setAlarmRoomId, setIsAlarm) => {
     // WebSocket 설정
-    const mainSocket = new WebSocket("ws://localhost:8253/");
+    const mainSocket = new WebSocket("ws://localhost:8253/socket");
 
     const loginUserInfo = userDataLoader();
 

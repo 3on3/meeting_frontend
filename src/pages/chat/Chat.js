@@ -9,6 +9,7 @@ import { CHATROOM_URL } from '../../config/host-config';
 import {chatWebSocket} from "./js/ChatWebSocket";
 import {fetchMessage, saveMessage} from "./js/ChatFetch"
 import {useModal} from "../../context/ModalContext";
+import {userDataLoader} from "../../config/auth";
 
 
 const Chat = () => {
@@ -33,13 +34,25 @@ const Chat = () => {
   console.log('id:',id);
   
   useEffect(()=>{
+
+    const loginUser = userDataLoader();
+
     const fetchData = async () => {
       try {
         console.log("트라이에서 id", id);
         
         const response = await fetch(
           `${CHATROOM_URL}/${id}`
-        );
+        , {
+              method: 'GET',
+              headers:  {
+                "Content-Type": "application/json",
+                Authorization:
+                    "Bearer " +
+                    loginUser.token
+
+              },
+            });
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }

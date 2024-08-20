@@ -14,8 +14,8 @@
     color: var(--color-light);
     font-weight: 500;
     &.isActive {
-      border-color: var(--color-dark);
-      color: var(--color-dark);
+      border-color: var(--color-bk);
+      color: var(--color-bk);
     }
   }
 }

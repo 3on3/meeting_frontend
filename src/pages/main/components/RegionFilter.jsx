@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "./RegionFilter.module.scss";
 import RegionFilterBox from "../../../components/common/regionFilterBoxs/RegionFilterBox";
-import { useDispatch } from "react-redux";
-import { filterAction } from "../../../store/Filter-slice";
+
 import { useSearchParams } from "react-router-dom";
 
 function RegionFilter({}) {

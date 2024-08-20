@@ -5,13 +5,14 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  padding: 0 calc(100vw * (20 / 500));
   .text {
-    margin: 0 auto 40px;
-    font-size: 32px;
-    margin-bottom: 80px;
+    margin: 0 auto calc(100vw * (40 / 500));
+    font-size: calc(100vw * (32 / 500));
+    margin-bottom: calc(100vw * (80 / 500));
   }
   .buttonBox {
     width: 100%;
-    margin-top: 40px;
+    margin-top: calc(100vw * (40 / 500));
   }
 }

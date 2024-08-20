@@ -1,35 +1,37 @@
 .content {
   width: 100%;
-  padding-bottom: 150px;
-  margin-top: 100px;
+  padding-bottom: calc(100vw * (150 / 500));
+  margin-top: calc(100vw * (100 / 500));
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  padding-left: calc(100vw * (20 / 500));
+  padding-right: calc(100vw * (20 / 500));
   .text {
-    margin-bottom: 80px;
+    margin-bottom: calc(100vw * (80 / 500));
   }
   .margin20 {
-    margin-bottom: 20px;
+    margin-bottom: calc(100vw * (20 / 500));
     width: 100%;
   }
   .margin40 {
-    margin-bottom: 40px;
+    margin-bottom: calc(100vw * (40 / 500));
     width: 100%;
   }
   .margin35 {
-    margin-bottom: 35px;
+    margin-bottom: calc(100vw * (35 / 500));
     width: 100%;
   }
   .margin60 {
-    margin-bottom: 60px;
+    margin-bottom: calc(100vw * (60 / 500));
     width: 100%;
   }
   .lineText {
     text-align: left;
     width: fit-content;
-    padding-left: 9px;
+    padding-left: calc(100vw * (9 / 500));
     margin-right: auto;
-    font-size: 18px;
+    font-size: calc(100vw * (18 / 500));
   }
 }

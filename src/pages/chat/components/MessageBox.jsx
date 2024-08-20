@@ -1,22 +1,27 @@
-import React from 'react';
-import MessageContent from './MessageContent';
-import profileUrl from '../../../assets/images/profile.jpg';
+import React from "react";
+import MessageContent from "./MessageContent";
+import profileUrl from "../../../assets/images/profile.jpg";
 
-const MessageBox = ({styles,authClass}) => {
-  
-  const message = "하이루 방가방가~";
-
-
+// 메세지 유저 정보 + 말풍선 컴포넌트
+const MessageBox = ({ styles, authClass, userName, content, sameUser }) => {
   return (
     <div className={`${styles.message} ${authClass}`}>
-      <div className={styles.user}>
-        <p className={styles.img}><img src={profileUrl}/></p>
-        
-        <p>유저1</p>
-      </div>
-        <MessageContent styles={styles} message={message}/>
-        <MessageContent styles={styles} message={message}/>
+      {
+        // 직전의 메세지와 같은 유저일 때는 유저 프로필과 이름 영역은 생략
+        sameUser ? (
+          ""
+        ) : (
+          <div className={styles.user}>
+            <p className={styles.img}>
+              <img src={profileUrl} />
+            </p>
 
+            <p>{userName}</p>
+          </div>
+        )
+      }
+      {/* 말풍선 */}
+      <MessageContent styles={styles} content={content} />
     </div>
   );
 };

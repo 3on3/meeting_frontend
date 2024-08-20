@@ -1,0 +1,58 @@
+.skeletonBodyContent {
+  background: #f4f9ff;
+  width: 100%;
+  height: calc(100vh - (100vw * (200 / 500)));
+  padding-bottom: calc(100vw * (130 / 500));
+  padding-top: calc(100vw * (40 / 500));
+
+  .skeletonCopyWrap {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    padding: 0 calc(100vw * (20 / 500));
+    margin-bottom: calc(100vw * (20 / 500));
+
+    .skeletonText {
+      width: calc(100vw * (220 / 500));
+      height: calc(100vw * (16 / 500));
+      background-color: #e0e0e0;
+      margin-right: calc(100vw * (10 / 500));
+      border-radius: calc(100vw * (4 / 500));
+    }
+
+    .skeletonButton {
+      width: calc(100vw * (34 / 500));
+      height: calc(100vw * (34 / 500));
+      background-color: #e0e0e0;
+      border-radius: calc(100vw * (8 / 500));
+    }
+  }
+
+  .skeletonTabs {
+    display: flex;
+    justify-content: center;
+    margin: calc(100vw * (40 / 500)) calc(100vw * (20 / 500)) 0;
+
+    .skeletonTab {
+      width: calc(100vw * (250 / 500));
+      height: calc(100vw * (40 / 500));
+      background-color: #e0e0e0;
+      border-bottom: calc(100vw * (2 / 500)) solid #e0e0e0;
+      border-radius: calc(100vw * (4 / 500));
+    }
+  }
+
+  .skeletonList {
+    padding: calc(100vw * (30 / 500)) calc(100vw * (20 / 500));
+    height: calc(100% - (100vw * (110 / 500)));
+    overflow-y: scroll;
+
+    .skeletonCard {
+      width: calc(100vw * (460 / 500));
+      height: calc(100vw * (60 / 500));
+      background-color: #e0e0e0;
+      border-radius: calc(100vw * (10 / 500));
+      margin-bottom: calc(100vw * (20 / 500));
+    }
+  }
+}

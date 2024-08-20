@@ -1,21 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./Header.module.scss";
 import MainNavigation from "./components/MainNavigation";
 import FloatingNavigation from "./components/FloatingNavigation";
 import { useLocation } from "react-router-dom";
 
 const Header = () => {
-
   const location = useLocation();
+  const [floatingNaviActive, setFloatingNaviActive] = useState(false);
 
+  const showMainNavigation = (location.pathname === "/login" || location.pathname === "/sign-up" || location.pathname === "/password-reset" || location.pathname === "/login/first-login");
 
   return (
-    <header id={styles.header}>
-      <MainNavigation styles={styles}/>
-      <div className={styles.layer}></div>
-    {location.pathname !== '/chat' ? <FloatingNavigation styles={styles}/> : null}
-   
+    <>
+    {location.pathname !== "/intro" &&(
+      <header id={styles.header}>
+      {!showMainNavigation && <MainNavigation styles={styles} />}
+      <div
+        className={
+          floatingNaviActive
+            ? `${styles.layer} ${styles.active}`
+            : `${styles.layer}`
+        }
+      ></div>
+      {(location.pathname === "/" ||
+        location.pathname == "/mypage/mygroup" ||
+        location.pathname == "/mypage/myChat") && (
+        <FloatingNavigation
+          styles={styles}
+          active={floatingNaviActive}
+          setActive={setFloatingNaviActive}
+        />
+      )}
     </header>
+    )}
+    </>
+    
+    
   );
 };
 

@@ -1,54 +1,61 @@
 // body {
 //   background-color: var(--color-wh);
 // }
-// .container {
-//   height: 100vh;
-//   padding: 100px 0 120px;
-//   // background-color: var(--color-wh);
-// }
+.container {
+  height: 100vh;
+  padding: calc( 100vw * ( 80 / 500)) calc( 100vw * ( 20 / 500)) calc( 100vw * ( 130 / 500));
+
+  background-color: var(--color-wh);
+  position: relative;
+}
 
 // ChatHead.js
 .head {
-  width: 100%;
-  height: 50px;
+  width: calc(100% - (100vw * ( 40 / 500)));
+  height: calc( 100vw * ( 60 / 500));
   background-color: #fff;
-  border-radius: 12px;
+  border-radius: calc( 100vw * ( 18 / 500));
   display: flex;
-  box-shadow: 0 0 10px rgba($color: #000000, $alpha: 0.1);
-  position: relative;
+  box-shadow: 0 0 calc( 100vw * ( 10 / 500)) rgba($color: #000000, $alpha: 0.1);
+  position: absolute;
+  z-index: 1;
+  top: calc( 100vw * ( 80 / 500));
+  left: 50%;
+  transform: translateX(-50%);
   > h1 {
-    width: calc(100% - 50px);
+    width: calc(100% - calc( 100vw * ( 50 / 500)));
     text-align: center;
-    line-height: 50px;
-    font-size: 16px;
+    line-height: calc( 100vw * ( 60 / 500));
+    font-size: calc( 100vw * ( 24 / 500));
+    padding-left: calc( 100vw * ( 30 / 500));
     font-weight: 600;
   }
   .chatMenuBtn {
-    width: 50px;
-    height: 50px;
-    border-radius: 12px;
+    width: calc( 100vw * ( 60 / 500));
+    height: calc( 100vw * ( 60 / 500));
+    border-radius: calc( 100vw * ( 18 / 500));
     background-color: var(--color-dark);
     background-image: url(../../assets/images/icons/c-chat-hamburger.svg);
     background-position: center;
-    background-size: 20px;
+    background-size: calc( 100vw * ( 24 / 500));
     background-repeat: no-repeat;
   }
 }
 .chatMenu {
   position: absolute;
-  top: 56px;
+  top: calc( 100vw * ( 70 / 500));
   right: 0;
   button {
-    width: 90px;
-    height: 44px;
-    border-radius: 12px;
-    font-size: 16px;
-    font-weight: 600;
+    width: calc( 100vw * ( 110 / 500));
+    height: calc( 100vw * ( 56 / 500));
+    border-radius: calc( 100vw * ( 18 / 500));
+    font-size: calc( 100vw * ( 18 / 500));
+    font-weight: 700;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 4px;
-    transform: translateX(-10px);
+    margin-bottom: calc( 100vw * ( 6 / 500));
+    transform: translateY(calc( 100vw * ( -10 / 500)));
     opacity: 0;
     transition: 0.5s ease-out;
     pointer-events: none;
@@ -57,7 +64,6 @@
     }
     &.showMemberBtn {
       background-color: var(--color-dark);
-
       color: #fff;
       font-weight: 400;
     }
@@ -82,28 +88,48 @@
 // ChatBody.js
 .chatBody {
   width: 100%;
-  padding-top: 30px;
-  height: calc(100% - 100px);
-  overflow-y: scroll;
+  padding-top: calc( 100vw * ( 30 / 500));
+  padding-bottom: calc( 100vw * ( 20 / 500));
+  height: calc(100% - ( 100vw * ( 60 / 500)));
   display: flex;
-  flex-direction: column;
+  align-items: flex-end;
+  border-radius: calc( 100vw * ( 18 / 500));
+  overflow-y: auto;
+
+  .chatInner{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+  }
 }
 .message {
-  margin-bottom: 27px;
+  margin-bottom: calc( 100vw * ( 12 / 500));
   display: flex;
   flex-direction: column;
+  animation: chatAni .6s ease-out forwards;
+  @keyframes chatAni {
+    0%{
+      opacity: 0;
+      transform: translateY(calc( 100vw * ( 10 / 500)));
+    }
+    100%{
+      opacity: 1;
+      transform: 0;
+    }
+  }
   &.otherUser {
     align-items: flex-start;
     .content {
-      border-radius: 0 12px 12px 12px;
-      margin-left: 42px;
+      border-radius: 0 calc( 100vw * ( 12 / 500)) calc( 100vw * ( 12 / 500)) calc( 100vw * ( 12 / 500));
+      margin-left: calc( 100vw * ( 42 / 500));
     }
   }
   &.user {
     margin-left: auto;
     align-items: flex-end;
     .content {
-      border-radius: 12px 0 12px 12px;
+      border-radius: calc( 100vw * ( 12 / 500)) 0 calc( 100vw * ( 12 / 500)) calc( 100vw * ( 12 / 500));
       margin-right: 0;
       background-color: var(--color-point);
       color: #fff;
@@ -113,12 +139,14 @@
     }
   }
   .content {
-    font-size: 14px;
-    padding: 10px 14px;
+    font-size: calc( 100vw * ( 18 / 500));
+    padding: calc( 100vw * ( 14 / 500)) calc( 100vw * ( 20 / 500));
     background-color: #fff;
     width: fit-content;
     height: fit-content;
-    margin-bottom: 7px;
+    margin-bottom: calc( 100vw * ( 7 / 500));
+  box-shadow: 0 0 calc( 100vw * ( 10 / 500)) rgba($color: #000000, $alpha: 0.1);
+
     &:last-child {
       margin-bottom: 0;
     }
@@ -127,12 +155,15 @@
 .user {
   display: flex;
   align-items: center;
-  margin-bottom: 8px;
+  margin-bottom: calc( 100vw * ( 10 / 500));
+  font-size: calc( 100vw * ( 20 / 500));
+  font-weight: 500;
   .img {
-    width: 40px;
-    height: 40px;
-    border-radius: 8px;
-    margin-right: 10px;
+    width: calc( 100vw * ( 50 / 500));
+    height: calc( 100vw * ( 50 / 500));
+    border-radius: calc( 100vw * ( 8 / 500));
+    margin-right: calc( 100vw * ( 16 / 500));
+    overflow: hidden;
     img {
       width: 100%;
       height: 100%;
@@ -146,39 +177,37 @@
   display: flex;
   justify-content: space-between;
   .chatInput {
-    width: calc(100% - 60px);
-    height: 50px;
+    width: calc(100% - ( 100vw * ( 70 / 500)));
+    height: calc( 100vw * ( 60 / 500));
     input {
       background-color: #fff;
+    font-size: calc( 100vw * ( 18 / 500));
+
     }
   }
   .sendBtn {
-    width: 50px;
-    height: 50px;
+    width: calc( 100vw * ( 60 / 500));
+    height: calc( 100vw * ( 60 / 500));
     background-color: var(--color-point);
-    border-radius: 18px;
+    border-radius: calc( 100vw * ( 18 / 500));
     background-image: url(../../assets/images/icons/c-chat-send.svg);
     background-position: center;
-    background-size: 18px;
+    background-size: calc( 100vw * ( 22 / 500));
     background-repeat: no-repeat;
   }
 }
 
-.modalTit {
-  font-size: 20px;
-  font-weight: 600;
-  text-align: center;
-}
+
 .tabBox {
-  margin-top: 24px;
+  margin-top: calc( 100vw * ( 40 / 500));
 }
 .tabBtns {
   width: 100%;
   display: flex;
   button {
-    width: 500px;
-    padding-bottom: 14px;
-    font-size: 16px;
+    width: calc( 100vw * ( 500 / 500));
+    padding-bottom: calc( 100vw * ( 14 / 500));
+    font-size: calc( 100vw * ( 18 / 500));
     font-weight: 600;
     &.isActive {
       color: var(--color-point);
@@ -186,50 +215,47 @@
       font-weight: 700;
     }
     color: #9aa9ba;
-    border-bottom: solid 2px #9aa9ba;
+    border-bottom: solid calc( 100vw * ( 2 / 500)) #9aa9ba;
   }
 }
 .userListWrap {
-  margin-top: 20px;
-  > li {
-    background-color: var(--color-wh);
-    display: flex;
-    align-items: center;
-    padding: 9px 10px;
-    border-radius: 12px;
-    margin-bottom: 12px;
-    box-shadow: 0 0 10px rgba($color: #000000, $alpha: 0.1);
-    &:last-child {
-      margin-bottom: 0;
-    }
-    .img {
-      width: 40px;
-      height: 40px;
-      border-radius: 8px;
-      overflow: hidden;
-      margin-right: 12px;
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-    }
-    .userName {
-      font-size: 16px;
-      color: var(--color-dark);
-      margin-right: 8px;
-      font-weight: 500;
-    }
-    .userInfo {
-      font-size: 14px;
-      color: #786e85;
-      font-weight: 500;
+  margin-top: calc( 100vw * ( 20 / 500));
 
-      span {
-        margin-right: 6px;
-        &:last-child {
-          margin-right: 0;
-        }
+}
+
+.deleteChatModal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  // padding: calc(100vw * (15 / 500));
+
+  .text {
+    font-size: calc(100vw * (18 / 500));
+    font-weight: 500;
+    margin-top: calc(100vw * (40 / 500));
+    line-height: 1.5;
+  text-align: center;
+  b{
+    color: var(--color-point);
+    display: block;
+    padding-top: calc(100vw * (40 / 500));
+    font-weight: 600;
+  }
+  }
+
+  .deleteButton {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: calc(100vw * (40 / 500));
+
+    button {
+      // width: 40%;
+      margin-right: calc(100vw * (10 / 500));
+      margin-bottom: calc(100vw * (10 / 500));
+      &:last-child{
+        margin-right: 0;
       }
     }
   }

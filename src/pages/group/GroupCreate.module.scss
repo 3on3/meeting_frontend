@@ -1,0 +1,100 @@
+.container {
+  width: 100%;
+  padding: calc(100vw * (120 / 500)) 0 0;
+
+  .groupInput {
+    width: calc(100% - (100vw * (40 / 500)));
+    margin: 0 calc(100vw * (20 / 500));
+    margin-top: calc(100vw * (50 / 500));
+  }
+  .region {
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap; /* 줄 바꿈 없이 가로로 펼쳐짐 */
+    margin-top: calc(100vw * (20 / 500));
+    padding: 0 calc(100vw * (20 / 500));
+  }
+  .region li {
+    margin-right: calc(100vw * (5 / 500));
+    cursor: pointer;
+    padding: calc(100vw * (9 / 500)) calc(100vw * (10 / 500));
+    margin-right: calc(100vw * (6 / 500));
+    cursor: pointer;
+    font-size: calc(100vw * (16 / 500));
+    border-radius: calc(100vw * (500 / 500));
+    font-weight: 600;
+  }
+  .genContainer {
+    display: flex;
+    margin-left: calc(100vw * (20 / 500));
+    margin-top: calc(100vw * (40 / 500));
+    font-size: calc(100vw * (14 / 500));
+    justify-content: start;
+    align-items: center;
+
+    .gender {
+      font-weight: 700;
+    }
+    .gen {
+      margin-left: calc(100vw * (50 / 500));
+    }
+  }
+  .numberContainer {
+    display: flex;
+    padding: 0 calc(100vw * (30 / 500));
+    margin-top: calc(100vw * (60 / 500));
+    font-size: calc(100vw * (16 / 500));
+    margin-bottom: calc(100vw * (50 / 500));
+    justify-content: start;
+    align-items: center;
+
+    .numberOfParticipants {
+      font-weight: 600;
+    }
+    .number {
+      margin-left: calc(100vw * (24 / 500));
+      display: flex;
+      label {
+        margin-right: calc(100vw * (5 / 500));
+        width: fit-content;
+        &:last-child {
+          margin-right: calc(100vw * (10 / 500));
+        }
+      }
+    }
+  }
+  .btns {
+    display: flex;
+    margin-top: calc(100vw * (80 / 500));
+    padding: 0 calc(100vw * (20 / 500));
+    button {
+      margin-right: calc(100vw * (10 / 500));
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+  // .infoText {
+  //   font-size: calc(100vw * (16 / 500));
+  //   padding: calc(100vw * (24 / 500)) calc(100vw * (20 / 500)) calc(100vw * (16 / 500)) calc(100vw * (24 / 500));
+  //   border-radius: calc(100vw * (12 / 500));
+  //   background-color: var(--color-wh);
+  //   border: solid 1px var(--color-dark);
+  //   b {
+  //     display: flex;
+  //     align-items: center;
+  //     font-weight: 500;
+  //     color: var(--color-dark);
+  //     margin-bottom: calc(100vw * (8 / 500));
+  //     &::before {
+  //       content: "";
+  //       display: inline-block;
+  //       width: 2px;
+  //       height: 2px;
+  //       border-radius: 50%;
+  //       background-color: var(--color-point);
+  //       margin-right: calc(100vw * (10 / 500));
+  //     }
+  //   }
+  // }
+}

@@ -1,0 +1,67 @@
+.profileMenu {
+  position: absolute;
+  top: calc(100vw * (56 / 500));
+  right: 0;
+  z-index: 10;
+
+  button {
+    width: calc(100vw * (100 / 500));
+    height: calc(100vw * (44 / 500));
+    border-radius: calc(100vw * (12 / 500));
+    font-size: calc(100vw * (16 / 500));
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: calc(100vw * (4 / 500));
+    transform: translateX(calc(100vw * (10 / 500)));
+    opacity: 0;
+    transition: 0.5s ease-out;
+    pointer-events: none;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &.defaultImgBtn {
+      border: calc(100vw * (1 / 500)) solid #000;
+      background-color: #fff;
+      color: black;
+      font-weight: 600;
+      animation: chatAni 0.6s ease-out forwards;
+      @keyframes chatAni {
+        0% {
+          opacity: 0;
+          transform: translateY(calc(100vw * (10 / 500)));
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+    }
+
+    &.changeProfileBtn {
+      transition-delay: 0.1s;
+      background-color: var(--color-dark);
+      color: #fff;
+      animation: chatAni 0.6s ease-out forwards;
+      @keyframes chatAni {
+        0% {
+          opacity: 0;
+          transform: translateY(calc(100vw * (10 / 500)));
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  &.isActive {
+    button {
+      transform: translateX(0px);
+      opacity: 1;
+      pointer-events: all;
+    }
+  }
+}

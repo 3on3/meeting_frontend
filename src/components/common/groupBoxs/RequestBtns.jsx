@@ -4,15 +4,18 @@ import {useFetchRequest} from '../../../hook/useFetchRequest';
 
 const RequestBtns = ({ styles, request, setIsChanged }) => {
   const { id: responseGroupId } = useParams();
+  const { processFetch, createFetch } = useFetchRequest();
+
   const payload = {
     requestGroupId: request.id,
     responseGroupId,
   };
 
-  const { processFetch, createFetch } = useFetchRequest();
-
+  // 수락 버튼 활성화
   const onClickAccept = async () => {
+  // 매칭 수락 요청
   await processFetch("response-accept", payload, setIsChanged)
+  // 채팅방 생성 요청
     await createFetch(payload, setIsChanged);
   };
 

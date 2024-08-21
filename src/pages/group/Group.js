@@ -194,7 +194,6 @@ const Group = () => {
           buttonType={"disabled"}
           buttonText={"이미 매칭 신청 중인 그룹이예요."}
           className={`${styles.groupBtn} ${styles.disable}`}
-          // className={}
         />
       )}
       {status === "RESPONSE" && (
@@ -203,7 +202,6 @@ const Group = () => {
           buttonType={"disabled"}
           buttonText={"내 그룹에 매칭을 신청한 그룹이예요."}
           className={`${styles.groupBtn} ${styles.disable}`}
-          // className={}
         />
       )}
       {auth === "HOST" && (
@@ -212,7 +210,6 @@ const Group = () => {
       {/* 신청자 그룹 선택 ㅊ모달 */}
       {modalActive && (
         <MyGroupSelectModal
-          // MyGroupSelectModal={MyGroupSelectModal}
           setIsChanged={setIsChanged}
           responseGroupId={id}
           setModalActive={setModalActive}

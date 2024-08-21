@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./BoardDetail.module.scss";
 import DetailHead from "../components/DetailHead";
 import DetailBody from "../components/DetailBody";
@@ -10,13 +10,13 @@ import ChatInput from "../../chat/components/ChatInput";
 import inputStyles from "../../chat/Chat.module.scss";
 
 const BoardDetail = () => {
-  const {id} = useParams();
+  const { id } = useParams();
   // const id = searchParams.get('id');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
   const [boardData, setBoardData] = useState({});
 
-
+  // 게시판 불러오기
   const getBoardFetch = async () => {
     setIsLoading(true);
     setError(null);
@@ -47,19 +47,31 @@ const BoardDetail = () => {
     getBoardFetch();
   }, [id]);
   console.log("board: ", boardData);
-  if(isLoading) return <div></div>;
+  if (isLoading) return <div></div>;
+
   return (
     <>
       <div className={styles.boardContainer}>
         <h1 className={`title ${styles.title}`}>{boardData.title}</h1>
-        <DetailHead className={styles.MainText} styles={styles} boardData={boardData}/>
-        <DetailBody className={styles.TextWrite} styles={styles}  content={boardData.content}/>
-        <DetailBottom className={styles.ReplyList} styles={styles} viewCount={boardData.viewCount}/>
+        <DetailHead
+          className={styles.MainText}
+          styles={styles}
+          boardData={boardData}
+        />
+        <DetailBody
+          className={styles.TextWrite}
+          styles={styles}
+          content={boardData.content}
+        />
+        <DetailBottom
+          className={styles.ReplyList}
+          styles={styles}
+          viewCount={boardData.viewCount}
+        />
         <div className={styles.inputBox}>
-        <ChatInput styles={inputStyles} />
+          <ChatInput styles={inputStyles} />
         </div>
       </div>
-      )
     </>
   );
 };

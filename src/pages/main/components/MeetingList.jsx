@@ -78,7 +78,6 @@ function MeetingList() {
         setPageNo((prevPage) => prevPage + 1);
 
         setLoading(false);
-        console.log("end loading!!");
 
         //더 불러올 데이터가 있는지
         if (totalElements === updatedListData.length) {
@@ -111,7 +110,7 @@ function MeetingList() {
       MainMeetingListFetch();
     }
   }, [inView, loading, isFinish]);
-  if(loading) return <Loading/>
+  if (loading) return <Loading />;
   return (
     <>
       <ul className={styles.meetingList}>
@@ -124,7 +123,7 @@ function MeetingList() {
             matchingStatus={group.matchingStatus}
           />
         ))}
-        <ScrollSection/>
+        {!isFinish && <ScrollSection />}
       </ul>
     </>
   );

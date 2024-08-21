@@ -144,3 +144,10 @@
     }
   }
 }
+
+// 에러메시지 추가
+.errorMessage {
+  color: red;
+  margin: 5px 0;
+  font-size: calc( 100vw* ( 14 /500));
+}

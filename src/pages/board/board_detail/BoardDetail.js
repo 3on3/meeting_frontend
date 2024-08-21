@@ -49,6 +49,26 @@ const BoardDetail = () => {
   console.log("board: ", boardData);
   if (isLoading) return <div></div>;
 
+  // 댓글 POST
+  const [replyInputValue, setReplyInputValue] = useState("");
+
+  const onChangeInput = (e) => {
+    console.log("e.target.value", e.target.value);
+    const inputValue = e.target.value;
+    setReplyInputValue(inputValue);
+  };
+
+  // 댓글 POST 클릭이벤트
+  const onClickPostRepliesBtnHandler = () => {
+
+
+
+
+
+
+    
+  };
+
   return (
     <>
       <div className={styles.boardContainer}>
@@ -69,7 +89,11 @@ const BoardDetail = () => {
           viewCount={boardData.viewCount}
         />
         <div className={styles.inputBox}>
-          <ChatInput styles={inputStyles} />
+          <ChatInput
+            styles={inputStyles}
+            onClickSendBtn={onClickPostRepliesBtnHandler}
+            onChangeInput={onChangeInput}
+          />
         </div>
       </div>
     </>

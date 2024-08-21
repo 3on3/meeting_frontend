@@ -17,18 +17,18 @@ const ProfileSection = ({ userId }) => {
 
   // 사용자 정보를 저장할 상태 변수들
   const [nickname, setNickname] = useState("");
-  const [age, setAge] = useState(""); 
-  const [profileIntroduce, setProfileIntroduce] = useState(""); 
-  const [univ, setUniv] = useState(""); 
-  const [major, setMajor] = useState(""); 
-  const [membership, setMembership] = useState(""); 
+  const [age, setAge] = useState("");
+  const [profileIntroduce, setProfileIntroduce] = useState("");
+  const [univ, setUniv] = useState("");
+  const [major, setMajor] = useState("");
+  const [membership, setMembership] = useState("");
 
   // 프로필 이미지를 관리하기 위한 상태 변수들
-  const [profileImg, setProfileImg] = useState(defaultImg); // 
+  const [profileImg, setProfileImg] = useState(defaultImg); //
   const [selectedFile, setSelectedFile] = useState(null); // 사용자가 선택한 파일 (프로필 이미지)
-  const [modalActive, setModalActive] = useState(false); // 
-  const [modalPosition, setModalPosition] = useState({ x: 0, y: 0 }); 
-  
+  const [modalActive, setModalActive] = useState(false); //
+  const [modalPosition, setModalPosition] = useState({ x: 0, y: 0 });
+
   // 파일 입력 필드를 참조하기 위한 ref
   const fileInputRef = useRef(null);
 
@@ -74,62 +74,64 @@ const ProfileSection = ({ userId }) => {
     setMajor(e.target.value); // 입력 필드의 값을 전공 상태에 저장
   };
 
-
-  
-
   // 사용자 프로필 정보를 서버에 업데이트하는 비동기 함수
-const updateProfileInfo = async () => {
-  // 사용자가 입력한 프로필 정보를 포함하는 객체 생성
-  const updatedProfileData = {
-    nickname: nickname,               // 사용자가 입력한 닉네임
-    profileIntroduce: profileIntroduce, // 사용자가 입력한 프로필 소개
-    major: major,                     // 사용자가 입력한 전공
-    profileImg: profileImg            // 현재 프로필 이미지 (사용자가 업로드한 이미지 또는 기본 이미지)
-  };
+  const updateProfileInfo = async () => {
+    // 사용자가 입력한 프로필 정보를 포함하는 객체 생성
+    const updatedProfileData = {
+      nickname: nickname, // 사용자가 입력한 닉네임
+      profileIntroduce: profileIntroduce, // 사용자가 입력한 프로필 소개
+      major: major, // 사용자가 입력한 전공
+      profileImg: profileImg, // 현재 프로필 이미지 (사용자가 업로드한 이미지 또는 기본 이미지)
+    };
 
-  try {
-    console.log("프로필 정보 업데이트를 시작합니다.");
-    
-    // 서버에 PUT 요청을 보내어 프로필 정보 업데이트
-    const response = await fetch(
-      `http://localhost:8253/mypage/userInfo/update`, 
-      {
-        method: "PUT", // HTTP 메소드: PUT (데이터 갱신)
-        headers: {
-          Authorization: `Bearer ${getUserToken()}`, 
-          "Content-Type": "application/json",        
-        },
-        body: JSON.stringify(updatedProfileData),     
+    try {
+      console.log("프로필 정보 업데이트를 시작합니다.");
+
+      // 서버에 PUT 요청을 보내어 프로필 정보 업데이트
+      const response = await fetch(
+        `http://localhost:8253/mypage/userInfo/update`,
+        {
+          method: "PUT", // HTTP 메소드: PUT (데이터 갱신)
+          headers: {
+            Authorization: `Bearer ${getUserToken()}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedProfileData),
+        }
+      );
+
+      // 요청이 성공한 경우
+      if (response.ok) {
+        const data = await response.json(); // 서버로부터의 응답 데이터를 JSON 형태로 파싱
+        console.log("프로필 정보가 성공적으로 업데이트되었습니다:", data);
+
+        // 모든 편집 모드를 종료
+        setIsEditingName(false);
+        setIsEditingDescription(false);
+        setIsEditingMajor(false);
+      } else {
+        console.error(
+          "응답이 실패했습니다:",
+          response.status,
+          response.statusText
+        );
+        throw new Error("프로필 정보를 업데이트하는 중 오류가 발생했습니다.");
       }
-    );
-
-    // 요청이 성공한 경우
-    if (response.ok) {
-      const data = await response.json(); // 서버로부터의 응답 데이터를 JSON 형태로 파싱
-      console.log("프로필 정보가 성공적으로 업데이트되었습니다:", data);
-
-      // 모든 편집 모드를 종료
-      setIsEditingName(false);
-      setIsEditingDescription(false);
-      setIsEditingMajor(false);
-    } else {
-    
-      console.error("응답이 실패했습니다:", response.status, response.statusText);
-      throw new Error("프로필 정보를 업데이트하는 중 오류가 발생했습니다.");
+    } catch (error) {
+      console.error(
+        "프로필 정보를 업데이트하는 중 오류가 발생했습니다:",
+        error
+      );
     }
-  } catch (error) {
- 
-    console.error("프로필 정보를 업데이트하는 중 오류가 발생했습니다:", error);
-  }
-};
+  };
 
   // 프로필 이미지 조회
   const fetchProfileImage = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8253/mypage/profileImage`, 
+        `http://localhost:8253/mypage/profileImage`,
         {
-          method: "GET", 
+          method: "GET",
           headers: {
             Authorization: `Bearer ${getUserToken()}`,
             "Content-Type": "application/json",
@@ -138,70 +140,75 @@ const updateProfileInfo = async () => {
       );
 
       if (response.ok) {
-        const imageUrl = await response.json(); 
+        const imageUrl = await response.json();
         setProfileImg(imageUrl.profileImg); // 가져온 프로필 이미지를 상태에 저장
       } else {
         const errorMessage = `프로필 이미지를 가져오지 못했습니다.: ${response.status} ${response.statusText}`;
-        throw new Error(errorMessage); 
+        throw new Error(errorMessage);
       }
     } catch (error) {
-      
-      console.error("프로필 이미지를 가져오는 중에 오류가 발생했습니다.:", error.message);
-  
+      console.error(
+        "프로필 이미지를 가져오는 중에 오류가 발생했습니다.:",
+        error.message
+      );
     }
   };
 
   const updateProfileImage = async (file) => {
     const formData = new FormData(); // 파일 데이터를 전송하기 위한 FormData 객체 생성
     formData.append("profileImage", file); // FormData에 파일 추가 (필드 이름은 "profileImage")
-  
+
     try {
       const response = await fetch(
         "http://localhost:8253/mypage/profileImage/update",
         {
           method: "POST",
           headers: {
-            Authorization: `Bearer ${getUserToken()}`, 
-     
+            Authorization: `Bearer ${getUserToken()}`,
           },
-          body: formData, 
+          body: formData,
         }
       );
-  
+
       if (response.ok) {
-        const result = await response.json();
+        const result = await response.text(); // JSON이 아닌 단순 문자열로 처리();
         console.log("프로필 이미지가 업데이트되었습니다.:", result);
         fetchProfileImage(); // 업데이트 후 새로 이미지를 가져옴
       } else {
         throw new Error("프로필 이미지를 업데이트 하지 못했습니다.");
       }
     } catch (error) {
-      console.error("프로필 이미지를 업데이트하는 중에 오류가 발생했습니다.:", error);
+      console.error(
+        "프로필 이미지를 업데이트하는 중에 오류가 발생했습니다.:",
+        error
+      );
     }
   };
-  
 
   // 프로필 이미지를 기본 이미지로 리셋
   const resetProfileImage = async () => {
     try {
       const response = await fetch(
-        "http://localhost:8253/mypage/profileImage", 
+        "http://localhost:8253/mypage/profileImage",
         {
-          method: "GET", 
+          method: "GET",
           headers: {
-            Authorization: `Bearer ${getUserToken()}`, 
+            Authorization: `Bearer ${getUserToken()}`,
           },
         }
       );
 
       if (response.ok) {
         console.log("프로필 이미지가 기본값으로 재설정되었습니다.");
-        setProfileImg(defaultImg); 
+        setProfileImg(defaultImg);
       } else {
         throw new Error("프로필 이미지를 재설정하지 못했습니다.");
       }
     } catch (error) {
-      console.error("프로필 이미지를 재설정하는 중에 오류가 발생했습니다.:", error);
+      console.error(
+        "프로필 이미지를 재설정하는 중에 오류가 발생했습니다.:",
+        error
+      );
     }
   };
 
@@ -256,15 +263,13 @@ const updateProfileInfo = async () => {
       });
 
     fetchProfileImage(); // 프로필 이미지를 서버로부터 가져옴
-
   }, [userId]); // userId가 변경될 때마다 실행
 
   return (
     <div className={styles.container}>
       <h1 className={`title ${styles.text}`}>마이페이지</h1>
-      
-      <div className={styles.profileContainer}>
 
+      <div className={styles.profileContainer}>
         <div className={styles.contentsBox}>
           {/* 프로필 이미지 클릭 시 모달을 여는 영역 */}
           <div className={styles.profile} onClick={profileClickHandler}>

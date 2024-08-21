@@ -55,18 +55,20 @@ const MyGroupSelectModal = ({
   };
 
   useEffect(() => {
+    // 내가 소속된 그룹 리스트 요청
     MyGroupsListFetch();
   }, []);
+
   useEffect(() => {
     if(myGroupList.length > 0){
+      // 리스트가 없는 경우
       setIsNull(false)
     }
   }, [myGroupList]);
 
-  // if (loading) {
-  //   return <div>Loading...</div>;
-  // }
 
+
+  // 확인 버튼 활성화
   const onClickApplyBtn = () => {
     onClickAndSuccess()
     setModalActive(false);
@@ -76,7 +78,7 @@ const MyGroupSelectModal = ({
         requestGroupId: selectedGroupId,
         responseGroupId: responseGroupId,
       };
-
+      // 매칭 신청 요청
       requestFetch(payload, setIsChanged);
       setIsChanged(false);
     }

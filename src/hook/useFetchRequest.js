@@ -62,6 +62,7 @@ export const useFetchRequest = () => {
 
     return data;
   };
+  
   // 매칭 프로세스 페치 - 수락(requsetUrl = "response-accept")/거절(requsetUrl = "response-deny")
   const processFetch = async (requestUrl, payload, setIsChanged) => {
     setIsLoading(true);

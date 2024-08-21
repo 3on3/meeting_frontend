@@ -1,0 +1,176 @@
+
+.groupBoxWrap{
+  list-style: none;
+  width: 100%;
+}
+
+.groupBox {
+  width: 100%;
+  padding: calc(100vw * (30 / 500));
+  border-radius: calc(100vw * (30 / 500));
+  box-shadow: 0 0 calc(100vw * (10 / 500)) rgba($color: #000000, $alpha: 0.1);
+  margin-bottom: calc(100vw * (13 / 500));
+
+  display: block;
+  animation: chatAni 0.6s ease-out forwards;
+  @keyframes chatAni {
+    0% {
+      opacity: 0;
+      transform: translateY(calc(100vw * (10 / 500)));
+    }
+    100% {
+      opacity: 1;
+      transform: 0;
+    }
+  }
+
+  // 기본값 흰색 박스
+  .groupDetailText {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    .groupTitle {
+      font-size: calc(100vw * (22 / 500));
+      // width: calc(100vw * (200 / 500));
+      font-weight: 600;
+    }
+
+    .groupInfoWrapper {
+      display: flex;
+      flex-direction: column;
+      text-align: end;
+
+      .groupInfo {
+        font-size: calc(100vw * (15 / 500));
+      }
+
+      .groupMajor {
+        font-size: calc(100vw * (15 / 500));
+        color: var(--color-gr);
+        // font-weight: 500;
+        margin-top: calc(100vw * (9 / 500));
+      }
+    }
+  }
+
+  .matchingWrapper {
+    height: calc(100vw * (34 / 500));
+    display: flex;
+    justify-content: end;
+    margin-top: calc(100vw * (25 / 500));
+
+    .matchingText {
+      color: var(--color-point);
+      font-size: calc(100vw * (14 / 500));
+      font-weight: 500;
+
+      display: flex;
+      align-items: center;
+    }
+
+    .matchingBt {
+      width: calc(100vw * (80 / 500));
+      margin-left: calc(100vw * (10 / 500));
+    }
+
+    &.notMatching {
+      .matchingText {
+        color: var(--color-gr);
+        align-items: end;
+
+      }
+
+      .matchingBt {
+        display: none;
+      }
+    }
+  }
+
+  // 하늘색 배경
+  &.sky {
+    background-color: var(--color-wh);
+
+    .matchingWrapper {
+      display: none;
+    }
+  }
+
+  // 검정 라인 + 흰색 배경
+  &.line {
+    border: calc(100vw * (1 / 500)) solid var(--color-dark);
+    .lineGroupText {
+      height: 100%;
+      display: flex;
+      justify-content: space-between;
+
+      .lineGroupTextWrapper {
+        display: flex;
+
+        .groupTitle {
+          font-size: calc(100vw * (22 / 500));
+
+          font-weight: 600;
+        }
+
+        .groupMajor {
+          font-size: calc(100vw * (15 / 500));
+          color: var(--color-gr);
+          margin-left: calc(100vw * (10 / 500));
+          padding-top: calc(100vw * (9 / 500));
+        }
+      }
+
+      .personnel {
+        font-size: calc(100vw * (14 / 500));
+        font-weight: 600;
+        color: var(--color-point);
+
+        &::before {
+          content: "";
+          display: inline-block;
+          background-image: url(../../../assets/images/icons/m-personnel.svg);
+          width: calc(100vw * (18 / 500));
+          height: calc(100vw * (14 / 500));
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: cover;
+          margin-right: calc(100vw * (3 / 500));
+        }
+      }
+    }
+
+    .lineGroupInfo {
+      margin-top: calc(100vw * (10 / 500));
+      font-size: calc(100vw * (15 / 500));
+      display: block;
+    }
+
+    .matchingWrapper {
+      display: none;
+    }
+  }
+}
+
+.reqTit {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: calc(100vw * (12 / 500));
+  color: var(--color-point);
+  font-size: calc(100vw * (16 / 500));
+  padding: 0 calc(100vw * (25 / 500));
+  font-weight: 500;
+  animation: chatAni 0.6s ease-out forwards;
+
+  button {
+    font-weight: 600;
+    margin-right: calc(100vw * (18 / 500));
+    font-size: calc(100vw * (18 / 500));
+    color: var(--color-point);
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}

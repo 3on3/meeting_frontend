@@ -1,0 +1,21 @@
+.container {
+  margin-top: calc( 100vw* ( 40 /500));
+  padding: calc( 100vw* ( 20 /500)) 0 0 0;
+}
+
+.findSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  margin-top: calc( 100vw * ( 40 / 500))!important;
+  font-size: calc( 100vw * ( 16 / 500));
+  p{
+    text-align: center;
+    color: var(--color-dark);
+    opacity: 1.0;
+    text-decoration-line: underline;
+    text-underline-position : under;
+  }
+}

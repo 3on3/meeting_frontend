@@ -1,0 +1,68 @@
+import React, { useEffect, useState } from "react";
+import { BOARD_URL } from "../../../config/host-config";
+import { getUserToken } from "../../../config/auth";
+import BoardBox from "./BoardBox";
+import Loading from "../../../components/common/loading/Loading";
+import EmptyGroups from '../../main/EmptyGroups';
+
+const BoardList = ({ className, styles, activeTab,isLoading ,setIsLoading }) => {
+  const [error, setError] = useState(false);
+  const [boardList, setBoardList] = useState([]);
+ // activeTab에 따른 URL 결정
+ const getFetchUrl = () => {
+  if (activeTab === "myPosts") {
+    return BOARD_URL + "/myboards";
+  }
+  return BOARD_URL;
+};
+  const getListFetch = async () => {
+    setIsLoading(true);
+    setError(null);
+
+    const fetchUrl = getFetchUrl(); // 매번 패치할 때 activeTab에 따른 URL 설정
+
+    try {
+      const response = await fetch(fetchUrl, {
+        headers: {
+          Authorization: "Bearer " + getUserToken(),
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
+      if (response.ok) {
+        setBoardList(data);
+      } else {
+        const errorText = await response.text();
+        setError(errorText);
+      }
+    } catch (err) {
+      console.error("Error:", err);
+      setError(err.message);
+    } finally {
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 500)
+      
+    }
+  };
+
+  useEffect(() => {
+    if(!isLoading){
+      getListFetch();
+
+    }
+  }, [activeTab]);
+  // console.log("boardList: ", boardList);
+
+  if(isLoading) return <Loading/>
+  return (
+    <ul className={className}>
+      {boardList.length === 0 && <div className={styles.empty}>게시글이 없습니다</div>}
+      {boardList.map((board) => {
+        return <BoardBox key={board.id} board={board} styles={styles} />;
+      })}
+    </ul>
+  );
+};
+
+export default BoardList;

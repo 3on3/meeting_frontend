@@ -1,0 +1,122 @@
+.filterBox {
+  width: calc(100% - (100vw * (40 / 500)));
+  height: auto;
+  padding: calc(100vw * (20 / 500)) calc(100vw * (30 / 500));
+  position: relative;
+  border-radius: calc(100vw * (18 / 500));
+  color: var(--color-sh);
+  background-color: var(--color-wh);
+  box-shadow: 0 0 calc(100vw * (10 / 500)) rgba($color: #000000, $alpha: 0.1);
+
+  margin: 0 calc(100vw * (20 / 500));
+  // 공통 타이틀
+  .filterTitle {
+    width: calc(100vw * (75 / 500));
+    font-size: calc(100vw * (16 / 500));
+    font-weight: 700;
+    color: var(--color-bk);
+  }
+
+  // 상단 필터
+  .filterHeder {
+    display: flex;
+    width: 100%;
+    font-size: calc(100vw * (16 / 500));
+
+    align-items: center;
+
+    .filterPossible {
+      cursor: pointer;
+
+      &::before {
+        content: "";
+        display: inline-block;
+        height: calc(100vw * (9 / 500));
+        width: calc(100vw * (14 / 500));
+        margin-right: calc(100vw * (5 / 500));
+        background-image: url(../../../assets/images/icons/m-check.svg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+      // 참여가능한 것만 보기 필터 클릭시 변경
+      &.check {
+        color: var(--color-point);
+        &::before {
+          background-image: url(../../../assets/images/icons/m-check-active.svg);
+          background-size: cover;
+        }
+      }
+    }
+  }
+
+  // 성별 & 인원 필터
+  .filterDetail {
+    overflow: hidden;
+    visibility: hidden;
+    opacity: 0;
+    max-height: 0;
+    transition: 0.4s ease-out;
+    // transition: max-height 0.3s ease, opacity 0.3s ease;
+
+    &.visible {
+      max-height: calc(100vw * (131 / 500));
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .filterHeder {
+      margin-top: calc(100vw * (22 / 500));
+
+      .filterTitle {
+        font-weight: 600;
+        font-size: calc(100vw * (16 / 500));
+      }
+
+      li {
+        margin-right: calc(100vw * (40 / 500));
+        font-weight: 500;
+        font-size: calc(100vw * (16 / 500));
+      }
+    }
+
+    // 성별 & 인원 클릭 시
+    .filterCheck {
+      color: var(--color-dark);
+
+      &::before {
+        content: "";
+        display: inline-block;
+        height: calc(100vw * (9 / 500));
+        width: calc(100vw * (14 / 500));
+        margin-right: calc(100vw * (5 / 500));
+        background-image: url(../../../assets/images/icons/m-check-active-B.svg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+    }
+  }
+
+  // 상세 보기
+  .more {
+    content: "";
+    display: inline-block;
+    height: calc(100vw * (60 / 500));
+    width: calc(100vw * (60 / 500));
+    position: absolute;
+    top: 0;
+    right: calc(100vw * (10 / 500));
+
+    background-image: url(../../../assets/images/icons/m-more.svg);
+    background-size: calc(100vw * (17 / 500));
+    background-repeat: no-repeat;
+    background-position: center;
+
+    &.closeMore {
+      // background-image: url(../../../assets/images/icons/m-close-more.svg);
+      // background-size: cover;
+      transform: rotate(180deg);
+    }
+  }
+}

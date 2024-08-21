@@ -1,0 +1,13 @@
+.regionFilter {
+  margin-top: calc(100vw * (15 / 500));
+  padding: 0 calc(100vw * (20 / 500));
+  display: flex;
+  overflow: auto;
+  white-space: nowrap;
+
+  li {
+    margin-right: calc(100vw * (5 / 500));
+    cursor: pointer;
+    font-size: calc(100vw * (17 / 500));
+  }
+}

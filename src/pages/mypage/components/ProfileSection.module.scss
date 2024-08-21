@@ -1,0 +1,146 @@
+.container {
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+  padding:calc( 100vw* ( 80 /500)) calc( 100vw* ( 20 /500)) calc( 100vw* ( 130 /500));
+
+  .profileContainer {
+    border-radius: calc( 100vw* ( 20 /500));
+    // box-shadow: 0 0 calc( 100vw* ( 10 /500)) rgba($color:#000000, $alpha: 0.1);
+    padding-bottom: calc( 100vw* ( 20 /500));
+  }
+  .contentsBox {
+    padding-top: calc( 100vw* ( 20 /500));
+
+    .fileInput {
+      display: none;
+    }
+  }
+  .text { 
+    font-weight: 700;
+    font-size: calc( 100vw * ( 32 / 500));
+    margin-bottom: calc( 100vw* ( 40 /500));
+  }
+  .profile {
+    width: calc( 100vw* ( 200 /500));
+    height: calc( 100vw* ( 170 /500));
+    overflow: hidden;
+    border-radius: calc( 100vw* ( 20 /500));
+    position: relative;
+    left: calc( 100vw* ( 124 /500));
+    box-shadow: 0 0 calc( 100vw* ( 10 /500)) rgba($color:#000000, $alpha: 0.1);
+  }
+  .profile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .firstContents,
+  .secondContents,
+  .thirdContents {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: calc( 100vw* ( 10 /500));
+    font-size: calc( 100vw* ( 16 /500));
+    line-height: calc( 100vw* ( 25 /500));
+    font-weight: 500;
+    padding-left: calc( 100vw* ( 40 /500));
+
+    img {
+      cursor: pointer;
+      margin-top: calc( 100vw* ( 5 /500));
+      margin-left: calc( 100vw* ( 4 /500));
+      width: calc( 100vw* ( 13 /500));
+      height: calc( 100vw* ( 13 /500));
+      
+      &.isEditing {
+        width: calc( 100vw* ( 16 /500));
+        height: calc( 100vw* ( 16 /500));
+      }
+    }
+  }
+  div {
+    margin: 0 calc( 100vw* ( 3 /500));
+  }
+
+}
+
+.firstContents {
+  padding-top: calc( 100vw* ( 20 /500));
+  flex-wrap: wrap;
+  .contentWrap{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-right: calc( 100vw* ( 20 /500));
+    padding-top: calc( 100vw* ( 10 /500));
+
+  }
+  .content1 {
+    font-weight: 600;
+
+    .nameInputField  {
+      text-align: center;
+      border-radius: calc( 100vw* ( 10 /500));
+      width: calc( 100vw* ( 50 /500));
+      font-size: calc( 100vw* ( 16 /500));
+      background: #F4F9FF;
+      font-weight: 500;
+    }
+  }
+  .content2 {
+    color: grey;
+    margin: 0;
+    font-size: calc( 100vw* ( 14 /500));
+    margin-right: calc( 100vw* ( 10 /500));
+  }
+  .content3 {
+    color: #8732F5;
+    margin: 0;
+
+    font-size: calc( 100vw* ( 14 /500));
+    font-weight: 700;
+  }
+  .paymentBox {
+    width: calc( 100vw* ( 30 /500));
+    height: calc( 100vw* ( 26 /500));
+    overflow: hidden;
+    border-radius: calc( 100vw* ( 4 /500));
+    position: relative;
+    left: calc( 100vw* ( 10 /500));
+    box-shadow: 0 0 calc( 100vw* ( 10 /500)) rgba($color:#000000, $alpha: 0.1);
+  }
+  .paymentBox img {
+    width: calc( 100vw* ( 22 /500));
+    height: calc( 100vw* ( 15 /500));
+   
+
+  }
+}
+.secondContents {
+  .content4 {
+    .descInputField  {
+      text-align: center;
+      border-radius: calc( 100vw* ( 10 /500));
+      width: calc( 100vw* ( 200 /500));
+      font-size: calc( 100vw* ( 16 /500));
+      background: #F4F9FF;
+      font-weight: 500;
+    }
+  }
+}
+.thirdContents {
+  .content6 {
+    .majorinputField  {
+      text-align: center;
+      border-radius: calc( 100vw* ( 10 /500));
+      width: calc( 100vw* ( 70 /500));
+      font-size: calc( 100vw* ( 16 /500));
+      background: #F4F9FF;
+      font-weight: 500;
+    }
+  }
+}

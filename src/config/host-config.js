@@ -16,6 +16,20 @@ if (clientHostName === "localhost") {
 const API_BASE_URL = backendHostName;
 
 const SIGNUP = "/SIGNUP";
-
+const GROUP = "/group";
+const GROUPMATCHING = "/group/matching";
+const MYPAGE = "/mypage";
+const TESTCHAT = "/testChat";
+const CHATROOM = "/chatroom";
+const ALARM = "/alarm";
+const BOARD = "/board";
 
 export const AUTH_URL = API_BASE_URL + SIGNUP;
+export const GROUP_URL = API_BASE_URL + GROUP;
+export const MYPAGE_URL = API_BASE_URL + MYPAGE;
+export const MYPAGEMATCHING_URL = API_BASE_URL + GROUPMATCHING;
+export const TESTCHT_URL = API_BASE_URL + TESTCHAT;
+export const CHATROOM_URL = API_BASE_URL + CHATROOM;
+export const ALARM_URL = API_BASE_URL + ALARM;
+export const BOARD_URL = API_BASE_URL + BOARD;
+

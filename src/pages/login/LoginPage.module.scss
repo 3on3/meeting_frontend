@@ -6,51 +6,70 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  padding: calc(100vh*(60/500)) calc(100vh*(20/500)) calc(100vh*(140/500));
+
 
   .logo {
-    width: 160px;
-    height: 117px;
-    margin: 0 auto 40px;
-
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+    width: calc( 100vw * ( 300 /500));
+    height: auto;
+    margin: 0 auto calc( 100vw* ( 40 /500));
+    // overflow: hidden;
   }
+
   .input {
     width: 100%;
-    margin-bottom: 25px;
 
-    input {
-      display: block;
-      margin-bottom: 12px;
-      width: 100%;
+    .inputCustom {
+      margin-bottom: calc(100vh*(12/500));
     }
 
-    div {
-      margin-bottom: 12px;
-    }
 
 
   }
 
   .checkbox {
-    margin-bottom: 12px;
+    margin-bottom: calc( 100vw* ( 12 /500));
+    padding-left: calc( 100vw* ( 5 /500));
     width: 100%;
     justify-content: left;
   }
 
   .button {
     width: 100%;
-    margin-bottom: 13px;
+    margin-top: calc( 100vw* ( 15 /500));
   }
 
-  .findPassword {
-    text-decoration: underline;
-    text-underline-position: under;
-    font-size: 18px;
+  .findSection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    width: 100%;
+    margin-top: calc( 100vw * ( 30 / 500));
+    p{
+      text-align: center;
+      color: var(--color-dark);
+      opacity: 0.8;
 
+    }
+    p::after{
+      content: '';
+      display: inline-block;
+      width: calc(100vw * (2 / 500));
+      height: calc(100vw * (2 / 500));
+      background-color: var(--color-gr);
+      border-radius: 50%;
+      margin: 0 calc( 100vw * ( 10 / 500));
+      transform: translateY(calc( -100vw * ( 4 / 500)));
+    }
+    p:last-child::after{
+      display: none;
+    }
+    .findPassword, .signUp {
+      text-decoration: underline;
+      text-underline-position: under;
+      font-size: calc(100vw * (18 / 500));
+      cursor: pointer;
+    }
   }
-
 }

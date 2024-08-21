@@ -37,7 +37,7 @@ const ProfileSection = ({ userId }) => {
   // 닉네임 편집 모드 토글 (활성화/비활성화)
   const editNameToggle = () => {
     if (isEditingName) {
-      updateProfileInfo(); // 수정된 부분: 체크 이미지를 클릭할 때 저장
+      updateProfileInfo(); // 체크 이미지를 클릭할 때 저장
     } else {
       setIsEditingName(true); // 연필 이미지를 클릭할 때 수정 모드 활성화
     }
@@ -93,7 +93,7 @@ const updateProfileInfo = async () => {
     const response = await fetch(
       `http://localhost:8253/mypage/userInfo/update`,
       {
-        method: "PUT", // HTTP 메소드: PUT (데이터 갱신)
+        method: "PUT", 
         headers: {
           Authorization: `Bearer ${getUserToken()}`,
           "Content-Type": "application/json",
@@ -228,6 +228,7 @@ const updateProfileInfo = async () => {
     const file = e.target.files[0]; // 사용자가 선택한 파일을 가져옴
     setSelectedFile(file); // 선택한 파일을 상태에 저장
 
+
     const reader = new FileReader(); // 파일을 읽기 위한 FileReader 객체 생성
     reader.onload = () => {
       setProfileImg(reader.result); // 파일을 읽어 미리보기를 위해 프로필 이미지 상태에 저장
@@ -315,9 +316,9 @@ const updateProfileInfo = async () => {
                   className={styles.nameInputField}
                 />
               ) : (
-                nickname // 닉네임 표시
+                nickname 
               )}
-              {errorMessage && ( // 에러 메시지가 있을 경우 표시
+              {errorMessage && ( 
                 <div className={styles.errorMessage}>
                   {errorMessage}
                 </div>
@@ -330,7 +331,7 @@ const updateProfileInfo = async () => {
                   isEditingName ? styles.isEditing : ""
                 }`}
                 alt={isEditingName ? "체크 이미지" : "연필 이미지"}
-                onClick={editNameToggle} // 수정된 부분: 클릭 시 저장 또는 수정 모드로 전환
+                onClick={editNameToggle}
               />
             </div>
             <div className={styles.contentWrap}>
@@ -341,7 +342,7 @@ const updateProfileInfo = async () => {
                 <img
                   src={paymentImg}
                   alt={"결제버튼"}
-                  // onClick={editNameToggle} // 수정된 부분: 클릭 시 저장 또는 수정 모드로 전환
+                  // onClick={editNameToggle} 
                 />
               </div>
             </div>
@@ -359,7 +360,7 @@ const updateProfileInfo = async () => {
                   className={styles.descInputField}
                 />
               ) : (
-                profileIntroduce // 프로필 소개 표시
+                profileIntroduce 
               )}
             </div>
             <div>
@@ -369,7 +370,7 @@ const updateProfileInfo = async () => {
                   isEditingDescription ? styles.isEditing : ""
                 }`}
                 alt={isEditingDescription ? "체크 이미지" : "연필 이미지"}
-                onClick={editDescriptionToggle} // 수정된 부분: 클릭 시 저장 또는 수정 모드로 전환
+                onClick={editDescriptionToggle} 
               />
             </div>
           </div>
@@ -397,7 +398,7 @@ const updateProfileInfo = async () => {
                   isEditingMajor ? styles.isEditing : ""
                 }`}
                 alt={isEditingMajor ? "체크 이미지" : "연필 이미지"}
-                onClick={editMajorToggle} // 수정된 부분: 클릭 시 저장 또는 수정 모드로 전환
+                onClick={editMajorToggle} 
               />
             </div>
           </div>

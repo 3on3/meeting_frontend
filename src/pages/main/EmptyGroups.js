@@ -41,7 +41,7 @@ const EmptyGroups = ({isGroup}) => {
           }
       </div>
       <div className={styles.groupCreateBt}>
-        <MatchingButton text={!isGroup? "그룹 생성" : "매팅 신청"} onClickHandler={onClickHandler} />
+        <MatchingButton text={!isGroup? "그룹 생성" : "매칭 신청"} onClickHandler={onClickHandler} />
       </div>
     </div>
   );

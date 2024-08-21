@@ -3,6 +3,11 @@
     calc(100vw * (140 / 500)) calc(100vw * (20 / 500));
   width: 100%;
   height: 100vh;
+  .myGroupList{
+    height: calc(100% - (100vw * (90 / 500)));
+    overflow-y: scroll;
+
+  }
 
   .myGroupsTitle {
     display: flex;

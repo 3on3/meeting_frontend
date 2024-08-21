@@ -8,6 +8,7 @@ import EmptyGroups from "../EmptyGroups";
 import { useSearchParams } from "react-router-dom";
 import { throttle } from "lodash";
 import ScrollSection from "../../../components/common/scroll-section/ScrollSection";
+import Loading from "../../../components/common/loading/Loading";
 
 // matchingState={"complete"} 이면 매칭 완료
 function MeetingList() {
@@ -110,7 +111,7 @@ function MeetingList() {
       MainMeetingListFetch();
     }
   }, [inView, loading, isFinish]);
-
+  if(loading) return <Loading/>
   return (
     <>
       <ul className={styles.meetingList}>

@@ -7,9 +7,9 @@ const ChatBody = ({ styles, messageList, myMessage }) => {
     const endOfMessagesRef = useRef(null);
     const isInitialRender = useRef(true);
 
+    // 처음 렌더링될 때만 스크롤을 제일 아래로 이동
     useEffect(() => {
         if (isInitialRender.current) {
-            // 처음 렌더링될 때만 스크롤을 제일 아래로 이동
             setTimeout(() => {
                 endOfMessagesRef.current?.scrollIntoView( { });
             }, 100);
@@ -17,6 +17,7 @@ const ChatBody = ({ styles, messageList, myMessage }) => {
         }
     }, [messageList]); // 메시지 목록이 변경될 때 호출
 
+    // 내가 메시지를 전송하면 화면이 제일 아래로 내려가도록
     useEffect(() => {
         setTimeout(() => {
             endOfMessagesRef.current?.scrollIntoView( { });
@@ -39,6 +40,13 @@ const ChatBody = ({ styles, messageList, myMessage }) => {
                                 content={message.messageContent}
                                 imgUrl={message.profileImg}
                                 sameUser={true}
+                                messageAt={message.messageAt}
+                                sameTime={
+                                i !== messageList.length-1
+                                    && message.messageAt[3] === messageList[i+1].messageAt[3]
+                                    && message.messageAt[4] === messageList[i+1].messageAt[4]
+                                }
+                                myMessage={message.userEmail === loginUser.email}
                             />
                         );
                     }
@@ -53,6 +61,14 @@ const ChatBody = ({ styles, messageList, myMessage }) => {
                             content={message.messageContent}
                             imgUrl={message.profileImg}
                             sameUser={false}
+                            messageAt={message.messageAt}
+                            sameTime={
+                                i !== messageList.length-1
+                                && message.messageAt[3] === messageList[i+1].messageAt[3]
+                                && message.messageAt[4] === messageList[i+1].messageAt[4]
+                            }
+                            myMessage={message.userEmail === loginUser.email}
+
                         />
                     );
                 })}

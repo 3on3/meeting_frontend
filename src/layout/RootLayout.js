@@ -28,10 +28,12 @@ const RootLayout = () => {
 
     const showMainNavigation = (location.pathname === "/intro" || location.pathname === "/login" || location.pathname === "/sign-up" || location.pathname === "/password-reset" || location.pathname === "/login/first-login");
 
+    // 로그인 상태가 변경될때마다 웹소켓에 접속할지 나갈지 결정하는 함수
     useEffect(() => {
 
         if(isLogin) {
 
+            // 로그인시에만 mainWebSocket 에 접속
             MainWebSocket(socketRef, setAlarmRoomId, setIsAlarm);
 
             setMainSocket(socketRef.current);
@@ -50,6 +52,7 @@ const RootLayout = () => {
         }
     }, [isLogin]);
 
+    // 알람을 띄우고 30초 뒤 알림을 없애기 위한 함수
     useEffect(() => {
         if(isAlarm === true) {
             setTimeout(() => {
@@ -58,6 +61,7 @@ const RootLayout = () => {
         }
     }, [isAlarm]);
 
+    // url이 바뀔때마다 알람이 있는지 없는지 확인하는 함수
     useEffect(() => {
         if(isLogin) {
             setAlarmList(null);
@@ -69,6 +73,7 @@ const RootLayout = () => {
 
 
 
+    // 알림 클릭시 매칭 신청이 들어온 그룹으로 리다이렉트
     const alarmClickHandler = () => {
         navigate("/group/"+alarmRoomId);
         setIsAlarm(false);

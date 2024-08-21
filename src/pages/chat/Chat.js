@@ -59,9 +59,7 @@ const Chat = () => {
         const data = await response.json();
         
         setChatRoomData(data);
-        console.log("set DAta next : ",chatRoomData);
       } catch (error) {
-        console.error(error);
       }
     };
 
@@ -88,25 +86,21 @@ const Chat = () => {
   // 메세지 보내기 버튼
   const onClickSendBtn = async () => {
 
+    // 버튼 클릭시 value가 있어야만 메세지 전송
     if (value !== "") {
       const payload = {
         roomId: id,
         message: value,
       }
 
+      // chat 웹소켓에 보낼 data 구성
       const data = {
         type: 'message',
         message: await saveMessage(payload),
         chatroomId: id
       }
 
-      console.log(data);
-
-
-
       socket.send(JSON.stringify(data));
-
-      console.log(JSON.stringify(data));
       // setMessageList(prevState => [...prevState, data]);
 
       setSendMyMessage(prevState => !prevState);

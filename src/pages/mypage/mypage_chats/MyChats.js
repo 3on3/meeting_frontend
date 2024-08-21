@@ -10,7 +10,6 @@ const MyChats = () => {
     useEffect( () => {
         const data = myChatListFetch(setChatList);
 
-        console.log(data);
     }, []);
 
   return (

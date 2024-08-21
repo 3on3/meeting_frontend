@@ -44,6 +44,8 @@ const Group = () => {
   };
 
 
+  
+
   const openConfirmModal = () => {
     openModal(
       "그룹 나가기",

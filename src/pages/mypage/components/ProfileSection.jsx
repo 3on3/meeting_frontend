@@ -194,8 +194,8 @@ const updateProfileInfo = async () => {
     }
   };
 
-
-
+  
+  
   // 프로필 이미지를 기본 이미지로 리셋
   const resetProfileImage = async () => {
     try {

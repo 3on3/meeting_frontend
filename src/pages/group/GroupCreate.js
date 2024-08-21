@@ -49,34 +49,7 @@ const GroupCreate = () => {
     setGroupName(e.target.value);
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   const payload = {
-  //     groupName,
-  //     groupPlace: selectedRegion,
-  //     groupGender,
-  //     maxNum,
-  //   };
-
-  //   console.log(payload);
-
-  //   const response = await fetch(`${GROUP_URL}/create`, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: "Bearer " + getUserToken(),
-  //     },
-  //     body: JSON.stringify(payload),
-  //   });
-
-  //   if (response.ok) {
-  //     navigate("/");
-  //   } else {
-  //     const errorText = await response.text();
-  //     alert(errorText);
-  //   }
-  // };
+  const isFormValid = groupName && selectedRegion && maxNum;
 
   const regions = [
     { value: "SEOUL_GYEONGGI", label: "서울/경기" },
@@ -119,12 +92,11 @@ const GroupCreate = () => {
           <li
             key={region.value}
             style={{
-             
               border:
                 selectedRegion === region.value
                   ? "calc(100vw * (1 / 500)) solid #271E33"
                   : "calc(100vw * (1 / 500)) solid #C3BECB",
-            
+
               backgroundColor:
                 selectedRegion === region.value ? "#fff" : "#fff",
               color: selectedRegion === region.value ? "#271E33" : "#C3BECB",
@@ -136,24 +108,6 @@ const GroupCreate = () => {
         ))}
       </ul>
       <div className={styles.choiceContainer}>
-        {/* <div className={styles.genContainer}> */}
-          {/* <div className={styles.gender}>성별</div>
-          <div className={styles.gen}>
-            <div
-              style={{
-                padding: "10px 20px",
-                margin: "5px",
-                fontSize: "calc(100vw * (16 / 500))",
-                borderRadius: "calc(100vw * (500 / 500))",
-                fontWeight: "700",
-                backgroundColor: "#fff",
-                color: "#C3BECB",
-              }}
-            >
-              {gender === "M" ? "남자" : "여자"}
-            </div> */}
-          {/* </div> */}
-        {/* </div> */}
         <div className={styles.numberContainer}>
           <div className={styles.numberOfParticipants}>참여 인원</div>
           <div className={styles.number}>
@@ -188,7 +142,7 @@ const GroupCreate = () => {
             eventHandler={mainPageHandler}
           />
           <MtButtons
-            buttonType={"apply"}
+            buttonType={isFormValid ? "apply" : "disabled"}
             buttonText={"그룹 생성"}
             eventType={"click"}
             eventHandler={openConfirmModal}

@@ -45,6 +45,8 @@ const Group = () => {
 
   console.log("groupData: ", groupData);
 
+  
+
   const openConfirmModal = () => {
     openModal(
       "그룹 나가기",

@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "./MemberList.module.scss";
-import {useModal} from "../../context/ModalContext";
+import { useModal } from "../../context/ModalContext";
 import ProfileImage from "../../pages/mypage/components/ProfileImage";
 import profileImage from "../../pages/mypage/components/ProfileImage";
-import {userDataLoader} from "../../config/auth";
+import { userDataLoader } from "../../config/auth";
 
 /**
  *
@@ -30,18 +30,13 @@ const MemberList = ({
 
   const loginUser = userDataLoader();
 
-  const {openModal} = useModal();
+  const { openModal } = useModal();
 
   const profileImgClickHandler = () => {
-      openModal(
-          "",
-          "imgMode",
-          <ProfileImage imgUrl={imgUrl}/>
-      )
+    openModal("", "imgMode", <ProfileImage imgUrl={imgUrl} />);
+  };
 
-      console.log(imgUrl)
-  }
-
+  console.log(imgUrl);
   return (
     <li className={`${styles.mamberList} ${styles[bgColor]}`}>
       {id === hostUser ? (
@@ -49,8 +44,11 @@ const MemberList = ({
       ) : (
         <p className={styles.user}></p>
       )}
-  
-      <p onClick={profileImgClickHandler} className={`${styles.img} ${styles.imgBlur}`}>
+
+      <p
+        onClick={profileImgClickHandler}
+        className={`${styles.img} ${styles.imgBlur}`}
+      >
         <img src={imgUrl} alt="유저프로필 이미지" />
       </p>
       <p className={styles.userName}>{nickname}</p>

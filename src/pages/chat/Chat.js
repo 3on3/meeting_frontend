@@ -102,7 +102,7 @@ const Chat = () => {
       const data = {
         type: 'message',
         message: await saveMessage(payload),
-        roomId: id
+        chatroomId: id
       }
 
       console.log(data);

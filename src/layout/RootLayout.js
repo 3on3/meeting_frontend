@@ -26,6 +26,8 @@ const RootLayout = () => {
 
     const location = useLocation();
 
+    const showMainNavigation = (location.pathname === "/intro" || location.pathname === "/login" || location.pathname === "/sign-up" || location.pathname === "/password-reset" || location.pathname === "/login/first-login");
+
     useEffect(() => {
 
         if(isLogin) {
@@ -93,13 +95,21 @@ const RootLayout = () => {
         }}
     >
       <Header />
-      <main className='container'>
-          <div className={styles.goBackBtn} onClick={goBackBtnHandler}></div>
-          {isAlarm && <div className={styles.alarm} onClick={alarmClickHandler}>매칭 신청이 도착했습니다!</div>}
-          <div className={alarmList ? styles.activeAlarmBtn : (isAlarm ? styles.activeAlarmBtn : styles.alarmBtn)} onClick={alarmBtnHandler}></div>
-        <Outlet/>
-      </main>
-      
+            <main className='container'>
+                { !showMainNavigation &&
+                    <>
+                        <div className={styles.goBackBtn} onClick={goBackBtnHandler}></div>
+                        {isAlarm && <div className={styles.alarm} onClick={alarmClickHandler}>매칭 신청이 도착했습니다!</div>}
+                        <div
+                            className={alarmList ? styles.activeAlarmBtn : (isAlarm ? styles.activeAlarmBtn : styles.alarmBtn)}
+                            onClick={alarmBtnHandler}>
+
+                        </div>
+                    </>
+                }
+                <Outlet/>
+            </main>
+
     </MainWebSocketContext.Provider>
 
   );

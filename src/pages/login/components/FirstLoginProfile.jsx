@@ -8,6 +8,7 @@ import { getUserToken } from "../../../config/auth";
 const FirstLoginProfile = ({ nextHandler }) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [profileImg, setProfileImg] = useState(defaultImg);
+  const [isDefaultImage, setIsDefaultImage] = useState(true); // 기본 이미지 상태
   const [modalActive, setModalActive] = useState(false);
   const [modalPosition, setModalPosition] = useState({ x: 0, y: 0 });
   const fileInputRef = useRef(null);
@@ -15,8 +16,9 @@ const FirstLoginProfile = ({ nextHandler }) => {
   // 프로필 이미지를 로컬 스토리지에서 불러오거나 기본 이미지를 설정
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem("userData") || "{}");
-    if (userData.profileImg) {
+    if (userData.profileImg && userData.profileImg !== defaultImg) {
       setProfileImg(userData.profileImg);
+      setIsDefaultImage(false); // 사용자가 이미 이미지를 설정했다면 기본 이미지가 아님
     }
   }, []);
 
@@ -28,6 +30,7 @@ const FirstLoginProfile = ({ nextHandler }) => {
     reader.onload = () => {
       const result = reader.result;
       setProfileImg(result);
+      setIsDefaultImage(false); // 이미지가 업로드되었으므로 기본 이미지 아님
       const userData = JSON.parse(localStorage.getItem("userData") || "{}");
       userData.profileImg = result;
       localStorage.setItem("userData", JSON.stringify(userData));
@@ -42,9 +45,12 @@ const FirstLoginProfile = ({ nextHandler }) => {
     } else {
       const response = await fetch(defaultImg);
       const blob = await response.blob();
-      formData.append("profileImage", new File([blob], "default.png", { type: blob.type }));
+      formData.append(
+        "profileImage",
+        new File([blob], "default.png", { type: blob.type })
+      );
     }
-  
+
     try {
       const response = await fetch("http://localhost:8253/file/upload", {
         method: "POST",
@@ -53,19 +59,20 @@ const FirstLoginProfile = ({ nextHandler }) => {
         },
         body: formData,
       });
-  
+
       if (response.ok) {
         // 서버에서 JSON 응답을 반환했는지 확인
         const contentType = response.headers.get("content-type");
         if (contentType && contentType.includes("application/json")) {
           const data = await response.json();
           const newProfileImgUrl = data.profileImgUrl;
-  
+
           const userData = JSON.parse(localStorage.getItem("userData") || "{}");
           userData.profileImg = newProfileImgUrl;
           localStorage.setItem("userData", JSON.stringify(userData));
-  
+
           setProfileImg(newProfileImgUrl);
+          setIsDefaultImage(false); // 새로운 이미지가 추가됨
           nextHandler();
         } else {
           console.error("서버가 JSON 응답을 반환하지 않았습니다.");
@@ -77,7 +84,6 @@ const FirstLoginProfile = ({ nextHandler }) => {
       console.error("Error:", error);
     }
   };
-  
 
   const skipHandler = () => {
     submitHandler();
@@ -86,6 +92,7 @@ const FirstLoginProfile = ({ nextHandler }) => {
   const setDefaultImageHandler = () => {
     setProfileImg(defaultImg);
     setSelectedFile(null);
+    setIsDefaultImage(true); // 기본 이미지로 돌아가므로 상태 변경
     setModalActive(false);
 
     const userData = JSON.parse(localStorage.getItem("userData") || "{}");
@@ -109,9 +116,18 @@ const FirstLoginProfile = ({ nextHandler }) => {
 
   return (
     <div className={styles.container}>
-      <h1 className={`title ${styles.text}`}>프로필 설정</h1>
-      <div className={styles.profile} onClick={profileClickHandler}>
+      <h1 className={`title ${styles.text}`}>
+        프로필 사진을 추가하고 <br></br>자신을 표현해보세요!
+      </h1>
+      <div
+        className={`${styles.profile} ${
+          !isDefaultImage ? styles.noOverlay : ""
+        }`}
+        onClick={profileClickHandler}
+      >
         <img src={profileImg} alt="프로필 이미지" />
+        {isDefaultImage && <div className={styles.cameraIcon} />}{" "}
+        {/* 카메라 아이콘 추가 */}
       </div>
       <input
         ref={fileInputRef}
@@ -130,7 +146,7 @@ const FirstLoginProfile = ({ nextHandler }) => {
       )}
       <MtButtons
         buttonType={"apply"}
-        buttonText={"SUBMIT"}
+        buttonText={"다음"}
         eventType={"click"}
         eventHandler={submitHandler}
       />

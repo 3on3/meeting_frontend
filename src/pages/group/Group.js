@@ -16,6 +16,7 @@ import GroupDeleteModal from "./components/modal/GroupDeleteModal";
 import { useModal } from "../../context/ModalContext";
 import GroupLeaveModal from "./components/modal/GroupLeaveModal";
 import InviteModal from "../../components/common/modal/InviteModal";
+import Loading from "../../components/common/loading/Loading";
 
 const Group = () => {
   const { id } = useParams();
@@ -42,7 +43,6 @@ const Group = () => {
     }, 1200);
   };
 
-  console.log("groupData: ", groupData);
 
   const openConfirmModal = () => {
     openModal(
@@ -67,7 +67,11 @@ const Group = () => {
       setGroupData(data);
       setGroupUsers(data.users);
       setAuth(data.groupAuth); // auth 값을 설정
-      setLoading(false);
+
+      setTimeout(()=>{
+        setLoading(false);
+
+      }, 500)
     } catch (error) {
       setError(error);
       setLoading(false);
@@ -76,21 +80,11 @@ const Group = () => {
 
   useEffect(() => {
     fetchGroupData();
-    console.log(groupData);
   }, [id, isChanged]);
 
-  if (loading) {
-    return <div></div>;
-  }
+  if (loading) {return (<div className={styles.container}><Loading/></div>)}
 
-  if (loading) {
-    return (
-      <>
-        <GroupViewHeadSkeleton />
-        <GroupViewBodySkeleton />
-      </>
-    );
-  }
+  
 
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -157,7 +151,7 @@ const Group = () => {
   const { type, text, onClickHandler } = getButtonConfig();
 
   return (
-    <>
+    <div className={styles.container}>
       <GroupViewHead
         styles={styles}
         place={meetingPlace}
@@ -226,7 +220,7 @@ const Group = () => {
       {isRequestSuccess && (
         <InviteModal content={"매칭신청이 완료되었습니다."} />
       )}
-    </>
+    </div>
   );
 };
 

@@ -7,6 +7,8 @@ import EmptyGroups from "../EmptyGroups";
 
 import { useSearchParams } from "react-router-dom";
 import { throttle } from "lodash";
+import ScrollSection from "../../../components/common/scroll-section/ScrollSection";
+import Loading from "../../../components/common/loading/Loading";
 
 // matchingState={"complete"} 이면 매칭 완료
 function MeetingList() {
@@ -76,7 +78,6 @@ function MeetingList() {
         setPageNo((prevPage) => prevPage + 1);
 
         setLoading(false);
-        console.log("end loading!!");
 
         //더 불러올 데이터가 있는지
         if (totalElements === updatedListData.length) {
@@ -109,7 +110,7 @@ function MeetingList() {
       MainMeetingListFetch();
     }
   }, [inView, loading, isFinish]);
-
+  if (loading) return <Loading />;
   return (
     <>
       <ul className={styles.meetingList}>
@@ -122,7 +123,7 @@ function MeetingList() {
             matchingStatus={group.matchingStatus}
           />
         ))}
-        <div ref={scrollRef} style={{ height: "100px" }}></div>
+        {!isFinish && <ScrollSection />}
       </ul>
     </>
   );

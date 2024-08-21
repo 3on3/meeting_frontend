@@ -17,6 +17,7 @@
     color: var(--color-bk);
   }
 
+
   // 상단 필터
   .filterHeder {
     display: flex;
@@ -67,6 +68,8 @@
 
     .filterHeder {
       margin-top: calc(100vw * (22 / 500));
+
+
 
       .filterTitle {
         font-weight: 600;

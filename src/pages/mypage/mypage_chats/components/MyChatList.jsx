@@ -55,6 +55,7 @@ const MyChatList = ({chat}) => {
         <div className={styles.chatBox} onClick={chatBoxClickHandler}>
             <div className={styles.boxFirstContent}>
                 <div className={styles.boxTitle}>
+                    <div className={styles.chatIcon}/>
                     <h1>{chat.chatRoomName}</h1>
                     <div className={styles.major}>{chat.major}</div>
                 </div>

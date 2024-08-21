@@ -33,6 +33,10 @@ const LoginPage = () => {
     navigate("/login/first-login");
   };
 
+  const backToIntro = () => {
+    navigate("/intro");
+  }
+
   const [idInput, setIdInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
   const [idStatus, setIdStatus] = useState(true);
@@ -174,8 +178,8 @@ const LoginPage = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.logo}>
-        <img src={logoImage} alt="로고이미지" />
+      <div className={styles.logo} >
+        <img src={logoImage} alt="로고이미지" onClick={backToIntro}/>
       </div>
       <div className={styles.input}>
         <DefaultInput

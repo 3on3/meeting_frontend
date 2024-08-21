@@ -7,6 +7,7 @@ import EmptyGroups from "../EmptyGroups";
 
 import { useSearchParams } from "react-router-dom";
 import { throttle } from "lodash";
+import ScrollSection from "../../../components/common/scroll-section/ScrollSection";
 
 // matchingState={"complete"} 이면 매칭 완료
 function MeetingList() {
@@ -122,7 +123,7 @@ function MeetingList() {
             matchingStatus={group.matchingStatus}
           />
         ))}
-        <div ref={scrollRef} style={{ height: "100px" }}></div>
+        <ScrollSection/>
       </ul>
     </>
   );

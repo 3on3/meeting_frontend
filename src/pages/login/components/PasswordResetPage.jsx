@@ -6,10 +6,10 @@ import { useModal } from "../../../context/ModalContext";
 import ConfirmIdentityModal from "./find_password/ConfirmIdentityModal";
 
 const PasswordResetPage = () => {
-    const [email, setEmail] = useState("");
+    const [email, setEmail] = useState(""); // 이메일 상태
     const [errorMessage, setErrorMessage] = useState(""); // 오류 메시지 상태
     const [isButtonDisabled, setIsButtonDisabled] = useState(true); // 버튼 비활성화 상태
-    const { openModal } = useModal();
+    const { openModal } = useModal(); // 모달 열기 함수
 
     // 이메일 입력 필드 변경 핸들러
     const handleEmailChange = (e) => {

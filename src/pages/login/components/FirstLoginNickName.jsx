@@ -5,6 +5,7 @@ import DefaultInput from "../../../components/common/inputs/DefaultInput";
 import { useNavigate } from "react-router-dom";
 import { nickNameVerification } from "../../../assets/js/Verification";
 
+// 형용사와 명사 배열 정의
 const adjectives = [
   "배부른", "행복한", "용감한", "똑똑한", "신나는", 
   "귀여운", "멋진", "강력한", "차분한", "영리한",
@@ -19,6 +20,7 @@ const nouns = [
   "부자", "미녀", "미남", "연예인", "가수"
 ];
 
+// 랜덤 닉네임 생성 함수
 const generateRandomNickname = () => {
   const randomAdjective = adjectives[Math.floor(Math.random() * adjectives.length)];
   const randomNoun = nouns[Math.floor(Math.random() * nouns.length)];
@@ -26,18 +28,20 @@ const generateRandomNickname = () => {
 };
 
 const FirstLoginNickName = () => {
-  const [isNickNameValid, setIsNickNameValid] = useState(true);
-  const [nickName, setNickName] = useState("");
-  const [isNickNameEmpty, setIsNickNameEmpty] = useState(true);
-  const [error, setError] = useState(""); // 에러 메시지
-  const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
-  const email = JSON.parse(localStorage.getItem("userData")).email;
+  const [isNickNameValid, setIsNickNameValid] = useState(true); // 닉네임 유효성 상태
+  const [nickName, setNickName] = useState(""); // 닉네임 상태
+  const [isNickNameEmpty, setIsNickNameEmpty] = useState(true); // 닉네임 비어있음 상태
+  const [error, setError] = useState(""); // 에러 메시지 상태
+  const [loading, setLoading] = useState(false); // 로딩 상태
+  const navigate = useNavigate(); // 페이지 네비게이션을 위한 훅
+  const email = JSON.parse(localStorage.getItem("userData")).email; // 로컬 스토리지에서 이메일 가져오기
 
+  // 닉네임 입력 필드가 비어있는지 확인
   useEffect(() => {
     setIsNickNameEmpty(nickName.trim() === "");
   }, [nickName]);
 
+  // 닉네임 유효성 검사
   useEffect(() => {
     if (!isNickNameEmpty) {
       setIsNickNameValid(nickNameVerification(nickName));
@@ -46,6 +50,7 @@ const FirstLoginNickName = () => {
     }
   }, [nickName, isNickNameEmpty]);
 
+  // 닉네임 확인 핸들러
   const isNickNameCheckHandler = async () => {
     if (isNickNameEmpty || !isNickNameValid) {
       setError("사용할 수 없는 닉네임입니다.");
@@ -90,6 +95,7 @@ const FirstLoginNickName = () => {
     }
   };
 
+  // 닉네임 입력 변경 핸들러
   const nickNameChangeHandler = (e) => {
     setNickName(e.target.value);
     if (e.target.value.trim() === "") {
@@ -101,6 +107,7 @@ const FirstLoginNickName = () => {
     }
   };
 
+  // 닉네임 건너뛰기 핸들러
   const skipClickHandler = async () => {
     const randomNickname = generateRandomNickname();
     try {

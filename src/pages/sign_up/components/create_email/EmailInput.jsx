@@ -4,6 +4,7 @@ import { emailVerification } from "../../../../assets/js/Verification";
 import MtButtons from "../../../../components/common/buttons/MtButtons";
 import styles1 from './EmailInput.module.scss'
 
+// 이메일 및 대학교 이름 입력 컴포넌트
 const EmailInput = ({
   styles,
   setIsEmail,
@@ -13,36 +14,38 @@ const EmailInput = ({
   setUnivName,
   setSignUpEmail
 }) => {
-  const [emailInput, setEmailInput] = useState("");
-  const [univNameInput, setUnivNameInput] = useState("");
+  const [emailInput, setEmailInput] = useState(""); // 이메일 입력 상태
+  const [univNameInput, setUnivNameInput] = useState(""); // 대학교 이름 입력 상태
   const [loading, setLoading] = useState(false); // 로딩 상태
   const [error, setError] = useState(""); // 에러 메시지
 
+  // 이메일 입력 핸들러
   const emailInputHandler = (e) => {
     setEmailInput(e.target.value);
     setSignUpEmail(e.target.value);
-    // 이메일 입력 변경 시 에러 초기화
     if (error) {
       setError("");
     }
   };
 
+  // 대학교 이름 입력 핸들러
   const univNameInputHandler = (e) => {
     setUnivNameInput(e.target.value);
     setUnivName(e.target.value);
-    // 대학교 이름 입력 변경 시 에러 초기화
     if (error) {
       setError("");
     }
   };
 
+  // 이메일 유효성 검사를 수행
   useEffect(() => {
     setIsEmail(emailVerification(emailInput));
   }, [emailInput]);
 
+  // 제출 핸들러
   const submitHandler = async () => {
     setLoading(true);
-    setError(""); // 이전의 에러 메시지 초기화
+    setError("");
     try {
         const response = await fetch("http://localhost:8253/signup/check-email", {
             method: "POST",
@@ -54,9 +57,9 @@ const EmailInput = ({
                 univName: univNameInput,
             }),
         });
-        
+
         const responseData = await response.text();
-        
+
         let data;
         try {
             data = JSON.parse(responseData);
@@ -69,13 +72,11 @@ const EmailInput = ({
             throw new Error(data.message || `서버 에러: ${response.status}`);
         }
 
-        // 중복된 이메일인 경우 에러 메시지 설정
         if (data) {
             setError("이미 사용 중인 이메일입니다. 다른 이메일을 사용해 주세요.");
             return;
         }
 
-        // 성공적인 응답 후 처리 로직
         setIsSubmit([true, false, false]);
     } catch (error) {
         console.error('Error in submitHandler:', error);

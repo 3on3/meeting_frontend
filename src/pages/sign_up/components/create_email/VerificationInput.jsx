@@ -1,26 +1,25 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import DefaultInput from "../../../../components/common/inputs/DefaultInput";
 import MtButtons from "../../../../components/common/buttons/MtButtons";
 
-const VerificationInput = ({styles,isSubmit,setIsSubmit, email, univName, onVerified}) => {
+// 이메일 인증 코드 입력 컴포넌트
+const VerificationInput = ({styles, isSubmit, setIsSubmit, email, univName, onVerified}) => {
 
-    const [emailVerificationInput, setEmailVerificationInput] = useState('');
-    const [inputState, setInputState] = useState('');
+    const [emailVerificationInput, setEmailVerificationInput] = useState(''); // 인증 코드 입력 상태
+    const [inputState, setInputState] = useState(''); // 입력 상태 (correct, error 등)
     const [loading, setLoading] = useState(false);  // 로딩 상태
     const [error, setError] = useState('');          // 에러 메시지
 
+    // 인증 코드 입력 핸들러
     const verificationInputHandler = e => {
         setEmailVerificationInput(e.target.value);
-        // 사용자가 입력을 시작하면 에러 메시지와 상태 초기화
         if (error) {
           setError('');
           setInputState('');
         }
     }
 
-
-    // 인증번호 입력 후 버튼 클릭시 인증번호가 일치한다면 다음 단계로 넘어감
-    // 인증번호가 일치하지 않는다면 error 메시지 출력
+    // 인증 버튼 클릭 핸들러
     const verificationHandler = async () => {
       setLoading(true);
       setError('');
@@ -42,12 +41,11 @@ const VerificationInput = ({styles,isSubmit,setIsSubmit, email, univName, onVeri
         console.log('VerificationInput response: ', response);
         console.log('data: ', data);
 
-        if (response.ok && data === true) { // 인증 성공: 응답 데이터도 확인
+        if (response.ok && data === true) {
             setInputState('correct');
             onVerified(data);
             setIsSubmit([true, true, false]);
         } else {
-            // 인증 실패
             setInputState('error');
             setError(data.message || '인증번호가 일치하지 않습니다. 다시 시도해주세요.');
         }
@@ -59,24 +57,25 @@ const VerificationInput = ({styles,isSubmit,setIsSubmit, email, univName, onVeri
     }
 };
 
-
-
-
     return (
         <>
-            <DefaultInput inputState={inputState}
-                          errorMessage={inputState === 'error' ? error : ''}
-                          onChange={verificationInputHandler}
-                          placeholder={'인증코드 입력'}
+            <DefaultInput 
+              inputState={inputState}
+              errorMessage={inputState === 'error' ? error : ''}
+              onChange={verificationInputHandler}
+              placeholder={'인증코드 입력'}
             />
-            {!isSubmit[1] && (<div className={styles.button}>
-                <MtButtons buttonText={'SUBMIT'}
-                           buttonType={emailVerificationInput ? 'apply' : 'disabled'}
-                           eventType={'click'}
-                           eventHandler={verificationHandler}
-                           disabled={loading}/>
-            </div>)}
-            {/* {error && <p className={styles.error}>{error}</p>} */}
+            {!isSubmit[1] && (
+                <div className={styles.button}>
+                    <MtButtons 
+                      buttonText={'SUBMIT'}
+                      buttonType={emailVerificationInput ? 'apply' : 'disabled'}
+                      eventType={'click'}
+                      eventHandler={verificationHandler}
+                      disabled={loading}
+                    />
+                </div>
+            )}
         </>
     );
 };

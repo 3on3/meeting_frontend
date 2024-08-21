@@ -7,38 +7,44 @@ function MainFilter({}) {
   // 필터 더보기 토글
   const [isMoreActive, setIsMoreActive] = useState(false);
 
-  // 필터 성별
+  // URL의 검색 파라미터를 가져오는 useSearchParams 훅
   const [searchParams, setSearchParams] = useSearchParams();
-  const paramsGender = searchParams.get("gender");
-
-  // 필터 인원수
-  const paramsPersonnel = searchParams.get("personnel");
+  const paramsGender = searchParams.get("gender"); // 필터 성별
+  const paramsPersonnel = searchParams.get("personnel"); // 필터 인원수
 
   // =====이벤트 함수=====
-  // 필터 더보기 클릭 시 이벤트
+  // 필터 더보기 클릭 시 상태를 토글
   const moreClickHandler = (e) => {
     setIsMoreActive(!isMoreActive);
   };
 
-  // 성별 클릭 이벤트 & params에 보내기
+  // 성별 클릭 이벤트: 성별을 토글하고 URL 파라미터를 업데이트하는 함수
   const filterGenderHandler = (Gender) => {
+    // 클릭한 성별이 이미 선택된 성별이면 null로 설정
     const newGender = paramsGender === Gender ? null : Gender;
+
+    // 성별이 null이면 파라미터를 삭제, 아니면 업데이트
     if (newGender === null) {
       searchParams.delete("gender");
     } else {
       searchParams.set("gender", newGender);
     }
+    // URL 파라미터를 업데이트
     setSearchParams(searchParams);
   };
 
-  // 인원수 클릭 이벤트 & params에 보내기
+  // 인원수 클릭 이벤트: 인원수를 토글하고 URL 파라미터를 업데이트
   const filterPersonnelHandler = (personnel) => {
+    // 클릭한 인원수가 이미 선택된 인원수이면 null로 설정
     const newPersonnel = paramsPersonnel === personnel ? null : personnel;
+
+    // 인원수가 null이면 파라미터를 삭제, 아니면 업데이트
     if (newPersonnel === null) {
       searchParams.delete("personnel");
     } else {
       searchParams.set("personnel", newPersonnel);
     }
+    // URL 파라미터를 업데이트
     setSearchParams(searchParams);
   };
 

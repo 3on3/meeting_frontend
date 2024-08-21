@@ -140,7 +140,7 @@ const GroupViewBody = ({
           ? users.map((user) => (
               <MemberList
                 key={user.id}
-                imgUrl={imgOriginUrl}
+                imgUrl={user.profileImageUrl}
                 userName={user.name}
                 univ={user.univName}
                 nickname={user.nickname}
@@ -156,7 +156,7 @@ const GroupViewBody = ({
           : applicants.map((applicant) => (
               <MemberList
                 key={applicant.id}
-                imgUrl={imgOriginUrl}
+                imgUrl={applicant.profileImageUrl}
                 userName={applicant.userName}
                 univ={applicant.userUnivName}
                 major={applicant.userMajor}

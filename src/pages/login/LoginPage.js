@@ -1,4 +1,3 @@
-// LoginPage.js
 import React, { useEffect, useState } from "react";
 import logoImage from "../../assets/images/login/logo.svg";
 import MtButtons from "../../components/common/buttons/MtButtons";
@@ -22,21 +21,25 @@ const extractPathFromUrl = (url) => {
 };
 
 const LoginPage = () => {
-  const navigate = useNavigate();
-  const loginDispatch = useDispatch();
+  const navigate = useNavigate(); // 페이지 이동을 위한 navigate 훅
+  const loginDispatch = useDispatch(); // Redux dispatch 훅
 
+  // 로그인 후 홈으로 이동
   const loginNavigate = () => {
     navigate("/");
   };
 
+  // 첫 로그인 후 프로필 설정 페이지로 이동
   const firstLoginNavigate = () => {
     navigate("/login/first-login");
   };
 
+  // 소개 페이지로 돌아가기
   const backToIntro = () => {
     navigate("/intro");
   }
 
+  // 상태 변수 초기화
   const [idInput, setIdInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
   const [idStatus, setIdStatus] = useState(true);
@@ -45,6 +48,7 @@ const LoginPage = () => {
   const [passwordError, setPasswordError] = useState("");
   const [loginError, setLoginError] = useState("");
 
+  // 컴포넌트가 마운트될 때 토큰 존재 여부 확인
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem("userData") || "{}");
     if (userData.token) {
@@ -54,25 +58,30 @@ const LoginPage = () => {
     }
   }, [navigate]);
 
+  // 이메일 형식 검증
   useEffect(() => {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     setIdStatus(emailPattern.test(idInput));
   }, [idInput]);
 
+  // 아이디 입력 핸들러
   const idInputHandler = (e) => {
     setIdInput(e.target.value);
     setIdError("");
   };
 
+  // 비밀번호 입력 핸들러
   const passwordInputHandler = (e) => {
     setPasswordInput(e.target.value);
     setPasswordError("");
   };
 
+  // 자동 로그인 체크박스 핸들러
   const autoLoginHandler = (isChecked) => {
     setAutoLogin(isChecked);
   };
 
+  // 로그인 핸들러
   const loginHandler = async () => {
     if (idStatus && passwordInput) {
       const payload = {
@@ -93,8 +102,8 @@ const LoginPage = () => {
         if (response.ok) {
           const data = await response.json();
           console.log('data: ', data);
-          
-          // 탈퇴여부가 true이면 error 알려주고 return
+
+          // 탈퇴 여부 확인
           if (data.isWithdrawn) {
             setLoginError("이 계정은 탈퇴된 회원입니다.");
             return;
@@ -124,7 +133,7 @@ const LoginPage = () => {
             {
               method: "GET",
               headers: {
-                Authorization: `Bearer ${data.token}`, // 로그인 시 받은 token 사용
+                Authorization: `Bearer ${data.token}`,
                 'Content-Type': 'application/json'
               },
             }
@@ -149,16 +158,16 @@ const LoginPage = () => {
             errorText.includes("Invalid password")
           ) {
             setIdError("아이디와 비밀번호가 모두 틀렸습니다.");
-            setPasswordError(""); // 비밀번호 오류 메시지 초기화
+            setPasswordError("");
           } else if (errorText.includes("User not found")) {
             setIdError("존재하지 않는 아이디입니다.");
-            setPasswordError(""); // 비밀번호 오류 메시지 초기화
+            setPasswordError("");
           } else if (errorText.includes("Invalid password")) {
             setPasswordError("비밀번호가 틀렸습니다.");
-            setIdError(""); // 아이디 오류 메시지 초기화
+            setIdError("");
           } else {
             setIdError("로그인에 실패했습니다.");
-            setPasswordError(""); // 비밀번호 오류 메시지 초기화
+            setPasswordError("");
           }
         }
       } catch (error) {
@@ -168,10 +177,12 @@ const LoginPage = () => {
     }
   };
 
+  // 회원가입 페이지로 이동
   const SignUpClickHandler = () => {
     navigate("/sign-up");
   };
 
+  // 비밀번호 찾기 페이지로 이동
   const findPasswordClickHandler = () => {
     navigate("/password-reset");
   };

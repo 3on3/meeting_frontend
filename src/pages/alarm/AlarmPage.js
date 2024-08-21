@@ -9,13 +9,10 @@ const AlarmPage =  () => {
 
     const [alarmList, setAlarmList] = useState({});
 
+    // 페이지 렌더링시 alarmList fetch
     useEffect(() => {
         alarmListFetch(setAlarmList);
     }, []);
-
-    useEffect(() => {
-        console.log(alarmList)
-    }, [alarmList]);
 
     return (
         <div className={styles.container}>

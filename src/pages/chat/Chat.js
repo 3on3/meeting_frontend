@@ -34,7 +34,6 @@ const Chat = () => {
   // 메시지 보냈는지 여부
   const [sendMyMessage, setSendMyMessage] = useState(false);
 
-  console.log('id:',id);
   
   useEffect(()=>{
 
@@ -42,7 +41,6 @@ const Chat = () => {
 
     const fetchData = async () => {
       try {
-        console.log("트라이에서 id", id);
         
         const response = await fetch(
           `${CHATROOM_URL}/${id}`
@@ -63,14 +61,11 @@ const Chat = () => {
         // console.log("data ", data);
         
         setChatRoomData(data);
-        console.log("set DAta next : ",chatRoomData);
       } catch (error) {
-        console.error(error);
       }
     };
 
     fetchData();
-    console.log("chatRoomData: ",chatRoomData);
     
   },[id])
 
@@ -93,25 +88,21 @@ const Chat = () => {
   // 메세지 보내기 버튼
   const onClickSendBtn = async () => {
 
+    // 버튼 클릭시 value가 있어야만 메세지 전송
     if (value !== "") {
       const payload = {
         roomId: id,
         message: value,
       }
 
+      // chat 웹소켓에 보낼 data 구성
       const data = {
         type: 'message',
         message: await saveMessage(payload),
         chatroomId: id
       }
 
-      console.log(data);
-
-
-
       socket.send(JSON.stringify(data));
-
-      console.log(JSON.stringify(data));
       // setMessageList(prevState => [...prevState, data]);
 
       setSendMyMessage(prevState => !prevState);

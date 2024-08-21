@@ -39,7 +39,6 @@ function GroupBox({ state, group, className, setIsChanged, matchingStatus }) {
       groupBoxState = styles.line;
       break;
     case "sky-request":
-      console.log("sky-request");
     default:
       groupBoxState = "";
       break;

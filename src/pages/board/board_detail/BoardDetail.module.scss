@@ -38,7 +38,7 @@
       flex-direction: column;
       .name {
         font-size: calc(100vw * (17 / 500));
-        font-weight: 550;
+        font-weight: 500;
         padding-bottom: calc(100vw * (6 / 500));
         padding-left: calc(100vw * (17 / 500));
       }
@@ -46,6 +46,10 @@
         font-size: calc(100vw * (15 / 500));
         padding-left: calc(100vw * (17 / 500));
         color: #786e85;
+        span{
+          margin-right: 10px;
+
+        }
       }
     }
   }
@@ -64,6 +68,10 @@
     font-size: calc(100vw * (19 / 500));
   }
 }
+.info{
+  display: flex;
+  justify-content: right;
+}
 .messageBox {
   display: flex;
   text-align: left;
@@ -72,17 +80,38 @@
   background-color: var(--color-wh);
   border-radius: calc(100vw * (8 / 500));
   width: fit-content;
-  margin-left: auto;
-  .imageB {
+  margin-right: calc(100vw * (6 / 500));
+  color: var(--color-point);
+  font-weight: 600;
+  font-size: calc(100vw * (17 / 500));
+  &::before{
+    content: '';
+    display: inline-block;
     width: calc(100vw * (20 / 500));
     height: calc(100vw * (20 / 500));
-    background: url(../../../assets/images/icons/h-messageBox.svg) center/cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-right: calc(100vw * (6 / 500));
   }
-  .count {
-    margin-left: calc(100vw * (7 / 500));
-    color: var(--color-point);
-    font-weight: 600;
-    font-size: calc(100vw * (17 / 500));
+  &:last-child{
+    margin-right: 0;
+  }
+
+  &.count {
+    &::before{
+      background-image: url(../../../assets/images/icons/h-messageBox.svg);
+      background-size: calc(100vw * (17 / 500));
+
+    }
+    
+  }
+  &.viewCount {
+    &::before{
+      background-size: calc(100vw * (20 / 500));
+      background-image: url(../../../assets/images/icons/c-view.svg);
+
+    }
+    
   }
 }
 .ReplyList {
@@ -141,6 +170,8 @@
     .replyTime {
       font-size: calc(100vw * (16 / 500));
       color: #786e85;
+      margin-left: auto;
+      width: fit-content;
     }
   }
 }

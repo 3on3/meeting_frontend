@@ -45,7 +45,6 @@ const BoardList = ({ className, styles, activeTab }) => {
   useEffect(() => {
     getListFetch();
   }, [activeTab]);
-  console.log("boardList: ", boardList);
 
   return (
     <ul className={className}>

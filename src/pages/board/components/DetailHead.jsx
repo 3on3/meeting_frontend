@@ -1,6 +1,6 @@
 import React from "react";
 
-const DetailHead = ({ styles, className }) => {
+const DetailHead = ({ styles, className ,boardData }) => {
   return (
     <div className={className}>
       <div className={styles.heads}>
@@ -9,7 +9,7 @@ const DetailHead = ({ styles, className }) => {
         </div>
         <div className={styles.nameAndMonth}>
           <div className={styles.name}>익명</div>
-          <div className={styles.time}>08/20 13:55</div>
+          <div className={styles.time}><span>{boardData.createdAt}</span></div>
         </div>
       </div>
     </div>

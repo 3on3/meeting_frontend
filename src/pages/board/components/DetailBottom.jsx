@@ -1,11 +1,16 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
-const DetailBottom = ({ className, styles, viewCount }) => {
+const DetailBottom = ({ className, styles, boardData }) => {
   return (
     <div className={className}>
       <div className={styles.info}>
+        {boardData.isAuthor && (
+          <NavLink className={styles.editBtn} to={`/board/modify/${boardData.id}`}>글 수정</NavLink>
+        )}
+
         <p className={`${styles.messageBox} ${styles.viewCount}`}>
-          {viewCount}
+          {boardData.viewCount}
         </p>
         <p className={`${styles.messageBox} ${styles.count}`}>3</p>
       </div>

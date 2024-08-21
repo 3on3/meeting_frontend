@@ -8,13 +8,14 @@ import styles from "./Textarea.module.scss";
  * @param maxLength :글자수 제한
  *
  */
-const Textarea = forwardRef(({ placeholder, text, maxLength },ref) =>{
+const Textarea = forwardRef(({ placeholder, text, maxLength, value },ref) =>{
   return (
     <textarea
       className={styles.textarea}
       placeholder={placeholder}
       maxLength={maxLength}
       ref={ref}
+      value={value}
     >
       {text}
     </textarea>

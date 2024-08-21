@@ -47,6 +47,7 @@ const BoardDetail = () => {
     getBoardFetch();
   }, [id]);
   console.log("board: ", boardData);
+  // if(boardData)
   if(isLoading) return <div></div>;
   return (
     <>
@@ -54,7 +55,7 @@ const BoardDetail = () => {
         <h1 className={`title ${styles.title}`}>{boardData.title}</h1>
         <DetailHead className={styles.MainText} styles={styles} boardData={boardData}/>
         <DetailBody className={styles.TextWrite} styles={styles}  content={boardData.content}/>
-        <DetailBottom className={styles.ReplyList} styles={styles} viewCount={boardData.viewCount}/>
+        <DetailBottom className={styles.ReplyList} styles={styles} boardData={boardData}/>
         <div className={styles.inputBox}>
         <ChatInput styles={inputStyles} />
         </div>

@@ -29,6 +29,7 @@ import AlarmPage from "../pages/alarm/AlarmPage";
 import Board from "../pages/board/Board";
 import BoardWrite from "../pages/board/boardWrite/BoardWrite";
 import BoardDetail from "../pages/board/board_detail/BoardDetail";
+import BoardModify from "../pages/board/boardModify/BoardModify";
 
 // 마이페이지 라우터
 const mypageRouter = [
@@ -77,6 +78,10 @@ const boardRouter = [
   {
     path: "detail/:id",
     element: <BoardDetail />,
+  },
+  {
+    path: "modify/:id",
+    element: <BoardModify />,
   },
 ];
 

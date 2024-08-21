@@ -12,7 +12,7 @@ import DefaultInput from "../../../../components/common/inputs/DefaultInput";
 const Withdraw = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isEmailMatch, setIsEmailMatch] = useState(true); // 이메일 일치 여부 상태 추가
+  const [isEmailMatch, setIsEmailMatch] = useState(true); 
   const [isPasswordValid, setIsPasswordValid] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
   const [showPassword, setShowPassword] = useState(false);

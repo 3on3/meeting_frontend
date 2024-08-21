@@ -41,7 +41,6 @@ const Chat = () => {
 
     const fetchData = async () => {
       try {
-        
         const response = await fetch(
           `${CHATROOM_URL}/${id}`
         , {
@@ -58,7 +57,6 @@ const Chat = () => {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
-        // console.log("data ", data);
         
         setChatRoomData(data);
       } catch (error) {

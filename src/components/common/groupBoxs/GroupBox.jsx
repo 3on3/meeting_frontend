@@ -7,8 +7,12 @@ import MyGroupSelectModal from "../../myGroupSelectModal/MyGroupSelectModal";
 import InviteModal from "../modal/InviteModal";
 
 function GroupBox({ state, group, className, setIsChanged, matchingStatus }) {
+  // 모달 활성화 상태를 관리하는 useStat
   const [modalActive, setModalActive] = useState(false);
+  // 요청 성공 여부를 관리하는 useState
   const [isRequestSuccess, setIsRequestSuccess] = useState(false);
+
+  // 매칭 요청 성공 후 1.2초 후에 모달을 닫는 함수
   const onClickAndSuccess = () => {
     setIsRequestSuccess(true);
     // 3초 후에 모달 닫기
@@ -16,6 +20,7 @@ function GroupBox({ state, group, className, setIsChanged, matchingStatus }) {
       setIsRequestSuccess(false);
     }, 1200);
   };
+
   // =============== param 스타일 가이드 ===============
   /**
    * li 태그라서 쓸때 ul 안에 사용하기
@@ -39,15 +44,15 @@ function GroupBox({ state, group, className, setIsChanged, matchingStatus }) {
       groupBoxState = styles.line;
       break;
     case "sky-request":
-      console.log("sky-request");
     default:
       groupBoxState = "";
       break;
   }
-
   // ====================================================
+
   // ======================= 함수 =======================
-  // groupGender Text 변경 작업
+
+  // groupGender 함수: 그룹 성별을 한글로 변환
   const groupGender = (gender) => {
     switch (gender) {
       case "M":
@@ -58,8 +63,7 @@ function GroupBox({ state, group, className, setIsChanged, matchingStatus }) {
     }
   };
 
-  // groupPlace Text 변경 작업
-
+  // groupPlace 함수: 그룹 위치를 한글로 변환
   const groupPlace = (place) => {
     switch (place) {
       case "SEOUL_GYEONGGI":
@@ -88,7 +92,7 @@ function GroupBox({ state, group, className, setIsChanged, matchingStatus }) {
     }
   };
 
-  // 매칭 요청 버튼 모달 활성화
+  // 매칭 요청 버튼을 클릭했을 때 모달을 활성화
   const onClickRequestBtn = (e) => {
     e.preventDefault();
     setModalActive(!modalActive);

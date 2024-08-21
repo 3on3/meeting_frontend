@@ -18,6 +18,7 @@ const GroupViewBody = ({
 }) => {
   const [tab, setTab] = useState("current");
   const [applicants, setApplicants] = useState([]);
+  const [modalContent, setModalContent] = useState("");
 
   useEffect(() => {
     if (auth === "HOST") {
@@ -48,6 +49,15 @@ const GroupViewBody = ({
     }
   }, [auth, groupId]);
 
+  const showModal = (message) => {
+    if (modalContent !== "") return;
+    setModalContent(message);
+
+    setTimeout(() => {
+      setModalContent("");
+    }, 1200);
+  };
+
   const handleAccept = async (applicantId) => {
     try {
       const response = await fetch(
@@ -73,6 +83,9 @@ const GroupViewBody = ({
           applicants.filter((applicant) => applicant.id !== applicantId)
         );
         updateUsers(newUsers);
+        showModal("그룹 참가 요청을 수락하였습니다.");
+      } else {
+        showModal("그룹이 이미 꽉 찬 상태입니다.");
       }
     } catch (error) {
       console.error(error);
@@ -170,6 +183,7 @@ const GroupViewBody = ({
       </ul>
 
       {/* 모달 표시 */}
+      {modalContent && <InviteModal content={modalContent} />}
     </div>
   );
 };

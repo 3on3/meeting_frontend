@@ -43,7 +43,6 @@ const Group = () => {
     }, 1200);
   };
 
-  console.log("groupData: ", groupData);
 
   const openConfirmModal = () => {
     openModal(
@@ -81,7 +80,6 @@ const Group = () => {
 
   useEffect(() => {
     fetchGroupData();
-    console.log(groupData);
   }, [id, isChanged]);
 
   if (loading) {return (<div className={styles.container}><Loading/></div>)}

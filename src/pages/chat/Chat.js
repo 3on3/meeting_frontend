@@ -34,7 +34,6 @@ const Chat = () => {
   // 메시지 보냈는지 여부
   const [sendMyMessage, setSendMyMessage] = useState(false);
 
-  console.log('id:',id);
   
   useEffect(()=>{
 
@@ -42,8 +41,6 @@ const Chat = () => {
 
     const fetchData = async () => {
       try {
-        console.log("트라이에서 id", id);
-        
         const response = await fetch(
           `${CHATROOM_URL}/${id}`
         , {
@@ -60,7 +57,6 @@ const Chat = () => {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
-        // console.log("data ", data);
         
         setChatRoomData(data);
         console.log("set DAta next : ",chatRoomData);
@@ -70,7 +66,6 @@ const Chat = () => {
     };
 
     fetchData();
-    console.log("chatRoomData: ",chatRoomData);
     
   },[id])
 

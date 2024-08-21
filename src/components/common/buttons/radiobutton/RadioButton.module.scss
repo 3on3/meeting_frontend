@@ -14,8 +14,8 @@
 
 .radioInput + span {
   display: inline-block;
-  width: 20px;
-  height: 20px;
+  width: calc(100vw * (20 / 500));
+  height: calc(100vw * (20 / 500));
   background-color: #e0e0e0;
   border-radius: 50%; 
   position: relative;
@@ -29,8 +29,8 @@
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 10px;
-  height: 10px;
+  width: calc(100vw * (10 / 500));
+  height: calc(100vw * (10 / 500));
   background-color: #a3a3a3; /* 기본 비선택 상태 */
   border-radius: 50%; 
   transform: translate(-50%, -50%);
@@ -51,10 +51,6 @@
 
 .radioInput:disabled:checked + span {
   background-color: #b0b0b0;
-}
-
-.radioInput:checked + span + span {
-  // font-weight: bold; /* 라디오 버튼이 선택된 경우 텍스트를 진하게 */
 }
 
 label span {

@@ -6,12 +6,28 @@ const ChatBody = ({ styles, messageList, myMessage }) => {
     const loginUser = userDataLoader();
     const endOfMessagesRef = useRef(null);
     const isInitialRender = useRef(true);
+    const chatInnerRef = useRef(null);
+
+    const isScrolledToBottom = () => {
+
+        if(chatInnerRef.current) {
+            console.log("실행됨?")
+            const { scrollTop, scrollHeight, clientHeight } = chatInnerRef.current;
+            // 사용자가 스크롤을 거의 아래에 두고 있는지 확인 (1px의 오차 허용)
+            return scrollHeight - scrollTop - clientHeight <= 200;
+        }
+
+    };
+
+    const scrollToBottom = () => {
+        endOfMessagesRef.current?.scrollIntoView({});
+    };
 
     // 처음 렌더링될 때만 스크롤을 제일 아래로 이동
     useEffect(() => {
         if (isInitialRender.current) {
             setTimeout(() => {
-                endOfMessagesRef.current?.scrollIntoView( { });
+                scrollToBottom();
             }, 100);
             isInitialRender.current = false;
         }
@@ -20,13 +36,21 @@ const ChatBody = ({ styles, messageList, myMessage }) => {
     // 내가 메시지를 전송하면 화면이 제일 아래로 내려가도록
     useEffect(() => {
         setTimeout(() => {
-            endOfMessagesRef.current?.scrollIntoView( { });
+            scrollToBottom();
         }, 100)
     }, [myMessage]);
 
+    useEffect(() => {
+        if (isScrolledToBottom()) {
+            setTimeout(() => {
+                scrollToBottom();
+            }, 100);
+        }
+    }, [messageList]);
+
     return (
         <div className={styles.chatBody}>
-            <div className={styles.chatInner}>
+            <div className={styles.chatInner} ref={chatInnerRef}>
                 {messageList !== null && messageList.map((message, i) => {
                     if (i !== 0 && message.userId === messageList[i - 1].userId) {
                         return (
@@ -45,6 +69,9 @@ const ChatBody = ({ styles, messageList, myMessage }) => {
                                 i !== messageList.length-1
                                     && message.messageAt[3] === messageList[i+1].messageAt[3]
                                     && message.messageAt[4] === messageList[i+1].messageAt[4]
+                                }
+                                sameUserTime={i !== messageList.length-1
+                                    && message.userId === messageList[i + 1].userId
                                 }
                                 myMessage={message.userEmail === loginUser.email}
                             />
@@ -68,6 +95,9 @@ const ChatBody = ({ styles, messageList, myMessage }) => {
                                 && message.messageAt[4] === messageList[i+1].messageAt[4]
                             }
                             myMessage={message.userEmail === loginUser.email}
+                            sameUserTime={i !== messageList.length-1
+                                && message.userId === messageList[i + 1].userId
+                            }
 
                         />
                     );

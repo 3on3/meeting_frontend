@@ -36,18 +36,10 @@ const Group = () => {
 
   const { openModal } = useModal();
   const [isRequestSuccess, setIsRequestSuccess] = useState(false);
-  const onClickAndSuccess = async () => {
+  const onClickAndSuccess = () => {
     setIsRequestSuccess(true);
 
-    await alarmFetch(setGroupHostUser, id);
-
-    const socketMessage = {
-      type: "matching",
-      email: groupHostUser.email,
-      responseGroupId: id,
-    };
-
-    mainSocket.mainWebSocket.send(JSON.stringify(socketMessage));
+    alarmFetch(setGroupHostUser, id);
 
     // 3초 후에 모달 닫기
     setTimeout(() => {
@@ -55,6 +47,25 @@ const Group = () => {
     }, 1200);
   };
 
+  const testHandler = () =>{
+    alarmFetch(setGroupHostUser, id);
+
+  }
+
+
+  useEffect(() => {
+    setTimeout(() => {
+      if(groupHostUser !== null && mainSocket.mainWebSocket !== null) {
+        const socketMessage = {
+          type: "matching",
+          email: groupHostUser,
+          responseGroupId: id,
+        };
+
+        mainSocket.mainWebSocket.send(JSON.stringify(socketMessage));
+      }
+    }, 1000)
+  }, [groupHostUser]);
 
   
 
@@ -91,6 +102,12 @@ const Group = () => {
       setLoading(false);
     }
   };
+
+
+  useEffect(() => {
+
+    console.log(groupHostUser)
+  }, [groupHostUser]);
 
   useEffect(() => {
     fetchGroupData();
@@ -143,9 +160,8 @@ const Group = () => {
         return {
           type: "cancel",
           text: "매칭 신청하기",
-          onClickHandler: async () => {
+          onClickHandler: () => {
             setModalActive(!modalActive);
-
           },
         };
       default:
@@ -157,6 +173,7 @@ const Group = () => {
 
   return (
     <div className={styles.container}>
+      <div onClick={testHandler}>일단테스트를 위한 아무거나야</div>
       <GroupViewHead
         styles={styles}
         place={meetingPlace}

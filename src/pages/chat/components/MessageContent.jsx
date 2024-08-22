@@ -31,7 +31,7 @@ const MessageContent = ({styles, content, messageAt, sameTime, sameUser, myMessa
         <p className={styles.content}>
           {content}
         </p>
-        {time && !sameTime && <div className={styles.textTime}>{time}</div>}
+        {time && (!sameTime || !sameUser) && <div className={styles.textTime}>{time}</div>}
       </div>
 
   );

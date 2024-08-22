@@ -9,11 +9,11 @@
   justify-content: center;
   align-items: center;
   color: var(--color-sh);
-  border: calc(100vw * (1 / 500)) solid var(--color-sh);
+  border: 1px solid var(--color-sh);
 
   // 활성화
   &.active {
-    border: calc(100vw * (1 / 500)) solid var(--color-bk);
+    border: 1px solid var(--color-bk);
     color: var(--color-bk);
   }
 

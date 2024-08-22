@@ -8,6 +8,7 @@ import { BOARD_URL } from "../../../config/host-config";
 import { getUserToken } from "../../../config/auth";
 import ChatInput from "../../chat/components/ChatInput";
 import inputStyles from "../../chat/Chat.module.scss";
+import Loading from "../../../components/common/loading/Loading";
 
 const BoardDetail = () => {
   const { id } = useParams();
@@ -46,7 +47,10 @@ const BoardDetail = () => {
       console.error("Error:", err);
       setError(err.message);
     } finally {
-      setIsLoading(false);
+      setTimeout(()=>{
+        setIsLoading(false);
+      },500)
+      
     }
   };
 
@@ -92,7 +96,7 @@ const BoardDetail = () => {
 
   
   // 수정요
-  if(isLoading) return <div>로딩</div>;
+  if(isLoading) return <div className={styles.loadingBox}><Loading/></div>;
   
 
   return (

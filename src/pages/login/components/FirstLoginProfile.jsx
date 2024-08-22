@@ -4,6 +4,7 @@ import MtButtons from "../../../components/common/buttons/MtButtons";
 import defaultImg from "../../../assets/images/login/defaultProfile.png";
 import ProfileMenuModal from "./ProfileModal/ProfileMenuModal";
 import { getUserToken } from "../../../config/auth";
+import { FILE_URL } from "../../../config/host-config";
 
 const FirstLoginProfile = ({ nextHandler }) => {
   const [selectedFile, setSelectedFile] = useState(null); // 선택된 파일 상태
@@ -55,7 +56,7 @@ const FirstLoginProfile = ({ nextHandler }) => {
     }
 
     try {
-      const response = await fetch("http://localhost:8253/file/upload", {
+      const response = await fetch(`${FILE_URL}/upload`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${getUserToken()}`, // 인증 토큰

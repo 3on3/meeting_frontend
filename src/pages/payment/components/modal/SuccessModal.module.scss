@@ -1,0 +1,21 @@
+.container {
+  background: #f4f9ff;
+  text-align: center;
+  max-width: calc(100vw * (500 / 500));
+  padding: calc(100vw * (20 / 500));
+  border-radius: calc(100vw * (8 / 500));
+  margin-top: calc(100vw * (42 / 500));
+  margin-bottom: calc(100vw * (20 / 500));
+}
+
+.modalContent {
+  font-size: calc(100vw * (18 / 500));
+
+  h2 {
+    font-weight: 600;
+  }
+}
+
+.btnContainer {
+  margin-bottom: calc(100vw * (15 / 500));
+}

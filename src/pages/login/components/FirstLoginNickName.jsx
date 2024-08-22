@@ -4,6 +4,7 @@ import MtButtons from "../../../components/common/buttons/MtButtons";
 import DefaultInput from "../../../components/common/inputs/DefaultInput";
 import { useNavigate } from "react-router-dom";
 import { nickNameVerification } from "../../../assets/js/Verification";
+import { AUTH_URL } from "../../../config/host-config";
 
 // 형용사와 명사 배열 정의
 const adjectives = [
@@ -62,7 +63,7 @@ const FirstLoginNickName = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:8253/signup/update-nickname",
+        `${AUTH_URL}/update-nickname`,
         {
           method: "POST",
           headers: {
@@ -111,7 +112,7 @@ const FirstLoginNickName = () => {
   const skipClickHandler = async () => {
     const randomNickname = generateRandomNickname();
     try {
-      const response = await fetch("http://localhost:8253/signup/update-nickname", {
+      const response = await fetch(`${AUTH_URL}/update-nickname`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

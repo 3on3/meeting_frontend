@@ -5,8 +5,11 @@ import penImg from "../../../assets/images/mypage/pen.svg";
 import checkImg from "../../../assets/images/mypage/check.svg";
 import ActionSection from "./ActionSection";
 import MypageModal from "../components/mypage_modal/MypageModal";
-import { getUserToken } from "../../../config/auth";
+import { getUserData, getUserToken } from "../../../config/auth";
 import paymentImg from "../../../assets/images/mypage/payment.svg";
+import { useModal } from "../../../context/ModalContext";
+import PaymentModal from "../../payment/components/modal/PaymentModal";
+import { MYPAGE_URL } from "../../../config/host-config";
 
 // ProfileSection 컴포넌트 정의
 const ProfileSection = ({ userId }) => {
@@ -31,13 +34,15 @@ const ProfileSection = ({ userId }) => {
 
   const [errorMessage, setErrorMessage] = useState("");
 
+  const { openModal, closeModal } = useModal();
+
   // 파일 입력 필드를 참조하기 위한 ref
   const fileInputRef = useRef(null);
 
   // 닉네임 편집 모드 토글 (활성화/비활성화)
   const editNameToggle = () => {
     if (isEditingName) {
-      updateProfileInfo(); // 수정된 부분: 체크 이미지를 클릭할 때 저장
+      updateProfileInfo(); // 체크 이미지를 클릭할 때 저장
     } else {
       setIsEditingName(true); // 연필 이미지를 클릭할 때 수정 모드 활성화
     }
@@ -91,9 +96,10 @@ const updateProfileInfo = async () => {
 
     // 서버에 PUT 요청을 보내어 프로필 정보 업데이트
     const response = await fetch(
-      `http://localhost:8253/mypage/userInfo/update`,
+      `${MYPAGE_URL}/userInfo/update`,
+
       {
-        method: "PUT", // HTTP 메소드: PUT (데이터 갱신)
+        method: "PUT", 
         headers: {
           Authorization: `Bearer ${getUserToken()}`,
           "Content-Type": "application/json",
@@ -138,7 +144,7 @@ const updateProfileInfo = async () => {
   const fetchProfileImage = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8253/mypage/profileImage`,
+        `${MYPAGE_URL}/profileImage`,
         {
           method: "GET",
           headers: {
@@ -169,7 +175,7 @@ const updateProfileInfo = async () => {
 
     try {
       const response = await fetch(
-        "http://localhost:8253/mypage/profileImage/update",
+        `${MYPAGE_URL}/profileImage/update`,
         {
           method: "POST",
           headers: {
@@ -194,13 +200,13 @@ const updateProfileInfo = async () => {
     }
   };
 
-
-
+  
+  
   // 프로필 이미지를 기본 이미지로 리셋
   const resetProfileImage = async () => {
     try {
       const response = await fetch(
-        "http://localhost:8253/mypage/profileImage",
+        `${MYPAGE_URL}/profileImage`,
         {
           method: "GET",
           headers: {
@@ -228,6 +234,7 @@ const updateProfileInfo = async () => {
     const file = e.target.files[0]; // 사용자가 선택한 파일을 가져옴
     setSelectedFile(file); // 선택한 파일을 상태에 저장
 
+
     const reader = new FileReader(); // 파일을 읽기 위한 FileReader 객체 생성
     reader.onload = () => {
       setProfileImg(reader.result); // 파일을 읽어 미리보기를 위해 프로필 이미지 상태에 저장
@@ -248,9 +255,27 @@ const updateProfileInfo = async () => {
   };
 
   // 컴포넌트가 마운트될 때 사용자 프로필 정보를 가져옴
+  const openPaymentModal = () => {
+    openModal(
+      "", 
+      "completeMode", 
+      <PaymentModal
+        name={"프리미엄 멤버십"}
+        totalPrice={7900}
+        onCancel={closeModal}
+      />
+    );
+  };
+
   useEffect(() => {
+    const userData = getUserData(); // 업데이트된 userData를 불러옴
+    if (userData) {
+      setMembership(userData.membership === "PREMIUM" ? "프리미엄" : "일반회원");
+    }
+
     // 사용자 프로필 정보를 가져오는 GET 요청
-    fetch(`http://localhost:8253/mypage/userInfo`, {
+    fetch(`${MYPAGE_URL}/userInfo`, {
+
       method: "GET",
       headers: {
         Authorization: `Bearer ${getUserToken()}`, // 사용자의 인증 토큰을 헤더에 포함
@@ -266,8 +291,7 @@ const updateProfileInfo = async () => {
         setProfileIntroduce(data.profileIntroduce);
         console.log("소개 정보:", data.profileIntroduce);
         setUniv(data.univ);
-        setMajor(data.major);
-        setMembership(data.membership === "PRIMIUM" ? "프리미엄" : "일반회원");
+        setMajor(data.major);        
       })
       .catch((error) => {
         console.error("프로필 정보를 불러오는 중 오류가 발생했습니다:", error);
@@ -315,9 +339,9 @@ const updateProfileInfo = async () => {
                   className={styles.nameInputField}
                 />
               ) : (
-                nickname // 닉네임 표시
+                nickname 
               )}
-              {errorMessage && ( // 에러 메시지가 있을 경우 표시
+              {errorMessage && ( 
                 <div className={styles.errorMessage}>
                   {errorMessage}
                 </div>
@@ -330,7 +354,7 @@ const updateProfileInfo = async () => {
                   isEditingName ? styles.isEditing : ""
                 }`}
                 alt={isEditingName ? "체크 이미지" : "연필 이미지"}
-                onClick={editNameToggle} // 수정된 부분: 클릭 시 저장 또는 수정 모드로 전환
+                onClick={editNameToggle}
               />
             </div>
             <div className={styles.contentWrap}>
@@ -341,7 +365,8 @@ const updateProfileInfo = async () => {
                 <img
                   src={paymentImg}
                   alt={"결제버튼"}
-                  // onClick={editNameToggle} // 수정된 부분: 클릭 시 저장 또는 수정 모드로 전환
+                  onClick={openPaymentModal}
+
                 />
               </div>
             </div>
@@ -359,7 +384,7 @@ const updateProfileInfo = async () => {
                   className={styles.descInputField}
                 />
               ) : (
-                profileIntroduce // 프로필 소개 표시
+                profileIntroduce 
               )}
             </div>
             <div>
@@ -369,7 +394,7 @@ const updateProfileInfo = async () => {
                   isEditingDescription ? styles.isEditing : ""
                 }`}
                 alt={isEditingDescription ? "체크 이미지" : "연필 이미지"}
-                onClick={editDescriptionToggle} // 수정된 부분: 클릭 시 저장 또는 수정 모드로 전환
+                onClick={editDescriptionToggle} 
               />
             </div>
           </div>
@@ -397,7 +422,7 @@ const updateProfileInfo = async () => {
                   isEditingMajor ? styles.isEditing : ""
                 }`}
                 alt={isEditingMajor ? "체크 이미지" : "연필 이미지"}
-                onClick={editMajorToggle} // 수정된 부분: 클릭 시 저장 또는 수정 모드로 전환
+                onClick={editMajorToggle} 
               />
             </div>
           </div>

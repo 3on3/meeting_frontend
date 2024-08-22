@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import DefaultInput from "../../../../components/common/inputs/DefaultInput";
 import styles from "../withdraw/Withdraw.module.scss";
 import { getUserToken } from "../../../../config/auth";
+import { MYPAGE_URL } from "../../../../config/host-config";
 
 const EmailInput = ({ email, handleEmailChange, isEmailValid, isInitial }) => {
   const [loading, setLoading] = useState(false);
@@ -22,7 +23,7 @@ const EmailInput = ({ email, handleEmailChange, isEmailValid, isInitial }) => {
 
     try {
       // 서버에 이메일 중복 여부를 확인하는 API 요청
-      const response = await fetch("http://localhost:8253/mypage/check-email", {
+      const response = await fetch(`${MYPAGE_URL}/check-email`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -76,24 +77,3 @@ const EmailInput = ({ email, handleEmailChange, isEmailValid, isInitial }) => {
 };
 
 export default EmailInput;
-
-// import React from 'react';
-// import DefaultInput from '../../../../components/common/inputs/DefaultInput';
-// import styles from "../withdraw/Withdraw.module.scss";
-
-// const EmailInput = ({ email, handleEmailChange, isEmailValid, isInitial }) => {
-//   const emailInputState = isInitial ? "" : (isEmailValid ? "correct" : "error");
-
-//   return (
-//     <DefaultInput
-//       inputState={emailInputState}
-//       placeholder={'이메일 입력'}
-//       errorMessage={!isEmailValid && !isInitial ? "등록되지 않은 이메일입니다" : ""}
-//       onChange={handleEmailChange}
-//       className={styles.inputCustom}
-//       value={email}
-//     />
-//   );
-// };
-
-// export default EmailInput;

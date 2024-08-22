@@ -15,7 +15,7 @@ const ConfirmWithdraw = ({ email, password }) => {
     setErrorMessage(""); // 에러 메시지 초기화
 
     try {
-      const response = await fetch("http://localhost:8253/mypage/withdraw", {
+      const response = await fetch(`${MYPAGE_URL}/withdraw`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

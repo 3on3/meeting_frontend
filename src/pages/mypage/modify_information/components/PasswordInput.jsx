@@ -39,7 +39,7 @@ const PasswordInput = ({
   const handlePasswordVerification = async () => {
     try {
       const response = await fetch(
-        "http://localhost:8253/mypage/check/password",
+        `${MYPAGE_URL}/check/password`,
         {
           method: "POST",
           headers: {

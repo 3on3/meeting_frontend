@@ -23,7 +23,7 @@ const VerificationInput = ({ styles, setIsSubmit, email }) => {
 
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:8253/mypage/check-email", {
+      const response = await fetch(`${MYPAGE_URL}/check-email`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -80,7 +80,7 @@ const VerificationInput = ({ styles, setIsSubmit, email }) => {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:8253/mypage/check/code", {
+      const response = await fetch(`${MYPAGE_URL}/check/code`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -13,7 +13,7 @@ const JoinGroupWithInvite = () => {
       const joinGroup = async () => {
         try {
           const response = await fetch(
-            `http://localhost:8253/group/join/invite?code=${inviteCode}`,
+            `${GROUP_URL}/join/invite?code=${inviteCode}`,
             {
               method: "POST",
               headers: {

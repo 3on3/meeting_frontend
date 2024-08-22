@@ -3,6 +3,7 @@ import MemberList from "../../../components/memberList/MemberList";
 import imgOriginUrl from "../../../assets/images/profile.jpg";
 import { getUserToken } from "../../../config/auth";
 import InviteModal from "../../../components/common/modal/InviteModal";
+import { GROUP_URL } from "../../../config/host-config";
 
 const GroupViewBody = ({
   auth,
@@ -24,16 +25,13 @@ const GroupViewBody = ({
     if (auth === "HOST") {
       const fetchApplicants = async () => {
         try {
-          const response = await fetch(
-            `http://localhost:8253/group/invite/${groupId}`,
-            {
-              method: "GET",
-              headers: {
-                Authorization: `Bearer ${getUserToken()}`,
-                "Content-Type": "application/json",
-              },
-            }
-          );
+          const response = await fetch(`${GROUP_URL}/invite/${groupId}`, {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${getUserToken()}`,
+              "Content-Type": "application/json",
+            },
+          });
           if (response.ok) {
             const data = await response.json();
             setApplicants(data);
@@ -61,7 +59,7 @@ const GroupViewBody = ({
   const handleAccept = async (applicantId) => {
     try {
       const response = await fetch(
-        `http://localhost:8253/group/join-requests/${applicantId}/accept`,
+        `${GROUP_URL}/join-requests/${applicantId}/accept`,
         {
           method: "POST",
           headers: {
@@ -95,7 +93,7 @@ const GroupViewBody = ({
   const handleCancel = async (applicantId) => {
     try {
       const response = await fetch(
-        `http://localhost:8253/group/join-requests/${applicantId}/cancel`,
+        `${GROUP_URL}/join-requests/${applicantId}/cancel`,
         {
           method: "POST",
           headers: {

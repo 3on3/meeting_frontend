@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "./PhoneNumberUpdateModal.module.scss";
 import { getUserToken } from "../../../../../config/auth";
 import MtButtons from "../../../../../components/common/buttons/MtButtons";
+import { MYPAGE_URL } from "../../../../../config/host-config";
 
 const PhoneNumberUpdateModal = ({ phoneNumber }) => {
   const [errorMessage, setErrorMessage] = useState("");
@@ -9,7 +10,7 @@ const PhoneNumberUpdateModal = ({ phoneNumber }) => {
   const handleSubmit = async () => {
     try {
       const response = await fetch(
-        "http://localhost:8253/mypage/update-phone",
+        `${MYPAGE_URL}/update-phone`,
         {
           method: "PATCH",
           headers: {

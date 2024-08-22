@@ -1,46 +1,92 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { getUserData, getUserToken } from "../../config/auth";
+import { PAYMENT_URL } from "../../config/host-config";
+import SuccessModal from "./components/modal/SuccessModal";
+import { useModal } from "../../context/ModalContext";
+import Loading from "../../components/common/loading/Loading";
+import styles from "./PaymentApproval.module.scss";
 
 const PaymentApproval = () => {
-    const location = useLocation();
+  const location = useLocation();
+  const [loading, setLoading] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const tid = localStorage.getItem('tid');
+  const payUrl = localStorage.getItem('payUrl');
 
-    useEffect(() => {
-        const searchParams = new URLSearchParams(location.search);
-        const pgToken = searchParams.get("pg_token");
+  const { openModal } = useModal();
 
-        const approvePayment = async () => {
-            try {
-                const response = await fetch("http://localhost:8253/payment/approve", {
-                    method: "POST",  // POST 요청
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({ pg_token: pgToken }), // 요청 본문에 pg_token 포함
-                });
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const pgToken = searchParams.get("pg_token");
 
-                if (!response.ok) {
-                    throw new Error("결제 승인 요청에 실패했습니다.");
-                }
+    if (pgToken) {
+      // 결제 승인 처리 및 모달 표시
+      setLoading(true);
+      setTimeout(() => {
+        setLoading(false);
+        setShowSuccessModal(true);
+        openModal(
+          "",
+          "completeMode",
+          <SuccessModal 
+            onConfirm={() => approvePayment(pgToken, tid)} // 확인 버튼 클릭 시 approvePayment 실행
+          />
+        );
+      }, 1000); // 1초 지연 후 모달 표시
+    }
+  }, [location, tid]);
 
-                const data = await response.json();
-                alert("결제가 성공적으로 완료되었습니다!");
-                console.log("결제 승인 응답:", data);
-            } catch (error) {
-                console.error("결제 승인 중 오류 발생:", error);
-                alert('결제 승인 중 오류가 발생했습니다.');
-            }
-        };
+  const approvePayment = async (pgToken, tid) => {
+    setLoading(true);
 
-        if (pgToken) {
-            approvePayment();
-        }
-    }, [location]);
+    try {
+      const response = await fetch(`${PAYMENT_URL}/approve`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${getUserToken()}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ pg_token: pgToken, tid: tid }),
+      });
 
-    return (
-        <div>
-            <h1>결제 처리 중...</h1>
-        </div>
-    );
+      if (!response.ok) {
+        throw new Error("결제 승인 요청에 실패했습니다.");
+      }
+
+      const data = await response.json();
+      console.log("결제 승인 응답:", data);
+
+      // userData의 membership PREMIUM으로 업데이트
+      const userData = getUserData();
+      if (userData) {
+        userData.membership = "PREMIUM";
+        localStorage.setItem("userData", JSON.stringify(userData));
+      }
+
+      // 결제 완료 후 tid와 payUrl을 로컬 스토리지에서 제거
+      localStorage.removeItem('tid');
+      localStorage.removeItem('payUrl');
+
+      // 로딩 상태를 false로 설정
+      setLoading(false);
+
+      // 승인 완료 후 홈으로 리다이렉트
+      window.location.href = "/";
+      
+    } catch (error) {
+      console.error("결제 승인 중 오류 발생:", error);
+      alert(`결제 승인 중 오류가 발생했습니다: ${error.message}`);
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className={styles.loading}>
+      {loading && <Loading />} 
+      {!loading && !showSuccessModal && <p>결제 승인 처리 중...</p>}
+    </div>
+  );
 };
 
 export default PaymentApproval;

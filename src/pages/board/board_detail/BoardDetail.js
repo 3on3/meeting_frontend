@@ -91,7 +91,8 @@ const BoardDetail = () => {
   }, [id]);
 
   
-  if(isLoading) return <div></div>;
+  // 수정요
+  if(isLoading) return <div>로딩</div>;
   
 
   return (

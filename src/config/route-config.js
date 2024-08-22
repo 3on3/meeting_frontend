@@ -26,6 +26,7 @@ import PasswordResetPage from "../pages/login/components/PasswordResetPage";
 import Payment from "../pages/payment/Payment";
 import PaymentApproval from "../pages/payment/PaymentApproval";
 import AlarmPage from "../pages/alarm/AlarmPage";
+import SignUpComplete from "../pages/sign_up/components/SignUpComplete";
 
 
 
@@ -84,6 +85,10 @@ export const router = createBrowserRouter([
       {
         path: "",
         element: isLogin(),
+      },
+      {
+        path: "signup-complete",
+        element: <SignUpComplete />,
       },
       {
         path: "login",

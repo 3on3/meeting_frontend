@@ -11,6 +11,7 @@ import DefaultInput from "../../../../components/common/inputs/DefaultInput";
 import MtButtons from "../../../../components/common/buttons/MtButtons";
 import RadioButton from "../../../../components/common/buttons/radiobutton/RadioButton";
 import { getUserToken } from "../../../../config/auth";
+import { AUTH_URL } from "../../../../config/host-config";
 
 // yyMMdd 형식을 yyyy-MM-dd 형식으로 변환하는 함수
 const convertToFullDate = (shortDate) => {
@@ -208,7 +209,7 @@ const CreateInformations = ({
       const encodedPhoneNumber = encodeURIComponent(phoneNumber);
       console.log('encodedPhoneNumber: ', encodedPhoneNumber);
 
-      const response = await fetch(`http://localhost:8253/signup/check-phone-number?phoneNumber=${encodedPhoneNumber}`, {
+      const response = await fetch(`${AUTH_URL}/check-phone-number?phoneNumber=${encodedPhoneNumber}`, {
         method: 'GET',
       });
       console.log('response: ', response);

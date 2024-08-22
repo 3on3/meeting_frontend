@@ -1,35 +1,22 @@
 import React, { useState } from "react";
+import { useModal } from "../../context/ModalContext";
+import PaymentModal from "./components/modal/PaymentModal";
 
 const Payment = () => {
-  const [name, setName] = useState("상품명"); // 상품명 초기화
-  const [totalPrice, setTotalPrice] = useState(20000); // 결제 금액 초기화
+  const [name, setName] = useState("상품명");
+  const [totalPrice, setTotalPrice] = useState(20000);
+  const { openModal, closeModal } = useModal(); // 모달 관련 훅 사용
 
-  const handlePayment = async () => {
-    try {
-      // 결제 준비 요청을 서버로 보냄
-      const response = await fetch("http://localhost:8253/payment/ready", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: name,
-          totalPrice: totalPrice,
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error("결제 준비 요청에 실패했습니다.");
-      }
-
-      const data = await response.json();
-
-      // 결제 준비 완료 후 리다이렉트 URL로 이동
-      window.location.href = data.next_redirect_pc_url;
-    } catch (error) {
-      console.error("결제 준비 중 오류 발생:", error);
-      alert("결제 준비 중 오류가 발생했습니다.");
-    }
+  const openPaymentModal = () => {
+    openModal(
+      "", // 모달의 타이틀을 설정하지 않음
+      "completeMode", // 모달 타입 설정
+      <PaymentModal
+        name={name}
+        totalPrice={totalPrice}
+        onCancel={closeModal} // 모달 닫기
+      />
+    );
   };
 
   return (
@@ -57,7 +44,7 @@ const Payment = () => {
           />
         </label>
       </div>
-      <button onClick={handlePayment}>결제하기</button>
+      <button onClick={openPaymentModal}>결제하기</button>
     </div>
   );
 };

@@ -4,6 +4,7 @@ import styles from "./CheckPass.module.scss";
 import DefaultInput from "../../../components/common/inputs/DefaultInput";
 import MtButtons from "../../../components/common/buttons/MtButtons";
 import { getUserToken, getUserData } from "../../../config/auth";
+import { MYPAGE_URL } from "../../../config/host-config";
 
 const CheckPass = () => {
   const [password, setPassword] = useState("");
@@ -23,7 +24,7 @@ const CheckPass = () => {
     const userData = getUserData();
     
     try {
-      const response = await fetch("http://localhost:8253/mypage/check-password", {
+      const response = await fetch(`${MYPAGE_URL}/check-password`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

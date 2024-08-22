@@ -3,6 +3,7 @@ import DefaultInput from "../../../../components/common/inputs/DefaultInput";
 import { getUserToken } from "../../../../config/auth";
 import styles from "../withdraw/Withdraw.module.scss";
 import { passwordVerification } from "../../../../assets/js/Verification";
+import { MYPAGE_URL } from "../../../../config/host-config";
 
 const PasswordInput = ({
   password,
@@ -39,7 +40,7 @@ const PasswordInput = ({
   const handlePasswordVerification = async () => {
     try {
       const response = await fetch(
-        "http://localhost:8253/mypage/check/password",
+        `${MYPAGE_URL}/check/password`,
         {
           method: "POST",
           headers: {

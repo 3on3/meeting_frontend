@@ -9,6 +9,7 @@ import { useSearchParams } from "react-router-dom";
 import { throttle } from "lodash";
 import ScrollSection from "../../../components/common/scroll-section/ScrollSection";
 import Loading from "../../../components/common/loading/Loading";
+import { MAIN_URL } from "../../../config/host-config";
 
 // MeetingList 컴포넌트: 미팅 목록을 보여주는 컴포넌트
 function MeetingList() {
@@ -49,7 +50,7 @@ function MeetingList() {
 
     try {
       // 동적 URL을 생성
-      let url = `http://localhost:8253/main?pageNo=${pageNo}`;
+      let url = `${MAIN_URL}?pageNo=${pageNo}`;
 
       if (gender) {
         url += `&gender=${gender}`;

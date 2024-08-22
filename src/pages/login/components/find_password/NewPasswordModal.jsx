@@ -3,6 +3,7 @@ import styles from "./NewPasswordModal.module.scss";
 import DefaultInput from "../../../../components/common/inputs/DefaultInput";
 import MtButtons from "../../../../components/common/buttons/MtButtons";
 import { passwordVerification } from "../../../../assets/js/Verification";
+import { PASSWORD_URL } from "../../../../config/host-config";
 
 const NewPasswordModal = ({ email }) => {
   // 새로운 비밀번호 상태
@@ -59,7 +60,7 @@ const NewPasswordModal = ({ email }) => {
 
     try {
       const response = await fetch(
-        "http://localhost:8253/password/reset-password",
+        `${PASSWORD_URL}/reset-password`,
         {
           method: "POST",
           headers: {

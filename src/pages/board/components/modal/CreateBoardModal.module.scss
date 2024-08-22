@@ -4,3 +4,13 @@
   font-weight: 500;
   margin-bottom: calc(100vw * (40 / 500));
 }
+.btns{
+  display: flex;
+  margin-top: calc(100vw * (40 / 500));
+  button{
+    margin-right:calc(100vw * (10 / 500)) ;
+    &:last-child{
+      margin-right: 0;
+    }
+  }
+}

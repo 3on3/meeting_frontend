@@ -154,7 +154,7 @@ const FirstLoginNickName = () => {
           buttonType={
             !isNickNameEmpty && isNickNameValid ? "apply" : "disabled"
           }
-          buttonText={"SUBMIT"}
+          buttonText={"확인"}
           eventType={!isNickNameEmpty && isNickNameValid ? "click" : null}
           eventHandler={
             !isNickNameEmpty && isNickNameValid ? isNickNameCheckHandler : null

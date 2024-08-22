@@ -8,24 +8,25 @@ import { useNavigate } from "react-router-dom";
 const SignUpComplete = () => {
   const navigate = useNavigate();
 
-
   // 시작하기 버튼 클릭시 로그인 페이지로 이동
   const mainNavigateHandler = () => {
     navigate("/login");
   };
   return (
     <>
-      <h1 className={"title"}>환영합니다!</h1>
-      <div className={styles.logo}>
-        <img src={profileImage} alt="로고이미지" />
-      </div>
-      <div className={styles.button}>
-        <MtButtons
-          eventType={"click"}
-          eventHandler={mainNavigateHandler}
-          buttonType={"apply"}
-          buttonText={"시작하기"}
-        />
+      <div className={styles.SignUpCompleteBox}>
+        <h1 className={"title"}>환영합니다!</h1>
+        <div className={styles.logo}>
+          <img src={profileImage} alt="로고이미지" />
+        </div>
+        <div className={styles.button}>
+          <MtButtons
+            eventType={"click"}
+            eventHandler={mainNavigateHandler}
+            buttonType={"apply"}
+            buttonText={"시작하기"}
+          />
+        </div>
       </div>
     </>
   );

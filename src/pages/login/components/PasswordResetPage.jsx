@@ -70,7 +70,7 @@ const PasswordResetPage = () => {
             </div>
             <MtButtons
                 buttonType={isButtonDisabled ? "disabled" : "apply"} // 버튼 타입 설정
-                buttonText="SUBMIT"
+                buttonText="확인"
                 eventType={isButtonDisabled ? null : "click"} // 버튼 클릭 이벤트 설정
                 eventHandler={isButtonDisabled ? null : handleEmailSubmit} // 버튼 클릭 핸들러 설정
             />

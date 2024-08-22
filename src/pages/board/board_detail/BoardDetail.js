@@ -114,8 +114,8 @@ const BoardDetail = () => {
         <DetailBottom
           className={styles.ReplyList}
           styles={styles}
-          viewCount={boardData.viewCount}
           newRelyData={newRelyData}
+          boardData={boardData}
         />
 
         <div className={styles.inputBox}>

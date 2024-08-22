@@ -4,6 +4,7 @@ import MtButtons from "../../../../components/common/buttons/MtButtons";
 import styles from "../withdraw/Withdraw.module.scss";
 import DefaultInput from "../../../../components/common/inputs/DefaultInput";
 import { getUserToken, removeUserToken } from "../../../../config/auth";
+import { MYPAGE_URL } from "../../../../config/host-config";
 
 const ConfirmWithdraw = ({ email, password }) => {
   const navigate = useNavigate();

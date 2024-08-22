@@ -28,6 +28,10 @@
     font-size: calc(100vw * (16 / 500));
     border-bottom: solid calc(100vw * (1 / 500)) var(--color-light);
     animation: chatAni 0.6s ease-out forwards;
+    &:last-child{
+      border-bottom: none;
+      margin-bottom: calc(100vw * (100 / 500));
+    }
     @keyframes chatAni {
       0% {
         opacity: 0;

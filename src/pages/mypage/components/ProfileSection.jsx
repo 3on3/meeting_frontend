@@ -90,8 +90,7 @@ const updateProfileInfo = async () => {
     console.log("프로필 정보 업데이트를 시작합니다.");
 
     // 서버에 PUT 요청을 보내어 프로필 정보 업데이트
-    const response = await fetch(
-      `http://localhost:8253/mypage/userInfo/update`,
+    const response = await fetch(`${MYPAGE_URL}/userInfo/update`,
       {
         method: "PUT", 
         headers: {
@@ -138,7 +137,7 @@ const updateProfileInfo = async () => {
   const fetchProfileImage = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8253/mypage/profileImage`,
+        `${MYPAGE_URL}/profileImage`,
         {
           method: "GET",
           headers: {
@@ -169,7 +168,7 @@ const updateProfileInfo = async () => {
 
     try {
       const response = await fetch(
-        "http://localhost:8253/mypage/profileImage/update",
+        `${MYPAGE_URL}/profileImage/update`,
         {
           method: "POST",
           headers: {
@@ -200,7 +199,7 @@ const updateProfileInfo = async () => {
   const resetProfileImage = async () => {
     try {
       const response = await fetch(
-        "http://localhost:8253/mypage/profileImage",
+        `${MYPAGE_URL}/profileImage`,
         {
           method: "GET",
           headers: {
@@ -251,7 +250,7 @@ const updateProfileInfo = async () => {
   // 컴포넌트가 마운트될 때 사용자 프로필 정보를 가져옴
   useEffect(() => {
     // 사용자 프로필 정보를 가져오는 GET 요청
-    fetch(`http://localhost:8253/mypage/userInfo`, {
+    fetch(`${MYPAGE_URL}/mypage/userInfo`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${getUserToken()}`, // 사용자의 인증 토큰을 헤더에 포함

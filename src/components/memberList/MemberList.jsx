@@ -10,7 +10,6 @@ import styles from "./MemberList.module.scss";
 const MemberList = ({
   imgUrl,
   nickname,
-  profileImg,
   userName,
   univ,
   major,

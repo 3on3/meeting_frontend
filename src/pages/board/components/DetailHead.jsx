@@ -12,6 +12,7 @@ const DetailHead = ({ styles, className, boardData }) => {
             <span className={styles.name}>익명</span>
             <span className={styles.time}>
               <span>{boardData.createdAt}</span>
+               {boardData.modifiedAt && <span> 수정됨 {boardData.modifiedAt}</span>}
             </span>
           </p>
         </div>

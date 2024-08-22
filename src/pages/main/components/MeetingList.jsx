@@ -6,10 +6,11 @@ import { getUserToken } from "../../../config/auth";
 import EmptyGroups from "../EmptyGroups";
 
 import { useSearchParams } from "react-router-dom";
-import { throttle } from "lodash";
 import ScrollSection from "../../../components/common/scroll-section/ScrollSection";
 import Loading from "../../../components/common/loading/Loading";
 import { MAIN_URL } from "../../../config/host-config";
+import { useDispatch, useSelector } from "react-redux";
+import { mainFilterLoadingActions } from "../../../store/MainFilterLoading-slice";
 
 // MeetingList 컴포넌트: 미팅 목록을 보여주는 컴포넌트
 function MeetingList() {
@@ -31,8 +32,9 @@ function MeetingList() {
   // 더이상 가져올 데이터가 있는지 확인
   const [isFinish, setIsFinish] = useState(false);
 
-  // 로딩 상태를 관리
-  const [loading, setLoading] = useState(false);
+  // 메인 미팅 리스트 GET Fetch Loading 불러오기
+  const dispatch = useDispatch();
+  const loading = useSelector((state) => state.mainFilterLoading.loading);
 
   // scrollRef와 inView를 통해 스크롤이 특정 지점에 도달했는지 확인
   const [scrollRef, inView] = useInView({
@@ -45,7 +47,9 @@ function MeetingList() {
     // 로딩 중이거나 더 가져올 데이터가 없으면 함수 종료
     if (loading || isFinish) return;
 
-    setLoading(true);
+    //로딩 시작
+    dispatch(mainFilterLoadingActions.filterLoadingStartAction());
+
     console.log("로딩중입니다...");
 
     try {
@@ -85,7 +89,8 @@ function MeetingList() {
         // 페이지 번호를 증가시킴
         setPageNo((prevPage) => prevPage + 1);
 
-        setLoading(false);
+        //로딩 끝
+        dispatch(mainFilterLoadingActions.filterLoadingStopAction());
 
         // 더 가져올 데이터가 있는지 확인
         if (totalElements === updatedListData.length) {
@@ -102,7 +107,7 @@ function MeetingList() {
   useEffect(() => {
     setListData([]); // 리스트 데이터를 초기화
     setPageNo(1); // 페이지 번호 초기화
-    setLoading(false); // 로딩 상태 초기화
+    dispatch(mainFilterLoadingActions.filterLoadingStopAction()); // 로딩 상태 초기화
     setIsFinish(false); // 데이터 끝 여부 초기화
   }, [gender, region, personnel, isChanged]);
 

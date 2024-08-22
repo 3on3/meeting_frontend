@@ -3,6 +3,7 @@ import styles from "./RegionFilter.module.scss";
 import RegionFilterBox from "../../../components/common/regionFilterBoxs/RegionFilterBox";
 
 import { useSearchParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 function RegionFilter({}) {
   // 지역 필터 옵션을 정의한 배열
@@ -53,10 +54,17 @@ function RegionFilter({}) {
   const [searchParams, setSearchParams] = useSearchParams();
   const paramsRegion = searchParams.get("region");
 
+  // 리덕스에 있는 mainFilterLoading 상태 불러오기
+  const loading = useSelector((state) => state.mainFilterLoading.loading);
+
   // ==== 핸들러 ====
 
   // 사용자가 지역을 클릭했을 때 호출되는 함수
   const activeHandler = (place) => {
+    
+    //로딩중이면 클릭 제한
+    if (loading) return;
+
     // 클릭한 지역이 현재 선택된 지역과 같으면 선택 해제(null), 아니면 새로운 지역으로 설정
     const newRegion = paramsRegion === place ? null : place;
 

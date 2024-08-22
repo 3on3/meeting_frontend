@@ -68,7 +68,7 @@ const CheckPass = () => {
             eventType={isPassCheck ? "click" : null}
             eventHandler={isPassCheckHandler}
             buttonType={isPassCheck ? "apply" : "disabled"}
-            buttonText={"SUBMIT"}
+            buttonText={"확인"}
           />
         </div>
       </div>

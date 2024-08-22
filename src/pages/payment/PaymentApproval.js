@@ -57,17 +57,6 @@ const PaymentApproval = () => {
       const data = await response.json();
       console.log("결제 승인 응답:", data);
 
-      // userData의 membership PREMIUM으로 업데이트
-      const userData = getUserData();
-      if (userData) {
-        userData.membership = "PREMIUM";
-        localStorage.setItem("userData", JSON.stringify(userData));
-      }
-
-      // 결제 완료 후 tid와 payUrl을 로컬 스토리지에서 제거
-      localStorage.removeItem('tid');
-      localStorage.removeItem('payUrl');
-
       // 로딩 상태를 false로 설정
       setLoading(false);
 

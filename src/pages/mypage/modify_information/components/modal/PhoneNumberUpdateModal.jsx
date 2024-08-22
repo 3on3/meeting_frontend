@@ -60,7 +60,7 @@ const PhoneNumberUpdateModal = ({ phoneNumber }) => {
       <div className={styles.btn}>
         <MtButtons
           buttonType={"apply"}
-          buttonText={"SUBMIT"}
+          buttonText={"확인"}
           eventType={"click"}
           eventHandler={handleSubmit}
         />

@@ -60,7 +60,7 @@ export const useFetchRequest = () => {
 
     const data = await response.json();
 
-    setGroupHostUser(data);
+    setGroupHostUser(data.email);
   };
   
   // 매칭 프로세스 페치 - 수락(requsetUrl = "response-accept")/거절(requsetUrl = "response-deny")

@@ -4,12 +4,12 @@ import MtButtons from "../../../../components/common/buttons/MtButtons";
 import styles from "../withdraw/Withdraw.module.scss";
 import DefaultInput from "../../../../components/common/inputs/DefaultInput";
 import { getUserToken, removeUserToken } from "../../../../config/auth";
+import { MYPAGE_URL } from "../../../../config/host-config";
 
 const ConfirmWithdraw = ({ email, password }) => {
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState(""); // 에러 메시지 상태 관리
   const [loading, setLoading] = useState(false); // 로딩 상태 관리
-
   const handleWithdraw = async () => {
     setLoading(true); // 로딩 상태 시작
     setErrorMessage(""); // 에러 메시지 초기화

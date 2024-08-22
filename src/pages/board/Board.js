@@ -3,13 +3,13 @@ import styles from "./Board.module.scss";
 import TabBox from "./components/TabBox";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import BoardList from "./components/BoardList";
+import MyBoardList from "./components/MyBoardList";
 
 const Board = () => {
   const location = useLocation();
   const isRootPath = location.pathname === "/board";
 
   const [activeTab, setActiveTab] = useState("all"); // 기본값은 '전체 글' 탭
-  const [page, setPage] = useState(0);
 
   return (
     <>
@@ -21,15 +21,22 @@ const Board = () => {
             styles={styles}
             activeTab={activeTab}
             setActiveTab={setActiveTab}
-            setPage={setPage}
           />
-          <BoardList
+          {activeTab==="all" && (
+             <BoardList
+             className={styles.boardList}
+             styles={styles}
+             activeTab={activeTab}
+           />
+          )}
+          {activeTab === "myPosts" && (
+            <MyBoardList
             className={styles.boardList}
             styles={styles}
             activeTab={activeTab}
-            page={page}
-            setPage={setPage}
-          />
+            />
+          )}
+         
           <NavLink to={"/board/write"} className={styles.newBoardBtn}>
             새 게시글 +
           </NavLink>

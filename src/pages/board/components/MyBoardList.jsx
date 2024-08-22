@@ -3,7 +3,7 @@ import { BOARD_URL } from "../../../config/host-config";
 import { getUserToken } from "../../../config/auth";
 import BoardBox from "./BoardBox";
 
-const BoardList = ({ className, styles, activeTab }) => {
+const MyBoardList = ({ className, styles, activeTab }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
   const [boardList, setBoardList] = useState([]);
@@ -11,7 +11,6 @@ const BoardList = ({ className, styles, activeTab }) => {
   const [size] = useState(5);
   const [isFinished, setIsFinished] = useState(false); // 추가 데이터가 더 있는지 여부
   const scrollUlRef = useRef();
-  
 
   const fetchBoards = async () => {
     if (isLoading || isFinished) return;
@@ -21,12 +20,15 @@ const BoardList = ({ className, styles, activeTab }) => {
 
 
     try {
-      const response = await fetch(`${BOARD_URL}?page=${page}&size=${size}`, {
-        headers: {
-          Authorization: "Bearer " + getUserToken(),
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        `${BOARD_URL}/myboards?page=${page}&size=${size}`,
+        {
+          headers: {
+            Authorization: "Bearer " + getUserToken(),
+            "Content-Type": "application/json",
+          },
+        }
+      );
       const data = await response.json();
       if (response.ok) {
         setBoardList((prev) => [...prev, ...data]);
@@ -48,8 +50,8 @@ const BoardList = ({ className, styles, activeTab }) => {
   }; // isLoading과 isFinished를 의존성 배열에 추가
 
   useEffect(() => {
-    fetchBoards();
-  }, []); 
+    fetchBoards(); // 처음 컴포넌트가 로드될 때 게시글 가져오기
+  }, []); // activeTab 변경 시 다시 로드
 
   // 스크롤 핸들러
   const handleScroll = () => {
@@ -78,10 +80,10 @@ const BoardList = ({ className, styles, activeTab }) => {
       })}
 
       {isLoading && (
-        <div style={{ height: "100px" }}></div>
+        <div style={{ height: "100px"}}></div>
       )}
     </ul>
   );
 };
 
-export default BoardList;
+export default MyBoardList;

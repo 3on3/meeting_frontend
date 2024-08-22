@@ -5,7 +5,6 @@ const TabBox = ({
   className,
   activeTab,
   setActiveTab,
-  setPage,
 }) => {
   const onClickActive = (tab) => {
     setActiveTab(tab); // 클릭된 탭의 상태를 설정

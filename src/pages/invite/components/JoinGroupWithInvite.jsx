@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { authCheckLoader, getUserToken } from "../../../config/auth";
+import { GROUP_URL } from "../../../config/host-config";
 const JoinGroupWithInvite = () => {
   const location = useLocation();
   const navigate = useNavigate();

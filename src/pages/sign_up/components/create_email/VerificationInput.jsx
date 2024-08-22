@@ -35,7 +35,8 @@ const VerificationInput = ({styles, isSubmit, setIsSubmit, email, univName, onVe
             email: email,
             univName: univName,
             code: emailVerificationInput,
-            univCertApiKey: process.env.REACT_APP_MAIL_API,
+            key: process.env.REACT_APP_MAIL_API,
+
           }),
         });
     

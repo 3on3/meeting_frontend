@@ -16,6 +16,12 @@ const BoardDetail = () => {
   const [error, setError] = useState(false);
   const [boardData, setBoardData] = useState({});
 
+  // 댓글 POST
+  // InputValue
+  const [replyInputValue, setReplyInputValue] = useState("");
+  // 댓글 POST가 클릭 되었는지
+  const [postFetchClick, setPostFetchClick] = useState(false);
+
   // 게시판 불러오기
   const getBoardFetch = async () => {
     setIsLoading(true);
@@ -46,27 +52,38 @@ const BoardDetail = () => {
   useEffect(() => {
     getBoardFetch();
   }, [id]);
-  console.log("board: ", boardData);
+  // console.log("board: ", boardData);
   if (isLoading) return <div></div>;
 
-  // 댓글 POST
-  const [replyInputValue, setReplyInputValue] = useState("");
-
+  // ============ POST ============
+  // input Change 이벤트
   const onChangeInput = (e) => {
-    console.log("e.target.value", e.target.value);
-    const inputValue = e.target.value;
-    setReplyInputValue(inputValue);
+    setReplyInputValue(e.target.value);
   };
 
   // 댓글 POST 클릭이벤트
-  const onClickPostRepliesBtnHandler = () => {
+  const onClickPostRepliesBtnHandler = async () => {
+    const payload = {
+      content: replyInputValue,
+      boardId: id,
+    };
+    console.log("payload :", payload);
 
-
-
-
-
-
-    
+    try {
+      const response = await fetch(`${BOARD_URL}/detail`, {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + getUserToken(),
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+      const PostData = await response.json();
+      setPostFetchClick(true);
+      console.log("PostData : ", PostData);
+    } catch (err) {
+      console.log("");
+    }
   };
 
   return (
@@ -87,6 +104,7 @@ const BoardDetail = () => {
           className={styles.ReplyList}
           styles={styles}
           viewCount={boardData.viewCount}
+          postFetchClick={postFetchClick}
         />
         <div className={styles.inputBox}>
           <ChatInput

@@ -4,7 +4,7 @@ import { BOARD_URL } from "../../../config/host-config";
 import { getUserToken } from "../../../config/auth";
 import { useInView } from "react-intersection-observer";
 
-const DetailBottom = ({ className, styles, viewCount }) => {
+const DetailBottom = ({ className, styles, viewCount, postFetchClick }) => {
   const { id } = useParams();
 
   // 댓글 데이터
@@ -63,7 +63,7 @@ const DetailBottom = ({ className, styles, viewCount }) => {
 
   useEffect(() => {
     getBoardReplies();
-  }, [id]);
+  }, [id, postFetchClick]);
 
   useEffect(() => {
     if (inView && !repliesIsLoading && !isFinish) {

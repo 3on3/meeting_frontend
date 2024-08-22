@@ -9,8 +9,11 @@ let backendHostName;
 
 if (clientHostName === "localhost") {
   backendHostName = "http://localhost:" + LOCAL_PORT;
-} else if (clientHostName === "www.bananagrape.co.kr") {
-  backendHostName = "https://api.myapi.com";
+} else if (
+  clientHostName ===
+  "http://mymeetinh-s3-bucket.s3-website.ap-northeast-2.amazonaws.com"
+) {
+  backendHostName = "http://3.35.133.17:8253";
 }
 
 export const API_BASE_URL = backendHostName;
@@ -36,6 +39,7 @@ export const MYPAGEMATCHING_URL = API_BASE_URL + GROUPMATCHING;
 export const TESTCHT_URL = API_BASE_URL + TESTCHAT;
 export const CHATROOM_URL = API_BASE_URL + CHATROOM;
 export const ALARM_URL = API_BASE_URL + ALARM;
+
 export const USER_URL = API_BASE_URL + USER;
 export const FILE_URL = API_BASE_URL + FILE;
 export const PASSWORD_URL = API_BASE_URL + PASSWORD;

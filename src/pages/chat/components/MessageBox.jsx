@@ -4,7 +4,7 @@ import {useModal} from "../../../context/ModalContext";
 import ProfileImage from "../../mypage/components/ProfileImage";
 
 // 메세지 유저 정보 + 말풍선 컴포넌트
-const MessageBox = ({ styles, authClass, userName, content, sameUser, imgUrl, messageAt, sameTime, myMessage }) => {
+const MessageBox = ({ styles, authClass, userName, content, sameUser, imgUrl, messageAt, sameTime, myMessage, sameUserTime }) => {
 
 
     const {openModal} = useModal();
@@ -28,7 +28,7 @@ const MessageBox = ({ styles, authClass, userName, content, sameUser, imgUrl, me
                     <p className={styles.userNickname}>{userName}</p>
                 </div>
             )}
-            <MessageContent styles={styles} content={content} messageAt={messageAt} sameTime={sameTime} sameUser={sameUser} myMessage={myMessage}/>
+            <MessageContent styles={styles} content={content} messageAt={messageAt} sameTime={sameTime} sameUserTime={sameUserTime} sameUser={sameUser} myMessage={myMessage}/>
         </div>
     );
 };

@@ -20,13 +20,23 @@ import GroupCreate from "../pages/group/GroupCreate";
 import Withdraw from "../pages/mypage/modify_information/withdraw/Withdraw";
 import MyChats from "../pages/mypage/mypage_chats/MyChats";
 import InvitePage from "../pages/invite/InvitePage";
-import { authCheckLoader, autoCheckReturnLoader } from "./auth";
+import {authCheckLoader, autoCheckReturnLoader, getUserToken, userDataLoader} from "./auth";
 import JoinEndPage from "../pages/invite/components/JoinEndPage";
 import PasswordResetPage from "../pages/login/components/PasswordResetPage";
 import Payment from "../pages/payment/Payment";
 import PaymentApproval from "../pages/payment/PaymentApproval";
 import AlarmPage from "../pages/alarm/AlarmPage";
 
+
+
+const isLogin = () => {
+  const token = userDataLoader();
+  if(!token) {
+    return <IntroPage />;
+  } else {
+    return <Main />;
+  }
+}
 // 마이페이지 라우터
 const mypageRouter = [
   {
@@ -72,13 +82,8 @@ export const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "/",
-        element: <Main />,
-        loader: authCheckLoader, // 메인 페이지 접근 시 토큰 여부 확인
-      },
-      {
-        path: "intro",
-        element: <IntroPage />,
+        path: "",
+        element: isLogin(),
       },
       {
         path: "login",

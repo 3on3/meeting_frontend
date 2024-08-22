@@ -10,8 +10,10 @@ let webSocketHostName;
 
 if (clientHostName === "localhost") {
   backendHostName = "http://localhost:" + LOCAL_PORT;
+  webSocketHostName = "ws://localhost:" + LOCAL_PORT + "/socket"
 } else {
   backendHostName = "http://3.38.26.248";
+  webSocketHostName = "ws://3.38.26.248/socket"
 }
 
 export const API_BASE_URL = backendHostName;

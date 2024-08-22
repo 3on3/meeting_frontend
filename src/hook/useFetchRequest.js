@@ -39,7 +39,7 @@ export const useFetchRequest = () => {
     }
   };
 
-  const alarmFetch = async (responseGroupId) => {
+  const alarmFetch = async (setGroupHostUser, responseGroupId) => {
     const loginUser = userDataLoader();
 
     const payload = {
@@ -60,7 +60,7 @@ export const useFetchRequest = () => {
 
     const data = await response.json();
 
-    return data;
+    setGroupHostUser(data);
   };
   
   // 매칭 프로세스 페치 - 수락(requsetUrl = "response-accept")/거절(requsetUrl = "response-deny")

@@ -79,17 +79,15 @@ const DetailBottom = ({ className, styles, newRelyData, boardData }) => {
     }
   }, [newRelyData]);
 
- const {openModal} = useModal()
-  const navigate = useNavigate()
+  const { openModal } = useModal();
+  const navigate = useNavigate();
 
-  const naviToBoards= ()=>{
-    navigate("/board")
-  }
-
+  const naviToBoards = () => {
+    navigate("/board");
+  };
 
   return (
     <div className={className}>
-      
       <div className={styles.info}>
         {boardData.isAuthor && (
           <p>
@@ -99,18 +97,31 @@ const DetailBottom = ({ className, styles, newRelyData, boardData }) => {
             >
               글 수정
             </NavLink>
-            <button className={styles.detBtn} onClick={()=>openModal("정말 삭제하시겠습니까?","completeMode",<ConfirmDelBoard id={boardData.id} naviToBoards={naviToBoards}/>)}>삭제</button>
+            <button
+              className={styles.detBtn}
+              onClick={() =>
+                openModal(
+                  "정말 삭제하시겠습니까?",
+                  "completeMode",
+                  <ConfirmDelBoard
+                    id={boardData.id}
+                    naviToBoards={naviToBoards}
+                  />
+                )
+              }
+            >
+              삭제
+            </button>
           </p>
         )}
         <p>
-          <sapn className={`${styles.messageBox} ${styles.viewCount}`}>
+          <span className={`${styles.messageBox} ${styles.viewCount}`}>
             {boardData.viewCount}
-          </sapn>
-          <sapn className={`${styles.messageBox} ${styles.count}`}>{totalReplies}</sapn>
+          </span>
+          <span className={`${styles.messageBox} ${styles.count}`}>
+            {totalReplies}
+          </span>
         </p>
-
-        
-
       </div>
 
       <ul>

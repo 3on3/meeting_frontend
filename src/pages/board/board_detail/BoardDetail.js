@@ -46,8 +46,6 @@ const BoardDetail = () => {
   useEffect(() => {
     getBoardFetch();
   }, [id]);
-  console.log("board: ", boardData);
-  // if(boardData)
   
   if(isLoading) return <div></div>;
   

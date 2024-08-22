@@ -138,10 +138,11 @@
 .ReplyList {
   padding-top: calc(100vw * (20 / 500));
   ul {
-    padding-top: calc(100vw * (20 / 500));
+    margin-top: calc(100vw * (20 / 500));
+    border-top: calc(100vw * (1 / 500)) solid var(--color-gr);
 
     > li {
-      padding: calc(100vw * (8 / 500));
+      padding: calc(100vw * (20 / 500)) calc(100vw * (8 / 500)) calc(100vw * (10 / 500));
       border-bottom: calc(100vw * (1 / 500)) solid var(--color-gr);
     }
   }

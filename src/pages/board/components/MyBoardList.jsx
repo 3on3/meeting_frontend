@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { BOARD_URL } from "../../../config/host-config";
 import { getUserToken } from "../../../config/auth";
 import BoardBox from "./BoardBox";
+import EmptyBoard from "./EmptyBoard";
 
 const MyBoardList = ({ className, styles, activeTab }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -75,10 +76,13 @@ const MyBoardList = ({ className, styles, activeTab }) => {
 
   return (
     <ul className={className} ref={scrollUlRef}>
-      {boardList.map((board) => {
-        return <BoardBox key={board.id} board={board} styles={styles} />;
-      })}
-
+      {boardList.length === 0 ? (
+        <EmptyBoard/>
+      ) : (
+        boardList.map((board) => {
+          return <BoardBox key={board.id} board={board} styles={styles} />;
+        })
+      )}
       {isLoading && (
         <div style={{ height: "100px"}}></div>
       )}

@@ -11,6 +11,7 @@ const Board = () => {
 
   const [activeTab, setActiveTab] = useState("all"); // 기본값은 '전체 글' 탭
 
+  
   return (
     <>
       {isRootPath && (

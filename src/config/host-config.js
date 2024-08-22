@@ -26,7 +26,9 @@ const USER = "/user";
 const FILE = "/file";
 const PASSWORD = "/password";
 const PAYMENT = "/payment";
+const MAIN = "/main";
 
+export const MAIN_URL = API_BASE_URL + MAIN;
 export const AUTH_URL = API_BASE_URL + SIGNUP;
 export const GROUP_URL = API_BASE_URL + GROUP;
 export const MYPAGE_URL = API_BASE_URL + MYPAGE;
@@ -38,3 +40,4 @@ export const USER_URL = API_BASE_URL + USER;
 export const FILE_URL = API_BASE_URL + FILE;
 export const PASSWORD_URL = API_BASE_URL + PASSWORD;
 export const PAYMENT_URL = API_BASE_URL + PAYMENT;
+

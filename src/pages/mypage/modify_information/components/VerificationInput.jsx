@@ -8,10 +8,10 @@ const VerificationInput = ({ styles, setIsSubmit, email }) => {
   const [inputState, setInputState] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  const [isEmailSent, setIsEmailSent] = useState(false); // 이메일 전송 여부
+  const [isEmailSent, setIsEmailSent] = useState(false); 
   const [debouncedCode, setDebouncedCode] = useState("");
 
-  const debounceTimeout = 500; // 디바운싱 시간 (500ms)
+  const debounceTimeout = 500; // 디바운싱 시간 설정 (500ms)
 
   // 인증 코드 입력 핸들러
   const verificationInputHandler = (e) => {
@@ -25,6 +25,7 @@ const VerificationInput = ({ styles, setIsSubmit, email }) => {
     setLoading(true);
     try {
       const response = await fetch(`{${MYPAGE_URL}/check-email`, {
+
         method: "POST",
         headers: {
           "Content-Type": "application/json",

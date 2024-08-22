@@ -168,7 +168,7 @@ const GroupViewBody = ({
               <MemberList
                 key={applicant.id}
                 imgUrl={applicant.profileImageUrl}
-                userName={applicant.userName}
+                userName={applicant.nickname}
                 univ={applicant.userUnivName}
                 major={applicant.userMajor}
                 bgColor="bgWhite"

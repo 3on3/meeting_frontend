@@ -8,7 +8,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useModal } from "../../../context/ModalContext";
 import ConfirmDelBoard from "./modal/ConfirmDelBoard";
 
-const DetailBottom = ({ className, styles, viewCount, newRelyData, boardData }) => {
+const DetailBottom = ({ className, styles, newRelyData, boardData }) => {
   const { id } = useParams();
 
   // 댓글 데이터

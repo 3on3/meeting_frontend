@@ -30,13 +30,25 @@ const Group = () => {
   const { alarmFetch } = useFetchRequest();
   const mainSocket = useContext(MainWebSocketContext);
   const [searchParams] = useSearchParams();
+  const [groupHostUser, setGroupHostUser] = useState(null)
 
   const status = searchParams.get("status");
 
   const { openModal } = useModal();
   const [isRequestSuccess, setIsRequestSuccess] = useState(false);
-  const onClickAndSuccess = () => {
+  const onClickAndSuccess = async () => {
     setIsRequestSuccess(true);
+
+    await alarmFetch(setGroupHostUser, id);
+
+    const socketMessage = {
+      type: "matching",
+      email: groupHostUser.email,
+      responseGroupId: id,
+    };
+
+    mainSocket.mainWebSocket.send(JSON.stringify(socketMessage));
+
     // 3초 후에 모달 닫기
     setTimeout(() => {
       setIsRequestSuccess(false);
@@ -134,15 +146,6 @@ const Group = () => {
           onClickHandler: async () => {
             setModalActive(!modalActive);
 
-            const hostUser = await alarmFetch(id);
-
-            const socketMessage = {
-              type: "matching",
-              email: hostUser.email,
-              responseGroupId: id,
-            };
-
-            mainSocket.mainWebSocket.send(JSON.stringify(socketMessage));
           },
         };
       default:

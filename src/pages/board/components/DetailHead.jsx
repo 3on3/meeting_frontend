@@ -6,7 +6,7 @@ const DetailHead = ({ styles, className, boardData }) => {
       <div className={styles.heads}>
         <div className={styles.left}>
           <p className={styles.ImageSection}>
-            <sapn className={styles.image}></sapn>
+            <span className={styles.image}></span>
           </p>
           <p className={styles.nameAndMonth}>
             <span className={styles.name}>익명</span>

@@ -6,6 +6,7 @@ const LOCAL_PORT = 8253; // 백엔드 로컬 서버 포트번호
 const clientHostName = window.location.hostname;
 
 let backendHostName;
+let webSocketHostName;
 
 if (clientHostName === "localhost") {
   backendHostName = "http://localhost:" + LOCAL_PORT;
@@ -14,9 +15,11 @@ if (clientHostName === "localhost") {
   "http://mymeetinh-s3-bucket.s3-website.ap-northeast-2.amazonaws.com"
 ) {
   backendHostName = "http://3.35.133.17:8253";
+  webSocketHostName = "ws://3.35.133.17:8253/socket";
 }
 
 export const API_BASE_URL = backendHostName;
+export const SOCKET_BASE_URL = webSocketHostName;
 
 const SIGNUP = "/signup";
 const GROUP = "/group";

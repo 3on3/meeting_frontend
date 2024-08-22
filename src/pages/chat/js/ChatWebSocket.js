@@ -1,12 +1,13 @@
 import {userDataLoader} from "../../../config/auth";
 import {saveMessage} from "./ChatFetch";
+import {SOCKET_BASE_URL} from "../../../config/host-config";
 
 export const chatWebSocket = (setSocket, setMessageList, id) => {
 
     const loginUser = userDataLoader();
     // WebSocket 설정
     // 연결할 웹소켓 주소 설정
-    const newSocket = new WebSocket("ws://localhost:8253/socket/Chat");
+    const newSocket = new WebSocket( SOCKET_BASE_URL+"/Chat");
 
     // 현재 접속중인 소켓 상태관리
     setSocket(newSocket);

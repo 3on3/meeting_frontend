@@ -3,12 +3,14 @@ import { useParams } from "react-router-dom";
 import { BOARD_URL } from "../../../config/host-config";
 import { getUserToken } from "../../../config/auth";
 import { useInView } from "react-intersection-observer";
+import { throttle } from "lodash";
 
-const DetailBottom = ({ className, styles, viewCount, postFetchClick }) => {
+const DetailBottom = ({ className, styles, viewCount, newRelyData }) => {
   const { id } = useParams();
 
   // 댓글 데이터
   const [boardRepliesData, setBoardRepliesData] = useState([]);
+
   //  댓글 전체수
   const [totalReplies, setTotalReplies] = useState(0);
 
@@ -19,14 +21,13 @@ const DetailBottom = ({ className, styles, viewCount, postFetchClick }) => {
   // ref
   const [scrollRef, inView] = useInView();
 
-  // 댓글 GET
+  // ============ 게시판 댓글 GET Fetch ============
   const getBoardReplies = async () => {
-    if (repliesIsLoading) {
+    if (repliesIsLoading || isFinish) {
       return;
     }
 
     setRepliesIsLoading(true);
-    console.log("로딩중입니당");
 
     try {
       const response = await fetch(
@@ -47,29 +48,33 @@ const DetailBottom = ({ className, styles, viewCount, postFetchClick }) => {
 
       setTimeout(() => {
         setBoardRepliesData(updatedRepliesData);
-        console.log("updatedRepliesData :", updatedRepliesData);
         setPageNo((prev) => prev + 1);
         if (totalElements === updatedRepliesData.length) {
           setIsFinish(true);
-          console.log("끝입니다아앙");
         }
       }, 500);
     } catch (err) {
-      console.log("error");
+      console.log("GET error");
     } finally {
       setRepliesIsLoading(false);
     }
   };
 
-  useEffect(() => {
-    getBoardReplies();
-  }, [id, postFetchClick]);
+  const throttledRepliesFetch = throttle(getBoardReplies, 1000);
 
   useEffect(() => {
     if (inView && !repliesIsLoading && !isFinish) {
-      getBoardReplies();
+      throttledRepliesFetch();
     }
   }, [inView]);
+
+  useEffect(() => {
+    if (newRelyData) {
+      setBoardRepliesData((prev) => [newRelyData, ...prev]);
+      setTotalReplies((prev) => prev + 1);
+      console.log(boardRepliesData);
+    }
+  }, [newRelyData]);
 
   return (
     <div className={className}>
@@ -92,7 +97,7 @@ const DetailBottom = ({ className, styles, viewCount, postFetchClick }) => {
               </div>
               <div className={styles.content}>
                 <div className={styles.textList}>{reply.content}</div>
-                <div className={styles.replyTime}>08/20 13:59</div>
+                <div className={styles.replyTime}>{reply.createdDate}</div>
               </div>
             </li>
           );

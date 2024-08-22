@@ -111,12 +111,25 @@
 }
 .ReplyList {
   padding-top: calc(100vw * (20 / 500));
+  padding-bottom: calc(100vw * (120 / 500));
   ul {
     padding-top: calc(100vw * (20 / 500));
 
     > li {
       padding: calc(100vw * (12 / 500)) calc(100vw * (8 / 500));
       border-bottom: calc(100vw * (1 / 500)) solid var(--color-light);
+
+      animation: chatAni 0.6s ease-out forwards;
+      @keyframes chatAni {
+        0% {
+          opacity: 0;
+          transform: translateY(calc(100vw * (10 / 500)));
+        }
+        100% {
+          opacity: 1;
+          transform: 0;
+        }
+      }
     }
   }
 
@@ -160,6 +173,8 @@
       font-size: calc(100vw * (17 / 500));
       font-weight: 450;
       padding: calc(100vw * (14 / 500)) 0;
+      word-break: break-all;
+      line-height: 130%;
     }
 
     .replyTime {

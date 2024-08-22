@@ -11,7 +11,6 @@ import inputStyles from "../../chat/Chat.module.scss";
 
 const BoardDetail = () => {
   const { id } = useParams();
-  // const id = searchParams.get('id');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
   const [boardData, setBoardData] = useState({});
@@ -20,9 +19,11 @@ const BoardDetail = () => {
   // InputValue
   const [replyInputValue, setReplyInputValue] = useState("");
   // 댓글 POST가 클릭 되었는지
-  const [postFetchClick, setPostFetchClick] = useState(false);
 
-  // 게시판 불러오기
+  // 새로 생성되는 댓글
+  const [newRelyData, setNewRelyData] = useState(null);
+
+  // ============ 게시판 GET Fetch ============
   const getBoardFetch = async () => {
     setIsLoading(true);
     setError(null);
@@ -49,13 +50,7 @@ const BoardDetail = () => {
     }
   };
 
-  useEffect(() => {
-    getBoardFetch();
-  }, [id]);
-  // console.log("board: ", boardData);
-  if (isLoading) return <div></div>;
-
-  // ============ POST ============
+  // ============ 게시판 댓글 POST Fetch ============
   // input Change 이벤트
   const onChangeInput = (e) => {
     setReplyInputValue(e.target.value);
@@ -63,11 +58,14 @@ const BoardDetail = () => {
 
   // 댓글 POST 클릭이벤트
   const onClickPostRepliesBtnHandler = async () => {
+    if (replyInputValue.trim() === "") {
+      return;
+    }
+
     const payload = {
       content: replyInputValue,
       boardId: id,
     };
-    console.log("payload :", payload);
 
     try {
       const response = await fetch(`${BOARD_URL}/detail`, {
@@ -78,13 +76,20 @@ const BoardDetail = () => {
         },
         body: JSON.stringify(payload),
       });
-      const PostData = await response.json();
-      setPostFetchClick(true);
-      console.log("PostData : ", PostData);
+      const postData = await response.json();
+      setNewRelyData(postData);
     } catch (err) {
-      console.log("");
+      console.log("post 오류");
+    } finally {
+      setReplyInputValue("");
     }
   };
+
+  // 해당 게시글 불러오기
+  useEffect(() => {
+    getBoardFetch();
+  }, [id]);
+  if (isLoading) return <div></div>;
 
   return (
     <>
@@ -104,13 +109,15 @@ const BoardDetail = () => {
           className={styles.ReplyList}
           styles={styles}
           viewCount={boardData.viewCount}
-          postFetchClick={postFetchClick}
+          newRelyData={newRelyData}
         />
         <div className={styles.inputBox}>
           <ChatInput
+            placeholderText={"reply"}
             styles={inputStyles}
             onClickSendBtn={onClickPostRepliesBtnHandler}
             onChangeInput={onChangeInput}
+            value={replyInputValue}
           />
         </div>
       </div>

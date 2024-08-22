@@ -4,8 +4,11 @@ import { BOARD_URL } from "../../../config/host-config";
 import { getUserToken } from "../../../config/auth";
 import { useInView } from "react-intersection-observer";
 import { throttle } from "lodash";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useModal } from "../../../context/ModalContext";
+import ConfirmDelBoard from "./modal/ConfirmDelBoard";
 
-const DetailBottom = ({ className, styles, viewCount, newRelyData }) => {
+const DetailBottom = ({ className, styles, viewCount, newRelyData, boardData }) => {
   const { id } = useParams();
 
   // 댓글 데이터
@@ -76,13 +79,38 @@ const DetailBottom = ({ className, styles, viewCount, newRelyData }) => {
     }
   }, [newRelyData]);
 
+ const {openModal} = useModal()
+  const navigate = useNavigate()
+
+  const naviToBoards= ()=>{
+    navigate("/board")
+  }
+
+
   return (
     <div className={className}>
+      
       <div className={styles.info}>
-        <p className={`${styles.messageBox} ${styles.viewCount}`}>
-          {viewCount}
+        {boardData.isAuthor && (
+          <p>
+            <NavLink
+              className={styles.editBtn}
+              to={`/board/modify/${boardData.id}`}
+            >
+              글 수정
+            </NavLink>
+            <button className={styles.detBtn} onClick={()=>openModal("정말 삭제하시겠습니까?","completeMode",<ConfirmDelBoard id={boardData.id} naviToBoards={naviToBoards}/>)}>삭제</button>
+          </p>
+        )}
+        <p>
+          <sapn className={`${styles.messageBox} ${styles.viewCount}`}>
+            {boardData.viewCount}
+          </sapn>
+          <sapn className={`${styles.messageBox} ${styles.count}`}>{totalReplies}</sapn>
         </p>
-        <p className={`${styles.messageBox} ${styles.count}`}>{totalReplies}</p>
+
+        
+
       </div>
 
       <ul>

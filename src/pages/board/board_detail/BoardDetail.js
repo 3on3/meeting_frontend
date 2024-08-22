@@ -89,12 +89,18 @@ const BoardDetail = () => {
   useEffect(() => {
     getBoardFetch();
   }, [id]);
-  if (isLoading) return <div></div>;
+
+  console.log("board: ", boardData);
+  // if(boardData)
+  
+  if(isLoading) return <div></div>;
+  
 
   return (
     <>
       <div className={styles.boardContainer}>
         <h1 className={`title ${styles.title}`}>{boardData.title}</h1>
+
         <DetailHead
           className={styles.MainText}
           styles={styles}
@@ -111,6 +117,7 @@ const BoardDetail = () => {
           viewCount={boardData.viewCount}
           newRelyData={newRelyData}
         />
+
         <div className={styles.inputBox}>
           <ChatInput
             placeholderText={"reply"}

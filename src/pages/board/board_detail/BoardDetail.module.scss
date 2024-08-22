@@ -80,8 +80,12 @@
 }
 .info{
   display: flex;
-  justify-content: right;
-  align-items: center;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-direction: column;
+  p{
+    display: flex;
+  }
 }
 .messageBox {
   display: flex;
@@ -203,12 +207,9 @@
   justify-content: center;
   font-weight: 600;
   color: var(--color-point);
-  font-size: calc(100vw * (14 / 500));
-  margin-right: calc(100vw * (10 / 500));
-  // width: calc(100vw * (80 / 500));
-  // height: calc(100vw * (32 / 500));
-  // border: solid 1px var(--color-point);
-  // border-radius: calc(100vw * (8 / 500));
+  font-size: calc(100vw * (16 / 500));
+  margin-right: calc(100vw * (4 / 500));
+  margin-bottom: calc(100vw * (20 / 500));
 
 
   &::after{
@@ -221,4 +222,16 @@
     margin-left: calc(100vw * (2 / 500));
     transform: translateY(calc(-100vw * (1 / 500)));
   }
+}
+.detBtn{
+  font-weight: 600;
+  font-size: calc(100vw * (16 / 500));
+  color: var(--color-gr);
+  margin-bottom: calc(100vw * (20 / 500));
+  width: calc(100vw * (54 / 500));
+}
+
+pre{
+  font-family: 'Pretendard', sans-serif;
+  line-height: 1.5;
 }

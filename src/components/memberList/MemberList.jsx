@@ -14,7 +14,6 @@ import { userDataLoader } from "../../config/auth";
 const MemberList = ({
   imgUrl,
   nickname,
-  profileImg,
   userName,
   univ,
   major,

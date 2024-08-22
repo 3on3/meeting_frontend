@@ -26,6 +26,7 @@ const MYPAGE = "/mypage";
 const TESTCHAT = "/testChat";
 const CHATROOM = "/chatroom";
 const ALARM = "/alarm";
+const BOARD = "/board";
 const USER = "/user";
 const FILE = "/file";
 const PASSWORD = "/password";
@@ -40,6 +41,7 @@ export const MYPAGEMATCHING_URL = API_BASE_URL + GROUPMATCHING;
 export const TESTCHT_URL = API_BASE_URL + TESTCHAT;
 export const CHATROOM_URL = API_BASE_URL + CHATROOM;
 export const ALARM_URL = API_BASE_URL + ALARM;
+export const BOARD_URL = API_BASE_URL + BOARD;
 
 export const USER_URL = API_BASE_URL + USER;
 export const FILE_URL = API_BASE_URL + FILE;

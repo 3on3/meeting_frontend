@@ -2,19 +2,21 @@ import React from "react";
 import styles from "./ErrorPage.module.scss";
 import MtButtons from "../../components/common/buttons/MtButtons";
 import profileImg from "../../assets/images/login/logo.svg";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const ErrorPage = () => {
   const navigate = useNavigate();
 
+  const location = useLocation()
   const mainPageHandler = () => {
     navigate("/");
   };
 
   const goBackHandler = () => {
-    navigate(-1); // 이전 페이지 이동
+   
+    // 그 외의 경우 이전 페이지로 이동
+    navigate(-1);
   };
-
   return (
     <div className={styles.container}>
       <div className={styles.textContainer}>

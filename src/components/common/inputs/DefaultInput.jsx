@@ -1,8 +1,8 @@
-import React, { useEffect, useRef } from "react";
+import React, { forwardRef, useEffect, useRef } from "react";
 import styles from "./DefaultInput.module.scss";
 
 // className 추가햇음
-const DefaultInput = ({type, inputState, errorMessage, placeholder, onChange, className, value }) => {
+const DefaultInput = forwardRef(({type, inputState, errorMessage, placeholder, onChange, className, value },ref) => {
   /**
    * inputState : error(오류), correct(성공), disabled(비활성화)에 따른 스타일 변경
    * errorMessage : 오류 시 나타나는 오류 메세지
@@ -43,12 +43,13 @@ const DefaultInput = ({type, inputState, errorMessage, placeholder, onChange, cl
           onChange={onChange}
           disabled={inputState === "disabled"}
           value={value}
+          ref={ref}
         />
 
         <div className={styles.errorMessage}>{errorMessage}</div>
       </div>
     </>
   );
-};
+});
 
 export default DefaultInput;

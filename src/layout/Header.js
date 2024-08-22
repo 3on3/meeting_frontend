@@ -25,11 +25,11 @@ const Header = () => {
             : `${styles.layer}`
         }
       ></div>
-      {(loginUser !== null &&(
-              location.pathname === "/" ||
-              location.pathname === "/mypage/mygroup" ||
-              location.pathname === "/mypage/myChat"
-      )
+
+      {(loginUser !== null && (location.pathname === "/" ||
+        location.pathname == "/mypage/mygroup" ||
+        location.pathname == "/mypage/myChat" ||
+        location.pathname == "/board") 
           ) && (
         <FloatingNavigation
           styles={styles}

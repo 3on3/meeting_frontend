@@ -1,0 +1,16 @@
+.textarea {
+  width: 100%;
+  height: 100%;
+  border-radius: calc(100vw * (18 / 500));
+  background-color: var(--color-wh);
+  box-shadow: 0 0 calc(100vw * (10 / 500)) rgba($color: #000000, $alpha: 0.1);
+  font-size: calc(100vw * (16 / 500));
+  font-weight: 500;
+  padding: calc(100vw * (20 / 500));
+  border: none;
+  font-family: "Pretendard", sans-serif;
+  line-height: 140%;
+  .textarea::placeholder {
+    font-weight: 500;
+  }
+}

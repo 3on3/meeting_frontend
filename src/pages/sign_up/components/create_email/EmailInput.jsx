@@ -3,6 +3,7 @@ import DefaultInput from "../../../../components/common/inputs/DefaultInput";
 import { emailVerification } from "../../../../assets/js/Verification";
 import MtButtons from "../../../../components/common/buttons/MtButtons";
 import styles1 from './EmailInput.module.scss'
+import { AUTH_URL } from "../../../../config/host-config";
 
 // 이메일 및 대학교 이름 입력 컴포넌트
 const EmailInput = ({
@@ -47,7 +48,7 @@ const EmailInput = ({
     setLoading(true);
     setError("");
     try {
-        const response = await fetch("http://localhost:8253/signup/check-email", {
+        const response = await fetch(`${AUTH_URL}/check-email`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

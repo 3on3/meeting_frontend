@@ -26,6 +26,7 @@ import PasswordResetPage from "../pages/login/components/PasswordResetPage";
 import Payment from "../pages/payment/Payment";
 import PaymentApproval from "../pages/payment/PaymentApproval";
 import AlarmPage from "../pages/alarm/AlarmPage";
+import SignUpComplete from "../pages/sign_up/components/SignUpComplete";
 
 // 마이페이지 라우터
 const mypageRouter = [
@@ -79,6 +80,10 @@ export const router = createBrowserRouter([
       {
         path: "intro",
         element: <IntroPage />,
+      },
+      {
+        path: "signup-complete",
+        element: <SignUpComplete />,
       },
       {
         path: "login",

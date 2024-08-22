@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import DefaultInput from "../../../../components/common/inputs/DefaultInput";
 import MtButtons from "../../../../components/common/buttons/MtButtons";
+import { AUTH_URL } from '../../../../config/host-config';
 
 // 이메일 인증 코드 입력 컴포넌트
 const VerificationInput = ({styles, isSubmit, setIsSubmit, email, univName, onVerified}) => {
@@ -25,7 +26,7 @@ const VerificationInput = ({styles, isSubmit, setIsSubmit, email, univName, onVe
       setError('');
       setInputState('');
       try {
-        const response = await fetch('http://localhost:8253/signup/code', {
+        const response = await fetch(`${AUTH_URL}/code`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

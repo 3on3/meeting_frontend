@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loginActions } from "../../store/Login-slice";
 import Checkbox from "../../components/common/buttons/checkboxbutton/Checkbox";
+import { AUTH_URL, USER_URL } from "../../config/host-config";
 
 // URL에서 경로를 추출하는 함수
 const extractPathFromUrl = (url) => {
@@ -91,7 +92,7 @@ const LoginPage = () => {
       };
 
       try {
-        const response = await fetch("http://localhost:8253/signup/sign-in", {
+        const response = await fetch(`${AUTH_URL}/sign-in`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -122,14 +123,15 @@ const LoginPage = () => {
             gender: data.gender,
             nickname: data.nickname,
             password: data.password,
-            membershipAuth: data.membershipAuth,
+            membership: data.membership,
             profileImg: data.profileImg
           };
+          
           localStorage.setItem("userData", JSON.stringify(userData));
-
+          
           // 프로필 이미지를 확인하는 API 호출
           const profileResponse = await fetch(
-            "http://localhost:8253/user/profile",
+            `${USER_URL}/profile`,
             {
               method: "GET",
               headers: {

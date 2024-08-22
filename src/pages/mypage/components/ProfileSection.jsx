@@ -5,8 +5,11 @@ import penImg from "../../../assets/images/mypage/pen.svg";
 import checkImg from "../../../assets/images/mypage/check.svg";
 import ActionSection from "./ActionSection";
 import MypageModal from "../components/mypage_modal/MypageModal";
-import { getUserToken } from "../../../config/auth";
+import { getUserData, getUserToken } from "../../../config/auth";
 import paymentImg from "../../../assets/images/mypage/payment.svg";
+import { useModal } from "../../../context/ModalContext";
+import PaymentModal from "../../payment/components/modal/PaymentModal";
+import { MYPAGE_URL } from "../../../config/host-config";
 
 // ProfileSection 컴포넌트 정의
 const ProfileSection = ({ userId }) => {
@@ -30,6 +33,8 @@ const ProfileSection = ({ userId }) => {
   const [modalPosition, setModalPosition] = useState({ x: 0, y: 0 });
 
   const [errorMessage, setErrorMessage] = useState("");
+
+  const { openModal, closeModal } = useModal();
 
   // 파일 입력 필드를 참조하기 위한 ref
   const fileInputRef = useRef(null);
@@ -90,7 +95,9 @@ const updateProfileInfo = async () => {
     console.log("프로필 정보 업데이트를 시작합니다.");
 
     // 서버에 PUT 요청을 보내어 프로필 정보 업데이트
-    const response = await fetch(`${MYPAGE_URL}/userInfo/update`,
+    const response = await fetch(
+      `${MYPAGE_URL}/userInfo/update`,
+
       {
         method: "PUT", 
         headers: {
@@ -248,9 +255,27 @@ const updateProfileInfo = async () => {
   };
 
   // 컴포넌트가 마운트될 때 사용자 프로필 정보를 가져옴
+  const openPaymentModal = () => {
+    openModal(
+      "", 
+      "completeMode", 
+      <PaymentModal
+        name={"프리미엄 멤버십"}
+        totalPrice={7900}
+        onCancel={closeModal}
+      />
+    );
+  };
+
   useEffect(() => {
+    const userData = getUserData(); // 업데이트된 userData를 불러옴
+    if (userData) {
+      setMembership(userData.membership === "PREMIUM" ? "프리미엄" : "일반회원");
+    }
+
     // 사용자 프로필 정보를 가져오는 GET 요청
-    fetch(`${MYPAGE_URL}/mypage/userInfo`, {
+    fetch(`${MYPAGE_URL}/userInfo`, {
+
       method: "GET",
       headers: {
         Authorization: `Bearer ${getUserToken()}`, // 사용자의 인증 토큰을 헤더에 포함
@@ -266,8 +291,7 @@ const updateProfileInfo = async () => {
         setProfileIntroduce(data.profileIntroduce);
         console.log("소개 정보:", data.profileIntroduce);
         setUniv(data.univ);
-        setMajor(data.major);
-        setMembership(data.membership === "PRIMIUM" ? "프리미엄" : "일반회원");
+        setMajor(data.major);        
       })
       .catch((error) => {
         console.error("프로필 정보를 불러오는 중 오류가 발생했습니다:", error);
@@ -341,7 +365,8 @@ const updateProfileInfo = async () => {
                 <img
                   src={paymentImg}
                   alt={"결제버튼"}
-                  // onClick={editNameToggle} 
+                  onClick={openPaymentModal}
+
                 />
               </div>
             </div>

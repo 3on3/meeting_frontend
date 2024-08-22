@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import DefaultInput from "../../../../components/common/inputs/DefaultInput";
 import styles from "../withdraw/Withdraw.module.scss";
 import { getUserToken } from "../../../../config/auth";
+import { MYPAGE_URL } from "../../../../config/host-config";
 
 const EmailInput = ({ email, handleEmailChange, isEmailValid, isInitial }) => {
   const [loading, setLoading] = useState(false);

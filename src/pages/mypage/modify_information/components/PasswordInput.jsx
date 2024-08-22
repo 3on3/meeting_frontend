@@ -3,6 +3,7 @@ import DefaultInput from "../../../../components/common/inputs/DefaultInput";
 import { getUserToken } from "../../../../config/auth";
 import styles from "../withdraw/Withdraw.module.scss";
 import { passwordVerification } from "../../../../assets/js/Verification";
+import { MYPAGE_URL } from "../../../../config/host-config";
 
 const PasswordInput = ({
   password,

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import DefaultInput from "../../../../components/common/inputs/DefaultInput";
 import { getUserToken } from "../../../../config/auth";
+import { MYPAGE_URL } from "../../../../config/host-config";
 
 const VerificationInput = ({ styles, setIsSubmit, email }) => {
   const [emailVerificationInput, setEmailVerificationInput] = useState("");
@@ -23,7 +24,8 @@ const VerificationInput = ({ styles, setIsSubmit, email }) => {
 
     setLoading(true);
     try {
-      const response = await fetch(`${MYPAGE_URL}/check-email`, {
+      const response = await fetch(`{${MYPAGE_URL}/check-email`, {
+
         method: "POST",
         headers: {
           "Content-Type": "application/json",

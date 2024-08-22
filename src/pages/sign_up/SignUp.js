@@ -5,6 +5,7 @@ import styles from "./components/SignUpComponent.module.scss";
 import CreateInformations from "./components/create_informations/CreateInformation";
 import CreatePassword from "./components/create_password/CreatePassword";
 import { useNavigate } from "react-router-dom";
+import { AUTH_URL } from "../../config/host-config";
 
 // 랜덤 닉네임 생성 함수
 const adjectives = [
@@ -75,7 +76,7 @@ const SignUp = () => {
 
     try {
       // 서버에 데이터 전송
-      const response = await fetch("http://localhost:8253/signup/join", {
+      const response = await fetch(`${AUTH_URL}/join`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

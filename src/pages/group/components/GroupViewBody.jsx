@@ -3,6 +3,7 @@ import MemberList from "../../../components/memberList/MemberList";
 import imgOriginUrl from "../../../assets/images/profile.jpg";
 import { getUserToken } from "../../../config/auth";
 import InviteModal from "../../../components/common/modal/InviteModal";
+import { GROUP_URL } from "../../../config/host-config";
 
 const GroupViewBody = ({
   auth,
@@ -18,21 +19,19 @@ const GroupViewBody = ({
 }) => {
   const [tab, setTab] = useState("current");
   const [applicants, setApplicants] = useState([]);
+  const [modalContent, setModalContent] = useState("");
 
   useEffect(() => {
     if (auth === "HOST") {
       const fetchApplicants = async () => {
         try {
-          const response = await fetch(
-            `http://localhost:8253/group/invite/${groupId}`,
-            {
-              method: "GET",
-              headers: {
-                Authorization: `Bearer ${getUserToken()}`,
-                "Content-Type": "application/json",
-              },
-            }
-          );
+          const response = await fetch(`${GROUP_URL}/invite/${groupId}`, {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${getUserToken()}`,
+              "Content-Type": "application/json",
+            },
+          });
           if (response.ok) {
             const data = await response.json();
             setApplicants(data);
@@ -48,10 +47,19 @@ const GroupViewBody = ({
     }
   }, [auth, groupId]);
 
+  const showModal = (message) => {
+    if (modalContent !== "") return;
+    setModalContent(message);
+
+    setTimeout(() => {
+      setModalContent("");
+    }, 1200);
+  };
+
   const handleAccept = async (applicantId) => {
     try {
       const response = await fetch(
-        `http://localhost:8253/group/join-requests/${applicantId}/accept`,
+        `${GROUP_URL}/join-requests/${applicantId}/accept`,
         {
           method: "POST",
           headers: {
@@ -73,6 +81,9 @@ const GroupViewBody = ({
           applicants.filter((applicant) => applicant.id !== applicantId)
         );
         updateUsers(newUsers);
+        showModal("그룹 참가 요청을 수락하였습니다.");
+      } else {
+        showModal("그룹이 이미 꽉 찬 상태입니다.");
       }
     } catch (error) {
       console.error(error);
@@ -82,7 +93,7 @@ const GroupViewBody = ({
   const handleCancel = async (applicantId) => {
     try {
       const response = await fetch(
-        `http://localhost:8253/group/join-requests/${applicantId}/cancel`,
+        `${GROUP_URL}/join-requests/${applicantId}/cancel`,
         {
           method: "POST",
           headers: {
@@ -140,7 +151,7 @@ const GroupViewBody = ({
           ? users.map((user) => (
               <MemberList
                 key={user.id}
-                imgUrl={imgOriginUrl}
+                imgUrl={user.profileImageUrl}
                 userName={user.name}
                 univ={user.univName}
                 nickname={user.nickname}
@@ -156,8 +167,8 @@ const GroupViewBody = ({
           : applicants.map((applicant) => (
               <MemberList
                 key={applicant.id}
-                imgUrl={imgOriginUrl}
-                userName={applicant.userName}
+                imgUrl={applicant.profileImageUrl}
+                userName={applicant.nickname}
                 univ={applicant.userUnivName}
                 major={applicant.userMajor}
                 bgColor="bgWhite"
@@ -170,6 +181,7 @@ const GroupViewBody = ({
       </ul>
 
       {/* 모달 표시 */}
+      {modalContent && <InviteModal content={modalContent} />}
     </div>
   );
 };

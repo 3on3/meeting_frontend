@@ -25,7 +25,6 @@ export const useFetchRequest = () => {
         },
         body: JSON.stringify(payload),
       });
-      console.log(payload);
       if (response.ok) {
         setIsChanged(true);
       } else {
@@ -40,9 +39,7 @@ export const useFetchRequest = () => {
     }
   };
 
-  const alarmFetch = async (responseGroupId) => {
-    console.log(responseGroupId);
-
+  const alarmFetch = async (setGroupHostUser, responseGroupId) => {
     const loginUser = userDataLoader();
 
     const payload = {
@@ -60,12 +57,12 @@ export const useFetchRequest = () => {
       body: JSON.stringify(payload),
     });
 
-    // console.log(response)
 
     const data = await response.json();
 
-    return data;
+    setGroupHostUser(data.email);
   };
+  
   // 매칭 프로세스 페치 - 수락(requsetUrl = "response-accept")/거절(requsetUrl = "response-deny")
   const processFetch = async (requestUrl, payload, setIsChanged) => {
     setIsLoading(true);
@@ -130,29 +127,13 @@ export const useFetchRequest = () => {
     }
   };
 
-  // 마이 그룹 리스트 페치
-  // const MyGroupsListFetch = async () => {
-  //   try {
-  //     const response = await fetch(`${MYPAGE_URL}/mygroup`, {
-  //       headers: {
-  //         Authorization: "Bearer " + getUserToken(),
-  //       },
-  //     });
-  //     const data = await response.json();
-  //     setMyGroupList(data);
-  //     setIsLoading(false);
-  //   } catch (error) {
-  //     console.error("Error fetching the group list:", error);
-  //     setIsLoading(false);
-  //   }
-  // };
+  
 
   return {
     alarmFetch,
     requestFetch,
     processFetch,
     createFetch,
-    // MyGroupsListFetch,
     isLoading,
     error,
   };

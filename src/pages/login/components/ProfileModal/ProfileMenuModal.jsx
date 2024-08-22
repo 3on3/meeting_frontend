@@ -1,30 +1,33 @@
-import React from 'react';
-import styles from './ProfileMenuModal.module.scss';
+import React from "react";
+import styles from "./ProfileMenuModal.module.scss";
 
-const ProfileMenuModal = ({ active, position, onDefaultImage, onChangeProfile }) => {
-  const modalStyles = {
-    left: `${position.x}px`,
-    top: `${position.y}px`,
-  };
-
+const ProfileMenuModal = ({ active, onDefaultImage, onChangeProfile }) => {
   return (
-    <nav 
-      className={active ? `${styles.isActive} ${styles.profileMenu}` : styles.profileMenu}
-      style={modalStyles}
-    >
-      <button 
-        className={`${styles.defaultImgBtn} defaultImgBtn`} 
-        onClick={onDefaultImage}
-      >
-        기본 이미지
-      </button>
-      <button 
-        className={`${styles.changeProfileBtn} changeProfileBtn`} 
-        onClick={onChangeProfile} 
-      >
-        프로필 변경
-      </button>
-    </nav>
+    <>
+      {/* 어두운 배경 클릭 시 닫기 동작 */}
+      <div
+        className={`${styles.modalBackground} ${active ? styles.active : ""}`}
+        onClick={onDefaultImage} // 배경 클릭 시 모달 닫기
+      ></div>
+
+      {/* 프로필 메뉴 모달 내용 */}
+      <nav className={`${styles.profileMenu} ${active ? styles.isActive : ""}`}>
+        {/* 기본 이미지 버튼 */}
+        <button
+          className={`${styles.defaultImgBtn} defaultImgBtn`}
+          onClick={onDefaultImage}
+        >
+          기본 이미지
+        </button>
+        {/* 프로필 변경 버튼 */}
+        <button
+          className={`${styles.changeProfileBtn} changeProfileBtn`}
+          onClick={onChangeProfile}
+        >
+          프로필 변경
+        </button>
+      </nav>
+    </>
   );
 };
 

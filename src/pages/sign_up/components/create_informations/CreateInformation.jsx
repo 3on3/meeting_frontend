@@ -11,12 +11,13 @@ import DefaultInput from "../../../../components/common/inputs/DefaultInput";
 import MtButtons from "../../../../components/common/buttons/MtButtons";
 import RadioButton from "../../../../components/common/buttons/radiobutton/RadioButton";
 import { getUserToken } from "../../../../config/auth";
+import { AUTH_URL } from "../../../../config/host-config";
 
-// yyMMdd를 yyyy-MM-dd로 변환하는 함수
+// yyMMdd 형식을 yyyy-MM-dd 형식으로 변환하는 함수
 const convertToFullDate = (shortDate) => {
   if (!/^\d{6}$/.test(shortDate)) return ""; // 형식이 맞지 않으면 빈 문자열 반환
 
-  const yearPrefix = shortDate.startsWith("9") ? "19" : "20"; // 첫 자리에 따라 결정
+  const yearPrefix = shortDate.startsWith("9") ? "19" : "20"; // 90년대는 19, 그 외는 20으로 시작
   const year = `${yearPrefix}${shortDate.substring(0, 2)}`;
   const month = shortDate.substring(2, 4);
   const day = shortDate.substring(4, 6);
@@ -35,7 +36,7 @@ const calculateAge = (birthDate) => {
     monthDifference < 0 ||
     (monthDifference === 0 && today.getDate() < birth.getDate())
   ) {
-    age--;
+    age--; // 생일이 지나지 않았으면 나이 -1
   }
 
   return age;
@@ -47,7 +48,7 @@ const CreateInformations = ({
   verifiedData,
   setUserData,
 }) => {
-  // input에 입력되는 값들을 저장하기 위한 useState
+  // 입력 필드 값 저장을 위한 상태들
   const [userName, setUserName] = useState("");
   const [userBirth, setUserBirth] = useState("");
   const [userGender, setUserGender] = useState("");
@@ -55,7 +56,7 @@ const CreateInformations = ({
   const [secondPhoneNumber, setSecondPhoneNumber] = useState("");
   const [lastPhoneNumber, setLastPhoneNumber] = useState("");
 
-  // input에 입력된 값들이 조건에 만족하는지를 관리하는 useState
+  // 각 입력 필드의 검증 상태를 저장하는 상태들
   const [isName, setIsName] = useState(false);
   const [isBirth, setIsBirth] = useState(false);
   const [isGender, setIsGender] = useState(false);
@@ -65,14 +66,14 @@ const CreateInformations = ({
   const [lastPhoneNoStatus, setLastPhoneNoStatus] = useState(false);
   const [birthErrorMessage, setBirthErrorMessage] = useState("");
 
-  // 전화번호 중복 확인 관련 상태
+  // 전화번호 중복 확인 및 오류 메시지 상태
   const [isPhoneNumberDuplicate, setIsPhoneNumberDuplicate] = useState(false);
   const [phoneNumberErrorMessage, setPhoneNumberErrorMessage] = useState("");
 
-  // 버튼의 활성상태를 관리하기 위한 useState
+  // 버튼 활성화 상태
   const [buttonStatus, setButtonStatus] = useState(false);
 
-  // 모든 입력된 값들이 조건에 만족할시 버튼 활성화
+  // 모든 입력이 완료되면 버튼을 활성화하는 함수
   const checkButtonStatus = () => {
     if (isName && isBirth && isGender && isPhoneNumber && !isPhoneNumberDuplicate) {
       setButtonStatus(true);
@@ -81,25 +82,27 @@ const CreateInformations = ({
     }
   };
 
-  // 각 input 값들이 변결될때마다 버튼 활성화 여부 검증
+  // 입력 필드의 값이 변경될 때마다 버튼 상태를 검토
   useEffect(() => {
     checkButtonStatus();
   }, [isName, isBirth, isGender, isPhoneNumber, isPhoneNumberDuplicate]);
 
-  // 유저 이름 상태관리
+  // 유저 이름 입력 핸들러
   const userNameInputHandler = (e) => {
     setUserName(e.target.value);
   };
 
+  // 유저 이름 검증
   useEffect(() => {
     setIsName(nameVerification(userName));
   }, [userName]);
 
+  // 이름 입력 제출 버튼 핸들러
   const nameBtnHandler = () => {
     setIsSubmit([true, false, false, false]);
   };
 
-  // 생년월일 상태관리 (yyMMdd 형식)
+  // 생년월일 입력 핸들러 (yyMMdd 형식)
   const userBirthInputHandler = (e) => {
     const inputBirth = e.target.value;
     setUserBirth(inputBirth);
@@ -115,16 +118,18 @@ const CreateInformations = ({
     }
   };
 
+  // 생년월일 검증
   useEffect(() => {
     setIsBirth(birthVerification(userBirth));
   }, [userBirth]);
 
+  // 나이 검증
   const checkAge = (birthDate) => {
     const fullBirthDate = convertToFullDate(birthDate);
     const age = calculateAge(fullBirthDate);
     const birthYear = parseInt(fullBirthDate.substring(0, 4), 10);
 
-    // 한국 나이 기준으로 2005년생까지 가입 허용 (20세까지 가입 가능)
+    // 20세 이상만 가입 가능
     if (age < 20 || birthYear > 2005) {
       setBirthErrorMessage("20세 이상만 가입이 가능합니다.");
       return false;
@@ -133,6 +138,7 @@ const CreateInformations = ({
     return true;
   };
 
+  // 생년월일 제출 버튼 핸들러
   const birthBtnHandler = () => {
     if (checkAge(userBirth)) {
       setIsSubmit([true, true, false, false]);
@@ -141,31 +147,33 @@ const CreateInformations = ({
     }
   };
 
-  // 성별 상태관리
+  // 성별 입력 핸들러
   const userGenderInputHandler = (e) => {
     setUserGender(e.target.value);
   };
 
+  // 성별 검증
   useEffect(() => {
     setIsGender(genderVerification(userGender));
   }, [userGender]);
 
+  // 성별 제출 버튼 핸들러
   const genderBtnHandler = () => {
     setIsSubmit([true, true, true, false]);
   };
 
-  // 전화번호 상태관리
+  // 전화번호 입력 핸들러
   const firstPhoneNumberInputHandler = (e) => {
     setFirstPhoneNumber(e.target.value);
-    resetPhoneNumberState(); // 번호 입력 시 상태 초기화
+    resetPhoneNumberState(); // 전화번호 입력 시 상태 초기화
   };
   const secondPhoneNumberInputHandler = (e) => {
     setSecondPhoneNumber(e.target.value);
-    resetPhoneNumberState(); // 번호 입력 시 상태 초기화
+    resetPhoneNumberState(); // 전화번호 입력 시 상태 초기화
   };
   const lastPhoneNumberInputHandler = (e) => {
     setLastPhoneNumber(e.target.value);
-    resetPhoneNumberState(); // 번호 입력 시 상태 초기화
+    resetPhoneNumberState(); // 전화번호 입력 시 상태 초기화
   };
 
   // 전화번호 상태 초기화 함수
@@ -175,6 +183,7 @@ const CreateInformations = ({
     setIsPhoneNumber(false);
   };
 
+  // 전화번호 검증
   useEffect(() => {
     setFirstPhoneNoStatus(firstPhoneNumberVerification(firstPhoneNumber));
   }, [firstPhoneNumber]);
@@ -187,6 +196,7 @@ const CreateInformations = ({
     setLastPhoneNoStatus(secondPhoneNumberVerification(lastPhoneNumber));
   }, [lastPhoneNumber]);
 
+  // 전체 전화번호 검증
   useEffect(() => {
     setIsPhoneNumber(
       firstPhoneNoStatus && secondPhoneNoStatus && lastPhoneNoStatus
@@ -199,7 +209,7 @@ const CreateInformations = ({
       const encodedPhoneNumber = encodeURIComponent(phoneNumber);
       console.log('encodedPhoneNumber: ', encodedPhoneNumber);
 
-      const response = await fetch(`http://localhost:8253/signup/check-phone-number?phoneNumber=${encodedPhoneNumber}`, {
+      const response = await fetch(`${AUTH_URL}/check-phone-number?phoneNumber=${encodedPhoneNumber}`, {
         method: 'GET',
       });
       console.log('response: ', response);
@@ -272,7 +282,7 @@ const CreateInformations = ({
       {!isSubmit[0] && (
         <div className={styles.button}>
           <MtButtons
-            buttonText={"SUBMIT"}
+            buttonText={"확인"}
             buttonType={isName ? "apply" : "disabled"}
             eventType={"click"}
             eventHandler={nameBtnHandler}
@@ -321,7 +331,7 @@ const CreateInformations = ({
           {!isSubmit[2] && (
             <div className={styles.button}>
               <MtButtons
-                buttonText={"SUBMIT"}
+                buttonText={"확인"}
                 buttonType={isGender ? "apply" : "disabled"}
                 eventType={"click"}
                 eventHandler={genderBtnHandler}
@@ -379,7 +389,7 @@ const CreateInformations = ({
 
           <div className={styles.button}>
             <MtButtons
-              buttonText={"SUBMIT"}
+              buttonText={"확인"}
               buttonType={buttonStatus ? "apply" : "disabled"}
               eventType={"click"}
               eventHandler={phoneNoBtnHandler}

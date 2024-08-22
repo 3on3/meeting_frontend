@@ -4,12 +4,13 @@ import DefaultInput from "../../../components/common/inputs/DefaultInput";
 import MtButtons from "../../../components/common/buttons/MtButtons";
 import { useModal } from "../../../context/ModalContext";
 import ConfirmIdentityModal from "./find_password/ConfirmIdentityModal";
+import { PASSWORD_URL } from "../../../config/host-config";
 
 const PasswordResetPage = () => {
-    const [email, setEmail] = useState("");
+    const [email, setEmail] = useState(""); // 이메일 상태
     const [errorMessage, setErrorMessage] = useState(""); // 오류 메시지 상태
     const [isButtonDisabled, setIsButtonDisabled] = useState(true); // 버튼 비활성화 상태
-    const { openModal } = useModal();
+    const { openModal } = useModal(); // 모달 열기 함수
 
     // 이메일 입력 필드 변경 핸들러
     const handleEmailChange = (e) => {
@@ -21,14 +22,15 @@ const PasswordResetPage = () => {
     const handleEmailSubmit = async () => {
         setErrorMessage(""); // 이전 오류 메시지 초기화
         try {
-            const response = await fetch("http://localhost:8253/password/email", {
+            const response = await fetch(`${PASSWORD_URL}/email`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ email }),
             });
-
+            console.log('response:', response);
+            
             if (response.ok) {
                 const data = await response.json();
                 console.log('data: ', data);
@@ -68,7 +70,7 @@ const PasswordResetPage = () => {
             </div>
             <MtButtons
                 buttonType={isButtonDisabled ? "disabled" : "apply"} // 버튼 타입 설정
-                buttonText="SUBMIT"
+                buttonText="확인"
                 eventType={isButtonDisabled ? null : "click"} // 버튼 클릭 이벤트 설정
                 eventHandler={isButtonDisabled ? null : handleEmailSubmit} // 버튼 클릭 핸들러 설정
             />

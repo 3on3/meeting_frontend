@@ -4,24 +4,44 @@ import logo from "../../assets/images/login/logo.svg";
 import styles from "./Main.module.scss";
 import { useNavigate } from "react-router-dom";
 
-const EmptyGroups = ({text}) => {
+const EmptyGroups = ({isGroup}) => {
   const navigate = useNavigate();
   const onClickHandler = () => {
-    navigate("/group/create");
+      if(!isGroup) {
+          navigate("/group/create");
+      } else {
+          navigate("/")
+      }
+
   };
   return (
     <div className={styles.emptyGroup}>
       <div className={styles.logo}>
         <img src={logo}></img>
       </div>
-      <div className={styles.topText}>아직 생성된 {text}이 없습니다</div>
+      <div className={styles.topText}>
+          {!isGroup ? `아직 생성된 그룹이 없습니다` : `아직 생성된 채팅이 없습니다.`}
+      </div>
       <div className={styles.text}>
-        그룹을 생성해서
-        <br />
-        미팅에 참여해보세요!
+          {!isGroup?
+              (
+                  <>
+                      그룹을 생성해서
+                      <br/>
+                      과팅에 참여해보세요!
+                  </>
+              ) :
+              (
+                  <>
+                      그룹 매칭을 통해
+                      <br/>
+                      과팅에 참여해보세요!
+                  </>
+              )
+          }
       </div>
       <div className={styles.groupCreateBt}>
-        <MatchingButton text={"그룹 생성"} onClickHandler={onClickHandler} />
+        <MatchingButton text={!isGroup? "그룹 생성" : "매칭 신청"} onClickHandler={onClickHandler} />
       </div>
     </div>
   );

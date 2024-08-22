@@ -3,6 +3,7 @@ import ChatMemberList from "../../../../components/memberList/MemberList";
 
 const ChatMembersModal = ({ styles, memberList }) => {
 
+    // 2개의 그룹을 나누기 위한 상태변수
     const [isGroup, setIsGroup] = useState(false);
 
     const fistGroupClickHandler = () => {
@@ -60,12 +61,6 @@ const ChatMembersModal = ({ styles, memberList }) => {
               )
           }
         </ul>
-        {/* 신청자 tab */}
-        {/* <ul className={styles.userListWrap}>
-          <ChatMemberList imgUrl={imgUrl} userName={userName} univ={univ} major={major}/>
-          <ChatMemberList imgUrl={imgUrl} userName={userName} univ={univ} major={major}/>
-          <ChatMemberList imgUrl={imgUrl} userName={userName} univ={univ} major={major}/>
-        </ul> */}
       </div>
 
   );

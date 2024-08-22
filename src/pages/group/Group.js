@@ -16,6 +16,7 @@ import GroupDeleteModal from "./components/modal/GroupDeleteModal";
 import { useModal } from "../../context/ModalContext";
 import GroupLeaveModal from "./components/modal/GroupLeaveModal";
 import InviteModal from "../../components/common/modal/InviteModal";
+import Loading from "../../components/common/loading/Loading";
 
 const Group = () => {
   const { id } = useParams();
@@ -29,6 +30,7 @@ const Group = () => {
   const { alarmFetch } = useFetchRequest();
   const mainSocket = useContext(MainWebSocketContext);
   const [searchParams] = useSearchParams();
+  const [groupHostUser, setGroupHostUser] = useState(null)
 
   const status = searchParams.get("status");
 
@@ -36,13 +38,36 @@ const Group = () => {
   const [isRequestSuccess, setIsRequestSuccess] = useState(false);
   const onClickAndSuccess = () => {
     setIsRequestSuccess(true);
+
+    alarmFetch(setGroupHostUser, id);
+
     // 3초 후에 모달 닫기
     setTimeout(() => {
       setIsRequestSuccess(false);
     }, 1200);
   };
 
-  console.log("groupData: ", groupData);
+  const testHandler = () =>{
+    alarmFetch(setGroupHostUser, id);
+
+  }
+
+
+  useEffect(() => {
+    setTimeout(() => {
+      if(groupHostUser !== null && mainSocket.mainWebSocket !== null) {
+        const socketMessage = {
+          type: "matching",
+          email: groupHostUser,
+          responseGroupId: id,
+        };
+
+        mainSocket.mainWebSocket.send(JSON.stringify(socketMessage));
+      }
+    }, 1000)
+  }, [groupHostUser]);
+
+  
 
   const openConfirmModal = () => {
     openModal(
@@ -67,30 +92,30 @@ const Group = () => {
       setGroupData(data);
       setGroupUsers(data.users);
       setAuth(data.groupAuth); // auth 값을 설정
-      setLoading(false);
+
+      setTimeout(()=>{
+        setLoading(false);
+
+      }, 500)
     } catch (error) {
       setError(error);
       setLoading(false);
     }
   };
 
+
+  useEffect(() => {
+
+    console.log(groupHostUser)
+  }, [groupHostUser]);
+
   useEffect(() => {
     fetchGroupData();
-    console.log(groupData);
   }, [id, isChanged]);
 
-  if (loading) {
-    return <div></div>;
-  }
+  if (loading) {return (<div className={styles.container}><Loading/></div>)}
 
-  if (loading) {
-    return (
-      <>
-        <GroupViewHeadSkeleton />
-        <GroupViewBodySkeleton />
-      </>
-    );
-  }
+  
 
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -135,18 +160,8 @@ const Group = () => {
         return {
           type: "cancel",
           text: "매칭 신청하기",
-          onClickHandler: async () => {
+          onClickHandler: () => {
             setModalActive(!modalActive);
-
-            const hostUser = await alarmFetch(id);
-
-            const socketMessage = {
-              type: "matching",
-              email: hostUser.email,
-              responseGroupId: id,
-            };
-
-            mainSocket.mainWebSocket.send(JSON.stringify(socketMessage));
           },
         };
       default:
@@ -157,7 +172,8 @@ const Group = () => {
   const { type, text, onClickHandler } = getButtonConfig();
 
   return (
-    <>
+    <div className={styles.container}>
+      <div onClick={testHandler}>일단테스트를 위한 아무거나야</div>
       <GroupViewHead
         styles={styles}
         place={meetingPlace}
@@ -198,7 +214,6 @@ const Group = () => {
           buttonType={"disabled"}
           buttonText={"이미 매칭 신청 중인 그룹이예요."}
           className={`${styles.groupBtn} ${styles.disable}`}
-          // className={}
         />
       )}
       {status === "RESPONSE" && (
@@ -207,7 +222,6 @@ const Group = () => {
           buttonType={"disabled"}
           buttonText={"내 그룹에 매칭을 신청한 그룹이예요."}
           className={`${styles.groupBtn} ${styles.disable}`}
-          // className={}
         />
       )}
       {auth === "HOST" && (
@@ -216,7 +230,6 @@ const Group = () => {
       {/* 신청자 그룹 선택 ㅊ모달 */}
       {modalActive && (
         <MyGroupSelectModal
-          // MyGroupSelectModal={MyGroupSelectModal}
           setIsChanged={setIsChanged}
           responseGroupId={id}
           setModalActive={setModalActive}
@@ -226,7 +239,7 @@ const Group = () => {
       {isRequestSuccess && (
         <InviteModal content={"매칭신청이 완료되었습니다."} />
       )}
-    </>
+    </div>
   );
 };
 

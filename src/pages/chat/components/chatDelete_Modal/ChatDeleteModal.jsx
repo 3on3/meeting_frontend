@@ -13,6 +13,10 @@ const ChatDeleteModal = ({roomId, navigate}) => {
         closeModal();
     }
 
+    // 삭제 확인 버튼 핸들러
+    /**
+     * deleteChatRoom이라는 fetch 실행 후 메인페이지로 리다이렉트;
+     */
     const deleteChatHandler = () => {
         deleteChatRoom(roomId);
         navigate("/")

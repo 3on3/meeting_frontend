@@ -70,9 +70,19 @@
     }
   }
   .imgBlur {
-    img {
-      filter: blur(1.5px);
-    }
+    position: relative; /* 부모 요소에 position 설정 */
+  }
+
+  .imgBlur::after {
+    content: '';
+    position: absolute; /* 가상 요소를 부모 요소 위에 위치시킴 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(2px); /* 블러 필터 적용 */
+    z-index: 1; /* 필요한 경우, z-index를 조정 */
+    pointer-events: none; /* 가상 요소가 클릭을 방해하지 않도록 설정 */
   }
   .userName {
     font-size: calc(100vw * (16 / 500));

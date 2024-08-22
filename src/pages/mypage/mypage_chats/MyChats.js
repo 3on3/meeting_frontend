@@ -10,15 +10,13 @@ const MyChats = () => {
     useEffect( () => {
         const data = myChatListFetch(setChatList);
 
-        console.log(data);
     }, []);
 
   return (
     <ul className={styles.myChatsWrapper}>
       <p className={styles.myGroupsTitle}>내가 속한 채팅</p>
-        {chatList && chatList.map(chat => <MyChatList key={chat.chatRoomId} chat={chat}/>)}
-      {chatList.length === 0 && (<div className={styles.empty}><EmptyGroups text={"채팅"} /></div>)}
-
+        {chatList && chatList.map(chat => <MyChatList key={chat.chatRoomId} chat={chat}/>) }
+      {chatList.length === 0 && (<div className={styles.empty}><EmptyGroups text={"채팅"} isGroup={true}/></div>)}
     </ul>
   );
 };

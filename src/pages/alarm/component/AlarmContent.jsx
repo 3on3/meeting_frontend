@@ -10,9 +10,15 @@ const AlarmContent = ({alarm}) => {
 
     const requestedAt = alarm.requestedAt;
 
+    // 알람 시간 패턴 변경
     const requestDate = `${requestedAt[0]}년 ${requestedAt[1]}월 ${requestedAt[2]}일`;
     const requestTime = `${requestedAt[3]}시 ${requestedAt[4]}분`
 
+    /**
+     * 알람박스 클릭 시 클릭한 알람박스의 id를 서버에 전송하여 확인완료처리
+     * 알람박스 클릭 시 매칭 요청이 들어온 그룹 페이지로 리다이렉트
+     * @returns {Promise<void>} = X
+     */
     const alarmBoxClickHandler = async () => {
 
         const payload = {

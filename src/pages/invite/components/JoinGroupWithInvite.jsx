@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { authCheckLoader, getUserToken } from "../../../config/auth";
+import { GROUP_URL } from "../../../config/host-config";
 const JoinGroupWithInvite = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ const JoinGroupWithInvite = () => {
       const joinGroup = async () => {
         try {
           const response = await fetch(
-            `http://localhost:8253/group/join/invite?code=${inviteCode}`,
+            `${GROUP_URL}/join/invite?code=${inviteCode}`,
             {
               method: "POST",
               headers: {

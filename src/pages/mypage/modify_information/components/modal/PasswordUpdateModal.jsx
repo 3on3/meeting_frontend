@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "./PasswordUpdateModal.module.scss";
 import { getUserToken, removeUserToken } from "../../../../../config/auth";
 import MtButtons from "../../../../../components/common/buttons/MtButtons";
+import { MYPAGE_URL } from "../../../../../config/host-config";
 
 const PasswordUpdateModal = ({ passwordInput, confirmPassword }) => {
   const [errorMessage, setErrorMessage] = useState("");
@@ -14,7 +15,7 @@ const PasswordUpdateModal = ({ passwordInput, confirmPassword }) => {
   
     try {
       const response = await fetch(
-        "http://localhost:8253/mypage/change-password",
+        `${MYPAGE_URL}/change-password`,
         {
           method: "PATCH",
           headers: {
@@ -62,7 +63,7 @@ const PasswordUpdateModal = ({ passwordInput, confirmPassword }) => {
       <div className={styles.btn}>
         <MtButtons
           buttonType={"apply"}
-          buttonText={"SUBMIT"}
+          buttonText={"확인"}
           eventType={"click"}
           eventHandler={handleSubmit}
         />

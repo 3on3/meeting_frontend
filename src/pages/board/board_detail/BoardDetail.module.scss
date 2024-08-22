@@ -58,12 +58,13 @@
         font-size: calc(100vw * (15 / 500));
         padding-left: calc(100vw * (17 / 500));
         color: #786e85;
+
         display: flex;
         justify-content: space-between;
         align-items: center;
         span{
-          margin-right: 10px;
 
+          margin-right: 10px;
         }
       }
     }
@@ -84,7 +85,7 @@
     font-size: calc(100vw * (19 / 500));
   }
 }
-.info{
+.info {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
@@ -105,8 +106,8 @@
   color: var(--color-point);
   font-weight: 600;
   font-size: calc(100vw * (17 / 500));
-  &::before{
-    content: '';
+  &::before {
+    content: "";
     display: inline-block;
     width: calc(100vw * (20 / 500));
     height: calc(100vw * (20 / 500));
@@ -114,35 +115,44 @@
     background-repeat: no-repeat;
     margin-right: calc(100vw * (6 / 500));
   }
-  &:last-child{
+  &:last-child {
     margin-right: 0;
   }
 
   &.count {
-    &::before{
+    &::before {
       background-image: url(../../../assets/images/icons/h-messageBox.svg);
       background-size: calc(100vw * (17 / 500));
-
     }
-    
   }
   &.viewCount {
-    &::before{
+    &::before {
       background-size: calc(100vw * (20 / 500));
       background-image: url(../../../assets/images/icons/c-view.svg);
-
     }
-    
   }
 }
 .ReplyList {
   padding-top: calc(100vw * (20 / 500));
+  padding-bottom: calc(100vw * (120 / 500));
   ul {
     padding-top: calc(100vw * (20 / 500));
 
     > li {
-      padding: calc(100vw * (8 / 500));
-      border-bottom: calc(100vw * (1 / 500)) solid var(--color-gr);
+      padding: calc(100vw * (12 / 500)) calc(100vw * (8 / 500));
+      border-bottom: calc(100vw * (1 / 500)) solid var(--color-light);
+
+      animation: chatAni 0.6s ease-out forwards;
+      @keyframes chatAni {
+        0% {
+          opacity: 0;
+          transform: translateY(calc(100vw * (10 / 500)));
+        }
+        100% {
+          opacity: 1;
+          transform: 0;
+        }
+      }
     }
   }
 
@@ -186,10 +196,12 @@
       font-size: calc(100vw * (17 / 500));
       font-weight: 450;
       padding: calc(100vw * (14 / 500)) 0;
+      word-break: break-all;
+      line-height: 130%;
     }
 
     .replyTime {
-      font-size: calc(100vw * (16 / 500));
+      font-size: calc(100vw * (14 / 500));
       color: #786e85;
       margin-left: auto;
       width: fit-content;

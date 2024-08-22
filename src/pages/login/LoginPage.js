@@ -148,7 +148,9 @@ const LoginPage = () => {
               firstLoginNavigate();
             } else {
               loginDispatch(loginActions.loginAction());
-              loginNavigate();
+              setTimeout(() => {
+                loginNavigate();
+              }, 500)
             }
           } else {
             firstLoginNavigate();
@@ -223,7 +225,7 @@ const LoginPage = () => {
       </div>
       <div className={styles.button}>
         <MtButtons
-          buttonText={"로그인"}
+          buttonText={"로그인하깅"}
           buttonType={idStatus && passwordInput ? "apply" : "disabled"}
           eventHandler={loginHandler}
           eventType={"click"}

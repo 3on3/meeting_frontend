@@ -56,6 +56,8 @@ const EmailInput = ({
             body: JSON.stringify({
                 email: emailInput,
                 univName: univNameInput,
+                key: process.env.REACT_APP_MAIL_API,
+                univ_check: false
             }),
         });
 

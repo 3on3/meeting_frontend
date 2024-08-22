@@ -6,6 +6,7 @@ const LOCAL_PORT = 80; // 백엔드 로컬 서버 포트번호
 const clientHostName = window.location.hostname;
 
 let backendHostName;
+let webSocketHostName;
 
 if (clientHostName === "localhost") {
   backendHostName = "http://localhost:" + LOCAL_PORT;
@@ -14,6 +15,7 @@ if (clientHostName === "localhost") {
 }
 
 export const API_BASE_URL = backendHostName;
+export const SOCKET_BASE_URL = webSocketHostName;
 
 const SIGNUP = "/signup";
 const GROUP = "/group";

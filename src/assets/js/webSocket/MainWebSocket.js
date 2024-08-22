@@ -1,9 +1,10 @@
 import {userDataLoader} from "../../../config/auth";
+import {SOCKET_BASE_URL} from "../../../config/host-config";
 
 export const MainWebSocket = (socketRef, setAlarmRoomId, setIsAlarm) => {
     // WebSocket 설정
     // mainWebSocket 접속을 위한 소켓 연결 주소 설정
-    const mainSocket = new WebSocket("ws://localhost:8253/socket");
+    const mainSocket = new WebSocket(SOCKET_BASE_URL);
 
     const loginUserInfo = userDataLoader();
 

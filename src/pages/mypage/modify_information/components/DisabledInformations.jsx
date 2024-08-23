@@ -8,6 +8,7 @@ const DisabledInformations = ({ styles }) => {
   const [myPageData, setMyPageDataData] = useState({});
 
 
+  // 날짜를 "yyyy-mm-dd" 형식으로 변환하는 함수
   const formatDate = (dateString) => {
     const options = { year: "numeric", month: "2-digit", day: "2-digit" };
     const date = new Date(dateString);
@@ -35,6 +36,7 @@ const DisabledInformations = ({ styles }) => {
 
         const formattedBirthDate = formatDate(data.birthDate);
         
+            // 가져온 데이터로 상태를 업데이트하고 성별 필드를 포맷
         
         if(data.gender === 'F'){
           setMyPageDataData({...data,gender:"여성", birthDate: formattedBirthDate})

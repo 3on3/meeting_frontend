@@ -11,6 +11,7 @@ const PaymentModal = ({ name, totalPrice, onCancel }) => {
   const handleConfirm = async () => {
     setIsLoading(true);
     setErrorMessage("");
+    console.log('PAYMENT_URL:', PAYMENT_URL);
 
     try {
       const response = await fetch(`${PAYMENT_URL}/ready`, {
@@ -22,27 +23,38 @@ const PaymentModal = ({ name, totalPrice, onCancel }) => {
         body: JSON.stringify({
           item_name: name,
           total_amount: totalPrice, 
-          partner_order_id: "unique_order_id",
+          partner_order_id: "1234", // 백엔드에서 사용하는 고정값으로 변경
           partner_user_id: getUserData()?.email, 
-          approval_url: `${PAYMENT_URL}/approval`, 
+          approval_url: `${PAYMENT_URL}/approval/`, 
           cancel_url: `${API_BASE_URL}`,
           fail_url: `${API_BASE_URL}`
         }),
       });
+      
+      const responseText = await response.text();
+      console.log('Raw server response:', responseText);
 
-      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}, message: ${responseText}`);
+      }
 
-      if (data && data.tid) {
-        localStorage.setItem("tid", data.tid);
-        localStorage.setItem("payUrl", data.next_redirect_mobile_url);
+      let data;
+      try {
+        data = JSON.parse(responseText);
+      } catch (error) {
+        console.error('JSON parsing error:', error);
+        throw new Error('Invalid JSON response from server');
+      }
 
+      if (data && data.next_redirect_mobile_url) {
+        // tid는 서버에서 관리하므로 클라이언트에서 저장할 필요X
         window.location.href = data.next_redirect_mobile_url;
       } else {
         setErrorMessage("결제 준비에 실패했습니다.");
         console.error("결제 준비 응답 데이터가 올바르지 않습니다:", data);
       }
     } catch (error) {
-      setErrorMessage("결제 준비 중 오류가 발생했습니다.");
+      setErrorMessage(`결제 준비 중 오류가 발생했습니다: ${error.message}`);
       console.error("결제 준비 중 오류 발생:", error);
     } finally {
       setIsLoading(false);

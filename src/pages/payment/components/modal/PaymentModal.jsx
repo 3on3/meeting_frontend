@@ -11,6 +11,8 @@ const PaymentModal = ({ name, totalPrice, onCancel }) => {
   const handleConfirm = async () => {
     setIsLoading(true);
     setErrorMessage("");
+    console.log("PAYMENT_URL:", PAYMENT_URL);
+
 
     try {
       const response = await fetch(`${PAYMENT_URL}/ready`, {
@@ -21,12 +23,13 @@ const PaymentModal = ({ name, totalPrice, onCancel }) => {
         },
         body: JSON.stringify({
           item_name: name,
-          total_amount: totalPrice, 
+          total_amount: totalPrice,
           partner_order_id: "unique_order_id",
           partner_user_id: getUserData()?.email, 
           approval_url: "http://mymeetinh-s3-bucket.s3-website.ap-northeast-2.amazonaws.com/payment/approval", 
           cancel_url: "http://mymeetinh-s3-bucket.s3-website.ap-northeast-2.amazonaws.com",
           fail_url: "http://mymeetinh-s3-bucket.s3-website.ap-northeast-2.amazonaws.com"
+
         }),
       });
 
@@ -63,7 +66,9 @@ const PaymentModal = ({ name, totalPrice, onCancel }) => {
             ※ 주의: 한 번 구매한 멤버십은 환불이 어렵습니다.
           </p>
         </div>
-        {errorMessage && <div className={styles.errorMessage}>{errorMessage}</div>}
+        {errorMessage && (
+          <div className={styles.errorMessage}>{errorMessage}</div>
+        )}
       </div>
       <div className={styles.btnContainer}>
         <MtButtons

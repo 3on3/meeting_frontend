@@ -67,11 +67,25 @@
       font-size: calc(100vw * (14 / 500));
       display: flex;
       justify-content: right;
-      padding-right: calc(100vw * (10 / 500));
       span {
-        padding-left: calc(100vw * (10 / 500));
-        &.date {
+        // padding-left: calc(100vw * (10 / 500));
+        display: flex;
+        align-items: center;
+        &.view {
           font-weight: 500;
+        }
+        &::after{
+          content: '';
+          display: inline-block;
+          width: 1px;
+          height: 8px;
+          background-color: var(--color-light);
+          margin: 0 calc(100vw * (10 / 500));
+
+        }
+        &:last-child::after{
+
+          display: none;
         }
       }
     }

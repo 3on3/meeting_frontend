@@ -137,15 +137,15 @@
     border-top: calc(100vw * (1 / 500)) solid var(--color-sh);
 
     > li {
-      padding: calc(100vw * (20 / 500)) calc(100vw * (8 / 500))
-        calc(100vw * (10 / 500));
+      padding: calc(100vw * (20 / 500)) 0
+        calc(100vw * (10 / 500)) calc(100vw * (8 / 500));
       border-bottom: calc(100vw * (1 / 500)) solid var(--color-sh);
 
-      animation: chatAni 0.6s ease-out forwards;
+      animation: chatAni 0.2s ease-out forwards;
       @keyframes chatAni {
         0% {
           opacity: 0;
-          transform: translateY(calc(100vw * (10 / 500)));
+          transform: translateY(calc(100vw * (5 / 500)));
         }
         100% {
           opacity: 1;
@@ -186,8 +186,8 @@
   .content {
     display: flex;
     flex-direction: column;
-    margin: calc(100vw * (10 / 500));
-    margin-left: calc(100vw * (0 / 500));
+    margin: calc(100vw * (10 / 500)) 0;
+    // margin-left: calc(100vw * (0 / 500));
 
     .textList {
       font-size: calc(100vw * (16 / 500));

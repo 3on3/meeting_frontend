@@ -20,7 +20,7 @@ const GroupDeleteModal = ({ groupName, id }) => {
 
       if (response.ok) {
         // 성공 시 사용자에게 알림을 주거나 페이지를 리다이렉트
-        window.location.href = "/";
+        window.location.href = "/main";
       } else {
         const errorText = await response.text();
         console.error(errorText);

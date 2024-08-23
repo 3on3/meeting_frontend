@@ -9,7 +9,7 @@ const JoinEndPage = () => {
   const location = useLocation();
   const { success, result, message } = location.state || {};
   const mainPageHandler = () => {
-    navigate("/");
+    navigate("/main");
   };
 
   return (

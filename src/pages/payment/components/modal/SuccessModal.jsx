@@ -24,7 +24,7 @@ const SuccessModal = ({ onConfirm }) => {
     }
 
     // 홈 페이지로 리다이렉트
-    window.location.href = "/";
+    window.location.href = "/main";
   };
 
   return (

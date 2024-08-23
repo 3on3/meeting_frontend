@@ -34,14 +34,7 @@ import SignUpComplete from "../pages/sign_up/components/SignUpComplete";
 
 
 
-const isLogin = () => {
-  const token = userDataLoader();
-  if(!token) {
-    return <IntroPage />;
-  } else {
-    return <Main />;
-  }
-}
+
 // 마이페이지 라우터
 const mypageRouter = [
   {
@@ -104,7 +97,11 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: isLogin(),
+        element: <IntroPage />,
+      },
+      {
+        path: "/main",
+        element: <Main />
       },
       {
         path: "signup-complete",

@@ -13,6 +13,7 @@ const PaymentModal = ({ name, totalPrice, onCancel }) => {
     setErrorMessage("");
     console.log("PAYMENT_URL:", PAYMENT_URL);
 
+
     try {
       const response = await fetch(`${PAYMENT_URL}/ready`, {
         method: "POST",
@@ -28,6 +29,7 @@ const PaymentModal = ({ name, totalPrice, onCancel }) => {
           approval_url: `${PAYMENT_URL}/approval`,
           cancel_url: `${API_BASE_URL}`,
           fail_url: `${API_BASE_URL}`,
+
         }),
       });
 

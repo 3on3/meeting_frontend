@@ -11,7 +11,6 @@ const ChatBody = ({ styles, messageList, myMessage }) => {
     const isScrolledToBottom = () => {
 
         if(chatInnerRef.current) {
-            console.log("실행됨?")
             const { scrollTop, scrollHeight, clientHeight } = chatInnerRef.current;
             // 사용자가 스크롤을 거의 아래에 두고 있는지 확인 (1px의 오차 허용)
             return scrollHeight - scrollTop - clientHeight <= 200;
@@ -25,10 +24,10 @@ const ChatBody = ({ styles, messageList, myMessage }) => {
 
     // 처음 렌더링될 때만 스크롤을 제일 아래로 이동
     useEffect(() => {
-        if (isInitialRender.current) {
+        if (isInitialRender.current && messageList.length > 1) {
             setTimeout(() => {
                 scrollToBottom();
-            }, 100);
+            }, 0);
             isInitialRender.current = false;
         }
     }, [messageList]); // 메시지 목록이 변경될 때 호출
@@ -37,14 +36,14 @@ const ChatBody = ({ styles, messageList, myMessage }) => {
     useEffect(() => {
         setTimeout(() => {
             scrollToBottom();
-        }, 100)
+        }, 200)
     }, [myMessage]);
 
     useEffect(() => {
         if (isScrolledToBottom()) {
             setTimeout(() => {
                 scrollToBottom();
-            }, 100);
+            }, 200);
         }
     }, [messageList]);
 

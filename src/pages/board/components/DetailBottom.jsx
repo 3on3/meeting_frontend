@@ -21,16 +21,23 @@ const DetailBottom = ({ className, styles, newRelyData, boardData }) => {
   const [isFinish, setIsFinish] = useState(false);
   const [pageNo, setPageNo] = useState(1);
 
+  // 댓글 삭제 여부
+  const [isDelete, setIsDelete] = useState(false);
+
   // ref
   const [scrollRef, inView] = useInView();
 
   // ============ 게시판 댓글 GET Fetch ============
+
   const getBoardReplies = async () => {
+    console.log("isFinish", isFinish);
+    console.log("repliesIsLoading", repliesIsLoading);
     if (repliesIsLoading || isFinish) {
       return;
     }
 
     setRepliesIsLoading(true);
+    console.log("getBoardReplies 시작이야");
 
     try {
       const response = await fetch(
@@ -46,6 +53,8 @@ const DetailBottom = ({ className, styles, newRelyData, boardData }) => {
       const repliesData = await response.json();
       const { content, totalElements } = repliesData;
       const updatedRepliesData = [...boardRepliesData, ...content];
+
+      console.log("updatedRepliesData : ", updatedRepliesData);
 
       setTotalReplies(totalElements);
 
@@ -66,12 +75,6 @@ const DetailBottom = ({ className, styles, newRelyData, boardData }) => {
   const throttledRepliesFetch = throttle(getBoardReplies, 1000);
 
   useEffect(() => {
-    if (inView && !repliesIsLoading && !isFinish) {
-      throttledRepliesFetch();
-    }
-  }, [inView]);
-
-  useEffect(() => {
     if (newRelyData) {
       setBoardRepliesData((prev) => [newRelyData, ...prev]);
       setTotalReplies((prev) => prev + 1);
@@ -79,11 +82,41 @@ const DetailBottom = ({ className, styles, newRelyData, boardData }) => {
     }
   }, [newRelyData]);
 
+  useEffect(() => {
+    if (isDelete) {
+      setBoardRepliesData([]);
+      setPageNo(1);
+      setTotalReplies(0);
+      console.log("isDelete useEffect");
+      setIsFinish(false);
+      setIsDelete(false);
+    }
+  }, [isDelete]);
+
+  useEffect(() => {
+    if (!isFinish && !isDelete) {
+      getBoardReplies();
+    }
+  }, [isFinish]);
+
+  useEffect(() => {
+    if (inView && !repliesIsLoading && !isFinish) {
+      throttledRepliesFetch();
+    }
+  }, [inView]);
+
   const { openModal } = useModal();
   const navigate = useNavigate();
 
+  //navigate : 게시글 LIST
   const naviToBoards = () => {
     navigate("/board");
+  };
+
+  // navigate : 게시글 Detail
+  const naviToBoardDetail = () => {
+    navigate(`/board/detail/${id}`);
+    setIsDelete(true);
   };
 
   return (
@@ -104,6 +137,7 @@ const DetailBottom = ({ className, styles, newRelyData, boardData }) => {
                   "정말 삭제하시겠습니까?",
                   "completeMode",
                   <ConfirmDelBoard
+                    type={"Board"}
                     id={boardData.id}
                     naviToBoards={naviToBoards}
                   />
@@ -136,7 +170,28 @@ const DetailBottom = ({ className, styles, newRelyData, boardData }) => {
               </div>
               <div className={styles.content}>
                 <div className={styles.textList}>{reply.content}</div>
-                <div className={styles.replyTime}>{reply.createdDate}</div>
+
+                <div className={styles.replyTime}>
+                  {reply.createdDate}
+                  {reply.isAuthor && (
+                    <button
+                      className={styles.detBtn}
+                      onClick={() =>
+                        openModal(
+                          "정말 삭제하시겠습니까?",
+                          "completeMode",
+                          <ConfirmDelBoard
+                            type={"BoardReply"}
+                            id={reply.id}
+                            naviToBoards={naviToBoardDetail}
+                          />
+                        )
+                      }
+                    >
+                      삭제
+                    </button>
+                  )}
+                </div>
               </div>
             </li>
           );

@@ -30,7 +30,7 @@ const GroupCreate = () => {
   };
 
   const mainPageHandler = () => {
-    navigate("/");
+    navigate("/main");
   };
 
   const handleRegionClick = (region) => {

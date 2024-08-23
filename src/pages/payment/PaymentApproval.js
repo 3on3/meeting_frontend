@@ -72,7 +72,7 @@ const PaymentApproval = () => {
       setLoading(false);
 
       // 승인 완료 후 홈으로 리다이렉트
-      window.location.href = "/";
+      window.location.href = "/main";
       
     } catch (error) {
       console.error("결제 승인 중 오류 발생:", error);

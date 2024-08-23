@@ -10,7 +10,7 @@ const EmptyGroups = ({isGroup}) => {
       if(!isGroup) {
           navigate("/group/create");
       } else {
-          navigate("/")
+          navigate("/main")
       }
 
   };

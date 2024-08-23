@@ -19,7 +19,7 @@ const ChatDeleteModal = ({roomId, navigate}) => {
      */
     const deleteChatHandler = () => {
         deleteChatRoom(roomId);
-        navigate("/")
+        navigate("/main")
         closeModal();
     }
 

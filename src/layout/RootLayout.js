@@ -29,7 +29,7 @@ const RootLayout = () => {
 
     const loginUser = userDataLoader();
 
-    const showMainNavigation = (loginUser === null   || location.pathname === "/intro" || location.pathname === "/login" || location.pathname === "/sign-up" || location.pathname === "/password-reset" || location.pathname === "/login/first-login");
+    const showMainNavigation = (loginUser === null   || location.pathname === "/" || location.pathname === "/login" || location.pathname === "/sign-up" || location.pathname === "/password-reset" || location.pathname === "/login/first-login");
 
     // 로그인 상태가 변경될때마다 웹소켓에 접속할지 나갈지 결정하는 함수
     useEffect(() => {

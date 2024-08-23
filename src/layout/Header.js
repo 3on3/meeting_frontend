@@ -11,7 +11,7 @@ const Header = () => {
 
   const loginUser = userDataLoader();
 
-  const showMainNavigation = (loginUser === null || location.pathname === "/login" || location.pathname === "/sign-up" || location.pathname === "/password-reset" || location.pathname === "/login/first-login");
+  const showMainNavigation = (loginUser === null || location.pathname === "/" || location.pathname === "/login" || location.pathname === "/sign-up" || location.pathname === "/password-reset" || location.pathname === "/login/first-login");
 
   return (
     <>
@@ -26,7 +26,7 @@ const Header = () => {
         }
       ></div>
       {(loginUser !== null &&(
-              location.pathname === "/" ||
+              location.pathname === "/main" ||
               location.pathname === "/mypage/mygroup" ||
               location.pathname === "/mypage/myChat"
       )

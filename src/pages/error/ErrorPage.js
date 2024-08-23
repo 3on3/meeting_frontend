@@ -8,7 +8,7 @@ const ErrorPage = () => {
   const navigate = useNavigate();
 
   const mainPageHandler = () => {
-    navigate("/");
+    navigate("/main");
   };
 
   const goBackHandler = () => {

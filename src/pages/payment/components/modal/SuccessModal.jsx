@@ -17,7 +17,7 @@ const SuccessModal = ({ onConfirm }) => {
           eventType="click"
           eventHandler={() => {
             onConfirm();
-            window.location.href = "/"; // "확인" 버튼을 누르면 홈 페이지로 리다이렉트
+            window.location.href = "/main"; // "확인" 버튼을 누르면 홈 페이지로 리다이렉트
           }}
         />
       </div>

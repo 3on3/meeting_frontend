@@ -34,7 +34,8 @@ const RootLayout = () => {
     location.pathname === "/login" ||
     location.pathname === "/sign-up" ||
     location.pathname === "/password-reset" ||
-    location.pathname === "/login/first-login";
+    location.pathname === "/login/first-login" ||
+    location.pathname.startsWith('/group/join/invite')
 
   // 로그인 상태가 변경될때마다 웹소켓에 접속할지 나갈지 결정하는 함수
   useEffect(() => {

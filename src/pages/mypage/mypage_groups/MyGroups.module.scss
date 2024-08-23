@@ -1,26 +1,22 @@
 .MyGroupsWrapper {
-  padding: calc(100vw * (80 / 500)) 0
-    calc(100vw * (100 / 500));
+  padding: calc(100vw * (80 / 500)) 0 calc(100vw * (100 / 500));
   width: 100%;
   height: 100vh;
-  .myGroupList{
+  .myGroupList {
     height: calc(100% - (100vw * (40 / 500)));
     padding: calc(100vw * (55 / 500)) calc(100vw * (20 / 500)) 0;
     overflow-y: scroll;
-
   }
-
   .myGroupsTitle {
     display: flex;
     justify-content: center;
     font-size: calc(100vw * (32 / 500));
     font-weight: 600;
-    // margin-bottom: ;
   }
-  li{
+  li {
     list-style: none;
   }
-  .empty{
+  .empty {
     height: 100%;
   }
 }

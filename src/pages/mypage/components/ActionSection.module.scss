@@ -1,6 +1,6 @@
 .container {
-  margin-top: calc(100vw * ( 40 / 500));
-  padding: calc(100vw * ( 20 / 500)) 0 0 0;
+  margin-top: calc(100vw * (40 / 500));
+  padding: calc(100vw * (20 / 500)) 0 0 0;
 }
 
 .findSection {
@@ -9,13 +9,17 @@
   align-items: center;
 
   width: 100%;
-  margin-top: calc(100vw * ( 60 / 500))!important;
-  font-size: calc(100vw * ( 16 / 500));
-  p{
+  margin-top: calc(100vw * (60 / 500)) !important;
+  font-size: calc(100vw * (16 / 500));
+
+  p {
+    font-size: calc(100vw * (14 / 500));
     text-align: center;
-    color: var(--color-dark);
-    opacity: 1.0;
+    color: var(--color-gr);
+    opacity: 1;
     text-decoration-line: underline;
-    text-underline-position : under;
+    text-underline-offset: calc(100vw * (2 / 500));
+    text-decoration-color: var(--color-gr);
+    text-underline-position: under;
   }
 }

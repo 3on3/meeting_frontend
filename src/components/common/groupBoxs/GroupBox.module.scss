@@ -1,5 +1,4 @@
-
-.groupBoxWrap{
+.groupBoxWrap {
   list-style: none;
   width: 100%;
 }
@@ -78,7 +77,6 @@
       .matchingText {
         color: var(--color-gr);
         align-items: end;
-
       }
 
       .matchingBt {
@@ -90,7 +88,6 @@
   // 하늘색 배경
   &.sky {
     background-color: var(--color-wh);
-
     .matchingWrapper {
       display: none;
     }

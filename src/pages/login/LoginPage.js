@@ -3,7 +3,7 @@ import logoImage from "../../assets/images/login/logo.svg";
 import MtButtons from "../../components/common/buttons/MtButtons";
 import styles from "./LoginPage.module.scss";
 import DefaultInput from "../../components/common/inputs/DefaultInput";
-import { getUserToken } from "../../config/auth";
+import {getUserToken, userDataLoader} from "../../config/auth";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loginActions } from "../../store/Login-slice";
@@ -27,7 +27,7 @@ const LoginPage = () => {
 
   // 로그인 후 홈으로 이동
   const loginNavigate = () => {
-    navigate("/");
+    navigate("/main");
   };
 
   // 첫 로그인 후 프로필 설정 페이지로 이동
@@ -48,16 +48,23 @@ const LoginPage = () => {
   const [idError, setIdError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [loginError, setLoginError] = useState("");
+  const [loginSuccess, setLoginSuccess] = useState(false);
 
   // 컴포넌트가 마운트될 때 토큰 존재 여부 확인
   useEffect(() => {
-    const userData = JSON.parse(localStorage.getItem("userData") || "{}");
-    if (userData.token) {
-      const redirectPath = localStorage.getItem("redirectPath") || "/";
-      localStorage.removeItem("redirectPath");
-      navigate(redirectPath);
-    }
-  }, [navigate]);
+    console.log("호출은 됨?");
+    // const userData = JSON.parse(localStorage.getItem("userData") || "{}");
+    setTimeout(() => {
+      const userData = userDataLoader();
+      if (userData) {
+        console.log("토큰이 없니?")
+        const redirectPath = localStorage.getItem("redirectPath") || "/main";
+        localStorage.removeItem("redirectPath");
+        navigate(redirectPath);
+      }
+    }, 500)
+
+  }, [loginSuccess]);
 
   // 이메일 형식 검증
   useEffect(() => {
@@ -146,10 +153,11 @@ const LoginPage = () => {
             if (profileData.profileImg === "https://spring-file-bucket-yocong.s3.ap-northeast-2.amazonaws.com/2024/default_profile.png") {
               // 프로필 이미지가 기본 이미지인 경우
               firstLoginNavigate();
-            } else {
+            } else{
+              console.log("로그인 완료!@!@!@")
               loginDispatch(loginActions.loginAction());
               setTimeout(() => {
-                loginNavigate();
+                setLoginSuccess(true);
               }, 500)
             }
           } else {

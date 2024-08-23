@@ -3,6 +3,8 @@ import { BOARD_URL } from "../../../config/host-config";
 import { getUserToken } from "../../../config/auth";
 import BoardBox from "./BoardBox";
 import EmptyBoard from "./EmptyBoard";
+import ScrollSection from "../../../components/common/scroll-section/ScrollSection";
+import Loading from "../../../components/common/loading/Loading";
 
 const MyBoardList = ({ className, styles, activeTab }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -51,6 +53,7 @@ const MyBoardList = ({ className, styles, activeTab }) => {
   }; // isLoading과 isFinished를 의존성 배열에 추가
 
   useEffect(() => {
+   
     fetchBoards(); // 처음 컴포넌트가 로드될 때 게시글 가져오기
   }, []); // activeTab 변경 시 다시 로드
 
@@ -83,8 +86,11 @@ const MyBoardList = ({ className, styles, activeTab }) => {
           return <BoardBox key={board.id} board={board} styles={styles} />;
         })
       )}
-      {isLoading && (
-        <div style={{ height: "100px"}}></div>
+      {/* {isLoading && (
+        <Loading/>
+      )} */}
+      {!isFinished && (
+        <ScrollSection/>
       )}
     </ul>
   );

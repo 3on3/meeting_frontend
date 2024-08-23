@@ -9,7 +9,7 @@ const ErrorPage = () => {
 
   const location = useLocation()
   const mainPageHandler = () => {
-    navigate("/");
+    navigate("/main");
   };
 
   const goBackHandler = () => {

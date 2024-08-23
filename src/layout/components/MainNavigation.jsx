@@ -20,7 +20,7 @@ const MainNavigation = ({ styles }) => {
 
   return (
     <nav className={styles.nav}>
-      <NavLink to="/" className={activeClassFn("/")}>
+      <NavLink to="/main" className={activeClassFn("/main")}>
         <i className={styles.home}></i>홈
       </NavLink>
       <NavLink

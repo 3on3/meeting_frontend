@@ -21,7 +21,7 @@ const GroupLeaveModal = ({ groupName, id }) => {
 
       if (response.ok) {
         alert("성공적으로 그룹을 나갔습니다.");
-        window.location.href = "/";
+        window.location.href = "/main";
       } else {
         const errorText = await response.text();
         console.error("Failed to leave the group:", errorText);

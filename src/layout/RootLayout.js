@@ -30,33 +30,39 @@ const RootLayout = () => {
 
   const showMainNavigation =
     loginUser === null ||
-    location.pathname === "/intro" ||
+    location.pathname === "/" ||
     location.pathname === "/login" ||
     location.pathname === "/sign-up" ||
     location.pathname === "/password-reset" ||
-    location.pathname === "/login/first-login";
+    location.pathname === "/login/first-login" ||
+    location.pathname.startsWith('/group/join/invite')
 
-  // 로그인 상태가 변경될때마다 웹소켓에 접속할지 나갈지 결정하는 함수
-  useEffect(() => {
-    if (isLogin) {
-      // 로그인시에만 mainWebSocket 에 접속
-      MainWebSocket(socketRef, setAlarmRoomId, setIsAlarm);
 
-      setMainSocket(socketRef.current);
 
-      // 컴포넌트 언마운트 시 소켓 연결 해제
-      return () => {
-        socketRef.current.close();
-        socketRef.current = null;
-      };
-    } else {
-      // 로그인 상태가 false 일 때 소켓을 닫습니다.
-      if (socketRef.current) {
-        socketRef.current.close();
-        socketRef.current = null;
-      }
-    }
-  }, [isLogin]);
+    // 로그인 상태가 변경될때마다 웹소켓에 접속할지 나갈지 결정하는 함수
+    useEffect(() => {
+
+        if(isLogin) {
+
+            // 로그인시에만 mainWebSocket 에 접속
+            MainWebSocket(socketRef, setAlarmRoomId, setIsAlarm);
+
+            setMainSocket(socketRef.current);
+
+            // 컴포넌트 언마운트 시 소켓 연결 해제
+            return () => {
+                socketRef.current.close();
+                socketRef.current = null;
+            };
+        } else {
+            // 로그인 상태가 false 일 때 소켓을 닫습니다.
+            if (socketRef.current) {
+                socketRef.current.close();
+                socketRef.current = null;
+            }
+        }
+    }, [isLogin]);
+
 
   // 알람을 띄우고 30초 뒤 알림을 없애기 위한 함수
   useEffect(() => {
@@ -84,6 +90,11 @@ const RootLayout = () => {
   };
 
   const goBackBtnHandler = () => {
+    
+    if(location.pathname.startsWith('/board/detail')){
+      navigate('/board')
+      return;
+    }
     navigate(-1);
   };
 

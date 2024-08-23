@@ -47,10 +47,6 @@ const Group = () => {
     }, 1200);
   };
 
-  const testHandler = () =>{
-    alarmFetch(setGroupHostUser, id);
-
-  }
 
 
   useEffect(() => {
@@ -173,7 +169,6 @@ const Group = () => {
 
   return (
     <div className={styles.container}>
-      <div onClick={testHandler}>일단테스트를 위한 아무거나야</div>
       <GroupViewHead
         styles={styles}
         place={meetingPlace}

@@ -88,7 +88,7 @@ const FirstLoginNickName = () => {
       userData.nickname = nickName;
       localStorage.setItem("userData", JSON.stringify(userData));
 
-      navigate("/");
+      navigate("/main");
     } catch (error) {
       setError(error.message || "알 수 없는 오류가 발생했습니다.");
     } finally {
@@ -129,7 +129,7 @@ const FirstLoginNickName = () => {
       userData.nickname = randomNickname;
       localStorage.setItem("userData", JSON.stringify(userData));
 
-      navigate("/");
+      navigate("/main");
     } catch (error) {
       setError(error.message || "닉네임 업데이트 중 오류가 발생했습니다.");
     }

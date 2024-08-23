@@ -28,6 +28,7 @@
     font-size: calc(100vw * (16 / 500));
     border-bottom: solid calc(100vw * (1 / 500)) var(--color-light);
     animation: chatAni 0.6s ease-out forwards;
+    
     &:last-child{
       border-bottom: none;
       margin-bottom: calc(100vw * (100 / 500));
@@ -83,7 +84,7 @@
   border-radius: calc(100vw * (500 / 500));
   position: fixed;
   left: 50%;
-  bottom: calc(100vw * (115 / 500));
+  bottom: calc(100vw * (127 / 500));
   transform: translateX(-50%);
   color: #fff;
   font-weight: 600;

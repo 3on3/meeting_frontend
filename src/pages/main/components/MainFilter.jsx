@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./MainFilter.module.scss";
 import { useSearchParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function MainFilter({}) {
   // =====useState 선언=====
@@ -12,6 +13,9 @@ function MainFilter({}) {
   const paramsGender = searchParams.get("gender"); // 필터 성별
   const paramsPersonnel = searchParams.get("personnel"); // 필터 인원수
 
+  // 리덕스에 있는 mainFilterLoading 상태 불러오기
+  const loading = useSelector((state) => state.mainFilterLoading.loading);
+
   // =====이벤트 함수=====
   // 필터 더보기 클릭 시 상태를 토글
   const moreClickHandler = (e) => {
@@ -20,6 +24,9 @@ function MainFilter({}) {
 
   // 성별 클릭 이벤트: 성별을 토글하고 URL 파라미터를 업데이트하는 함수
   const filterGenderHandler = (Gender) => {
+    //로딩중이면 클릭 제한
+    if (loading) return;
+
     // 클릭한 성별이 이미 선택된 성별이면 null로 설정
     const newGender = paramsGender === Gender ? null : Gender;
 
@@ -35,6 +42,9 @@ function MainFilter({}) {
 
   // 인원수 클릭 이벤트: 인원수를 토글하고 URL 파라미터를 업데이트
   const filterPersonnelHandler = (personnel) => {
+    //로딩중이면 클릭 제한
+    if (loading) return;
+
     // 클릭한 인원수가 이미 선택된 인원수이면 null로 설정
     const newPersonnel = paramsPersonnel === personnel ? null : personnel;
 

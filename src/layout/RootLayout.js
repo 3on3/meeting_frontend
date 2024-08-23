@@ -34,7 +34,8 @@ const RootLayout = () => {
     location.pathname === "/login" ||
     location.pathname === "/sign-up" ||
     location.pathname === "/password-reset" ||
-    location.pathname === "/login/first-login";
+    location.pathname === "/login/first-login" ||
+    location.pathname.startsWith('/group/join/invite')
 
 
 

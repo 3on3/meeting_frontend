@@ -15,7 +15,7 @@
   border-radius: 12px;
   align-items: center;
 
-  .left{
+  .left {
     display: flex;
     align-items: center;
     width: 100%;
@@ -24,9 +24,8 @@
     display: flex;
     padding: calc(100vw * (20 / 500)) 0;
     align-items: center;
-  justify-content: space-between;
+    justify-content: space-between;
 
-    
     .ImageSection {
       // flex: 2;
       width: calc(100vw * (50 / 500));
@@ -62,14 +61,12 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        span{
-
+        span {
           margin-right: 10px;
         }
       }
     }
   }
-  
 }
 
 .TextWrite {
@@ -90,7 +87,7 @@
   justify-content: space-between;
   align-items: flex-end;
   flex-direction: column;
-  p{
+  p {
     display: flex;
   }
 }
@@ -137,11 +134,12 @@
   padding-bottom: calc(100vw * (120 / 500));
   ul {
     margin-top: calc(100vw * (20 / 500));
-    border-top: calc(100vw * (1 / 500)) solid var(--color-gr);
+    border-top: calc(100vw * (1 / 500)) solid var(--color-sh);
 
     > li {
-      padding: calc(100vw * (20 / 500)) calc(100vw * (8 / 500)) calc(100vw * (10 / 500));
-      border-bottom: calc(100vw * (1 / 500)) solid var(--color-gr);
+      padding: calc(100vw * (20 / 500)) calc(100vw * (8 / 500))
+        calc(100vw * (10 / 500));
+      border-bottom: calc(100vw * (1 / 500)) solid var(--color-sh);
 
       animation: chatAni 0.6s ease-out forwards;
       @keyframes chatAni {
@@ -206,6 +204,10 @@
       color: #786e85;
       margin-left: auto;
       width: fit-content;
+
+      .detBtn {
+        margin-bottom: 0;
+      }
     }
   }
 }
@@ -220,7 +222,7 @@
     border: solid 1px var(--color-wh);
   }
 }
-.editBtn{
+.editBtn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -230,9 +232,8 @@
   margin-right: calc(100vw * (4 / 500));
   margin-bottom: calc(100vw * (20 / 500));
 
-
-  &::after{
-    content: '';
+  &::after {
+    content: "";
     display: inline-block;
     width: calc(100vw * (24 / 500));
     height: calc(100vw * (24 / 500));
@@ -242,7 +243,8 @@
     transform: translateY(calc(-100vw * (1 / 500)));
   }
 }
-.detBtn{
+
+.detBtn {
   font-weight: 600;
   font-size: calc(100vw * (16 / 500));
   color: var(--color-gr);
@@ -250,7 +252,7 @@
   width: calc(100vw * (54 / 500));
 }
 
-pre{
-  font-family: 'Pretendard', sans-serif;
+pre {
+  font-family: "Pretendard", sans-serif;
   line-height: 1.5;
 }

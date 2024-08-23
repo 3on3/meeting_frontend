@@ -89,6 +89,11 @@ const RootLayout = () => {
   };
 
   const goBackBtnHandler = () => {
+    
+    if(location.pathname.startsWith('/board/detail')){
+      navigate('/board')
+      return;
+    }
     navigate(-1);
   };
 

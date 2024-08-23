@@ -7,7 +7,6 @@
 
   .profileContainer {
     border-radius: calc(100vw * (20 / 500));
-    // box-shadow: 0 0 calc( 100vw* ( 10 /500)) rgba($color:#000000, $alpha: 0.1);
     padding-bottom: calc(100vw * (20 / 500));
   }
   .contentsBox {
@@ -18,7 +17,7 @@
     }
   }
   .text {
-    font-weight: 700;
+    font-weight: 600;
     font-size: calc(100vw * (32 / 500));
     margin-bottom: calc(100vw * (40 / 500));
   }

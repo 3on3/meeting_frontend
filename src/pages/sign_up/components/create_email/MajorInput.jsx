@@ -27,7 +27,7 @@ const MajorInput = ({ styles, setIsSubmit, setMajor }) => {
       />
       <div className={styles.button}>
         <MtButtons
-          buttonText={"SUBMIT"}
+          buttonText={"확인"}
           buttonType={majorInput ? "apply" : "disabled"}
           eventType={"click"}
           eventHandler={submitHandler}

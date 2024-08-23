@@ -108,7 +108,7 @@ const EmailInput = ({
       {!isSubmit[0] && (
         <div className={styles.button}>
           <MtButtons
-            buttonText={"SUBMIT"}
+            buttonText={"확인"}
             buttonType={isEmail ? "apply" : "disabled"}
             eventType={"click"}
             eventHandler={submitHandler}

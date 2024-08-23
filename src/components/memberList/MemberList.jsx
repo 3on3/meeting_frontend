@@ -2,8 +2,9 @@ import React from "react";
 import styles from "./MemberList.module.scss";
 import { useModal } from "../../context/ModalContext";
 import ProfileImage from "../../pages/mypage/components/ProfileImage";
-import profileImage from "../../pages/mypage/components/ProfileImage";
 import { userDataLoader } from "../../config/auth";
+import PaymentChoiceModal from "../common/modal/PaymentChoiceModal";
+import PaymentModal from "../../pages/payment/components/modal/PaymentModal";
 
 /**
  *
@@ -14,7 +15,6 @@ import { userDataLoader } from "../../config/auth";
 const MemberList = ({
   imgUrl,
   nickname,
-  profileImg,
   userName,
   univ,
   major,
@@ -26,15 +26,38 @@ const MemberList = ({
   id,
   hostUser,
 }) => {
-  console.log("auth = ", auth);
-
   const loginUser = userDataLoader();
+  const { openModal,closeModal } = useModal();
 
-  const { openModal } = useModal();
+  // 결제 확인 핸들러
+  const handlePaymentConfirm = () => {
+    openModal("", "completeMode",
+    <PaymentModal
+      name={"프리미엄 멤버십"}
+      totalPrice={7900}
+      onCancel={closeModal}
+    />);
+  };
+
+  // 결제 취소 핸들러
+  const paymentCancelHandler = () => {
+    openModal("", "imgMode", <ProfileImage imgUrl={imgUrl} nickname={nickname} />);
+  };
 
   const profileImgClickHandler = () => {
-    openModal("", "imgMode", <ProfileImage imgUrl={imgUrl} />);
+    if (loginUser?.membership !== "PREMIUM") {
+      openModal("", "completeMode", (
+        <PaymentChoiceModal onConfirm={handlePaymentConfirm} onCancel={paymentCancelHandler} />
+      ));
+    } else {
+      openModal("", "imgMode", <ProfileImage imgUrl={imgUrl} nickname={nickname} />);
+    }
   };
+
+  // 본인이면 블러처리 제외
+  // const isCurrentUser = loginUser.nickname === nickname;
+  // console.log('isCurrentUser:', isCurrentUser);
+  
 
   console.log(imgUrl);
   return (
@@ -48,12 +71,12 @@ const MemberList = ({
       <p
         onClick={profileImgClickHandler}
         className={`${styles.img} ${styles.imgBlur}`}
+        // className={`${styles.img} ${!isCurrentUser ? styles.imgBlur : ""}`} // 현재 사용자가 아니면 블러 적용
       >
         <img src={imgUrl} alt="유저프로필 이미지" />
       </p>
       <p className={styles.userName}>{nickname}</p>
       <p className={styles.userInfo}>
-        {/* <span>cornw</span> */}
         <span>{univ}</span>
         <span>{major}</span>
       </p>

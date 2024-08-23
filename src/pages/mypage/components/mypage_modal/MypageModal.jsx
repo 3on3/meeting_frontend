@@ -1,19 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import styles from './MypageModal.module.scss';
+import React, { useEffect, useState } from "react";
+import styles from "./MypageModal.module.scss";
 import { getUserToken } from "../../../../config/auth";
+import { MYPAGE_URL } from "../../../../config/host-config";
 
 const MypageModal = ({ active, position, onDefaultImage, onChangeProfile }) => {
   const [profileImg, setProfileImg] = useState(null);
-  const [nickname, setNickname] = useState('');
-  const [age, setAge] = useState('');
-  const [profileIntroduce, setProfileIntroduce] = useState('');
-  const [univ, setUniv] = useState('');
-  const [major, setMajor] = useState('');
-  const [membership, setMembership] = useState('');
+  const [nickname, setNickname] = useState("");
+  const [age, setAge] = useState("");
+  const [profileIntroduce, setProfileIntroduce] = useState("");
+  const [univ, setUniv] = useState("");
+  const [major, setMajor] = useState("");
+  const [membership, setMembership] = useState("");
 
   useEffect(() => {
     // 사용자 프로필 정보를 가져오는 GET 요청
-    fetch(`http://localhost:8253/mypage/userInfo`, {
+    fetch(`${MYPAGE_URL}/userInfo`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${getUserToken()}`,
@@ -43,15 +44,15 @@ const MypageModal = ({ active, position, onDefaultImage, onChangeProfile }) => {
 
   const handleDefaultImage = async () => {
     try {
-      const response = await fetch('http://localhost:8253/mypage/profileImage/default', {
-        method: 'POST',
+      const response = await fetch(`${MYPAGE_URL}/profileImage/default`, {
+        method: "POST",
         headers: {
           Authorization: `Bearer ${getUserToken()}`,
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({}),
       });
-  
+
       if (response.ok) {
         const result = await response.text();
         setProfileImg(result); // 기본 프로필 이미지 URL을 결과에서 가져와 설정
@@ -60,10 +61,12 @@ const MypageModal = ({ active, position, onDefaultImage, onChangeProfile }) => {
         throw new Error("기본 프로필 이미지를 설정하지 못했습니다.");
       }
     } catch (error) {
-      console.error("기본 프로필 이미지를 설정하는 중 오류가 발생했습니다:", error);
+      console.error(
+        "기본 프로필 이미지를 설정하는 중 오류가 발생했습니다:",
+        error
+      );
     }
   };
-  
 
   const modalStyles = {
     left: `${position.x}px`,
@@ -71,12 +74,14 @@ const MypageModal = ({ active, position, onDefaultImage, onChangeProfile }) => {
   };
 
   return (
-    <nav 
-      className={active ? `${styles.isActive} ${styles.profileMenu}` : styles.profileMenu}
+    <nav
+      className={
+        active ? `${styles.isActive} ${styles.profileMenu}` : styles.profileMenu
+      }
       style={modalStyles}
     >
-      <button 
-        className={`${styles.defaultImgBtn} defaultImgBtn`} 
+      <button
+        className={`${styles.defaultImgBtn} defaultImgBtn`}
         onClick={() => {
           handleDefaultImage();
           if (onDefaultImage) onDefaultImage(); // 외부에서 전달된 onDefaultImage 함수 호출
@@ -84,9 +89,9 @@ const MypageModal = ({ active, position, onDefaultImage, onChangeProfile }) => {
       >
         기본 이미지
       </button>
-      <button 
-        className={`${styles.changeProfileBtn} changeProfileBtn`} 
-        onClick={onChangeProfile} 
+      <button
+        className={`${styles.changeProfileBtn} changeProfileBtn`}
+        onClick={onChangeProfile}
       >
         프로필 변경
       </button>

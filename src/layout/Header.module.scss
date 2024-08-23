@@ -58,6 +58,12 @@
     &.active i.chat {
       background-image: url(../assets/images/icons/h-chat-active.svg);
     }
+    & i.board {
+      background-image: url(../assets/images/icons/h-board.svg);
+    }
+    &.active i.board {
+      background-image: url(../assets/images/icons/h-board-active.svg);
+    }
     & i.mypage {
       background-image: url(../assets/images/icons/h-mypage.svg);
     }

@@ -1,0 +1,57 @@
+.container {
+  background: #f4f9ff;
+  text-align: center;
+  max-width: calc(100vw * (500 / 500));
+  padding: calc(100vw * (20 / 500));
+  border-radius: calc(100vw * (8 / 500));
+  margin-top: calc(100vw * (42 / 500));
+  margin-bottom: calc(100vw * (20 / 500));
+}
+
+.modalContent {
+  font-size: calc(100vw * (18 / 500));
+  font-weight: 500;
+
+  p {
+    margin: 0;
+    color: #333;
+    .profileBold {
+      font-weight: bold;
+    }
+  }
+}
+
+.btn {
+  margin-bottom: calc(100vw * (15 / 500));
+  display: flex;
+  justify-content: center;
+  gap: calc(100vw * (10 / 500));
+
+  .confirmButton,
+  .cancelButton {
+    padding: calc(100vw * (10 / 500)) calc(100vw * (20 / 500));
+    font-size: calc(100vw * (16 / 500));
+    border-radius: calc(100vw * (5 / 500));
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+  }
+
+  .confirmButton {
+    background-color: #007bff;
+    color: white;
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+
+  .cancelButton {
+    background-color: #f8f9fa;
+    color: black;
+    border: 1px solid #ddd;
+    &:hover {
+      background-color: #e2e6ea;
+    }
+  }
+}

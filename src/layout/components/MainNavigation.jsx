@@ -32,6 +32,9 @@ const MainNavigation = ({ styles }) => {
       <NavLink to="/mypage/myChat" className={activeClassFn("/mypage/myChat")}>
         <i className={styles.chat}></i>내 채팅
       </NavLink>
+      <NavLink to="/board" className={activeClassFn("/board")}>
+        <i className={styles.board}></i>게시판
+      </NavLink>
       <NavLink to="/mypage" className={activeClassFn("/mypage")}>
         <i className={styles.mypage}></i>
         마이페이지

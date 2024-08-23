@@ -233,7 +233,7 @@ const LoginPage = () => {
       </div>
       <div className={styles.button}>
         <MtButtons
-          buttonText={"로그인하깅"}
+          buttonText={"로그인"}
           buttonType={idStatus && passwordInput ? "apply" : "disabled"}
           eventHandler={loginHandler}
           eventType={"click"}

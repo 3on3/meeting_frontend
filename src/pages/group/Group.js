@@ -30,6 +30,7 @@ const Group = () => {
   const { alarmFetch } = useFetchRequest();
   const mainSocket = useContext(MainWebSocketContext);
   const [searchParams] = useSearchParams();
+  const [groupHostUser, setGroupHostUser] = useState(null)
 
   const status = searchParams.get("status");
 
@@ -37,12 +38,34 @@ const Group = () => {
   const [isRequestSuccess, setIsRequestSuccess] = useState(false);
   const onClickAndSuccess = () => {
     setIsRequestSuccess(true);
+
+    alarmFetch(setGroupHostUser, id);
+
     // 3초 후에 모달 닫기
     setTimeout(() => {
       setIsRequestSuccess(false);
     }, 1200);
   };
 
+  const testHandler = () =>{
+    alarmFetch(setGroupHostUser, id);
+
+  }
+
+
+  useEffect(() => {
+    setTimeout(() => {
+      if(groupHostUser !== null && mainSocket.mainWebSocket !== null) {
+        const socketMessage = {
+          type: "matching",
+          email: groupHostUser,
+          responseGroupId: id,
+        };
+
+        mainSocket.mainWebSocket.send(JSON.stringify(socketMessage));
+      }
+    }, 1000)
+  }, [groupHostUser]);
 
   
 
@@ -79,6 +102,12 @@ const Group = () => {
       setLoading(false);
     }
   };
+
+
+  useEffect(() => {
+
+    console.log(groupHostUser)
+  }, [groupHostUser]);
 
   useEffect(() => {
     fetchGroupData();
@@ -131,18 +160,8 @@ const Group = () => {
         return {
           type: "cancel",
           text: "매칭 신청하기",
-          onClickHandler: async () => {
+          onClickHandler: () => {
             setModalActive(!modalActive);
-
-            const hostUser = await alarmFetch(id);
-
-            const socketMessage = {
-              type: "matching",
-              email: hostUser.email,
-              responseGroupId: id,
-            };
-
-            mainSocket.mainWebSocket.send(JSON.stringify(socketMessage));
           },
         };
       default:
@@ -154,6 +173,7 @@ const Group = () => {
 
   return (
     <div className={styles.container}>
+      <div onClick={testHandler}>일단테스트를 위한 아무거나야</div>
       <GroupViewHead
         styles={styles}
         place={meetingPlace}

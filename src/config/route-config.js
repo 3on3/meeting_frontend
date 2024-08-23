@@ -26,6 +26,10 @@ import PasswordResetPage from "../pages/login/components/PasswordResetPage";
 import Payment from "../pages/payment/Payment";
 import PaymentApproval from "../pages/payment/PaymentApproval";
 import AlarmPage from "../pages/alarm/AlarmPage";
+import Board from "../pages/board/Board";
+import BoardWrite from "../pages/board/boardWrite/BoardWrite";
+import BoardDetail from "../pages/board/board_detail/BoardDetail";
+import BoardModify from "../pages/board/boardModify/BoardModify";
 import SignUpComplete from "../pages/sign_up/components/SignUpComplete";
 
 
@@ -66,6 +70,22 @@ const chatRouter = [
     path: "/chat",
     element: <Chat />,
     loader: authCheckLoader,
+  },
+];
+
+// 익명게시판 라우터
+const boardRouter = [
+  {
+    path: "write",
+    element: <BoardWrite />,
+  },
+  {
+    path: "detail/:id",
+    element: <BoardDetail />,
+  },
+  {
+    path: "modify/:id",
+    element: <BoardModify />,
   },
 ];
 
@@ -140,6 +160,14 @@ export const router = createBrowserRouter([
         path: "payment/approval",
         element: <PaymentApproval />,
       },
+
+      // -----------------------
+      {
+        path: "board",
+        element: <Board />,
+        children: boardRouter,
+      },
+
       // 이하로는 임시페이지임
       {
         path: "error",

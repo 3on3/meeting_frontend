@@ -109,7 +109,7 @@ const ModifyInformation = () => {
           <MtButtons
             eventType={isPasswordSubmitEnabled ? "click" : null}
             buttonType={isPasswordSubmitEnabled ? "apply" : "disabled"}
-            buttonText={"SUBMIT"}
+            buttonText={"확인"}
             eventHandler={handlePasswordSubmit}
           />
         </div>
@@ -131,7 +131,7 @@ const ModifyInformation = () => {
           <MtButtons
             eventType={isPhoneNumberValid ? "click" : null}
             buttonType={isPhoneNumberValid ? "apply" : "disabled"}
-            buttonText={"SUBMIT"}
+            buttonText={"확인"}
             eventHandler={handlePhoneNumberSubmit}
           />
         </div>

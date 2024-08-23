@@ -1,6 +1,6 @@
 import React from 'react';
   // 채팅 말풍선 컴포넌트
-const MessageContent = ({styles, content, messageAt, sameTime, sameUser, myMessage}) => {
+const MessageContent = ({styles, content, messageAt, sameTime, sameUser, myMessage, sameUserTime}) => {
 
   let hour;
   let minutes;
@@ -31,7 +31,7 @@ const MessageContent = ({styles, content, messageAt, sameTime, sameUser, myMessa
         <p className={styles.content}>
           {content}
         </p>
-        {time && !sameTime && <div className={styles.textTime}>{time}</div>}
+        {time && (!sameTime || !sameUserTime) && <div className={styles.textTime}>{time}</div>}
       </div>
 
   );

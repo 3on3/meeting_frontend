@@ -33,12 +33,10 @@ const PaymentModal = ({ name, totalPrice, onCancel }) => {
       const data = await response.json();
 
       if (data && data.tid) {
-        // Save tid and redirect URL to local storage
         localStorage.setItem("tid", data.tid);
-        localStorage.setItem("payUrl", data.next_redirect_pc_url);
+        localStorage.setItem("payUrl", data.next_redirect_mobile_url);
 
-        // Redirect to KakaoPay payment page
-        window.location.href = data.next_redirect_pc_url;
+        window.location.href = data.next_redirect_mobile_url;
       } else {
         setErrorMessage("결제 준비에 실패했습니다.");
         console.error("결제 준비 응답 데이터가 올바르지 않습니다:", data);
@@ -62,7 +60,7 @@ const PaymentModal = ({ name, totalPrice, onCancel }) => {
             금액: <span className={styles.highlight}>{totalPrice}원</span>
           </p>
           <p className={styles.wathchout}>
-            ※ 주의: 한 번 구매한 멤버십은 환불할 수 없습니다.
+            ※ 주의: 한 번 구매한 멤버십은 환불이 어렵습니다.
           </p>
         </div>
         {errorMessage && <div className={styles.errorMessage}>{errorMessage}</div>}

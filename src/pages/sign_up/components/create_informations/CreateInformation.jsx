@@ -282,7 +282,7 @@ const CreateInformations = ({
       {!isSubmit[0] && (
         <div className={styles.button}>
           <MtButtons
-            buttonText={"SUBMIT"}
+            buttonText={"확인"}
             buttonType={isName ? "apply" : "disabled"}
             eventType={"click"}
             eventHandler={nameBtnHandler}
@@ -331,7 +331,7 @@ const CreateInformations = ({
           {!isSubmit[2] && (
             <div className={styles.button}>
               <MtButtons
-                buttonText={"SUBMIT"}
+                buttonText={"확인"}
                 buttonType={isGender ? "apply" : "disabled"}
                 eventType={"click"}
                 eventHandler={genderBtnHandler}
@@ -389,7 +389,7 @@ const CreateInformations = ({
 
           <div className={styles.button}>
             <MtButtons
-              buttonText={"SUBMIT"}
+              buttonText={"확인"}
               buttonType={buttonStatus ? "apply" : "disabled"}
               eventType={"click"}
               eventHandler={phoneNoBtnHandler}

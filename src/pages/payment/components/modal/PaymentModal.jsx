@@ -24,9 +24,9 @@ const PaymentModal = ({ name, totalPrice, onCancel }) => {
           total_amount: totalPrice, 
           partner_order_id: "unique_order_id",
           partner_user_id: getUserData()?.email, 
-          approval_url: `${PAYMENT_URL}:80/approval`, 
-          cancel_url: `${API_BASE_URL}:80`,
-          fail_url: `${API_BASE_URL}:80`
+          approval_url: "http://mymeetinh-s3-bucket.s3-website.ap-northeast-2.amazonaws.com/payment/approval", 
+          cancel_url: "http://mymeetinh-s3-bucket.s3-website.ap-northeast-2.amazonaws.com",
+          fail_url: "http://mymeetinh-s3-bucket.s3-website.ap-northeast-2.amazonaws.com"
         }),
       });
 

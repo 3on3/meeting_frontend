@@ -6,6 +6,15 @@ import { getUserToken } from "../../../../config/auth";
 const DisabledInformations = ({ styles }) => {
 
   const [myPageData, setMyPageDataData] = useState({});
+
+
+  const formatDate = (dateString) => {
+    const options = { year: "numeric", month: "2-digit", day: "2-digit" };
+    const date = new Date(dateString);
+    return date.toLocaleDateString("ko-KR", options).replace(/. /g, "-").replace(".", "");
+  };
+
+
   
   const resetProfileImage = async () => {
     try {
@@ -23,12 +32,14 @@ const DisabledInformations = ({ styles }) => {
         const data = await response.json()
         console.log('response: ',response);
         console.log('data: ',data);
+
+        const formattedBirthDate = formatDate(data.birthDate);
         
         
         if(data.gender === 'F'){
-          setMyPageDataData({...data,gender:"여성"})
+          setMyPageDataData({...data,gender:"여성", birthDate: formattedBirthDate})
         }else if(data.gender === 'M'){
-          setMyPageDataData({...data,gender:"남성"})
+          setMyPageDataData({...data,gender:"남성", birthDate: formattedBirthDate})
         }
     
         

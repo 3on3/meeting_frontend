@@ -31,11 +31,15 @@ const GroupExileModal = ({ members, id, hostUser, updateUsers }) => {
   return (
     <>
       <div className={styles.container}>
-        <div className={styles.informationCon}>
+        {members.length === 1 ? (
+          <div className={styles.null}>현재 참여자가 없습니다.</div>
+        ):(
+          <><div className={styles.informationCon}>
           <div className={styles.deleteMessage}>이름</div>
           <div className={styles.deleteMessage}>가입시기</div>
         </div>
         <div className={styles.information}>
+          
           {members
             .filter((member) => member.id !== hostUser)
             .map((member) => (
@@ -65,6 +69,9 @@ const GroupExileModal = ({ members, id, hostUser, updateUsers }) => {
               </div>
             ))}
         </div>
+        </>
+        )}
+       
       </div>
       <div className={styles.btns}>
         <MtButtons

@@ -61,7 +61,7 @@ const GroupInviteModal = ({ groupName, inviteCode, remainingTime }) => {
       <div className={styles.container}>
         <div className={styles.deleteMessage}>
           <div className={styles.information}>
-            친구에게 <span className={styles.groupName}>{groupName}</span>의(를)
+            친구에게 <span className={styles.groupName}>{groupName}</span>의(를)<br/>
             그룹 초대 링크 전송하기
             <br />
             <div className={styles.linkWrapper}>
@@ -92,7 +92,7 @@ const GroupInviteModal = ({ groupName, inviteCode, remainingTime }) => {
       <div className={styles.btns}>
         <MtButtons
           buttonType={"cancel"}
-          buttonText={"취소"}
+          buttonText={"닫기"}
           eventType={"click"}
           eventHandler={closeModal}
         />

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./BoardModify.module.scss";
 import Textarea from "../../../components/textarea/Textarea";
 import DefaultInput from "../../../components/common/inputs/DefaultInput";
@@ -13,22 +13,19 @@ function BoardModify() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [isChanged, setIsChanged] = useState(false);
-  const [boardData, setBoardData] = useState({});
-  const titleRef = useRef();
-  const contentRef = useRef();
+  const [boardData, setBoardData] = useState({ title: "", content: "" });
   const { openModal } = useModal();
   const navigate = useNavigate();
-  const naviToBoard = (id) => {
-    navigate(`/board/detail/${id}`);
-  };
   const { id } = useParams();
-  // 상태를 업데이트하는 onChange 핸들러 추가
+
+  // 제목 변경 핸들러
   const handleTitleChange = (e) => {
     setBoardData((prevData) => ({
       ...prevData,
       title: e.target.value,
     }));
   };
+
   // 내용 변경 핸들러
   const handleContentChange = (e) => {
     setBoardData((prevData) => ({
@@ -37,6 +34,7 @@ function BoardModify() {
     }));
   };
 
+  // 게시물 데이터 가져오기
   const getRequiredBoard = async () => {
     setIsLoading(true);
     setError(null);
@@ -62,22 +60,20 @@ function BoardModify() {
       setIsLoading(false);
     }
   };
+
   useEffect(() => {
     getRequiredBoard();
   }, [id]);
 
   // 수정 요청
   const onClickModifyBoardBtn = async () => {
-    const title = titleRef.current.value;
-    const content = contentRef.current.value;
+    const { title, content } = boardData;
 
     if (title.length > 0 && content.length > 0) {
-      const payload = {
-        title,
-        content,
-      };
+      const payload = { title, content };
       setIsLoading(true);
       setError(null);
+
       try {
         const response = await fetch(`${BOARD_URL}/modify/${id}`, {
           method: "POST",
@@ -87,11 +83,10 @@ function BoardModify() {
           },
           body: JSON.stringify(payload),
         });
-        const data = await response.json()
+
         if (response.ok) {
           setIsChanged(true);
-          naviToBoard(id)
-      
+          navigate(`/board/detail/${id}`);
         } else {
           const errorText = await response.text();
           setError(errorText);
@@ -106,28 +101,27 @@ function BoardModify() {
       console.log("빈 칸");
     }
   };
+
   return (
     <div className={styles.boardWriteWrapper}>
       <div className={styles.boardWriteTitle}>익명게시판</div>
       <DefaultInput
-        placeholder={"제목을 입력하세요."}
-        value={boardData.title} // 상태를 value로 설정
-        onChange={handleTitleChange} // onChange 핸들러로 상태 업데이트
-        ref={titleRef}
+        placeholder="제목을 입력하세요."
+        value={boardData.title}
+        onChange={handleTitleChange}
       />
       <div className={styles.textareaMargin}>
         <Textarea
-          placeholder={"200자 이내로 내용을 작성하세요."}
+          placeholder="200자 이내로 내용을 작성하세요."
           maxLength={200}
-          value={boardData.content} // 내용을 상태에서 가져오기
-          onChange={handleContentChange} // 내용이 변경되면 상태 업데이트
-          ref={contentRef}
+          value={boardData.content}
+          onChange={handleContentChange}
         />
       </div>
       <MtButtons
-        buttonType={"apply"}
-        buttonText={"수정하기"}
-        eventType={"click"}
+        buttonType="apply"
+        buttonText="수정하기"
+        eventType="click"
         eventHandler={onClickModifyBoardBtn}
       />
     </div>

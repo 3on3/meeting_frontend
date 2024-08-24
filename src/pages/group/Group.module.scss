@@ -1,4 +1,4 @@
-.container{
+.container {
   height: 100vh;
 }
 .content {
@@ -67,12 +67,12 @@
   bottom: calc(100vw * (110 / 500));
   transform: translateX(-50%);
 
-  &.disable{
+  &.disable {
     background-color: transparent;
     box-shadow: none;
-   >div{
-    font-weight: 500;
-   }
+    > div {
+      font-weight: 500;
+    }
   }
 }
 .informationFilter {
@@ -256,7 +256,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 8px;
+      border-radius: calc(100vw * (8 / 500));
       border: solid 1px var(--color-dark);
       font-weight: 500;
       background: url(../../assets/images/icons/c-copy.svg) no-repeat

@@ -7,7 +7,7 @@ body {
 
 body {
   position: relative;
-  max-width: 500px;
+  max-width: calc(100vw * (500 / 500));
   margin: 0 auto;
 }
 

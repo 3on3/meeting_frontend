@@ -10,14 +10,14 @@
       justify-content: center;
 
       img {
-        width: 190px;
+        width: calc(100vw * (190 / 500));
         height: auto;
       }
     }
 
     .text {
-      font-size: 29px;
-      margin-top: 25px;
+      font-size: calc(100vw * (29 / 500));
+      margin-top: calc(100vw * (25 / 500));
       line-height: 140%;
     }
   }

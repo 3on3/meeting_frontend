@@ -84,8 +84,8 @@
         &::after {
           content: "";
           display: inline-block;
-          width: 1px;
-          height: 8px;
+          width: calc(100vw * (1 / 500));
+          height: calc(100vw * (8 / 500));
           background-color: var(--color-light);
           margin: 0 calc(100vw * (10 / 500));
         }

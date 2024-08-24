@@ -9,10 +9,8 @@
   }
 }
 .MainText {
-  // padding-top: 20px;
   margin-top: calc(100vw * (40 / 500));
-  // background-color: var(--color-wh);
-  border-radius: 12px;
+  border-radius: calc(100vw * (12 / 500));
   align-items: center;
 
   .left {
@@ -62,7 +60,7 @@
         justify-content: space-between;
         align-items: center;
         span {
-          margin-right: 10px;
+          margin-right: calc(100vw * (10 / 500));
         }
       }
     }
@@ -137,8 +135,8 @@
     border-top: calc(100vw * (1 / 500)) solid var(--color-sh);
 
     > li {
-      padding: calc(100vw * (20 / 500)) 0
-        calc(100vw * (10 / 500)) calc(100vw * (8 / 500));
+      padding: calc(100vw * (20 / 500)) 0 calc(100vw * (10 / 500))
+        calc(100vw * (8 / 500));
       border-bottom: calc(100vw * (1 / 500)) solid var(--color-sh);
 
       animation: chatAni 0.2s ease-out forwards;
@@ -257,7 +255,6 @@ pre {
   line-height: 1.5;
 }
 
-.loadingBox{
+.loadingBox {
   height: 100vh;
 }
-

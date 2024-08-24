@@ -34,10 +34,14 @@ const MyBoardList = ({ className, styles, activeTab }) => {
       );
       const data = await response.json();
       if (response.ok) {
-        setBoardList((prev) => [...prev, ...data]);
+        setBoardList((prev) => {
+          const newBoards = data.filter(newBoard => 
+            !prev.some(existingBoard => existingBoard.id === newBoard.id)
+          );
+          return [...prev, ...newBoards];
+        });
         setIsFinished(data.length === 0);
         setPage((prevPage) => prevPage + 1);
-        console.log(page);
       } else {
         const errorText = await response.text();
         setError(errorText);
@@ -83,13 +87,11 @@ const MyBoardList = ({ className, styles, activeTab }) => {
         <EmptyBoard/>
       ) : (
         boardList.map((board) => {
-          return <BoardBox key={board.id} board={board} styles={styles} />;
+          return <BoardBox key={`myboard/${board.id}`} board={board} styles={styles} />;
         })
       )}
-      {/* {isLoading && (
-        <Loading/>
-      )} */}
-      {!isFinished && (
+  
+      {!isFinished && boardList.length > size && (
         <ScrollSection/>
       )}
     </ul>

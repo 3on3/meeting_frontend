@@ -64,8 +64,8 @@ const PaymentApproval = () => {
       window.location.href = "/main";
       
     } catch (error) {
-      console.error("결제 승인 중 오류 발생:", error);
-      alert(`결제 승인 중 오류가 발생했습니다: ${error.message}`);
+      // console.error("결제 승인 중 오류 발생:", error);
+      // alert(`결제 승인 중 오류가 발생했습니다: ${error.message}`);
       setLoading(false);
     }
   };

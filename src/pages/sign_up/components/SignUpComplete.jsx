@@ -13,7 +13,7 @@ const SignUpComplete = () => {
     navigate("/login");
   };
   return (
-    <>
+    <>e
       <div className={styles.SignUpCompleteBox}>
         <h1 className={"title"}>환영합니다!</h1>
         <div className={styles.logo}>

@@ -37,7 +37,7 @@ const LoginPage = () => {
 
   // 소개 페이지로 돌아가기
   const backToIntro = () => {
-    navigate("/intro");
+    navigate("/");
   }
 
   // 상태 변수 초기화
@@ -52,12 +52,9 @@ const LoginPage = () => {
 
   // 컴포넌트가 마운트될 때 토큰 존재 여부 확인
   useEffect(() => {
-    console.log("호출은 됨?");
     // const userData = JSON.parse(localStorage.getItem("userData") || "{}");
     setTimeout(() => {
-      const userData = userDataLoader();
-      if (userData) {
-        console.log("토큰이 없니?")
+      if (loginSuccess) {
         const redirectPath = localStorage.getItem("redirectPath") || "/main";
         localStorage.removeItem("redirectPath");
         navigate(redirectPath);

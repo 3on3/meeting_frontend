@@ -30,14 +30,11 @@ const DetailBottom = ({ className, styles, newRelyData, boardData }) => {
   // ============ 게시판 댓글 GET Fetch ============
 
   const getBoardReplies = async () => {
-    console.log("isFinish", isFinish);
-    console.log("repliesIsLoading", repliesIsLoading);
     if (repliesIsLoading || isFinish) {
       return;
     }
 
     setRepliesIsLoading(true);
-    console.log("getBoardReplies 시작이야");
 
     try {
       const response = await fetch(
@@ -54,7 +51,6 @@ const DetailBottom = ({ className, styles, newRelyData, boardData }) => {
       const { content, totalElements } = repliesData;
       const updatedRepliesData = [...boardRepliesData, ...content];
 
-      console.log("updatedRepliesData : ", updatedRepliesData);
 
       setTotalReplies(totalElements);
 
@@ -78,7 +74,6 @@ const DetailBottom = ({ className, styles, newRelyData, boardData }) => {
     if (newRelyData) {
       setBoardRepliesData((prev) => [newRelyData, ...prev]);
       setTotalReplies((prev) => prev + 1);
-      console.log(boardRepliesData);
     }
   }, [newRelyData]);
 
@@ -87,7 +82,6 @@ const DetailBottom = ({ className, styles, newRelyData, boardData }) => {
       setBoardRepliesData([]);
       setPageNo(1);
       setTotalReplies(0);
-      console.log("isDelete useEffect");
       setIsFinish(false);
       setIsDelete(false);
     }

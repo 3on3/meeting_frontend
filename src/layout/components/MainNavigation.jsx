@@ -20,9 +20,6 @@ const MainNavigation = ({ styles }) => {
 
   return (
     <nav className={styles.nav}>
-      <NavLink to="/main" className={activeClassFn("/main")}>
-        <i className={styles.home}></i>홈
-      </NavLink>
       <NavLink
         to="/mypage/mygroup"
         className={activeClassFn("/mypage/mygroup")}
@@ -31,6 +28,9 @@ const MainNavigation = ({ styles }) => {
       </NavLink>
       <NavLink to="/mypage/myChat" className={activeClassFn("/mypage/myChat")}>
         <i className={styles.chat}></i>내 채팅
+      </NavLink>
+      <NavLink to="/main" className={activeClassFn("/main")}>
+        <i className={styles.home}></i>홈
       </NavLink>
       <NavLink to="/board" className={activeClassFn("/board")}>
         <i className={styles.board}></i>게시판

@@ -50,7 +50,7 @@ const ChatBody = ({ styles, messageList, myMessage }) => {
     return (
         <div className={styles.chatBody}>
             <div className={styles.chatInner} ref={chatInnerRef}>
-                {messageList !== null && messageList.map((message, i) => {
+                {messageList.length >= 1 && messageList.map((message, i) => {
                     if (i !== 0 && message.userId === messageList[i - 1].userId) {
                         return (
                             <MessageBox

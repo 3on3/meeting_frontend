@@ -6,6 +6,7 @@
     word-break: break-all;
     width: calc(100% - (100vw * (100 / 500)));
     margin: 0 auto;
+    font-size: calc(100vw * (32 / 500));
   }
 }
 .MainText {

@@ -2,6 +2,13 @@
   padding: calc(100vw * (80 / 500)) calc(100vw * (20 / 500))
     calc(100vw * (130 / 500));
   height: 100vh;
+
+  .boardTitle {
+    display: flex;
+    justify-content: center;
+    font-size: calc(100vw * (32 / 500));
+    font-weight: 600;
+  }
 }
 .tabBtns {
   display: flex;
@@ -13,7 +20,7 @@
     padding: calc(100vw * (10 / 500)) 0;
     color: #9aa9ba;
     font-weight: 600;
-    transition: .1s ease-out;
+    transition: 0.1s ease-out;
     &.isActive {
       border-color: var(--color-bk);
       color: var(--color-bk);
@@ -28,8 +35,8 @@
     font-size: calc(100vw * (16 / 500));
     border-bottom: solid calc(100vw * (1 / 500)) var(--color-light);
     animation: chatAni 0.6s ease-out forwards;
-    
-    &:last-child{
+
+    &:last-child {
       border-bottom: none;
       margin-bottom: calc(100vw * (100 / 500));
     }
@@ -74,23 +81,20 @@
         &.view {
           font-weight: 500;
         }
-        &::after{
-          content: '';
+        &::after {
+          content: "";
           display: inline-block;
           width: 1px;
           height: 8px;
           background-color: var(--color-light);
           margin: 0 calc(100vw * (10 / 500));
-
         }
-        &:last-child::after{
-
+        &:last-child::after {
           display: none;
         }
       }
     }
   }
-  
 }
 .newBoardBtn {
   padding: calc(100vw * (12 / 500)) calc(100vw * (16 / 500));
@@ -104,4 +108,3 @@
   font-weight: 600;
   font-size: calc(100vw * (18 / 500));
 }
-

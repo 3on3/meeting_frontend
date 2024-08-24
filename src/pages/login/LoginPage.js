@@ -231,7 +231,7 @@ const LoginPage = () => {
           자동로그인
         </Checkbox>
       </div>
-      <div className={styles.button}>
+      <div className={styles.loginButton}>
         <MtButtons
           buttonText={"로그인"}
           buttonType={idStatus && passwordInput ? "apply" : "disabled"}

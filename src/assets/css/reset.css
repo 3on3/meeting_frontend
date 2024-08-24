@@ -76,7 +76,7 @@ body {
   width: auto;
   height: 100%;
   font-family: "Pretendard", sans-serif;
-  font-size: 10px;
+  font-size: calc(100vw * (10 / 500));
   color: var(--color-bk);
 }
 
@@ -163,11 +163,10 @@ label {
   outline: 0;
   font-family: inherit;
   color: var(--color-bk);
-} *,
-
-input[type='checkbox'],
-input[type='radio'] {
-
+}
+*,
+input[type="checkbox"],
+input[type="radio"] {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -205,8 +204,7 @@ textarea {
 }
 
 textarea::placeholder {
-  color: #A2A2A2;
-
+  color: #a2a2a2;
 }
 
 textarea:focus {

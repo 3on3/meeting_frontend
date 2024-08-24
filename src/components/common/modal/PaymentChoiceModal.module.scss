@@ -49,7 +49,7 @@
   .cancelButton {
     background-color: #f8f9fa;
     color: black;
-    border: 1px solid #ddd;
+    border: calc(100vw * (1 / 500)) solid #ddd;
     &:hover {
       background-color: #e2e6ea;
     }

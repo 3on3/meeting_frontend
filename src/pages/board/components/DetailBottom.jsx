@@ -166,7 +166,10 @@ const DetailBottom = ({ className, styles, newRelyData, boardData }) => {
                 <p className={styles.imageSection}>
                   <span className={styles.image}></span>
                 </p>
-                <div className={styles.name}>익명{totalReplies - index}</div>
+                <div className={styles.name}>
+                  익명{totalReplies - index}
+                  {reply.isAuthor && <span>(나)</span>}
+                </div>
               </div>
               <div className={styles.content}>
                 <div className={styles.textList}>{reply.content}</div>

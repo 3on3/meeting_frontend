@@ -5,13 +5,13 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: calc(100vh * (60 / 500)) calc(100vh * (20 / 500))
+  padding: calc(100vh * (100 / 500)) calc(100vh * (20 / 500))
     calc(100vh * (140 / 500));
 
   .logo {
-    width: calc(100vw * (230 / 500));
+    width: calc(100vw * (200 / 500));
     height: auto;
-    margin: 0 auto calc(100vw * (40 / 500));
+    margin: 0 auto calc(100vw * (60 / 500));
     // overflow: hidden;
   }
 
@@ -33,6 +33,11 @@
   .button {
     width: 100%;
     margin-top: calc(100vw * (15 / 500));
+  }
+
+  .loginButton {
+    width: 100%;
+    margin-top: calc(100vw * (35 / 500));
   }
 
   .findSection {

@@ -71,7 +71,7 @@
     border: none;
     color: red;
     cursor: pointer;
-    margin-bottom: 20px;
+    margin-bottom: calc(100vw * (20 / 500));
   }
 
   .skip {

@@ -7,20 +7,21 @@ import { useLocation, useNavigate } from "react-router-dom";
 const ErrorPage = () => {
   const navigate = useNavigate();
 
-  const location = useLocation()
+  const location = useLocation();
   const mainPageHandler = () => {
     navigate("/main");
   };
 
   const goBackHandler = () => {
-   
     // 그 외의 경우 이전 페이지로 이동
     navigate(-1);
   };
   return (
     <div className={styles.container}>
       <div className={styles.textContainer}>
-        <img src={profileImg} alt="로고 이미지" />
+        <p>
+          <img src={profileImg} alt="로고 이미지" />
+        </p>
         <h1 className={`title ${styles.text}`}>
           요청하신 페이지를
           <br />

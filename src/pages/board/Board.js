@@ -11,33 +11,32 @@ const Board = () => {
 
   const [activeTab, setActiveTab] = useState("all"); // 기본값은 '전체 글' 탭
 
-  
   return (
     <>
       {isRootPath && (
         <div className={styles.boardContainer}>
-          <h1 className="title">익명 게시판</h1>
+          <h1 className={styles.boardTitle}>익명 게시판</h1>
           <TabBox
             className={styles.tabBtns}
             styles={styles}
             activeTab={activeTab}
             setActiveTab={setActiveTab}
           />
-          {activeTab==="all" && (
-             <BoardList
-             className={styles.boardList}
-             styles={styles}
-             activeTab={activeTab}
-           />
+          {activeTab === "all" && (
+            <BoardList
+              className={styles.boardList}
+              styles={styles}
+              activeTab={activeTab}
+            />
           )}
           {activeTab === "myPosts" && (
             <MyBoardList
-            className={styles.boardList}
-            styles={styles}
-            activeTab={activeTab}
+              className={styles.boardList}
+              styles={styles}
+              activeTab={activeTab}
             />
           )}
-         
+
           <NavLink to={"/board/write"} className={styles.newBoardBtn}>
             새 게시글 +
           </NavLink>

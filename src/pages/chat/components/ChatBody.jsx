@@ -27,7 +27,7 @@ const ChatBody = ({ styles, messageList, myMessage }) => {
         if (isInitialRender.current && messageList.length > 1) {
             setTimeout(() => {
                 scrollToBottom();
-            }, 0);
+            }, 100);
             isInitialRender.current = false;
         }
     }, [messageList]); // 메시지 목록이 변경될 때 호출
@@ -50,7 +50,7 @@ const ChatBody = ({ styles, messageList, myMessage }) => {
     return (
         <div className={styles.chatBody}>
             <div className={styles.chatInner} ref={chatInnerRef}>
-                {messageList !== null && messageList.map((message, i) => {
+                {messageList.length >= 1 && messageList.map((message, i) => {
                     if (i !== 0 && message.userId === messageList[i - 1].userId) {
                         return (
                             <MessageBox

@@ -109,7 +109,7 @@ const EmailInput = ({
         <div className={styles.button}>
           <MtButtons
             buttonText={"확인"}
-            buttonType={isEmail ? "apply" : "disabled"}
+            buttonType={isEmail && univNameInput.length > 0 ? "apply" : "disabled"}
             eventType={"click"}
             eventHandler={submitHandler}
             disabled={loading || !isEmail || univNameInput.length === 0}

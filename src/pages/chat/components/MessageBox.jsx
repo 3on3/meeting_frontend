@@ -42,11 +42,13 @@ const MessageBox = ({ styles, authClass, userName, content, sameUser, imgUrl, me
         }
     };
 
+    const shouldApplyBlur = userData?.membership !== "PREMIUM";
+
     return (
         <div className={`${styles.message} ${authClass}`}>
             {!sameUser && (
                 <div className={styles.user}>
-                    <p onClick={profileImgClickHandler} className={`${styles.img} ${styles.imgBlur}`}>
+                    <p onClick={profileImgClickHandler} className={`${styles.img} ${shouldApplyBlur ? styles.imgBlur : ""}`}>
                         <img src={imgUrl} alt={userName} />
                     </p>
                     <p className={styles.userNickname}>{userName}</p>

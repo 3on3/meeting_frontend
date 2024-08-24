@@ -54,9 +54,7 @@ const MemberList = ({
     }
   };
 
-  // 본인이면 블러처리 제외
-  // const isCurrentUser = loginUser.nickname === nickname;
-  // console.log('isCurrentUser:', isCurrentUser);
+  const shouldApplyBlur = loginUser?.membership !== "PREMIUM";
   
 
   console.log(imgUrl);
@@ -70,8 +68,7 @@ const MemberList = ({
 
       <p
         onClick={profileImgClickHandler}
-        className={`${styles.img} ${styles.imgBlur}`}
-        // className={`${styles.img} ${!isCurrentUser ? styles.imgBlur : ""}`} // 현재 사용자가 아니면 블러 적용
+        className={`${styles.img} ${shouldApplyBlur ? styles.imgBlur : ""}`}
       >
         <img src={imgUrl} alt="유저프로필 이미지" />
       </p>

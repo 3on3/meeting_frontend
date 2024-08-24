@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 const BoardBox = ({styles,board}) => {
-  const {id,title, content, createdAt} = board;
+  const {id,title, content, createdAt, viewCount} = board;
  
   return (
     <li>
@@ -14,6 +14,7 @@ const BoardBox = ({styles,board}) => {
       <p className={styles.bot}>
         <span className={styles.name}>익명</span>
         <span className={styles.date}>{createdAt}</span>
+        <span className={styles.view}>조회수 {viewCount}</span>
       </p>
       </NavLink>
     </li>

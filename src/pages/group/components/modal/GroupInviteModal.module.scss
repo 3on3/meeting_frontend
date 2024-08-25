@@ -45,6 +45,7 @@
   outline: none;
   background-color: transparent;
   word-break: break-all;
+  width: calc(100% - (100vw * (30 / 500)));
 }
 
 .copyButton {
@@ -56,6 +57,12 @@
   border-radius: calc(100vw * (5 / 500));
   cursor: pointer;
   margin-left: calc(100vw * (10 / 500));
+  width: calc(100vw * (30 / 500));
+  height: calc(100vw * (40 / 500));
+  background-image: url(../../../../assets/images/icons/c-copy.svg);
+  background-size: calc(100vw * (33 / 500));
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .btns {

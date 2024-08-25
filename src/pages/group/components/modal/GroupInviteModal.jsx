@@ -75,7 +75,7 @@ const GroupInviteModal = ({ groupName, inviteCode, remainingTime }) => {
                 className={styles.copyButton}
                 onClick={handleCopyToClipboard}
               >
-                복사하기
+                {/* 복사하기 */}
               </button>
             </div>
             <div className={styles.message}>

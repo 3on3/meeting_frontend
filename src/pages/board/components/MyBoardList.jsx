@@ -83,17 +83,14 @@ const MyBoardList = ({ className, styles, activeTab }) => {
 
   return (
     <ul className={className} ref={scrollUlRef}>
-      {boardList.length === 0 ? (
-        <EmptyBoard/>
-      ) : (
-        boardList.map((board) => {
-          return <BoardBox key={`myboard/${board.id}`} board={board} styles={styles} />;
-        })
-      )}
-  
-      {!isFinished && boardList.length > size && (
-        <ScrollSection/>
-      )}
+      {boardList.length === 0 && !isLoading && <EmptyBoard />}
+      {boardList.length > 0 &&
+        boardList.map(
+          (board) => {
+            return <BoardBox key={board.id} board={board} styles={styles} />;
+          })}
+
+      {boardList.length >= 5 && !isFinished && <ScrollSection />}
     </ul>
   );
 };

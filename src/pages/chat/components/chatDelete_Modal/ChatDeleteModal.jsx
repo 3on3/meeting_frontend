@@ -31,8 +31,8 @@ const ChatDeleteModal = ({roomId, navigate, socket, id}) => {
 
             socket.send(JSON.stringify(data));
 
-            // deleteChatRoom(roomId);
-            // navigate("/main")
+            deleteChatRoom(roomId);
+            navigate("/main");
             closeModal();
 
         }

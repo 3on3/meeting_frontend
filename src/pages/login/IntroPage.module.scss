@@ -9,11 +9,11 @@
   padding: 0 calc(100vw * (20 / 500)) calc(100vw * (30 / 500));
 
   .logo {
-    width: calc(100vw * (250 / 500));
+    width: calc(100vw * (210 / 500));
     height: auto;
     // height: calc( 100vw* ( 160 /500));
 
-    margin: 0 auto calc(100vw * (40 / 500));
+    margin: 0 auto calc(100vw * (65 / 500));
     animation: floating 1.7s ease-in-out infinite;
     @keyframes floating {
       0% {

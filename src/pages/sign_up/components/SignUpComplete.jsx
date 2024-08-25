@@ -13,12 +13,13 @@ const SignUpComplete = () => {
     navigate("/login");
   };
   return (
-    <>e
+    <>
+      e
       <div className={styles.SignUpCompleteBox}>
-        <h1 className={"title"}>환영합니다!</h1>
         <div className={styles.logo}>
           <img src={profileImage} alt="로고이미지" />
         </div>
+        <h1 className={styles.title}>가입이 완료되었습니다.</h1>
         <div className={styles.button}>
           <MtButtons
             eventType={"click"}

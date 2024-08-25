@@ -13,7 +13,6 @@ const PaymentModal = ({ name, totalPrice, onCancel }) => {
     setErrorMessage("");
     console.log("PAYMENT_URL:", PAYMENT_URL);
 
-
     try {
       const response = await fetch(`${PAYMENT_URL}/ready`, {
         method: "POST",
@@ -25,6 +24,7 @@ const PaymentModal = ({ name, totalPrice, onCancel }) => {
           item_name: name,
           total_amount: totalPrice,
           partner_order_id: "unique_order_id",
+
           partner_user_id: getUserData()?.email, 
           approval_url: "http://gwating.com/payment/approval",
           cancel_url: "http://gwating.com",

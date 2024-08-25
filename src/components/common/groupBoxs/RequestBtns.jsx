@@ -19,12 +19,16 @@ const RequestBtns = ({ styles, request, setIsChanged }) => {
     await createFetch(payload, setIsChanged);
   };
 
+  // 거절 버튼 활성화
+  const onClickDeny = async ()=>{
+    processFetch("response-deny", payload, setIsChanged)
+  }
   return (
     <div className={styles.reqTit}>
       <span>매칭 신청이 도착했습니다</span>
       <p>
         <button onClick={onClickAccept}>수락</button>
-        <button onClick={() => processFetch("response-deny")}>거절</button>
+        <button onClick={onClickDeny}>거절</button>
       </p>
     </div>
   );

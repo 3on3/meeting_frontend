@@ -54,7 +54,7 @@ const GroupDeleteModal = ({ groupName, id }) => {
         />
         <MtButtons
           buttonType={"apply"}
-          buttonText={"확인"}
+          buttonText={"삭제"}
           eventType={"click"}
           eventHandler={groupDeleteHandler}
         />

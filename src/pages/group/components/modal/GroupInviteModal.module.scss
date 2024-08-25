@@ -19,7 +19,7 @@
 
 .information {
   font-size: calc(100vw * (18 / 500));
-  margin-top: calc(100vw * (10 / 500));
+  // margin-top: calc(100vw * (10 / 500));
   line-height: 1.5;
   font-weight: 400;
 }
@@ -40,10 +40,11 @@
   flex: 1;
   border: none;
   font-size: calc(100vw * (16 / 500));
-  text-align: left;
-  padding: calc(100vw * (5 / 500));
+  text-align: center;
+  padding: calc(100vw * (5 / 500)) calc(100vw * (10 / 500));
   outline: none;
   background-color: transparent;
+  word-break: break-all;
 }
 
 .copyButton {

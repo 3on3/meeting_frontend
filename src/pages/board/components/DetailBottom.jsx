@@ -171,7 +171,11 @@ const DetailBottom = ({ className, styles, newRelyData, boardData }) => {
             >
               <div className={styles.headWrap}>
                 <p className={styles.imageSection}>
-                  <span className={styles.image}></span>
+                  <span className={styles.image}    
+                  style={{
+                backgroundImage: `url(/images/board/${reply.imgFile})`,
+              }}
+              ></span>
                 </p>
                 <div className={styles.name}>
                   익명{totalReplies - index}

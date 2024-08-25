@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { BOARD_URL } from "../../../config/host-config";
 import { getUserToken } from "../../../config/auth";
 import BoardBox from "./BoardBox";
-import EmptyBoard from './EmptyBoard';
+import EmptyBoard from "./EmptyBoard";
 // import Loading from "../../../components/common/loading/Loading";
 import ScrollSection from "../../../components/common/scroll-section/ScrollSection";
 import Loading from "../../../components/common/loading/Loading";
@@ -15,14 +15,12 @@ const BoardList = ({ className, styles, activeTab }) => {
   const [size] = useState(5);
   const [isFinished, setIsFinished] = useState(false); // 추가 데이터가 더 있는지 여부
   const scrollUlRef = useRef();
-  
 
   const fetchBoards = async () => {
     if (isLoading || isFinished) return;
 
     setIsLoading(true);
     setError(null);
-
 
     try {
       const response = await fetch(`${BOARD_URL}?page=${page}&size=${size}`, {
@@ -34,8 +32,9 @@ const BoardList = ({ className, styles, activeTab }) => {
       const data = await response.json();
       if (response.ok) {
         setBoardList((prev) => {
-          const newBoards = data.filter(newBoard => 
-            !prev.some(existingBoard => existingBoard.id === newBoard.id)
+          const newBoards = data.filter(
+            (newBoard) =>
+              !prev.some((existingBoard) => existingBoard.id === newBoard.id)
           );
           return [...prev, ...newBoards];
         });
@@ -57,7 +56,7 @@ const BoardList = ({ className, styles, activeTab }) => {
 
   useEffect(() => {
     fetchBoards();
-  }, []); 
+  }, []);
 
   // 스크롤 핸들러
   const handleScroll = () => {
@@ -79,23 +78,17 @@ const BoardList = ({ className, styles, activeTab }) => {
     };
   }, [fetchBoards]);
 
-  if(isFinished){ console.log("finished");}
-  
+
   return (
     <ul className={className} ref={scrollUlRef}>
-      {boardList.length === 0 ? (
-        
-        <EmptyBoard/>
-      ) : (
-        boardList.map((board) => {
-          return <BoardBox key={board.id} board={board} styles={styles} />;
-        })
-      )}
-  
-      
-      {!isFinished && (
-        <ScrollSection/>
-      )}
+      {boardList.length === 0 && !isLoading && <EmptyBoard />}
+      {boardList.length > 0 &&
+        boardList.map(
+          (board) => {
+            return <BoardBox key={board.id} board={board} styles={styles} />;
+          })}
+
+      {boardList.length >= 5 && !isFinished && <ScrollSection />}
     </ul>
   );
 };

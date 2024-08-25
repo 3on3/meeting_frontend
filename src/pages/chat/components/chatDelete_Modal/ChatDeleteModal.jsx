@@ -1,11 +1,13 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import MtButtons from "../../../../components/common/buttons/MtButtons";
 import styles from "../../Chat.module.scss"
 import {useModal} from "../../../../context/ModalContext";
 import {deleteChatRoom} from "../../js/ChatFetch";
 import {useNavigate} from "react-router-dom";
+import {MainWebSocketContext} from "../../../../context/MainWebSocketContext";
 
-const ChatDeleteModal = ({roomId, navigate}) => {
+const ChatDeleteModal = ({roomId, navigate, socket, id}) => {
+
 
     const {closeModal} = useModal();
 
@@ -18,9 +20,23 @@ const ChatDeleteModal = ({roomId, navigate}) => {
      * deleteChatRoom이라는 fetch 실행 후 메인페이지로 리다이렉트;
      */
     const deleteChatHandler = () => {
-        deleteChatRoom(roomId);
-        navigate("/main")
-        closeModal();
+
+        if(socket !== null) {
+
+            // chat 웹소켓에 보낼 data 구성
+            const data = {
+                type: 'delete',
+                chatroomId: id,
+            }
+
+            socket.send(JSON.stringify(data));
+
+            deleteChatRoom(roomId);
+            navigate("/main");
+            closeModal();
+
+        }
+
     }
 
     return (

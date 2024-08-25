@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import MessageBox from "./MessageBox";
 import { userDataLoader } from "../../../config/auth";
 
-const ChatBody = ({ styles, messageList, myMessage }) => {
+const ChatBody = ({ styles, messageList, myMessage, isChatDeleted}) => {
     const loginUser = userDataLoader();
     const endOfMessagesRef = useRef(null);
     const isInitialRender = useRef(true);
@@ -101,6 +101,7 @@ const ChatBody = ({ styles, messageList, myMessage }) => {
                         />
                     );
                 })}
+                {isChatDeleted && <div className={styles.deleteMessage}>채팅방이 삭제되었습니다.</div>}
                 <div ref={endOfMessagesRef} />
             </div>
         </div>

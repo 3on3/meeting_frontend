@@ -3,6 +3,7 @@ import DefaultInput from "../../../components/common/inputs/DefaultInput";
 
 // 채팅 입력창 컴포넌트
 const ChatInput = ({
+    isChatDeleted,
   styles,
   onChangeInput,
   onClickSendBtn,
@@ -29,9 +30,10 @@ const ChatInput = ({
         value={value}
       />
       <button
+          disabled={isChatDeleted}
         type="submit"
         onClick={onClickSendBtn}
-        className={styles.sendBtn}
+        className={!isChatDeleted? styles.sendBtn : styles.chatDeleteBtn}
       ></button>
     </div>
   );

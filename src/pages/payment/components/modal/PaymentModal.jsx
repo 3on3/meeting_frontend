@@ -24,13 +24,12 @@ const PaymentModal = ({ name, totalPrice, onCancel }) => {
           item_name: name,
           total_amount: totalPrice,
           partner_order_id: "unique_order_id",
-          partner_user_id: getUserData()?.email,
-          approval_url:
-            "http://gwating.com.s3-website.ap-northeast-2.amazonaws.com/payment/approval",
-          cancel_url:
-            "http://gwating.com.s3-website.ap-northeast-2.amazonaws.com",
-          fail_url:
-            "http://gwating.com.s3-website.ap-northeast-2.amazonaws.com",
+
+          partner_user_id: getUserData()?.email, 
+          approval_url: "http://gwating.com/payment/approval",
+          cancel_url: "http://gwating.com",
+          fail_url: "http://gwating.com"
+
         }),
       });
 
@@ -38,9 +37,9 @@ const PaymentModal = ({ name, totalPrice, onCancel }) => {
 
       if (data && data.tid) {
         localStorage.setItem("tid", data.tid);
-        localStorage.setItem("payUrl", data.next_redirect_mobile_url);
+        localStorage.setItem("payUrl", data.next_redirect_pc_url);
 
-        window.location.href = data.next_redirect_mobile_url;
+        window.location.href = data.next_redirect_pc_url;
       } else {
         setErrorMessage("결제 준비에 실패했습니다.");
         console.error("결제 준비 응답 데이터가 올바르지 않습니다:", data);

@@ -2,7 +2,7 @@ import {userDataLoader} from "../../../config/auth";
 import {saveMessage} from "./ChatFetch";
 import {SOCKET_BASE_URL} from "../../../config/host-config";
 
-export const chatWebSocket = (setSocket, setMessageList, id) => {
+export const chatWebSocket = (setSocket, setMessageList, id, setIsChatDelete) => {
 
     const loginUser = userDataLoader();
     // WebSocket 설정
@@ -27,9 +27,16 @@ export const chatWebSocket = (setSocket, setMessageList, id) => {
     // 소켓에서 전송한 메세지를 받아 messageList 로 상태관리
     // chat socket 서버에서 전송하는 메세지는 채팅 message 뿐..
     newSocket.onmessage = (event) => {
+
         const newMessage = JSON.parse(event.data);
 
-        setMessageList(prevState => [...prevState, newMessage]);
+        console.log(newMessage);
+
+        if(!newMessage.delete) {
+            setMessageList(prevState => [...prevState, newMessage]);
+        } else if (newMessage.delete) {
+            setIsChatDelete(true);
+        }
     };
 
     newSocket.onclose = () => {

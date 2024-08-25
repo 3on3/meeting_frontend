@@ -160,8 +160,13 @@ function GroupBox({ state, group, className, setIsChanged, matchingStatus }) {
               {group.matchingStatus === "NONE" && "매칭을 기다리고 있어요!"}
               {group.matchingStatus === "REQUESITNG" &&
                 "이미 매칭 신청 중인 그룹이예요."}
+                 {group.matchingStatus === "REQUEST_DENIED" &&
+                "이미 매칭 거절된 그룹이예요"}
               {group.matchingStatus === "RESPONSE" &&
                 "내 그룹에 매칭을 신청한 그룹이예요."}
+              {group.matchingStatus === "RESPONSE_DENY" &&
+                "이미 매칭을 거절한 그룹이예요."}
+             
             </div>
 
             <div className={styles.matchingBt}>

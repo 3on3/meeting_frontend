@@ -57,7 +57,7 @@ const GroupSettingModal = ({
 
         // 초대 코드 모달 열기
         openModal(
-          `친구를 ${groupName} 그룹으로 초대하기`,
+          `친구를 그룹으로 초대하기`,
           "completeMode",
           <GroupInviteModal
             groupName={groupName}

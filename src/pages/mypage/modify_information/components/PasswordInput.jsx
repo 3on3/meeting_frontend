@@ -82,6 +82,7 @@ const PasswordInput = ({
   return (
     <div>
       <DefaultInput
+        type={password}
         className={styles.inputCustom}
         inputState={password ? "correct" : passwordInputState}
         placeholder={"비밀번호 입력"}

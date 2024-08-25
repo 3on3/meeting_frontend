@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { BOARD_URL } from "../../../config/host-config";
 import { getUserToken } from "../../../config/auth";
@@ -27,6 +27,8 @@ const DetailBottom = ({ className, styles, newRelyData, boardData }) => {
   // ref
   const [scrollRef, inView] = useInView();
 
+  const newReplyRef = useRef([]);
+
   // ============ 게시판 댓글 GET Fetch ============
 
   const getBoardReplies = async () => {
@@ -51,7 +53,6 @@ const DetailBottom = ({ className, styles, newRelyData, boardData }) => {
       const { content, totalElements } = repliesData;
       const updatedRepliesData = [...boardRepliesData, ...content];
 
-
       setTotalReplies(totalElements);
 
       setTimeout(() => {
@@ -74,6 +75,15 @@ const DetailBottom = ({ className, styles, newRelyData, boardData }) => {
     if (newRelyData) {
       setBoardRepliesData((prev) => [newRelyData, ...prev]);
       setTotalReplies((prev) => prev + 1);
+      setTimeout(() => {
+        // 새 댓글로 포커스 이동
+        if (newReplyRef.current[0]) {
+          newReplyRef.current[0].scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+          });
+        }
+      }, 100);
     }
   }, [newRelyData]);
 
@@ -155,7 +165,10 @@ const DetailBottom = ({ className, styles, newRelyData, boardData }) => {
       <ul>
         {boardRepliesData.map((reply, index) => {
           return (
-            <li key={reply.id}>
+            <li
+              key={reply.id}
+              ref={($li) => (newReplyRef.current[index] = $li)}
+            >
               <div className={styles.headWrap}>
                 <p className={styles.imageSection}>
                   <span className={styles.image}></span>

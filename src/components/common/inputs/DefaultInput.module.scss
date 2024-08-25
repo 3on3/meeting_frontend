@@ -42,6 +42,8 @@
     &::after {
       background-image: url(../../../assets/images/icons/icon-error.svg);
       background-size: cover;
+      height: calc(100vw * (13 / 500));
+      width: calc(100vw * (13 / 500));
     }
     .errorMessage {
       display: block;

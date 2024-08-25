@@ -14,7 +14,7 @@ const SignUpComplete = () => {
   };
   return (
     <>
-      e
+      
       <div className={styles.SignUpCompleteBox}>
         <div className={styles.logo}>
           <img src={profileImage} alt="로고이미지" />

@@ -194,7 +194,7 @@ const Group = () => {
         totalMember={totalMembers}
         fetchGroupData={fetchGroupData}
       />
-      {auth !== "HOST" && status !== "REQUESITNG" && status !== "RESPONSE" && (
+      {auth !== "HOST" && status === "NONE" && (
         <MtButtons
           eventType={"click"}
           buttonType={type}
@@ -211,11 +211,27 @@ const Group = () => {
           className={`${styles.groupBtn} ${styles.disable}`}
         />
       )}
+      {status === "REQUEST_DENIED" && (
+        <MtButtons
+          eventType={"click"}
+          buttonType={"disabled"}
+          buttonText={"이미 매칭 거절된 그룹이예요"}
+          className={`${styles.groupBtn} ${styles.disable}`}
+        />
+      )}
       {status === "RESPONSE" && (
         <MtButtons
           eventType={"click"}
           buttonType={"disabled"}
           buttonText={"내 그룹에 매칭을 신청한 그룹이예요."}
+          className={`${styles.groupBtn} ${styles.disable}`}
+        />
+      )}
+      {status === "RESPONSE_DENY" && (
+        <MtButtons
+          eventType={"click"}
+          buttonType={"disabled"}
+          buttonText={"이미 매칭을 거절한 그룹이예요."}
           className={`${styles.groupBtn} ${styles.disable}`}
         />
       )}

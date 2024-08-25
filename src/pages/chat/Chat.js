@@ -34,6 +34,9 @@ const Chat = () => {
   // 메시지 보냈는지 여부
   const [sendMyMessage, setSendMyMessage] = useState(false);
 
+  // 채팅방 삭제 여부
+  const [isChatDeleted, setIsChatDeleted] = useState(false);
+
   
   useEffect(()=>{
 
@@ -70,7 +73,7 @@ const Chat = () => {
 
   useEffect(() => {
     // 웹소켓 설정
-    const cleanUp = chatWebSocket(setSocket, setMessageList, id);
+    const cleanUp = chatWebSocket(setSocket, setMessageList, id, setIsChatDeleted);
 
     // 채팅방을 열면 이 채팅방의 메시지 받아오기
     fetchMessage(setMessageList, id);
@@ -111,9 +114,10 @@ const Chat = () => {
 
   return (
     <div className={styles.container}>
-      <ChatHead styles={styles} chatRoomData={chatRoomData} setMember={setMemberList} setOpenModal={setOpenModal}/>
-      <ChatBody messageList={messageList} styles={styles} myMessage={sendMyMessage}/>
+      <ChatHead id={id} styles={styles} chatRoomData={chatRoomData} setMember={setMemberList} socket={socket} setOpenModal={setOpenModal}/>
+      <ChatBody isChatDeleted={isChatDeleted} messageList={messageList} styles={styles} myMessage={sendMyMessage}/>
       <ChatInput
+          isChatDeleted={isChatDeleted}
         onChangeInput={onChangeInput}
         onClickSendBtn={onClickSendBtn}
         styles={styles}

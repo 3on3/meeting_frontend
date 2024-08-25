@@ -3,6 +3,8 @@ import ChatMemberList from "../../../../components/memberList/MemberList";
 
 const ChatMembersModal = ({ styles, memberList }) => {
 
+
+
     // 2개의 그룹을 나누기 위한 상태변수
     const [isGroup, setIsGroup] = useState(false);
 

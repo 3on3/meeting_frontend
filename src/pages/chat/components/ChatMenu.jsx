@@ -7,7 +7,7 @@ import {userDataLoader} from "../../../config/auth";
 import ChatDeleteModal from "./chatDelete_Modal/ChatDeleteModal";
 import {useNavigate} from "react-router-dom";
 
-const ChatMenu = ({styles, active , roomId}) => {
+const ChatMenu = ({styles, active , roomId, socket, id}) => {
 
     const {openModal} = useModal();
 
@@ -32,7 +32,7 @@ const ChatMenu = ({styles, active , roomId}) => {
         openModal(
             "채팅방 삭제",
             "completeMode",
-            <ChatDeleteModal roomId={roomId} navigate={navigate}/>
+            <ChatDeleteModal id={id} socket={socket} roomId={roomId} navigate={navigate}/>
             );
     }
 

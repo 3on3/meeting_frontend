@@ -24,7 +24,7 @@ const VerificationInput = ({ styles, setIsSubmit, email }) => {
 
     setLoading(true);
     try {
-      const response = await fetch(`{${MYPAGE_URL}/check-email`, {
+      const response = await fetch(`${MYPAGE_URL}/check-email`, {
 
         method: "POST",
         headers: {

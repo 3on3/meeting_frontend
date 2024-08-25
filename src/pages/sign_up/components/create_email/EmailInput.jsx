@@ -61,11 +61,11 @@ const EmailInput = ({
             }),
         });
 
-        const responseData = await response.text();
+        // const responseData = await response.text();
 
         let data;
         try {
-            data = JSON.parse(responseData);
+            data = await response.json();
         } catch (e) {
             console.error('Failed to parse JSON:', e);
             throw new Error('서버에서 유효하지 않은 응답을 받았습니다.');

@@ -65,18 +65,19 @@ const GroupInviteModal = ({ groupName, inviteCode, remainingTime }) => {
             그룹 초대 링크 전송하기
             <br />
             <div className={styles.linkWrapper}>
-              <input
+              <span className={styles.inviteLink}>{inviteCode}</span>
+              {/* <input
                 type="text"
                 className={styles.inviteLink}
                 value={inviteCode}
                 readOnly
-              />
-              <button
+              /> */}
+              {/* <button
                 className={styles.copyButton}
                 onClick={handleCopyToClipboard}
-              >
+              > */}
                 {/* 복사하기 */}
-              </button>
+              {/* </button> */}
             </div>
             <div className={styles.message}>
               현재 생성된 초대 링크는{" "}

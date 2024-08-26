@@ -1,20 +1,18 @@
-const LOCAL_PORT = 8253; // 백엔드 로컬 서버 포트번호
-
-// 예를들어 지금 요청하는 브라우저의 host가 http://localhost:3000 이라면
-// hostname은 localhost만 리턴
-// https://www.naver.com => hostname은 www.naver.com만 리턴
+const LOCAL_PORT = 8253;
 const clientHostName = window.location.hostname;
 
 let backendHostName;
 let webSocketHostName;
 
 if (clientHostName === "localhost") {
-  backendHostName = "http://localhost:" + LOCAL_PORT;
-  webSocketHostName = "ws://localhost:" + LOCAL_PORT + "/socket"
+  backendHostName = `http://localhost:${LOCAL_PORT}`;
+  webSocketHostName = `ws://localhost:${LOCAL_PORT}/socket`;
 } else {
-  backendHostName = "http://3.38.26.248";
-  webSocketHostName = "ws://3.38.26.248/socket"
+  backendHostName = "https://gwating.com";
+  webSocketHostName = "wss://gwating.com/socket";
 }
+
+console.log(backendHostName);
 
 export const API_BASE_URL = backendHostName;
 export const SOCKET_BASE_URL = webSocketHostName;

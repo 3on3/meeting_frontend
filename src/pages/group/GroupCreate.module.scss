@@ -1,6 +1,7 @@
 .container {
   width: 100%;
   padding: calc(100vw * (120 / 500)) 0 0;
+  height: 100vh;
 
   .groupInput {
     width: calc(100% - (100vw * (40 / 500)));

@@ -28,9 +28,11 @@ export const MainWebSocket = (socketRef, setAlarmRoomId, setIsAlarm) => {
      * @param event - 매칭 신청 알람에 대한 정보가 온다 (자기가 Host인 그룹에 매칭신청이 들어올 시)
      */
     mainSocket.onmessage = (event) => {
+
         const newMessage = JSON.parse(event.data);
 
         setAlarmRoomId(newMessage);
+
         setIsAlarm(true);
 
     };

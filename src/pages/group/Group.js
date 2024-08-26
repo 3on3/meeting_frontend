@@ -30,7 +30,8 @@ const Group = () => {
   const { alarmFetch } = useFetchRequest();
   const mainSocket = useContext(MainWebSocketContext);
   const [searchParams] = useSearchParams();
-  const [groupHostUser, setGroupHostUser] = useState(null)
+  const [groupHostUser, setGroupHostUser] = useState(null);
+  const [test, setTest] = useState(false);
 
   const status = searchParams.get("status");
 
@@ -39,19 +40,25 @@ const Group = () => {
   const onClickAndSuccess = () => {
     setIsRequestSuccess(true);
 
-    alarmFetch(setGroupHostUser, id);
-
     // 3초 후에 모달 닫기
     setTimeout(() => {
+      alarmFetch(setGroupHostUser, id);
       setIsRequestSuccess(false);
     }, 1200);
   };
 
+  useEffect(() => {
+    alarmFetch(setGroupHostUser, id);
+  }, [test]);
+
+  const testHandler = () => {
+    setTest(prevState => !prevState);
+  }
 
 
   useEffect(() => {
     setTimeout(() => {
-      if(groupHostUser !== null && mainSocket.mainWebSocket !== null) {
+      if(groupHostUser !== null) {
         const socketMessage = {
           type: "matching",
           email: groupHostUser,
@@ -169,6 +176,7 @@ const Group = () => {
 
   return (
     <div className={styles.container}>
+      <div onClick={testHandler}>testtesttesttsettestsetsetsetsetsetsetset</div>
       <GroupViewHead
         styles={styles}
         place={meetingPlace}

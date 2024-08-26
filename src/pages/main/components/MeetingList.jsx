@@ -79,12 +79,11 @@ function MeetingList() {
       // JSON 형식으로 데이터를 파싱
       const list = await response.json();
 
+      const { content, totalElements } = list;
+      const updatedListData = [...listData, ...content];
 
       // 0.5초 지연 후 상태 업데이트
       setTimeout(() => {
-        const { content, totalElements } = list;
-        const updatedListData = [...listData, ...content];
-
         setListData(updatedListData);
 
         // 페이지 번호를 증가시킴
@@ -97,7 +96,7 @@ function MeetingList() {
         if (totalElements === updatedListData.length) {
           setIsFinish(true);
         }
-      }, 1000);
+      }, 500);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -126,7 +125,7 @@ function MeetingList() {
   }, [inView, loading, isFinish]);
 
   console.log(listData);
-  
+
   // 로딩 중이면 Loading 컴포넌트를 반환
   if (loading) return <Loading />;
 

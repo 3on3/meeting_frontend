@@ -48,12 +48,18 @@ const Group = () => {
   };
 
   useEffect(() => {
-    alarmFetch(setGroupHostUser, id);
+    if(test) {
+
+      alarmFetch(setGroupHostUser, id);
+    } else {
+      setGroupHostUser(null);
+    }
   }, [test]);
 
   const testHandler = () => {
     setTest(prevState => !prevState);
   }
+
 
 
   useEffect(() => {

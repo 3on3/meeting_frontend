@@ -37,9 +37,9 @@ const PaymentModal = ({ name, totalPrice, onCancel }) => {
 
       if (data && data.tid) {
         localStorage.setItem("tid", data.tid);
-        localStorage.setItem("payUrl", data.next_redirect_pc_url);
+        localStorage.setItem("payUrl", data.next_redirect_mobile_url);
 
-        window.location.href = data.next_redirect_pc_url;
+        window.location.href = data.next_redirect_mobile_url;
       } else {
         setErrorMessage("결제 준비에 실패했습니다.");
         console.error("결제 준비 응답 데이터가 올바르지 않습니다:", data);

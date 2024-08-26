@@ -6,10 +6,12 @@
  * @returns {boolean} - 이메일 패턴이 맞다면 true, 아니라면 false
  */
 export const emailVerification = (email) => {
-    // 간단한 이메일 패턴 검사
+    // 간단한 이메일 패턴 검사와 한글 포함 여부 검사
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const containsNonEnglish = /[^\x00-\x7F]/; // 영어 알파벳 및 ASCII 범위 밖의 문자 포함 여부 확인
 
-    return emailPattern.test(email);
+    // 이메일이 올바른 형식이고 한글을 포함하지 않을 때 true 반환
+    return emailPattern.test(email) && !containsNonEnglish.test(email);
 
 }
 

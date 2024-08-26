@@ -31,7 +31,6 @@ const Group = () => {
   const mainSocket = useContext(MainWebSocketContext);
   const [searchParams] = useSearchParams();
   const [groupHostUser, setGroupHostUser] = useState(null);
-  const [test, setTest] = useState(false);
 
   const status = searchParams.get("status");
 
@@ -42,23 +41,20 @@ const Group = () => {
 
     // 3초 후에 모달 닫기
     setTimeout(() => {
-      alarmFetch(setGroupHostUser, id);
       setIsRequestSuccess(false);
     }, 1200);
   };
 
   useEffect(() => {
-    if(test) {
+    if(isChanged) {
+      setTimeout(() => {
+        alarmFetch(setGroupHostUser, id)
 
-      alarmFetch(setGroupHostUser, id);
-    } else {
-      setGroupHostUser(null);
+      }, 1000)
     }
-  }, [test]);
+  }, [isChanged]);
 
-  const testHandler = () => {
-    setTest(prevState => !prevState);
-  }
+
 
 
 
@@ -182,7 +178,6 @@ const Group = () => {
 
   return (
     <div className={styles.container}>
-      <div onClick={testHandler}>testtesttesttsettestsetsetsetsetsetsetset</div>
       <GroupViewHead
         styles={styles}
         place={meetingPlace}

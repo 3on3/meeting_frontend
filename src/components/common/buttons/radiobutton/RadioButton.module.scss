@@ -1,0 +1,57 @@
+.radioLabel {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  // font-family: Arial, sans-serif;
+  width: 100%;
+}
+
+.radioInput {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.radioInput + span {
+  display: inline-block;
+  width: calc(100vw * (20 / 500));
+  height: calc(100vw * (20 / 500));
+  background-color: #e0e0e0;
+  border-radius: 50%;
+  position: relative;
+  transition: background-color 0.3s, border-color 0.3s;
+  flex-shrink: 0;
+}
+
+.radioInput + span::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: calc(100vw * (10 / 500));
+  height: calc(100vw * (10 / 500));
+  background-color: #a3a3a3; /* 기본 비선택 상태 */
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.radioInput:checked + span {
+  background-color: #e0e0e0;
+}
+
+.radioInput:checked + span::after {
+  background-color: #8732f5; /* 선택 시 보라색 내부 원 */
+}
+
+.radioInput:disabled + span {
+  background-color: #e0e0e0; /* 선택 시 외부 원 */
+  cursor: not-allowed;
+}
+
+.radioInput:disabled:checked + span {
+  background-color: #b0b0b0;
+}
+
+label span {
+  margin-right: calc(100vw * (8 / 500));
+}

@@ -1,0 +1,64 @@
+.modalBackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); // 반투명 어두운 배경
+  z-index: 9;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  pointer-events: none;
+
+  &.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+}
+
+.profileMenu {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: calc(100vw * (20 / 500));
+  display: flex;
+  flex-direction: column;
+  gap: calc(100vw * (10 / 500));
+  z-index: 10;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+
+  &.isActive {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+
+  button {
+    width: 100%;
+    height: calc(100vw * (44 / 500));
+    border-radius: calc(100vw * (12 / 500));
+    font-size: calc(100vw * (16 / 500));
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0;
+    transition: 0.3s ease;
+    cursor: pointer;
+
+    &.defaultImgBtn {
+      border: calc(100vw * (1 / 500)) solid #000;
+      background-color: #fff;
+      height: calc(100vw * (65 / 500));
+      color: black;
+    }
+
+    &.changeProfileBtn {
+      background-color: #fff;
+      color: #000;
+      height: calc(100vw * (65 / 500));
+    }
+  }
+}

@@ -1,12 +1,15 @@
+import React from "react";
 import { RouterProvider } from "react-router-dom";
 import "./App.css";
 import { router } from "./config/route-config";
-import MtButtons from "./components/common/buttons/MtButtons";
-
-import DefaultInput from "./components/common/inputs/DefaultInput";
+import { ModalProvider } from "./context/ModalContext";
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <ModalProvider>
+      <RouterProvider router={router} />
+    </ModalProvider>
+  );
 }
 
 export default App;

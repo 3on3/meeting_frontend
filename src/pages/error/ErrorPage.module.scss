@@ -1,0 +1,28 @@
+.container {
+  padding: calc(100vw * (30 / 500)) calc(100vw * (20 / 500)) 0
+    calc(100vw * (20 / 500));
+
+  .textContainer {
+    margin-top: calc(100vw * (120 / 500));
+    p {
+      display: flex;
+      text-align: center;
+      justify-content: center;
+
+      img {
+        width: calc(100vw * (190 / 500));
+        height: auto;
+      }
+    }
+
+    .text {
+      font-size: calc(100vw * (29 / 500));
+      margin-top: calc(100vw * (25 / 500));
+      line-height: 140%;
+    }
+  }
+
+  h1 {
+    margin-bottom: calc(100vw * (70 / 500));
+  }
+}

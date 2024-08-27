@@ -1,7 +1,7 @@
 import React from 'react'
 import DefaultInput from '../../../../components/common/inputs/DefaultInput'
 
-const DisabledInfoInputs = ({styles, title,placeholder,inputState}) => {
+const DisabledInfoInputs = ({styles, title,placeholder,inputState, value}) => {
   return (
     <>
     <div className={styles.margin20}>
@@ -11,6 +11,7 @@ const DisabledInfoInputs = ({styles, title,placeholder,inputState}) => {
         <DefaultInput
           inputState={inputState}
           placeholder={placeholder}
+          value={value}
         />
       </div>
       </>

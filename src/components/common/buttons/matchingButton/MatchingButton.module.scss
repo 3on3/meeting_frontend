@@ -1,0 +1,10 @@
+.matchingBt {
+  width: 100%;
+  height: calc(100vw * (34 / 500));
+  border-radius: calc(100vw * (500 / 500));
+  background-color: var(--color-point);
+  color: #fff;
+
+  font-weight: 600;
+  font-size: calc(100vw * (15 / 500));
+}

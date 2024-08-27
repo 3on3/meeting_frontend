@@ -4,37 +4,37 @@
 // MainNavigation.js
 .nav {
   width: 100%;
-  height: 100px;
+  height: calc( 100vw * ( 100 / 500));
   background-color: #fff;
-  box-shadow: 0 0 10px rgba($color: #000000, $alpha: 0.2);
+  box-shadow: 0 0 calc( 100vw * ( 10 / 500)) rgba($color: #000000, $alpha: 0.2);
   position: fixed;
   left: 0;
   bottom: 0;
   z-index: 100;
-  max-width: 500px;
+  max-width: calc( 100vw * ( 500 / 500));
   display: flex;
   justify-content: space-between;
-  padding: 0 20px 20px;
+  padding: 0 calc( 100vw * ( 20 / 500)) calc( 100vw * ( 20 / 500));
   a {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 60px;
+    width: calc( 100vw * ( 70 / 500));
     height: 100%;
-    font-size: 12px;
+    font-size: calc( 100vw * ( 14 / 500));
     font-weight: 700;
-    color: var(--color-dark);
+    color: var(--color-gr);
     transition: color .1s;
 
     i {
-      width: 30px;
-      height: 30px;
-      margin-bottom: 4px;
+      width: calc( 100vw * ( 34 / 500));
+      height: calc( 100vw * ( 34 / 500));
+      margin-bottom: calc( 100vw * ( 4 / 500));
       display: inline-block;
       background-size: cover;
       background-position: center;
-      transition: .1s;
+      transition: background-image .1s;
     }
 
     &.active {
@@ -58,6 +58,12 @@
     &.active i.chat {
       background-image: url(../assets/images/icons/h-chat-active.svg);
     }
+    & i.board {
+      background-image: url(../assets/images/icons/h-board.svg);
+    }
+    &.active i.board {
+      background-image: url(../assets/images/icons/h-board-active.svg);
+    }
     & i.mypage {
       background-image: url(../assets/images/icons/h-mypage.svg);
     }
@@ -69,8 +75,8 @@
 .layer {
   width: 100%;
   height: 100vh;
-  background-color: rgba($color: #000000, $alpha: 0.4);
-  backdrop-filter: blur(10px);
+  background-color: rgba($color: #000000, $alpha: 0.1);
+  backdrop-filter: blur(5px);
   position: fixed;
   left: 0;
   top: 0;
@@ -78,26 +84,30 @@
   opacity: 0;
   transition: 0.4s ease-out;
   pointer-events: none;
+  &.active{
+    opacity: 1;
+    pointer-events: all;
+  }
 }
 // FloatingNavigation.js
 .floating {
   > button {
-    width: 50px;
-    height: 50px;
+    width: calc( 100vw * ( 60 / 500));
+    height: calc( 100vw * ( 60 / 500));
     background-color: var(--color-dark);
-    border-radius: 18px;
+    border-radius: calc( 100vw * ( 18 / 500));
     position: fixed;
-    bottom: 110px;
-    right: 20px;
+    bottom: calc( 100vw * ( 120 / 500));
+    right: calc( 100vw * ( 20 / 500));
     z-index: 100;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 0 10px rgba($color: #000000, $alpha: 0.2);
+    box-shadow: 0 0 calc( 100vw * ( 10 / 500)) rgba($color: #000000, $alpha: 0.2);
 
     i {
-      width: 20px;
-      height: 20px;
+      width: calc( 100vw * ( 20 / 500));
+      height: calc( 100vw * ( 20 / 500));
       background: url(../assets/images/icons/h-plus.svg) no-repeat;
       background-size: cover;
       transition: 0.6s ease-out;
@@ -109,20 +119,22 @@
   }
   > nav {
     position: fixed;
-    bottom: 170px;
-    right: 20px;
+    bottom: calc( 100vw * ( 190 / 500));
+    right: calc( 100vw * ( 20 / 500));
     z-index: 100;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+  pointer-events: none;
+
     a {
       display: flex;
-      padding: 17px 16px;
-      font-size: 16px;
+      padding: calc( 100vw * ( 17 / 500)) calc( 100vw * ( 16 / 500));
+      font-size: calc( 100vw * ( 18 / 500));
       font-weight: 600;
-      border-radius: 18px;
-      box-shadow: 0 0 10px rgba($color: #000000, $alpha: 0.2);
-      transform: translateX(-10px);
+      border-radius: calc( 100vw * ( 18 / 500));
+      box-shadow: 0 0 calc( 100vw * ( 10 / 500)) rgba($color: #000000, $alpha: 0.2);
+      transform: translateX(-calc( 100vw * ( 10 / 500)));
 
       opacity: 0;
       transition: 0.6s ease-out;
@@ -130,10 +142,11 @@
       &:last-child {
         margin-bottom: 0;
       }
-      margin-bottom: 8px;
+      margin-bottom: calc( 100vw * ( 8 / 500));
       &.invite_code_btn {
+        // border: solid 1px var(--color-point);
         background-color: var(--color-wh);
-        color: var(--color-dark);
+        // color: var(--color-point);
         transition-delay: 0.2s;
       }
       &.new_group_btn {
@@ -142,6 +155,8 @@
       }
     }
     &.isActive {
+  pointer-events: all;
+
       a {
         opacity: 1;
         transform: translateX(0);

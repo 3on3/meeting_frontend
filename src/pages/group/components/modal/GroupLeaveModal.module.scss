@@ -1,0 +1,46 @@
+/* GroupDeleteModal.module.scss */
+.container {
+  background: #f4f9ff;
+  text-align: center;
+  max-width: calc(100vw * (500 / 500));
+  padding: calc(100vw * (20 / 500));
+  border-radius: calc(100vw * (8 / 500));
+  margin: 0 auto;
+  margin-top: calc(100vw * (20 / 500));
+}
+
+.deleteBox {
+  padding: calc(100vw * (10 / 500));
+  border-radius: calc(100vw * (8 / 500));
+  margin-bottom: calc(100vw * (20 / 500));
+}
+
+.deleteMessage {
+  font-size: calc(100vw * (18 / 500));
+  font-weight: bold;
+  // margin-bottom: calc(100vw * (10 / 500));
+}
+
+.groupName {
+  font-weight: 700;
+}
+
+.information {
+  font-size: calc(100vw * (18 / 500));
+  // color: #333;
+  margin-top: calc(100vw * (10 / 500));
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+.btns {
+  display: flex;
+  margin-top: calc(100vw * (25 / 500));
+  padding: calc(100vw * (5 / 500));
+  button {
+    margin-right: calc(100vw * (10 / 500));
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}

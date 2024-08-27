@@ -12,12 +12,13 @@ const MyGroupSelectModal = ({
   setModalActive,
   setIsChanged,
   responseGroupId,
-  onClickAndSuccess
+  onClickAndSuccess,
+  setGroupHostUser
 }) => {
   const [myGroupList, setMyGroupList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedGroupId, setSelectedGroupId] = useState(null);
-  const { requestFetch } = useFetchRequest();
+  const { requestFetch, alarmFetch } = useFetchRequest();
   const [isNull,setIsNull] = useState(true)
   
   // 라디오 버튼 활성화
@@ -80,6 +81,7 @@ const MyGroupSelectModal = ({
       };
       // 매칭 신청 요청
       requestFetch(payload, setIsChanged);
+      alarmFetch(setGroupHostUser, responseGroupId)
       setIsChanged(false);
     }
   };

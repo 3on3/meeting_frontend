@@ -92,7 +92,7 @@ const updateProfileInfo = async () => {
   };
 
   try {
-    console.log("프로필 정보 업데이트를 시작합니다.");
+
 
     // 서버에 PUT 요청을 보내어 프로필 정보 업데이트
     const response = await fetch(
@@ -111,7 +111,7 @@ const updateProfileInfo = async () => {
     // 요청이 성공한 경우
     if (response.ok) {
       const data = await response.json(); 
-      console.log("프로필 정보가 성공적으로 업데이트되었습니다:", data);
+
 
       // 모든 편집 모드를 종료
       setIsEditingName(false);
@@ -187,7 +187,7 @@ const updateProfileInfo = async () => {
 
       if (response.ok) {
         const result = await response.text(); 
-        console.log("프로필 이미지가 업데이트되었습니다.:", result);
+
         fetchProfileImage(); // 업데이트 후 새로 이미지를 가져옴
       } else {
         throw new Error("프로필 이미지를 업데이트 하지 못했습니다.");
@@ -216,7 +216,7 @@ const updateProfileInfo = async () => {
       );
 
       if (response.ok) {
-        console.log("프로필 이미지가 기본값으로 재설정되었습니다.");
+
         setProfileImg(defaultImg);
       } else {
         throw new Error("프로필 이미지를 재설정하지 못했습니다.");
@@ -285,11 +285,11 @@ const updateProfileInfo = async () => {
       .then((response) => response.json())
       .then((data) => {
         // 서버에서 받은 데이터를 상태에 저장하여 화면에 표시함
-        console.log("받은 사용자 프로필 데이터:", data);
+
         setNickname(data.nickname);
         setAge(data.age);
         setProfileIntroduce(data.profileIntroduce);
-        console.log("소개 정보:", data.profileIntroduce);
+
         setUniv(data.univ);
         setMajor(data.major);        
       })

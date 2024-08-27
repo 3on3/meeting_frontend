@@ -29,11 +29,11 @@ const PasswordResetPage = () => {
                 },
                 body: JSON.stringify({ email }),
             });
-            console.log('response:', response);
+
             
             if (response.ok) {
                 const data = await response.json();
-                console.log('data: ', data);
+
                 openModal(
                     "",
                     "completeMode",

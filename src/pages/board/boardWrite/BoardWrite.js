@@ -38,7 +38,7 @@ function BoardWrite() {
           },
           body: JSON.stringify(payload),
         });
-        console.log(payload);
+
         const data = await response.json()
         if (response.ok) {
           setIsChanged(true);
@@ -59,7 +59,7 @@ function BoardWrite() {
         setIsLoading(false);
       }
     } else {
-      console.log("빈 칸");
+
     }
   };
   return (

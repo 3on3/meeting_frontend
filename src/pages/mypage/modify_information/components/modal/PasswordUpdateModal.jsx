@@ -29,7 +29,7 @@ const PasswordUpdateModal = ({ passwordInput, confirmPassword }) => {
         }
       );
   
-      console.log('Response:', response); 
+
   
       let responseData;
       const contentType = response.headers.get("content-type");
@@ -39,7 +39,7 @@ const PasswordUpdateModal = ({ passwordInput, confirmPassword }) => {
         responseData = await response.text(); // JSON이 아닌 응답을 처리
       }
   
-      console.log('Response data:', responseData); 
+
   
       if (response.ok) {
         removeUserToken();

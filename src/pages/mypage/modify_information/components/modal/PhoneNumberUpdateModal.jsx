@@ -31,7 +31,7 @@ const PhoneNumberUpdateModal = ({ phoneNumber }) => {
         responseData = await response.text(); // JSON이 아닌 응답 처리
       }
 
-      console.log('response: ', response);
+
       
       if (response.ok) {
         // 전화번호 변경시 userData 에서도 변경

@@ -30,7 +30,7 @@ export const chatWebSocket = (setSocket, setMessageList, id, setIsChatDelete) =>
 
         const newMessage = JSON.parse(event.data);
 
-        console.log(newMessage);
+
 
         if(!newMessage.delete) {
             setMessageList(prevState => [...prevState, newMessage]);

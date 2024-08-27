@@ -40,7 +40,7 @@ const Withdraw = () => {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
     const isValidEmail = emailPattern.test(debouncedEmail);
     const isMatchingEmail = isValidEmail && debouncedEmail === userData.email;
-    console.log(isMatchingEmail);
+
     setIsSubmit([isMatchingEmail, false]);
   }, [debouncedEmail, userData.email]);
 

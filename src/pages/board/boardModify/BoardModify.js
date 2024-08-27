@@ -98,7 +98,7 @@ function BoardModify() {
         setIsLoading(false);
       }
     } else {
-      console.log("빈 칸");
+
     }
   };
 

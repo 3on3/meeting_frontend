@@ -41,8 +41,7 @@ const VerificationInput = ({styles, isSubmit, setIsSubmit, email, univName, onVe
         });
     
         const data = await response.json();
-        console.log('VerificationInput response: ', response);
-        console.log('data: ', data);
+
 
         if (response.ok && data === true) {
             setInputState('correct');

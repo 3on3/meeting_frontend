@@ -50,7 +50,7 @@ function MeetingList() {
     //로딩 시작
     dispatch(mainFilterLoadingActions.filterLoadingStartAction());
 
-    console.log("로딩중입니다...");
+
 
     try {
       // 동적 URL을 생성
@@ -124,7 +124,7 @@ function MeetingList() {
     }
   }, [inView, loading, isFinish]);
 
-  console.log(listData);
+
   
   // 로딩 중이면 Loading 컴포넌트를 반환
   if (loading) return <Loading />;

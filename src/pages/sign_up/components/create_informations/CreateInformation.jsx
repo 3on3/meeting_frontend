@@ -207,15 +207,12 @@ const CreateInformations = ({
   const checkPhoneNumberDuplicate = async (phoneNumber) => {
     try {
       const encodedPhoneNumber = encodeURIComponent(phoneNumber);
-      console.log('encodedPhoneNumber: ', encodedPhoneNumber);
 
       const response = await fetch(`${AUTH_URL}/check-phone-number?phoneNumber=${encodedPhoneNumber}`, {
         method: 'GET',
       });
-      console.log('response: ', response);
 
-      const data = await response.json(); 
-      console.log('Server response data:', data);
+      const data = await response.json();
 
       if (data === true) {
         // 중복된 전화번호인 경우
@@ -247,7 +244,7 @@ const CreateInformations = ({
     const fullPhoneNumber = `${firstPhoneNumber}-${secondPhoneNumber}-${lastPhoneNumber}`;
     
     const isDuplicate = await checkPhoneNumberDuplicate(fullPhoneNumber);
-    console.log('isDuplicate: ', isDuplicate);
+
     
     if (isDuplicate) {
       // 중복된 경우 버튼 비활성화

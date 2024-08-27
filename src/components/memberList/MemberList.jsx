@@ -57,7 +57,7 @@ const MemberList = ({
   const shouldApplyBlur = loginUser?.membership !== "PREMIUM";
   
 
-  console.log(imgUrl);
+
   return (
     <li className={`${styles.mamberList} ${styles[bgColor]}`}>
       {id === hostUser ? (

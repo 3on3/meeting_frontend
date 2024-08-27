@@ -97,11 +97,6 @@ const Group = () => {
 
 
   useEffect(() => {
-
-    console.log(groupHostUser)
-  }, [groupHostUser]);
-
-  useEffect(() => {
     fetchGroupData();
   }, [id, isChanged]);
 

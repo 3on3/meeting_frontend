@@ -12,7 +12,7 @@ const FirstLoginPage = () => {
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem("userData") || "{}");
     const profileImg = userData.profileImg;
-    console.log();
+
 
     // 프로필 이미지가 기본 이미지 URL인지 확인
     if (profileImg === DEFAULT_PROFILE_IMG_URL) {

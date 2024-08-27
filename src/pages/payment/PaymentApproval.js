@@ -55,7 +55,7 @@ const PaymentApproval = () => {
       }
 
       const data = await response.json();
-      console.log("결제 승인 응답:", data);
+
 
       // 로딩 상태를 false로 설정
       setLoading(false);

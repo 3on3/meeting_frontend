@@ -46,19 +46,6 @@ const Group = () => {
   };
 
   useEffect(() => {
-    if(isChanged) {
-      setTimeout(() => {
-        alarmFetch(setGroupHostUser, id)
-
-      }, 1000)
-    }
-  }, [isChanged]);
-
-
-
-
-
-  useEffect(() => {
     setTimeout(() => {
       if(groupHostUser !== null) {
         const socketMessage = {
@@ -254,6 +241,7 @@ const Group = () => {
           responseGroupId={id}
           setModalActive={setModalActive}
           onClickAndSuccess={onClickAndSuccess}
+          setGroupHostUser={setGroupHostUser()}
         />
       )}
       {isRequestSuccess && (

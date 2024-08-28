@@ -3,7 +3,7 @@ import logoImage from "../../assets/images/login/logo.svg";
 import MtButtons from "../../components/common/buttons/MtButtons";
 import styles from "./LoginPage.module.scss";
 import DefaultInput from "../../components/common/inputs/DefaultInput";
-import {getUserToken, userDataLoader} from "../../config/auth";
+import { getUserToken, userDataLoader } from "../../config/auth";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loginActions } from "../../store/Login-slice";
@@ -16,7 +16,7 @@ const extractPathFromUrl = (url) => {
     const urlObj = new URL(url);
     return urlObj.pathname; // 경로만 추출
   } catch (e) {
-    console.error('Invalid URL:', e);
+    console.error("Invalid URL:", e);
     return null;
   }
 };
@@ -38,7 +38,7 @@ const LoginPage = () => {
   // 소개 페이지로 돌아가기
   const backToIntro = () => {
     navigate("/");
-  }
+  };
 
   // 상태 변수 초기화
   const [idInput, setIdInput] = useState("");
@@ -59,8 +59,7 @@ const LoginPage = () => {
         localStorage.removeItem("redirectPath");
         navigate(redirectPath);
       }
-    }, 500)
-
+    }, 500);
   }, [loginSuccess]);
 
   // 이메일 형식 검증
@@ -106,7 +105,7 @@ const LoginPage = () => {
 
         if (response.ok) {
           const data = await response.json();
-          console.log('data: ', data);
+          console.log("data: ", data);
 
           // 탈퇴 여부 확인
           if (data.isWithdrawn) {
@@ -128,34 +127,34 @@ const LoginPage = () => {
             nickname: data.nickname,
             password: data.password,
             membership: data.membership,
-            profileImg: data.profileImg
+            profileImg: data.profileImg,
           };
-          
+
           localStorage.setItem("userData", JSON.stringify(userData));
-          
+
           // 프로필 이미지를 확인하는 API 호출
-          const profileResponse = await fetch(
-            `${USER_URL}/profile`,
-            {
-              method: "GET",
-              headers: {
-                Authorization: `Bearer ${data.token}`,
-                'Content-Type': 'application/json'
-              },
-            }
-          );
+          const profileResponse = await fetch(`${USER_URL}/profile`, {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${data.token}`,
+              "Content-Type": "application/json",
+            },
+          });
 
           if (profileResponse.ok) {
             const profileData = await profileResponse.json();
-            if (profileData.profileImg === "https://spring-file-bucket-yocong.s3.ap-northeast-2.amazonaws.com/2024/default_profile.png") {
+            if (
+              profileData.profileImg ===
+              "https://spring-file-bucket-yocong.s3.ap-northeast-2.amazonaws.com/2024/default_profile.png"
+            ) {
               // 프로필 이미지가 기본 이미지인 경우
               firstLoginNavigate();
-            } else{
-              console.log("로그인 완료!@!@!@")
+            } else {
+              console.log("로그인 완료!@!@!@");
               loginDispatch(loginActions.loginAction());
               setTimeout(() => {
                 setLoginSuccess(true);
-              }, 500)
+              }, 500);
             }
           } else {
             firstLoginNavigate();
@@ -198,8 +197,8 @@ const LoginPage = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.logo} >
-        <img src={logoImage} alt="로고이미지" onClick={backToIntro}/>
+      <div className={styles.logo}>
+        <img src={logoImage} alt="로고이미지" onClick={backToIntro} />
       </div>
       <div className={styles.input}>
         <DefaultInput
@@ -230,7 +229,7 @@ const LoginPage = () => {
       </div>
       <div className={styles.loginButton}>
         <MtButtons
-          buttonText={"로그인"}
+          buttonText={"로그인하기"}
           buttonType={idStatus && passwordInput ? "apply" : "disabled"}
           eventHandler={loginHandler}
           eventType={"click"}

@@ -7,7 +7,7 @@ import MtButtons from "../../../../components/common/buttons/MtButtons";
 const GroupLeaveModal = ({ groupName, id }) => {
   const { closeModal } = useModal();
   const groupDeleteHandler = async () => {
-    console.log(id);
+
 
     try {
       const response = await fetch(`${GROUP_URL}/withdraw`, {

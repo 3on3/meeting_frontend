@@ -30,9 +30,7 @@ const DisabledInformations = ({ styles }) => {
         }
       );
       if (response.ok) {
-        const data = await response.json()
-        console.log('response: ',response);
-        console.log('data: ',data);
+        const data = await response.json();
 
         const formattedBirthDate = formatDate(data.birthDate);
         
@@ -61,7 +59,6 @@ const DisabledInformations = ({ styles }) => {
   
   },[])
 
-  // console.log(myPageData);
   
   
   return (

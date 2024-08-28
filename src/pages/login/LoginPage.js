@@ -105,7 +105,6 @@ const LoginPage = () => {
 
         if (response.ok) {
           const data = await response.json();
-          console.log("data: ", data);
 
           // 탈퇴 여부 확인
           if (data.isWithdrawn) {
@@ -150,7 +149,8 @@ const LoginPage = () => {
               // 프로필 이미지가 기본 이미지인 경우
               firstLoginNavigate();
             } else {
-              console.log("로그인 완료!@!@!@");
+
+
               loginDispatch(loginActions.loginAction());
               setTimeout(() => {
                 setLoginSuccess(true);

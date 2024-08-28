@@ -11,7 +11,7 @@ const PaymentModal = ({ name, totalPrice, onCancel }) => {
   const handleConfirm = async () => {
     setIsLoading(true);
     setErrorMessage("");
-    console.log("PAYMENT_URL:", PAYMENT_URL);
+
 
     try {
       const response = await fetch(`${PAYMENT_URL}/ready`, {

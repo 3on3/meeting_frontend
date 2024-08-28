@@ -73,7 +73,7 @@ const SignUp = () => {
       password: password,
       nickname: randomNickname, // 랜덤 닉네임 추가
     };
-    console.log("payload: ", payload);
+
 
     try {
       // 서버에 데이터 전송
@@ -90,7 +90,7 @@ const SignUp = () => {
         console.error("Error:", error);
       } else {
         const result = await response.text();
-        console.log("Success:", result);
+
 
         // 사용자 정보를 로컬 스토리지에 저장
         localStorage.setItem("userData", JSON.stringify(payload));

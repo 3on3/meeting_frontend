@@ -20,7 +20,12 @@ import GroupCreate from "../pages/group/GroupCreate";
 import Withdraw from "../pages/mypage/modify_information/withdraw/Withdraw";
 import MyChats from "../pages/mypage/mypage_chats/MyChats";
 import InvitePage from "../pages/invite/InvitePage";
-import {authCheckLoader, autoCheckReturnLoader, getUserToken, userDataLoader} from "./auth";
+import {
+  authCheckLoader,
+  autoCheckReturnLoader,
+  getUserToken,
+  userDataLoader,
+} from "./auth";
 import JoinEndPage from "../pages/invite/components/JoinEndPage";
 import PasswordResetPage from "../pages/login/components/PasswordResetPage";
 import Payment from "../pages/payment/Payment";
@@ -31,9 +36,6 @@ import BoardWrite from "../pages/board/boardWrite/BoardWrite";
 import BoardDetail from "../pages/board/board_detail/BoardDetail";
 import BoardModify from "../pages/board/boardModify/BoardModify";
 import SignUpComplete from "../pages/sign_up/components/SignUpComplete";
-
-
-
 
 // 마이페이지 라우터
 const mypageRouter = [
@@ -101,7 +103,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/main",
-        element: <Main />
+        element: <Main />,
       },
       {
         path: "signup-complete",
@@ -166,6 +168,7 @@ export const router = createBrowserRouter([
         path: "board",
         element: <Board />,
         children: boardRouter,
+        loader: authCheckLoader,
       },
 
       // 이하로는 임시페이지임

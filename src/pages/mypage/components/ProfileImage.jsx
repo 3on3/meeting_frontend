@@ -12,7 +12,7 @@ const ProfileImage = ({imgUrl, nickname }) => {
     // 닉네임이 같으면 블러 제외
     // const isCurrentUser = loginUserInfo.nickname === nickname;
 
-    console.log(loginUserInfo);
+
 
     return (
         <div className={`${styles.img} ${!isPremium ? styles.imgBlur : ""}`}>

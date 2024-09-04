@@ -23,7 +23,7 @@ const GroupCreateModal = ({
       maxNum,
     };
 
-    console.log(payload);
+
 
     const response = await fetch(`${GROUP_URL}/create`, {
       method: "POST",

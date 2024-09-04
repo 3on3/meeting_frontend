@@ -18,8 +18,6 @@ export const MainWebSocket = (socketRef, setAlarmRoomId, setIsAlarm) => {
             loginUser: loginUserInfo
         }
 
-        console.log("메인 웹소켓 연결");
-
         mainSocket.send(JSON.stringify(data));
     };
 
@@ -38,7 +36,6 @@ export const MainWebSocket = (socketRef, setAlarmRoomId, setIsAlarm) => {
     };
 
     mainSocket.onclose = () => {
-        console.log("연결끊김");
     };
 
     mainSocket.onerror = (error) => {

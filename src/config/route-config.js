@@ -169,7 +169,7 @@ export const router = createBrowserRouter([
         path: "board",
         element: <Board />,
         children: boardRouter,
-        loader: autoCheckReturnLoader,
+        loader: authCheckLoader,
       },
 
       // 이하로는 임시페이지임

@@ -24,7 +24,7 @@ const MypageModal = ({ active, position, onDefaultImage, onChangeProfile }) => {
       .then((response) => response.json())
       .then((data) => {
         // 서버에서 받은 데이터를 상태에 저장하여 화면에 표시함
-        console.log("받은 사용자 프로필 데이터:", data);
+
         setNickname(data.nickname);
         setAge(data.age);
         setProfileIntroduce(data.profileIntroduce);
@@ -56,7 +56,7 @@ const MypageModal = ({ active, position, onDefaultImage, onChangeProfile }) => {
       if (response.ok) {
         const result = await response.text();
         setProfileImg(result); // 기본 프로필 이미지 URL을 결과에서 가져와 설정
-        console.log("기본 프로필 이미지로 설정되었습니다.");
+
       } else {
         throw new Error("기본 프로필 이미지를 설정하지 못했습니다.");
       }

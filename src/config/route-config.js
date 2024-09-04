@@ -157,6 +157,7 @@ export const router = createBrowserRouter([
       {
         path: "payment/ready",
         element: <Payment />,
+        loader: autoCheckReturnLoader,
       },
       {
         path: "payment/approval",
